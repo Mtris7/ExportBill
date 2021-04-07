@@ -17,7 +17,7 @@ namespace ExportBill
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FindCustomer());
-            Application.Run(new Login());
+            Application.Run(new PrintInvoiceForm());
         }
     }
 }

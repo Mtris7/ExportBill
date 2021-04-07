@@ -53,6 +53,13 @@ namespace ExportBill
             reportViewer1.LocalReport.DataSources.Add(dataSource);
             reportViewer1.LocalReport.Refresh();
             reportViewer1.RefreshReport();
+
+            BarcodeLib.Barcode barcode = new BarcodeLib.Barcode()
+            {
+                BarWidth = 1,
+            };
+            Image img = barcode.Encode(BarcodeLib.TYPE.CODE128, "tienthu.com.vn", Color.Black, Color.White, 100, 30);
+            this.pictureBox1.Image = img;
         }
     }
 }
