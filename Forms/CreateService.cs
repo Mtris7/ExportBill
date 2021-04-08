@@ -73,7 +73,7 @@ namespace ExportBill
                 cl.Timeout = new TimeSpan(0, 0, _TimeoutSec);
                 string _ContentType = "application/x-www-form-urlencoded";
                 cl.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_ContentType));
-                cl.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", FindCustomer.token);
+                cl.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Main.token);
                 var nvc = new List<KeyValuePair<string, string>>();
                 nvc.Add(new KeyValuePair<string, string>("CustAccount", MaKHTxt.Text));
                 if (!string.IsNullOrWhiteSpace(BSTxt.Text))

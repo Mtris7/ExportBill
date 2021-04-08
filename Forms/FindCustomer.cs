@@ -16,14 +16,12 @@ namespace ExportBill
         private const string URL = @"http://api.ototienthu.com.vn/api/v1/oauth/token";
         private const string username = "apitest@tienthu.vn";
         private const string password = "62&z!]r*RV";
-        public static string token = string.Empty;
         #endregion
         //##############################################################################################
 
         public FindCustomer()
         {
             InitializeComponent();
-            this.getToken();
         }
         //##############################################################################################
         #region event
@@ -51,7 +49,7 @@ namespace ExportBill
                     url = @"http://api.ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + this.textBox1.Text + "&searchtype=LicensePlate";
                 }
                 var client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", FindCustomer.token);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Main.token);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
 
@@ -67,11 +65,11 @@ namespace ExportBill
                     }
                     var customerData = dataList.data[0].Split(';');
                     var customer = new CustomerModel();
-                    customer.Cart_Number = customerData[0];
-                    customer.Name = customerData[1];
-                    customer.Address = customerData[2];
-                    customer.Tel = customerData[3];
-                    customer.BS = customerData[4];
+                    customer.MaKH = customerData[0];
+                    //customer.Name = customerData[1];
+                    //customer.Address = customerData[2];
+                    //customer.Tel = customerData[3];
+                    //customer.BS = customerData[4];
                     customer.SoLanKTDK = customerData[5];
                     List<CustomerModel> list = new List<CustomerModel>();
                     list.Add(customer);
@@ -128,32 +126,7 @@ namespace ExportBill
         #endregion
         //##############################################################################################
         #region method
-        public async void getToken()
-        {
-            try
-            {
-                var client = new HttpClient();
-                var request = new HttpRequestMessage(HttpMethod.Post, URL);
-                var formContent = new FormUrlEncodedContent(new[]
-                    {
-                        new KeyValuePair<string, string>("username", username),
-                        new KeyValuePair<string, string>("password", password),
-                        new KeyValuePair<string, string>("grant_type", "password"),
-                    });
-                request.Content = formContent;
-                var response = await client.SendAsync(request);
-                if (response.IsSuccessStatusCode)
-                {
-                    var body = await response.Content.ReadAsStringAsync();
-                    var tokenData = JsonConvert.DeserializeObject<Token>(body);
-                    FindCustomer.token = tokenData.access_token;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        
         #endregion
         //##############################################################################################
     }
