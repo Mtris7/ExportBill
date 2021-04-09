@@ -189,6 +189,7 @@
             this.SaveBtn.Text = "Lưu";
             this.SaveBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.SaveBtn.UseVisualStyleBackColor = true;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
             // placeHolderTextBox1
             // 

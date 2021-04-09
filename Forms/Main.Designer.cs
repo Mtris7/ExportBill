@@ -56,10 +56,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Location = new System.Drawing.Point(0, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1180, 552);
+            this.tabControl1.Size = new System.Drawing.Size(1180, 540);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -70,7 +70,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1172, 523);
+            this.tabPage1.Size = new System.Drawing.Size(1172, 511);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Danh sách xe làm dịch vụ";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -116,7 +116,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1172, 523);
+            this.tabPage2.Size = new System.Drawing.Size(1172, 511);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Tạo phiếu dịch vụ";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -194,7 +194,7 @@
             this.CreateServiceGrid.Location = new System.Drawing.Point(6, 98);
             this.CreateServiceGrid.Name = "CreateServiceGrid";
             this.CreateServiceGrid.RowTemplate.Height = 24;
-            this.CreateServiceGrid.Size = new System.Drawing.Size(1160, 419);
+            this.CreateServiceGrid.Size = new System.Drawing.Size(1160, 407);
             this.CreateServiceGrid.TabIndex = 10;
             this.CreateServiceGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CreateServiceGrid_CellDoubleClick);
             // 
