@@ -100,7 +100,7 @@ namespace ExportBill
             try
             {
                 ToolTip toolTip = new ToolTip();
-                if (string.IsNullOrWhiteSpace(textBox1.Text))
+                if (textBox1.Text == "Tìm khách hàng: Biển số/SĐT")
                 {
                     toolTip.AutoPopDelay = 5000;
                     toolTip.InitialDelay = 1000;
@@ -130,7 +130,7 @@ namespace ExportBill
                     var dataList = JsonConvert.DeserializeObject<DataModel>(body);
                     if(dataList.data == null)
                     {
-                        MessageBox.Show("Quá thời gian quy định,Vui lòng đăng nhập lại.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Có lỗi dữ liệu từ máy chủ, liên hệ phòng công nghệ để giải quyết", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     if (dataList.data.Count == 0)
@@ -178,8 +178,9 @@ namespace ExportBill
                     if (result.Equals(DialogResult.Yes))
                     {
                         var makh = this.CreateServiceGrid.Rows[0].Cells[0].Tag?.ToString();
+                        var tenkh = this.CreateServiceGrid.Rows[0].Cells[0].Value?.ToString();
                         var bs = this.CreateServiceGrid.Rows[0].Cells[1].Value?.ToString();
-                        var createService = new CreateService(makh, bs);
+                        var createService = new CreateService(makh, tenkh, bs);
                         createService.ShowDialog();
                     }
                 }

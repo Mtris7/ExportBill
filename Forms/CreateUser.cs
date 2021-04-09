@@ -20,5 +20,17 @@ namespace ExportBill
         public void MainLoad()
         {
         }
+
+        private void CreateSaveBtn_Click(object sender, EventArgs e)
+        {
+            string maKH = string.Empty;
+            this.Close();
+            new CreateService(maKH, NameTxt.Text,BSTxt.Text).ShowDialog();
+        }
+
+        private void CreateUser_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

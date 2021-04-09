@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateUser));
             this.NameTxt = new ExportBill.PlaceHolderTextBox();
             this.CMNDTxt = new ExportBill.PlaceHolderTextBox();
             this.CityTxt = new ExportBill.PlaceHolderTextBox();
@@ -39,8 +40,10 @@
             this.KilometerTxt = new ExportBill.PlaceHolderTextBox();
             this.NoteTxt = new ExportBill.PlaceHolderTextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.CreateSaveBtn = new System.Windows.Forms.Button();
+            this.SaveBtn = new System.Windows.Forms.Button();
+            this.placeHolderTextBox1 = new ExportBill.PlaceHolderTextBox();
+            this.BSTxt = new ExportBill.PlaceHolderTextBox();
             this.SuspendLayout();
             // 
             // NameTxt
@@ -126,7 +129,7 @@
             // comboBox3
             // 
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(21, 151);
+            this.comboBox3.Location = new System.Drawing.Point(21, 186);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(217, 24);
             this.comboBox3.TabIndex = 8;
@@ -135,7 +138,7 @@
             // 
             this.KilometerTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic);
             this.KilometerTxt.ForeColor = System.Drawing.Color.Gray;
-            this.KilometerTxt.Location = new System.Drawing.Point(264, 151);
+            this.KilometerTxt.Location = new System.Drawing.Point(264, 186);
             this.KilometerTxt.Name = "KilometerTxt";
             this.KilometerTxt.PlaceHolderText = "Số kilomet";
             this.KilometerTxt.Size = new System.Drawing.Size(204, 22);
@@ -146,7 +149,7 @@
             // 
             this.NoteTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic);
             this.NoteTxt.ForeColor = System.Drawing.Color.Gray;
-            this.NoteTxt.Location = new System.Drawing.Point(21, 193);
+            this.NoteTxt.Location = new System.Drawing.Point(21, 226);
             this.NoteTxt.Multiline = true;
             this.NoteTxt.Name = "NoteTxt";
             this.NoteTxt.PlaceHolderText = "Ghi chú";
@@ -162,31 +165,62 @@
             this.dateTimePicker1.Size = new System.Drawing.Size(111, 22);
             this.dateTimePicker1.TabIndex = 11;
             // 
-            // button1
+            // CreateSaveBtn
             // 
-            this.button1.Location = new System.Drawing.Point(325, 294);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(143, 32);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Lưu và tạo phiếu";
-            this.button1.UseVisualStyleBackColor = true;
+            this.CreateSaveBtn.Image = ((System.Drawing.Image)(resources.GetObject("CreateSaveBtn.Image")));
+            this.CreateSaveBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.CreateSaveBtn.Location = new System.Drawing.Point(306, 316);
+            this.CreateSaveBtn.Name = "CreateSaveBtn";
+            this.CreateSaveBtn.Size = new System.Drawing.Size(162, 43);
+            this.CreateSaveBtn.TabIndex = 12;
+            this.CreateSaveBtn.Text = "Lưu và tạo phiếu";
+            this.CreateSaveBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.CreateSaveBtn.UseVisualStyleBackColor = true;
+            this.CreateSaveBtn.Click += new System.EventHandler(this.CreateSaveBtn_Click);
             // 
-            // button2
+            // SaveBtn
             // 
-            this.button2.Location = new System.Drawing.Point(232, 294);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 32);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Lưu";
-            this.button2.UseVisualStyleBackColor = true;
+            this.SaveBtn.Image = ((System.Drawing.Image)(resources.GetObject("SaveBtn.Image")));
+            this.SaveBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.SaveBtn.Location = new System.Drawing.Point(238, 316);
+            this.SaveBtn.Name = "SaveBtn";
+            this.SaveBtn.Size = new System.Drawing.Size(68, 43);
+            this.SaveBtn.TabIndex = 13;
+            this.SaveBtn.Text = "Lưu";
+            this.SaveBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.SaveBtn.UseVisualStyleBackColor = true;
+            // 
+            // placeHolderTextBox1
+            // 
+            this.placeHolderTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic);
+            this.placeHolderTextBox1.ForeColor = System.Drawing.Color.Gray;
+            this.placeHolderTextBox1.Location = new System.Drawing.Point(265, 153);
+            this.placeHolderTextBox1.Name = "placeHolderTextBox1";
+            this.placeHolderTextBox1.PlaceHolderText = "Loại xe";
+            this.placeHolderTextBox1.Size = new System.Drawing.Size(204, 22);
+            this.placeHolderTextBox1.TabIndex = 15;
+            this.placeHolderTextBox1.Text = "Loại xe";
+            // 
+            // BSTxt
+            // 
+            this.BSTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic);
+            this.BSTxt.ForeColor = System.Drawing.Color.Gray;
+            this.BSTxt.Location = new System.Drawing.Point(22, 153);
+            this.BSTxt.Name = "BSTxt";
+            this.BSTxt.PlaceHolderText = "Biển số xe";
+            this.BSTxt.Size = new System.Drawing.Size(213, 22);
+            this.BSTxt.TabIndex = 14;
+            this.BSTxt.Text = "Biển số xe";
             // 
             // CreateUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(491, 338);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(491, 367);
+            this.Controls.Add(this.placeHolderTextBox1);
+            this.Controls.Add(this.BSTxt);
+            this.Controls.Add(this.SaveBtn);
+            this.Controls.Add(this.CreateSaveBtn);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.NoteTxt);
             this.Controls.Add(this.KilometerTxt);
@@ -201,6 +235,7 @@
             this.Name = "CreateUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tạo mới khách hàng";
+            this.Load += new System.EventHandler(this.CreateUser_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,7 +254,9 @@
         private PlaceHolderTextBox KilometerTxt;
         private PlaceHolderTextBox NoteTxt;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button CreateSaveBtn;
+        private System.Windows.Forms.Button SaveBtn;
+        private PlaceHolderTextBox placeHolderTextBox1;
+        private PlaceHolderTextBox BSTxt;
     }
 }

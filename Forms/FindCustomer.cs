@@ -104,8 +104,8 @@ namespace ExportBill
                 {
                     var makh = this.dataGridView1.Rows[0].Cells[0].Value?.ToString();
                     var bs = this.dataGridView1.Rows[0].Cells[4].Value?.ToString();
-                    var createService = new CreateService(makh, bs);
-                    createService.ShowDialog();
+                    //var createService = new CreateService(makh, bs);
+                    //createService.ShowDialog();
                 }
                 //MessageBox.Show("Khách hàng chỉ thay Nhớt", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 //if(this.DialogResult.Equals(DialogResult.OK))

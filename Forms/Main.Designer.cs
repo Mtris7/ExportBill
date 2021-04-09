@@ -91,9 +91,9 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(265, 6);
+            this.button1.Location = new System.Drawing.Point(252, 6);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 36);
+            this.button1.Size = new System.Drawing.Size(117, 36);
             this.button1.TabIndex = 4;
             this.button1.Text = "Tìm kiếm";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
