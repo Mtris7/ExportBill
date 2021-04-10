@@ -17,101 +17,132 @@ namespace ExportBill
         private const string password = "62&z!]r*RV";
         public static string token = string.Empty;
         #endregion
+        //###############################################################################################
+
+        #region Initialize
         public Main()
         {
             InitializeComponent();
             MainLoad();
         }
-        //###############################################################################################
         public void MainLoad()
         {
-            myTxtbx.GotFocus += RemoveText;
-            myTxtbx.LostFocus += AddText;
-            textBox1.GotFocus += RemoveText;
-            textBox1.LostFocus += AddText;
-            this.getToken();
-            InitializeGrid();
+            try
+            {
+                this.getToken();
+                InitializeGrid();
+                SetDefault();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         public void InitializeGrid()
         {
-
-            int columnIndex = 4;
-            this.CreateServiceGrid.Columns.Add("TenKH", "khách hàng");
-            this.CreateServiceGrid.Columns.Add("BS", "Biển số xe");
-            this.CreateServiceGrid.Columns.Add("Lx", "Loại xe");
-            this.CreateServiceGrid.Columns.Add("SDT", "Số điện thoại");
-            if (CreateServiceGrid.Columns["CreateServiceBtn"] == null)
+            try
             {
-                DataGridViewButtonColumn CreateServiceBtn = new DataGridViewButtonColumn()
+                //BikeGrid
+                this.BikeGrid.Columns.Add("TenKH", "khách hàng");
+                this.BikeGrid.Columns.Add("BS", "Biển số xe");
+                this.BikeGrid.Columns.Add("Lx", "Loại xe");
+                this.BikeGrid.Columns.Add("TSC", "Thợ sửa chữa");
+                this.BikeGrid.Columns.Add("DG", "Diễn giải");
+                this.BikeGrid.Columns.Add("TT", "Thành tiền");
+                if (BikeGrid.Columns["ViewBtn"] == null)
                 {
-                    Text = "+",
-                    HeaderText = "Tạo phiếu",
-                    Name = "CreateServiceBtn",
-                    UseColumnTextForButtonValue = true,
-                    DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.WhiteSmoke, ForeColor = Color.Blue, Alignment = DataGridViewContentAlignment.MiddleCenter},
-                };
-                CreateServiceGrid.Columns.Insert(columnIndex, CreateServiceBtn);
+                    DataGridViewButtonColumn ViewBtn = new DataGridViewButtonColumn()
+                    {
+                        HeaderText = "Số phiếu",
+                        Name = "ViewBtn",
+                        UseColumnTextForButtonValue = true,
+                        DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.White, ForeColor = Color.Green, Alignment = DataGridViewContentAlignment.MiddleCenter },
+                    };
+                    BikeGrid.Columns.Insert(0, ViewBtn);
+                }
+                if (BikeGrid.Columns["IB"] == null)
+                {
+                    DataGridViewButtonColumn PrintBtn = new DataGridViewButtonColumn()
+                    {
+                        HeaderText = "In Bill",
+                        Name = "PrintBtn",
+                        UseColumnTextForButtonValue = true,
+                        DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.White, ForeColor = Color.Green, Alignment = DataGridViewContentAlignment.MiddleCenter },
+                    };
+                    BikeGrid.Columns.Insert(7, PrintBtn);
+                }
+                this.BikeGrid.RowCount = 20;
+                this.Total.Text = "0";
+                //CreateServiceGrid
+                int columnIndex = 4;
+                this.CreateServiceGrid.Columns.Add("TenKH", "khách hàng");
+                this.CreateServiceGrid.Columns.Add("BS", "Biển số xe");
+                this.CreateServiceGrid.Columns.Add("Lx", "Loại xe");
+                this.CreateServiceGrid.Columns.Add("SDT", "Số điện thoại");
+                if (CreateServiceGrid.Columns["CreateServiceBtn"] == null)
+                {
+                    DataGridViewButtonColumn CreateServiceBtn = new DataGridViewButtonColumn()
+                    {
+                        Text = "+",
+                        HeaderText = "Tạo phiếu",
+                        Name = "CreateServiceBtn",
+                        UseColumnTextForButtonValue = true,
+                        DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.White, ForeColor = Color.Green, Alignment = DataGridViewContentAlignment.MiddleCenter },
+                    };
+                    CreateServiceGrid.Columns.Insert(columnIndex, CreateServiceBtn);
+                }
+                CreateServiceGrid.RowCount = 10;
+                for (int i = 0; i < this.CreateServiceGrid.RowCount; i++)
+                {
+                    //this.CreateServiceGrid.Rows[i].Cells[columnIndex].Style.BackColor = Color.Blue;
+                }
             }
-            CreateServiceGrid.RowCount = 10;
-            for(int i =0; i < this.CreateServiceGrid.RowCount;i++)
+            catch (Exception ex)
             {
-                this.CreateServiceGrid.Rows[i].Cells[columnIndex].Style.BackColor = Color.Blue;
-            }
-        }
-        #region event
-        public void RemoveText(object sender, EventArgs e)
-        {
-            if (myTxtbx.Text == "Nhập biển số xe...")
-            {
-                myTxtbx.Font = new Font(myTxtbx.Font, FontStyle.Regular);
-                myTxtbx.Text = "";
-            }
-            if (textBox1.Text == "Tìm khách hàng: Biển số/SĐT")
-            {
-                textBox1.Font = new Font(textBox1.Font, FontStyle.Regular);
-                textBox1.Text = "";
+                MessageBox.Show(ex.Message);
             }
         }
 
-        public void AddText(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(myTxtbx.Text))
-            {
-                myTxtbx.Font = new Font(myTxtbx.Font, FontStyle.Italic);
-                myTxtbx.Text = "Nhập biển số xe...";
-            }
-            if (string.IsNullOrWhiteSpace(textBox1.Text))
-            {
-                textBox1.Font = new Font(textBox1.Font, FontStyle.Italic);
-                textBox1.Text = "Tìm khách hàng: Biển số/SĐT";
-            }
-        }
         #endregion
-
         //##############################################################################################
         #region event
+
+        private void BikeGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if(e.ColumnIndex.Equals(0))
+                {
+                    //this.BikeGrid.Rows[e.RowIndex + 1].Cells[e.ColumnIndex].Style.BackColor = Color.Transparent;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private async void button2_ClickAsync(object sender, EventArgs e)
         {
             try
             {
                 ToolTip toolTip = new ToolTip();
-                if (textBox1.Text == "Tìm khách hàng: Biển số/SĐT")
+                if (string.IsNullOrWhiteSpace(SearchTxt.Text))
                 {
                     toolTip.AutoPopDelay = 5000;
                     toolTip.InitialDelay = 1000;
                     toolTip.ReshowDelay = 500;
-                    toolTip.Show("Nhập thông tin cần tìm.", textBox1);
-                    this.textBox1.Focus();
+                    toolTip.Show("Nhập thông tin cần tìm.", SearchTxt);
+                    this.SearchTxt.Focus();
                     return;
                 }
                 string url = string.Empty;
                 if (this.chkSDT.Checked)
                 {
-                    url = @"http://api.ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + this.textBox1.Text + "&searchtype=CustomerPhone";
+                    url = @"http://api.ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + this.SearchTxt.Text + "&searchtype=CustomerPhone";
                 }
                 else
                 {
-                    url = @"http://api.ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + this.textBox1.Text + "&searchtype=LicensePlate";
+                    url = @"http://api.ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + this.SearchTxt.Text + "&searchtype=LicensePlate";
                 }
                 var client = new HttpClient();
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Main.token);
@@ -215,7 +246,19 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
-
+        private void SetDefault()
+        {
+            try
+            {
+                this.DatetimeLb.Text = this.DatetimeLb2.Text = DateTime.Now.ToLocalTime().ToShortDateString();
+                //this.egencylb.Text = this.egencylb2.Text = "";
+                //this.Diemltn.Text = this.Diemltn2.Text = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #endregion
         //##############################################################################################
     }
