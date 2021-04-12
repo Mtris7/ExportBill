@@ -42,17 +42,19 @@
             this.TSC = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DG = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TT = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.PrintBill = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Diemltn = new System.Windows.Forms.Label();
             this.egencylb = new System.Windows.Forms.Label();
-            this.DatetimeLb = new System.Windows.Forms.Label();
+            this.DatetimeLbl = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.placeHolderTextBox1 = new ExportBill.PlaceHolderTextBox();
+            this.SearchControl1Txt = new ExportBill.PlaceHolderTextBox();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
@@ -63,11 +65,10 @@
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.DatetimeLbl2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.placeHolderTextBox2 = new ExportBill.PlaceHolderTextBox();
+            this.Search2Txt = new ExportBill.PlaceHolderTextBox();
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
-            this.PrintBill = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
@@ -121,9 +122,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControl2.Controls.Add(this.gridControl1);
-            this.groupControl2.Location = new System.Drawing.Point(3, 90);
+            this.groupControl2.Location = new System.Drawing.Point(3, 107);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(1169, 428);
+            this.groupControl2.Size = new System.Drawing.Size(1169, 411);
             this.groupControl2.TabIndex = 1;
             // 
             // gridControl1
@@ -137,11 +138,10 @@
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEdit1,
             this.repositoryItemButtonEdit2});
-            this.gridControl1.Size = new System.Drawing.Size(1165, 401);
+            this.gridControl1.Size = new System.Drawing.Size(1165, 384);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
-            this.gridControl1.Click += new System.EventHandler(this.gridControl1_Click);
             // 
             // gridView1
             // 
@@ -246,6 +246,8 @@
             this.DG.FieldName = "DG";
             this.DG.Name = "DG";
             this.DG.OptionsColumn.AllowEdit = false;
+            this.DG.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "DG", "Tổng cộng")});
             this.DG.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.DG.Visible = true;
             this.DG.VisibleIndex = 5;
@@ -259,15 +261,25 @@
             this.TT.Caption = "Thành tiền";
             this.TT.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.TT.FieldName = "TT";
+            this.TT.GroupFormat.FormatString = "{0:C}VNĐ";
             this.TT.GroupFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.TT.Name = "TT";
             this.TT.OptionsColumn.AllowEdit = false;
             this.TT.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TT", "Tổng cộng = {0:0.##}"),
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TT", "= {0:C}VNĐ"),
             new DevExpress.XtraGrid.GridColumnSummaryItem()});
             this.TT.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.TT.Visible = true;
             this.TT.VisibleIndex = 6;
+            // 
+            // PrintBill
+            // 
+            this.PrintBill.Caption = "In Bill";
+            this.PrintBill.Name = "PrintBill";
+            this.PrintBill.OptionsColumn.AllowEdit = false;
+            this.PrintBill.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.PrintBill.Visible = true;
+            this.PrintBill.VisibleIndex = 7;
             // 
             // repositoryItemButtonEdit1
             // 
@@ -289,25 +301,34 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControl1.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.groupControl1.Appearance.Options.UseBackColor = true;
+            this.groupControl1.Controls.Add(this.dateTimePicker1);
             this.groupControl1.Controls.Add(this.pictureBox3);
             this.groupControl1.Controls.Add(this.pictureBox2);
             this.groupControl1.Controls.Add(this.pictureBox1);
             this.groupControl1.Controls.Add(this.Diemltn);
             this.groupControl1.Controls.Add(this.egencylb);
-            this.groupControl1.Controls.Add(this.DatetimeLb);
+            this.groupControl1.Controls.Add(this.DatetimeLbl);
             this.groupControl1.Controls.Add(this.button1);
-            this.groupControl1.Controls.Add(this.placeHolderTextBox1);
+            this.groupControl1.Controls.Add(this.SearchControl1Txt);
             this.groupControl1.Location = new System.Drawing.Point(3, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1169, 81);
+            this.groupControl1.Size = new System.Drawing.Size(1169, 98);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "Thông tin tìm kiếm";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(23, 66);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(126, 23);
+            this.dateTimePicker1.TabIndex = 18;
             // 
             // pictureBox3
             // 
             this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(1024, 36);
+            this.pictureBox3.Location = new System.Drawing.Point(1024, 43);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(32, 31);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -319,7 +340,7 @@
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(824, 37);
+            this.pictureBox2.Location = new System.Drawing.Point(824, 44);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(35, 33);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -330,7 +351,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(631, 37);
+            this.pictureBox1.Location = new System.Drawing.Point(631, 44);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(35, 32);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -341,7 +362,7 @@
             // 
             this.Diemltn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Diemltn.AutoSize = true;
-            this.Diemltn.Location = new System.Drawing.Point(1063, 44);
+            this.Diemltn.Location = new System.Drawing.Point(1063, 51);
             this.Diemltn.Name = "Diemltn";
             this.Diemltn.Size = new System.Drawing.Size(54, 17);
             this.Diemltn.TabIndex = 14;
@@ -351,21 +372,21 @@
             // 
             this.egencylb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.egencylb.AutoSize = true;
-            this.egencylb.Location = new System.Drawing.Point(865, 44);
+            this.egencylb.Location = new System.Drawing.Point(865, 51);
             this.egencylb.Name = "egencylb";
             this.egencylb.Size = new System.Drawing.Size(81, 17);
             this.egencylb.TabIndex = 13;
             this.egencylb.Text = "Tường phát";
             // 
-            // DatetimeLb
+            // DatetimeLbl
             // 
-            this.DatetimeLb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DatetimeLb.AutoSize = true;
-            this.DatetimeLb.Location = new System.Drawing.Point(673, 44);
-            this.DatetimeLb.Name = "DatetimeLb";
-            this.DatetimeLb.Size = new System.Drawing.Size(63, 17);
-            this.DatetimeLb.TabIndex = 12;
-            this.DatetimeLb.Text = "Datetime";
+            this.DatetimeLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DatetimeLbl.AutoSize = true;
+            this.DatetimeLbl.Location = new System.Drawing.Point(673, 51);
+            this.DatetimeLbl.Name = "DatetimeLbl";
+            this.DatetimeLbl.Size = new System.Drawing.Size(63, 17);
+            this.DatetimeLbl.TabIndex = 12;
+            this.DatetimeLbl.Text = "Datetime";
             // 
             // button1
             // 
@@ -373,24 +394,25 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(219, 37);
+            this.button1.Location = new System.Drawing.Point(175, 59);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(109, 30);
             this.button1.TabIndex = 5;
             this.button1.Text = "Tìm kiếm";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // placeHolderTextBox1
+            // SearchControl1Txt
             // 
-            this.placeHolderTextBox1.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
-            this.placeHolderTextBox1.ForeColor = System.Drawing.Color.Gray;
-            this.placeHolderTextBox1.Location = new System.Drawing.Point(8, 41);
-            this.placeHolderTextBox1.Name = "placeHolderTextBox1";
-            this.placeHolderTextBox1.PlaceHolderText = "Nhập biển số xe";
-            this.placeHolderTextBox1.Size = new System.Drawing.Size(205, 23);
-            this.placeHolderTextBox1.TabIndex = 0;
-            this.placeHolderTextBox1.Text = "Nhập biển số xe";
+            this.SearchControl1Txt.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
+            this.SearchControl1Txt.ForeColor = System.Drawing.Color.Gray;
+            this.SearchControl1Txt.Location = new System.Drawing.Point(23, 37);
+            this.SearchControl1Txt.Name = "SearchControl1Txt";
+            this.SearchControl1Txt.PlaceHolderText = "Nhập biển số xe";
+            this.SearchControl1Txt.Size = new System.Drawing.Size(126, 23);
+            this.SearchControl1Txt.TabIndex = 0;
+            this.SearchControl1Txt.Text = "Nhập biển số xe";
             // 
             // xtraTabPage2
             // 
@@ -432,9 +454,9 @@
             this.groupControl3.Controls.Add(this.pictureBox6);
             this.groupControl3.Controls.Add(this.label1);
             this.groupControl3.Controls.Add(this.label2);
-            this.groupControl3.Controls.Add(this.label3);
+            this.groupControl3.Controls.Add(this.DatetimeLbl2);
             this.groupControl3.Controls.Add(this.button2);
-            this.groupControl3.Controls.Add(this.placeHolderTextBox2);
+            this.groupControl3.Controls.Add(this.Search2Txt);
             this.groupControl3.Location = new System.Drawing.Point(3, 3);
             this.groupControl3.Name = "groupControl3";
             this.groupControl3.Size = new System.Drawing.Size(1169, 83);
@@ -495,15 +517,15 @@
             this.label2.TabIndex = 20;
             this.label2.Text = "Tường phát";
             // 
-            // label3
+            // DatetimeLbl2
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(681, 44);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 17);
-            this.label3.TabIndex = 19;
-            this.label3.Text = "Datetime";
+            this.DatetimeLbl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DatetimeLbl2.AutoSize = true;
+            this.DatetimeLbl2.Location = new System.Drawing.Point(681, 44);
+            this.DatetimeLbl2.Name = "DatetimeLbl2";
+            this.DatetimeLbl2.Size = new System.Drawing.Size(63, 17);
+            this.DatetimeLbl2.TabIndex = 19;
+            this.DatetimeLbl2.Text = "Datetime";
             // 
             // button2
             // 
@@ -518,27 +540,18 @@
             this.button2.Text = "Tìm kiếm";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // placeHolderTextBox2
+            // Search2Txt
             // 
-            this.placeHolderTextBox2.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
-            this.placeHolderTextBox2.ForeColor = System.Drawing.Color.Gray;
-            this.placeHolderTextBox2.Location = new System.Drawing.Point(8, 41);
-            this.placeHolderTextBox2.Name = "placeHolderTextBox2";
-            this.placeHolderTextBox2.PlaceHolderText = "Nhập biển số xe";
-            this.placeHolderTextBox2.Size = new System.Drawing.Size(205, 23);
-            this.placeHolderTextBox2.TabIndex = 0;
-            this.placeHolderTextBox2.Text = "Nhập biển số xe";
-            // 
-            // PrintBill
-            // 
-            this.PrintBill.Caption = "In Bill";
-            this.PrintBill.FieldName = "gridColumn1";
-            this.PrintBill.Name = "PrintBill";
-            this.PrintBill.OptionsColumn.AllowEdit = false;
-            this.PrintBill.UnboundType = DevExpress.Data.UnboundColumnType.String;
-            this.PrintBill.Visible = true;
-            this.PrintBill.VisibleIndex = 7;
+            this.Search2Txt.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
+            this.Search2Txt.ForeColor = System.Drawing.Color.Gray;
+            this.Search2Txt.Location = new System.Drawing.Point(8, 41);
+            this.Search2Txt.Name = "Search2Txt";
+            this.Search2Txt.PlaceHolderText = "Nhập biển số xe";
+            this.Search2Txt.Size = new System.Drawing.Size(205, 23);
+            this.Search2Txt.TabIndex = 0;
+            this.Search2Txt.Text = "Nhập biển số xe";
             // 
             // DXMain
             // 
@@ -548,6 +561,7 @@
             this.Controls.Add(this.xtraTabControl1);
             this.Name = "DXMain";
             this.Text = "DXMain";
+            this.Load += new System.EventHandler(this.DXMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
             this.xtraTabPage1.ResumeLayout(false);
@@ -586,7 +600,7 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.GroupControl groupControl1;
-        private PlaceHolderTextBox placeHolderTextBox1;
+        private PlaceHolderTextBox SearchControl1Txt;
         private System.Windows.Forms.Button button1;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
@@ -603,21 +617,22 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label Diemltn;
         private System.Windows.Forms.Label egencylb;
-        private System.Windows.Forms.Label DatetimeLb;
+        private System.Windows.Forms.Label DatetimeLbl;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit2;
         private DevExpress.XtraEditors.GroupControl groupControl4;
         private DevExpress.XtraGrid.GridControl gridControl2;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
         private DevExpress.XtraEditors.GroupControl groupControl3;
-        private PlaceHolderTextBox placeHolderTextBox2;
+        private PlaceHolderTextBox Search2Txt;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label DatetimeLbl2;
         private System.Windows.Forms.Button button2;
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
         private DevExpress.XtraGrid.Columns.GridColumn PrintBill;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }
