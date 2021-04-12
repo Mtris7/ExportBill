@@ -155,6 +155,7 @@
             this.TT,
             this.PrintBill});
             this.gridView1.GridControl = this.gridControl1;
+            this.gridView1.GroupFormat = "= {0:C}VNĐ";
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsEditForm.EditFormColumnCount = 1;
             this.gridView1.OptionsMenu.ShowFooterItem = true;
@@ -170,7 +171,7 @@
             this.View.AppearanceCell.Options.UseTextOptions = true;
             this.View.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.View.AppearanceHeader.Options.UseTextOptions = true;
-            this.View.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.View.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.View.Caption = "Số phiếu";
             this.View.FieldName = "View";
             this.View.Name = "View";
@@ -261,12 +262,11 @@
             this.TT.Caption = "Thành tiền";
             this.TT.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.TT.FieldName = "TT";
-            this.TT.GroupFormat.FormatString = "{0:C}VNĐ";
             this.TT.GroupFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.TT.Name = "TT";
             this.TT.OptionsColumn.AllowEdit = false;
             this.TT.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TT", "= {0:C}VNĐ"),
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TT", "= {0:N0}VNĐ"),
             new DevExpress.XtraGrid.GridColumnSummaryItem()});
             this.TT.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.TT.Visible = true;
@@ -274,7 +274,12 @@
             // 
             // PrintBill
             // 
+            this.PrintBill.AppearanceCell.Options.UseTextOptions = true;
+            this.PrintBill.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.PrintBill.AppearanceHeader.Options.UseTextOptions = true;
+            this.PrintBill.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.PrintBill.Caption = "In Bill";
+            this.PrintBill.FieldName = "PrintBill";
             this.PrintBill.Name = "PrintBill";
             this.PrintBill.OptionsColumn.AllowEdit = false;
             this.PrintBill.UnboundType = DevExpress.Data.UnboundColumnType.String;

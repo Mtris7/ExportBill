@@ -11,6 +11,8 @@ using DevExpress.XtraEditors;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.Utils.Drawing;
 
 namespace ExportBill
 {
@@ -44,6 +46,7 @@ namespace ExportBill
         {
             InitializeComponent();
             gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            gridView1.RowCellClick += gridView1_RowCellClick;
         }
         
 
@@ -59,8 +62,6 @@ namespace ExportBill
 
         private async void button1_Click(object sender, EventArgs e)
         {
-
-
             try
             {
                 string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId=TT_0762_16092016&serviceDate=" + this.dateTimePicker1.Text;
@@ -92,8 +93,8 @@ namespace ExportBill
                     foreach (var item in dataList.data)
                     {
                         var data = item.Split(';');
-                        //customer( view,  userName,  bs,  lx,  tsc,  dg,  tt,  shop,  adress,  print))
-                        ds.Add(new Customer(data[0], data[1], data[2], data[3], data[4], data[5], Convert.ToDecimal(data[6]), data[7], data[8], "print"));
+                        //public Customer(string maPhieu, string userName, string bs, string lx, string tsc, string dg, decimal discount, decimal total, string detaiMoney, string company, string adress, string date, string print)
+                        ds.Add(new Customer(data[0], data[1], data[2], data[3], data[4], data[5], Convert.ToDecimal(data[6]), Convert.ToDecimal(data[7]), data[8], data[9], data[10],this.dateTimePicker1.Text, "print"));
                     }
                     this.gridControl1.DataSource = ds;
                 }
@@ -106,6 +107,13 @@ namespace ExportBill
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+        void gridView1_RowCellClick(object sender, RowCellClickEventArgs e)
+        {
+            if (e.Column.FieldName == "View")
+            {
+                //new PrintInvoiceForm().ShowDialog();
             }
         }
         //##############################################################################################
@@ -151,32 +159,5 @@ namespace ExportBill
         }
         #endregion
         //##############################################################################################
-    }
-    public class Customer
-    {
-        public Customer() { }
-        public Customer(string view, string userName, string bs, string lx, string tsc, string dg, decimal tt, string shop, string adress, string print)
-        {
-            View = view;
-            UserName = userName;
-            BS = bs;
-            LX = lx;
-            TSC = tsc;
-            DG = dg;
-            TT = tt;
-            Shop = shop;
-            Adress = adress;
-            PrintBill = print;
-        }
-        public string View { get; set; }
-        public string UserName { get; set; }
-        public string BS { get; set; }
-        public string LX { get; set; }
-        public string TSC { get; set; }
-        public string DG { get; set; }
-        public decimal TT { get; set; }
-        public string Shop { get; set; }
-        public string Adress { get; set; }
-        public string PrintBill { get; set; }
     }
 }

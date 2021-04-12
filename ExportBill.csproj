@@ -152,8 +152,10 @@
     <Compile Include="Forms\PrintInvoiceForm.Designer.cs">
       <DependentUpon>PrintInvoiceForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\CustomerModel.cs" />
     <Compile Include="Model\DataModel.cs" />
+    <Compile Include="Model\ItemSell.cs" />
     <Compile Include="Model\Token.cs" />
     <Compile Include="PlaceHolderTextBox.cs">
       <SubType>Component</SubType>
