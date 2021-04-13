@@ -32,13 +32,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.89352in</Width>
+              <Width>1.29166in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.89352in</Width>
+              <Width>0.46204in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.89352in</Width>
+              <Width>0.92685in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -54,8 +54,10 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Item Name</Value>
-                              <Style />
+                              <Value>Nội dung sữa chữa</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -67,6 +69,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -84,11 +87,15 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Item Quality</Value>
-                              <Style />
+                              <Value>SL</Value>
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox9</rd:DefaultName>
@@ -97,6 +104,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -115,10 +123,14 @@
                           <TextRuns>
                             <TextRun>
                               <Value>Item Price</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox11</rd:DefaultName>
@@ -127,6 +139,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -150,10 +163,14 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!ItemName.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>ItemName</rd:DefaultName>
@@ -162,6 +179,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -180,10 +198,14 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!ItemQuality.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>ItemQuality</rd:DefaultName>
@@ -192,6 +214,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -210,10 +233,14 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!ItemPrice.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>ItemPrice</rd:DefaultName>
@@ -222,6 +249,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -255,7 +283,7 @@
         <Top>2.71297in</Top>
         <Left>0.03056in</Left>
         <Height>0.5in</Height>
-        <Width>2.68056in</Width>
+        <Width>2.68055in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -374,29 +402,11 @@
               <TextAlign>Center</TextAlign>
             </Style>
           </Paragraph>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>http://tienthu.com.vn/</Value>
-                <Style>
-                  <FontStyle>Normal</FontStyle>
-                  <FontFamily>Code39AzaleaWide1</FontFamily>
-                  <FontSize>30pt</FontSize>
-                  <FontWeight>Normal</FontWeight>
-                  <TextDecoration>None</TextDecoration>
-                  <Color>#000000</Color>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Center</TextAlign>
-            </Style>
-          </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>4.09075in</Top>
+        <Top>4.07686in</Top>
         <Left>0.01111in</Left>
-        <Height>0.99074in</Height>
+        <Height>0.49907in</Height>
         <Width>2.7in</Width>
         <ZIndex>5</ZIndex>
         <Style>
@@ -426,9 +436,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TitleBotom</rd:DefaultName>
-        <Top>5.10927in</Top>
+        <Top>5.0426in</Top>
         <Left>0.04501in</Left>
-        <Height>0.30961in</Height>
+        <Height>0.41795in</Height>
         <Width>2.68055in</Width>
         <ZIndex>6</ZIndex>
         <Style>
@@ -483,11 +493,13 @@
             <TextRuns>
               <TextRun>
                 <Value>=First(Fields!ItemDetailPrice.Value, "DataSet1")</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style>
-              <TextAlign>Center</TextAlign>
+              <TextAlign>Right</TextAlign>
             </Style>
           </Paragraph>
         </Paragraphs>
@@ -619,7 +631,9 @@
                 <Style />
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Discount</rd:DefaultName>
@@ -632,6 +646,7 @@
           <Border>
             <Style>None</Style>
           </Border>
+          <VerticalAlign>Middle</VerticalAlign>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
@@ -649,7 +664,9 @@
                 <Style />
               </TextRun>
             </TextRuns>
-            <Style />
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>ItemTotal</rd:DefaultName>
@@ -662,6 +679,7 @@
           <Border>
             <Style>None</Style>
           </Border>
+          <VerticalAlign>Middle</VerticalAlign>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
@@ -677,6 +695,7 @@
               <TextRun>
                 <Value>=First(Fields!CompanyName.Value, "DataSet1")</Value>
                 <Style>
+                  <FontSize>11pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -710,7 +729,9 @@
             <TextRuns>
               <TextRun>
                 <Value>=First(Fields!Address.Value, "DataSet1")</Value>
-                <Style />
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style>
@@ -768,11 +789,27 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Image Name="Image1">
+        <Source>Database</Source>
+        <Value>=First(Fields!Image.Value, "DataSet1")</Value>
+        <MIMEType>image/png</MIMEType>
+        <Sizing>FitProportional</Sizing>
+        <Top>11.69343cm</Top>
+        <Left>1.55366cm</Left>
+        <Height>0.86784cm</Height>
+        <Width>4.08372cm</Width>
+        <ZIndex>17</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
     </ReportItems>
     <Height>14.7447cm</Height>
     <Style />
   </Body>
-  <Width>7.21cm</Width>
+  <Width>7.89752cm</Width>
   <Page>
     <PageHeight>27.94cm</PageHeight>
     <PageWidth>7.21cm</PageWidth>
@@ -855,6 +892,10 @@
         <Field Name="PhieuDV">
           <DataField>PhieuDV</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Image">
+          <DataField>Image</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

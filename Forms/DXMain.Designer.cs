@@ -35,14 +35,14 @@
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.View = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.MaPhieu = new DevExpress.XtraGrid.Columns.GridColumn();
             this.UserName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.BS = new DevExpress.XtraGrid.Columns.GridColumn();
             this.LX = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TSC = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DG = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.TT = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.PrintBill = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Total = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.PostBill = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
@@ -122,9 +122,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControl2.Controls.Add(this.gridControl1);
-            this.groupControl2.Location = new System.Drawing.Point(3, 107);
+            this.groupControl2.Location = new System.Drawing.Point(3, 78);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(1169, 411);
+            this.groupControl2.Size = new System.Drawing.Size(1169, 440);
             this.groupControl2.TabIndex = 1;
             // 
             // gridControl1
@@ -138,7 +138,7 @@
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEdit1,
             this.repositoryItemButtonEdit2});
-            this.gridControl1.Size = new System.Drawing.Size(1165, 384);
+            this.gridControl1.Size = new System.Drawing.Size(1165, 413);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -146,14 +146,14 @@
             // gridView1
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.View,
+            this.MaPhieu,
             this.UserName,
             this.BS,
             this.LX,
             this.TSC,
             this.DG,
-            this.TT,
-            this.PrintBill});
+            this.Total,
+            this.PostBill});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.GroupFormat = "= {0:C}VNĐ";
             this.gridView1.Name = "gridView1";
@@ -162,24 +162,24 @@
             this.gridView1.OptionsView.ShowFooter = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
-            // View
+            // MaPhieu
             // 
-            this.View.AppearanceCell.BackColor = System.Drawing.Color.Transparent;
-            this.View.AppearanceCell.ForeColor = System.Drawing.Color.Lime;
-            this.View.AppearanceCell.Options.UseBackColor = true;
-            this.View.AppearanceCell.Options.UseForeColor = true;
-            this.View.AppearanceCell.Options.UseTextOptions = true;
-            this.View.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.View.AppearanceHeader.Options.UseTextOptions = true;
-            this.View.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.View.Caption = "Số phiếu";
-            this.View.FieldName = "View";
-            this.View.Name = "View";
-            this.View.OptionsColumn.AllowEdit = false;
-            this.View.OptionsEditForm.UseEditorColRowSpan = false;
-            this.View.UnboundType = DevExpress.Data.UnboundColumnType.String;
-            this.View.Visible = true;
-            this.View.VisibleIndex = 0;
+            this.MaPhieu.AppearanceCell.BackColor = System.Drawing.Color.Transparent;
+            this.MaPhieu.AppearanceCell.ForeColor = System.Drawing.Color.Lime;
+            this.MaPhieu.AppearanceCell.Options.UseBackColor = true;
+            this.MaPhieu.AppearanceCell.Options.UseForeColor = true;
+            this.MaPhieu.AppearanceCell.Options.UseTextOptions = true;
+            this.MaPhieu.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.MaPhieu.AppearanceHeader.Options.UseTextOptions = true;
+            this.MaPhieu.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.MaPhieu.Caption = "Số phiếu";
+            this.MaPhieu.FieldName = "MaPhieu";
+            this.MaPhieu.Name = "MaPhieu";
+            this.MaPhieu.OptionsColumn.AllowEdit = false;
+            this.MaPhieu.OptionsEditForm.UseEditorColRowSpan = false;
+            this.MaPhieu.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.MaPhieu.Visible = true;
+            this.MaPhieu.VisibleIndex = 0;
             // 
             // UserName
             // 
@@ -253,38 +253,38 @@
             this.DG.Visible = true;
             this.DG.VisibleIndex = 5;
             // 
-            // TT
+            // Total
             // 
-            this.TT.AppearanceCell.Options.UseTextOptions = true;
-            this.TT.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.TT.AppearanceHeader.Options.UseTextOptions = true;
-            this.TT.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.TT.Caption = "Thành tiền";
-            this.TT.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.TT.FieldName = "TT";
-            this.TT.GroupFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.TT.Name = "TT";
-            this.TT.OptionsColumn.AllowEdit = false;
-            this.TT.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            this.Total.AppearanceCell.Options.UseTextOptions = true;
+            this.Total.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.Total.AppearanceHeader.Options.UseTextOptions = true;
+            this.Total.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.Total.Caption = "Thành tiền";
+            this.Total.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.Total.FieldName = "Total";
+            this.Total.GroupFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.Total.Name = "Total";
+            this.Total.OptionsColumn.AllowEdit = false;
+            this.Total.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "TT", "= {0:N0}VNĐ"),
             new DevExpress.XtraGrid.GridColumnSummaryItem()});
-            this.TT.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
-            this.TT.Visible = true;
-            this.TT.VisibleIndex = 6;
+            this.Total.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
+            this.Total.Visible = true;
+            this.Total.VisibleIndex = 6;
             // 
-            // PrintBill
+            // PostBill
             // 
-            this.PrintBill.AppearanceCell.Options.UseTextOptions = true;
-            this.PrintBill.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.PrintBill.AppearanceHeader.Options.UseTextOptions = true;
-            this.PrintBill.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.PrintBill.Caption = "In Bill";
-            this.PrintBill.FieldName = "PrintBill";
-            this.PrintBill.Name = "PrintBill";
-            this.PrintBill.OptionsColumn.AllowEdit = false;
-            this.PrintBill.UnboundType = DevExpress.Data.UnboundColumnType.String;
-            this.PrintBill.Visible = true;
-            this.PrintBill.VisibleIndex = 7;
+            this.PostBill.AppearanceCell.Options.UseTextOptions = true;
+            this.PostBill.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.PostBill.AppearanceHeader.Options.UseTextOptions = true;
+            this.PostBill.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.PostBill.Caption = "Post Bill";
+            this.PostBill.FieldName = "PostBill";
+            this.PostBill.Name = "PostBill";
+            this.PostBill.OptionsColumn.AllowEdit = false;
+            this.PostBill.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.PostBill.Visible = true;
+            this.PostBill.VisibleIndex = 7;
             // 
             // repositoryItemButtonEdit1
             // 
@@ -317,23 +317,24 @@
             this.groupControl1.Controls.Add(this.SearchControl1Txt);
             this.groupControl1.Location = new System.Drawing.Point(3, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1169, 98);
+            this.groupControl1.Size = new System.Drawing.Size(1169, 74);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "Thông tin tìm kiếm";
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(23, 66);
+            this.dateTimePicker1.Location = new System.Drawing.Point(676, 38);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(126, 23);
             this.dateTimePicker1.TabIndex = 18;
+            this.dateTimePicker1.Visible = false;
             // 
             // pictureBox3
             // 
             this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(1024, 43);
+            this.pictureBox3.Location = new System.Drawing.Point(1024, 35);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(32, 31);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -345,7 +346,7 @@
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(824, 44);
+            this.pictureBox2.Location = new System.Drawing.Point(824, 36);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(35, 33);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -356,7 +357,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(631, 44);
+            this.pictureBox1.Location = new System.Drawing.Point(631, 36);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(35, 32);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -367,7 +368,7 @@
             // 
             this.Diemltn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Diemltn.AutoSize = true;
-            this.Diemltn.Location = new System.Drawing.Point(1063, 51);
+            this.Diemltn.Location = new System.Drawing.Point(1063, 43);
             this.Diemltn.Name = "Diemltn";
             this.Diemltn.Size = new System.Drawing.Size(54, 17);
             this.Diemltn.TabIndex = 14;
@@ -377,7 +378,7 @@
             // 
             this.egencylb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.egencylb.AutoSize = true;
-            this.egencylb.Location = new System.Drawing.Point(865, 51);
+            this.egencylb.Location = new System.Drawing.Point(865, 43);
             this.egencylb.Name = "egencylb";
             this.egencylb.Size = new System.Drawing.Size(81, 17);
             this.egencylb.TabIndex = 13;
@@ -387,11 +388,12 @@
             // 
             this.DatetimeLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.DatetimeLbl.AutoSize = true;
-            this.DatetimeLbl.Location = new System.Drawing.Point(673, 51);
+            this.DatetimeLbl.Location = new System.Drawing.Point(673, 43);
             this.DatetimeLbl.Name = "DatetimeLbl";
             this.DatetimeLbl.Size = new System.Drawing.Size(63, 17);
             this.DatetimeLbl.TabIndex = 12;
             this.DatetimeLbl.Text = "Datetime";
+            this.DatetimeLbl.Click += new System.EventHandler(this.DatetimeLbl_Click);
             // 
             // button1
             // 
@@ -399,7 +401,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(175, 59);
+            this.button1.Location = new System.Drawing.Point(181, 33);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(109, 30);
             this.button1.TabIndex = 5;
@@ -609,14 +611,14 @@
         private System.Windows.Forms.Button button1;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn View;
+        private DevExpress.XtraGrid.Columns.GridColumn MaPhieu;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit1;
         private DevExpress.XtraGrid.Columns.GridColumn UserName;
         private DevExpress.XtraGrid.Columns.GridColumn BS;
         private DevExpress.XtraGrid.Columns.GridColumn LX;
         private DevExpress.XtraGrid.Columns.GridColumn TSC;
         private DevExpress.XtraGrid.Columns.GridColumn DG;
-        private DevExpress.XtraGrid.Columns.GridColumn TT;
+        private DevExpress.XtraGrid.Columns.GridColumn Total;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -637,7 +639,7 @@
         private System.Windows.Forms.Label DatetimeLbl2;
         private System.Windows.Forms.Button button2;
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
-        private DevExpress.XtraGrid.Columns.GridColumn PrintBill;
+        private DevExpress.XtraGrid.Columns.GridColumn PostBill;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

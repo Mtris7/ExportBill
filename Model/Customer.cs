@@ -10,7 +10,7 @@ namespace ExportBill
     public class Customer
     {
         public Customer() { }
-        public Customer(string maPhieu, string userName, string bs, string lx, string tsc, string dg, decimal discount, decimal total, string detaiMoney, string company, string adress, string date, string print)
+        public Customer(string maPhieu, string userName, string bs, string lx, string tsc, string dg, decimal discount, int total, string detaiMoney, string company, string adress, string date, string print)
         {
             MaPhieu = maPhieu;
             UserName = userName;
@@ -24,7 +24,7 @@ namespace ExportBill
             Company = company;
             Adress = adress;
             Date = date;
-            PrintBill = print;
+            PostBill = print;
         }
         public string MaPhieu { get; set; }
         public string UserName { get; set; }
@@ -33,11 +33,11 @@ namespace ExportBill
         public string TSC { get; set; }
         public string DG { get; set; }
         public decimal Discount { get; set; }
-        public decimal Total { get; set; }
+        public int Total { get; set; }
         public string DetailMoney { get; set; }
         public string Company { get; set; }
         public string Adress { get; set; }
-        public string PrintBill { get; set; }
+        public string PostBill { get; set; }
         public string Date { get; set; }
     }
 }

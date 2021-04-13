@@ -23,7 +23,12 @@ namespace ExportBill
         private const string URL = @"http://api.ototienthu.com.vn/api/v1/oauth/token";
         private const string username = "apitest@tienthu.vn";
         private const string password = "62&z!]r*RV";
+        private const string PBill = "Post Bill";
         public static string token = string.Empty;
+        #endregion
+        //###############################################################################################
+        #region field
+        private BindingList<Customer> ds = new BindingList<Customer>();
         #endregion
         //###############################################################################################
         #region Initialize
@@ -56,6 +61,12 @@ namespace ExportBill
             SetDefault();
         }
 
+
+        private void DatetimeLbl_Click(object sender, EventArgs e)
+        {
+            dateTimePicker1.Visible = true;
+            DatetimeLbl.Visible = false;
+        }
         private  void button2_Click(object sender, EventArgs e)
         {
         }
@@ -64,6 +75,7 @@ namespace ExportBill
         {
             try
             {
+                this.ds.Clear();
                 string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId=TT_0762_16092016&serviceDate=" + this.dateTimePicker1.Text;
                 if(!string.IsNullOrWhiteSpace(this.SearchControl1Txt.Text))
                 {
@@ -89,12 +101,11 @@ namespace ExportBill
                         DialogResult result = MessageBox.Show("Không tìm thấy khách hàng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
-                    BindingList<Customer> ds = new BindingList<Customer>();
                     foreach (var item in dataList.data)
                     {
                         var data = item.Split(';');
                         //public Customer(string maPhieu, string userName, string bs, string lx, string tsc, string dg, decimal discount, decimal total, string detaiMoney, string company, string adress, string date, string print)
-                        ds.Add(new Customer(data[0], data[1], data[2], data[3], data[4], data[5], Convert.ToDecimal(data[6]), Convert.ToDecimal(data[7]), data[8], data[9], data[10],this.dateTimePicker1.Text, "print"));
+                        ds.Add(new Customer(data[0], data[1], data[2], data[3], data[4], data[5], Convert.ToInt32(Convert.ToDecimal(data[6])), Convert.ToInt32(Convert.ToDecimal(data[7])), data[8], data[9], data[10],this.dateTimePicker1.Text, PBill));
                     }
                     this.gridControl1.DataSource = ds;
                 }
@@ -111,9 +122,42 @@ namespace ExportBill
         }
         void gridView1_RowCellClick(object sender, RowCellClickEventArgs e)
         {
-            if (e.Column.FieldName == "View")
+            if (e.Column.FieldName == "MaPhieu")
             {
-                //new PrintInvoiceForm().ShowDialog();
+                var getData = ds.Where(x => x.MaPhieu == (string)e.CellValue).FirstOrDefault();
+                Customer cs = new Customer();
+                cs.MaPhieu = getData.MaPhieu;
+                cs.UserName = getData.UserName;
+                cs.BS = getData.BS;
+                cs.LX = getData.LX;
+                cs.TSC = getData.TSC;
+                cs.DG = getData.DG;
+                cs.Total = getData.Total;
+                cs.Company = getData.Company;
+                cs.Adress = getData.Adress;
+                cs.Discount = getData.Discount;
+                cs.DetailMoney = getData.DetailMoney;
+                cs.Date = getData.Date;
+                new PrintInvoiceForm(cs).ShowDialog();
+            }
+            if(e.Column.FieldName == PBill)
+            {
+                var MaPhieu = this.gridView1.GetRowCellValue(e.RowHandle, "MaPhieu")?.ToString();
+                var getData = ds.Where(x => x.MaPhieu == MaPhieu).FirstOrDefault();
+                Customer cs = new Customer();
+                cs.MaPhieu = getData.MaPhieu;
+                cs.UserName = getData.UserName;
+                cs.BS = getData.BS;
+                cs.LX = getData.LX;
+                cs.TSC = getData.TSC;
+                cs.DG = getData.DG;
+                cs.Total = getData.Total;
+                cs.Company = getData.Company;
+                cs.Adress = getData.Adress;
+                cs.Discount = getData.Discount;
+                cs.DetailMoney = getData.DetailMoney;
+                cs.Date = getData.Date;
+                new PrintInvoiceForm(cs, true).ShowDialog(); ;
             }
         }
         //##############################################################################################

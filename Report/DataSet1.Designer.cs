@@ -307,6 +307,8 @@ namespace ExportBill.Report {
             
             private global::System.Data.DataColumn columnPhieuDV;
             
+            private global::System.Data.DataColumn columnImage;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public DataTable_ReportDataTable() {
@@ -454,6 +456,14 @@ namespace ExportBill.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn ImageColumn {
+                get {
+                    return this.columnImage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -489,7 +499,7 @@ namespace ExportBill.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable_ReportRow AddDataTable_ReportRow(string InvoiceID, string InvoiceDate, string CompanyName, string Address, string BS, string Loaixe, string Discount, string ItemPrice, string ItemQuality, string ItemName, string ItemTotal, string ItemDetailPrice, string TitleBotom, string PhieuDV) {
+            public DataTable_ReportRow AddDataTable_ReportRow(string InvoiceID, string InvoiceDate, string CompanyName, string Address, string BS, string Loaixe, string Discount, string ItemPrice, string ItemQuality, string ItemName, string ItemTotal, string ItemDetailPrice, string TitleBotom, string PhieuDV, byte[] Image) {
                 DataTable_ReportRow rowDataTable_ReportRow = ((DataTable_ReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         InvoiceID,
@@ -505,7 +515,8 @@ namespace ExportBill.Report {
                         ItemTotal,
                         ItemDetailPrice,
                         TitleBotom,
-                        PhieuDV};
+                        PhieuDV,
+                        Image};
                 rowDataTable_ReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable_ReportRow);
                 return rowDataTable_ReportRow;
@@ -542,6 +553,7 @@ namespace ExportBill.Report {
                 this.columnItemDetailPrice = base.Columns["ItemDetailPrice"];
                 this.columnTitleBotom = base.Columns["TitleBotom"];
                 this.columnPhieuDV = base.Columns["PhieuDV"];
+                this.columnImage = base.Columns["Image"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -575,6 +587,8 @@ namespace ExportBill.Report {
                 base.Columns.Add(this.columnTitleBotom);
                 this.columnPhieuDV = new global::System.Data.DataColumn("PhieuDV", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPhieuDV);
+                this.columnImage = new global::System.Data.DataColumn("Image", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnImage);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -941,6 +955,22 @@ namespace ExportBill.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public byte[] Image {
+                get {
+                    try {
+                        return ((byte[])(this[this.tableDataTable_Report.ImageColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Image\' in table \'DataTable_Report\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable_Report.ImageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsInvoiceIDNull() {
                 return this.IsNull(this.tableDataTable_Report.InvoiceIDColumn);
             }
@@ -1105,6 +1135,18 @@ namespace ExportBill.Report {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetPhieuDVNull() {
                 this[this.tableDataTable_Report.PhieuDVColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsImageNull() {
+                return this.IsNull(this.tableDataTable_Report.ImageColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetImageNull() {
+                this[this.tableDataTable_Report.ImageColumn] = global::System.Convert.DBNull;
             }
         }
         

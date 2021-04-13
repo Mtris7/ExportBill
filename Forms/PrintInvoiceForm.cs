@@ -10,13 +10,13 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ExportBill
 {
     public partial class PrintInvoiceForm : Form
     {
-        string barcodeUrl = "www.tienthu.com.vn";
         string titleBottom = "Phòng chăm sóc khách hàng/ Hotline 02363566887";
         bool auto = false;
         Customer customer = new Customer();
@@ -29,97 +29,29 @@ namespace ExportBill
 
         private async void PrintInvoiceForm_Load(object sender, EventArgs e)
         {
-            if (!auto)
+            try
             {
-                DataTable dt = new DataTable("DataTable_Report");
-                DataColumn workCol = dt.Columns.Add("InvoiceID", typeof(Int32));
-                dt.Columns.Add("InvoiceDate", typeof(String));
-                dt.Columns.Add("CompanyName", typeof(String));
-                dt.Columns.Add("Address", typeof(String));
-                dt.Columns.Add("BS", typeof(String));
-                dt.Columns.Add("Loaixe", typeof(String));
-                dt.Columns.Add("Discount", typeof(int));
-
-                dt.Columns.Add("ItemName", typeof(String));
-                dt.Columns.Add("ItemQuality", typeof(int));
-                dt.Columns.Add("ItemPrice", typeof(int));
-                dt.Columns.Add("ItemTotal", typeof(decimal));
-                dt.Columns.Add("ItemDetailPrice", typeof(String));
-                dt.Columns.Add("TitleBotom", typeof(String));
-                dt.Columns.Add("PhieuDV", typeof(String));
-                dt.Columns.Add("Image", typeof(byte[]));
-
-                BarcodeLib.Barcode barcode = new BarcodeLib.Barcode()
+                if (!auto)
                 {
-                    BarWidth = 1,
-                };
-                Image img = barcode.Encode(BarcodeLib.TYPE.CODE128B, barcodeUrl, Color.Black, Color.White, 100, 30);
-                MemoryStream ms = new MemoryStream();
-                img.Save(ms, ImageFormat.Png);
+                    DataTable dt = await LoadData();
 
-                List<ItemSell> itemSell = new List<ItemSell>();
-                if(this.customer != null)
-                {
-                    string url = @"http://api.ototienthu.com.vn/api/v1/customers/BillService?serviceOrderId=DV-189329" + this.customer.BS;
-                    var client = new HttpClient();
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    var request = new HttpRequestMessage(HttpMethod.Get, url);
-
-                    var response = await client.SendAsync(request);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var body = await response.Content.ReadAsStringAsync();
-                        var dataList = JsonConvert.DeserializeObject<DataModel>(body);
-                        if (dataList.data == null)
-                        {
-                            MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        if (dataList.data.Count == 0)
-                        {
-                            DialogResult result = MessageBox.Show("Không tìm thấy khách hàng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            return;
-                        }
-                        //DẦU NHỚT PHUY XE TAY GA 200L-10W30(MB);0.80;liters;86,000.00;0.00"
-                        foreach (var item in dataList.data)
-                        {
-                            var data = item.Split(';');
-                            ItemSell items = new ItemSell();
-                            items.itemName = data[0];
-                            items.itemQuality = data[1];
-                            items.itemType = data[2];
-                            items.itemPrice = data[3];
-                            itemSell.Add(items);
-                            //customer( view,  userName,  bs,  lx,  tsc,  dg, discount, thanh tien, detail money  company,  adress,  print))
-                            //ds.Add(new Customer(data[0], data[1], data[2], data[3], data[4], data[5], Convert.ToDecimal(data[6]), Convert.ToDecimal(data[7]), data[8], data[9], data[10], this.dateTimePicker1.Text, "print"));
-                        }
-                    }
-                    ////InvoiceID           InvoiceDate             CompanyName  Address BS Loaixe                                              Discount ItemName ItemQuality ItemPrice ItemTotal                                   ItemDetailPrice TitleBotom PhieuDV
-                    int i = 0;
-                    foreach (var item in itemSell)
-                    {
-                        dt.Rows.Add(i, this.customer.Date, this.customer.Company, this.customer.Adress, this.customer.BS, this.customer.LX, this.customer.Discount, item.itemName, item.itemQuality, item.itemPrice, this.customer.Total, this.customer.DetailMoney, this.titleBottom, this.customer.MaPhieu);
-                        i++;
-                    }
+                    ReportDataSource dataSource = new ReportDataSource("DataSet1", dt);
+                    
+                    reportViewer1.Reset();
+                    reportViewer1.ProcessingMode = ProcessingMode.Local;
+                    reportViewer1.LocalReport.ReportPath = Application.StartupPath + @"\Report\Report1.rdlc";
+                    reportViewer1.LocalReport.DataSources.Clear();
+                    reportViewer1.LocalReport.DataSources.Add(dataSource);
+                    reportViewer1.LocalReport.Refresh();
+                    reportViewer1.RefreshReport();
                 }
-                //dt.Rows.Add(1, @"Ngày in bill: 04/05/2021", "Cửa hàng xe máy honda", "179 Phan Châu Trinh", "Biển số: 92E1-33719", "Loại xe: Exciter", 50, "nhớt", 1, 180000, 90000, "chín mươi ngàn đồng", "title bot", "Phiếu DV: DV-244878", ms.ToArray());
-
-                ReportDataSource dataSource = new ReportDataSource("DataSet1", dt);
-                //Microsoft.Reporting.WinForms.ReportParameter[] param =  new ReportParameter[]
-                //{
-                //}
-                reportViewer1.Reset();
-                reportViewer1.ProcessingMode = ProcessingMode.Local;
-                reportViewer1.LocalReport.ReportPath = Application.StartupPath + @"\Report\Report1.rdlc";
-                reportViewer1.LocalReport.DataSources.Clear();
-                reportViewer1.LocalReport.DataSources.Add(dataSource);
-                reportViewer1.LocalReport.Refresh();
-                reportViewer1.RefreshReport();
+                else
+                    Run();
             }
-            else
-                Run();
-
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private int m_currentPageIndex;
         private IList<Stream> m_streams;
@@ -204,34 +136,10 @@ namespace ExportBill
         }
         // Create a local report for Report.rdlc, load the data,
         //    export the report to an .emf file, and print it.
-        private void Run()
+        private async void Run()
         {
-            DataTable dt = new DataTable("DataTable_Report");
-            DataColumn workCol = dt.Columns.Add("InvoiceID", typeof(Int32));
-            dt.Columns.Add("InvoiceDate", typeof(String));
-            dt.Columns.Add("CompanyName", typeof(String));
-            dt.Columns.Add("Address", typeof(String));
-            dt.Columns.Add("BS", typeof(String));
-            dt.Columns.Add("Loaixe", typeof(String));
-            dt.Columns.Add("Discount", typeof(int));
-
-            dt.Columns.Add("ItemName", typeof(String));
-            dt.Columns.Add("ItemQuality", typeof(int));
-            dt.Columns.Add("ItemPrice", typeof(int));
-            dt.Columns.Add("ItemTotal", typeof(decimal));
-            dt.Columns.Add("ItemDetailPrice", typeof(String));
-            dt.Columns.Add("TitleBotom", typeof(String));
-            dt.Columns.Add("PhieuDV", typeof(String));
-            dt.Columns.Add("Image", typeof(byte[]));
-
-            BarcodeLib.Barcode barcode = new BarcodeLib.Barcode()
-            {
-                BarWidth = 1,
-            };
-            Image img = barcode.Encode(BarcodeLib.TYPE.CODE128B, "www.tienthu.com.vn", Color.Black, Color.White, 100, 30);
-            MemoryStream ms = new MemoryStream();
-            img.Save(ms, ImageFormat.Png);
-            dt.Rows.Add(1, "04052021", "Cửa hàng xe máy honda", "179 Phan Châu Trinh", "92E1-33719", "Exciter", 50, "nhớt", 1, 180000, 90000, "chín mươi ngàn đồng", "title bot", "OK", ms.ToArray());
+            DataTable dt = await LoadData();
+            //dt.Rows.Add(1, "04052021", "Cửa hàng xe máy honda", "179 Phan Châu Trinh", "92E1-33719", "Exciter", 50, "nhớt", 1, 180000, 90000, "chín mươi ngàn đồng", "title bot", "OK", ms.ToArray());
 
             ReportDataSource dataSource = new ReportDataSource("DataSet1", dt);
 
@@ -240,6 +148,88 @@ namespace ExportBill
             report.DataSources.Add(dataSource);
             Export(report);
             Print();
+            this.Close();
+        }
+        private async Task<DataTable> LoadData()
+        {
+            try
+            {
+                DataTable dt = new DataTable("DataTable_Report");
+                DataColumn workCol = dt.Columns.Add("InvoiceID", typeof(Int32));
+                dt.Columns.Add("InvoiceDate", typeof(String));
+                dt.Columns.Add("CompanyName", typeof(String));
+                dt.Columns.Add("Address", typeof(String));
+                dt.Columns.Add("BS", typeof(String));
+                dt.Columns.Add("Loaixe", typeof(String));
+                dt.Columns.Add("Discount", typeof(int));
+
+                dt.Columns.Add("ItemName", typeof(String));
+                dt.Columns.Add("ItemQuality", typeof(int));
+                dt.Columns.Add("ItemPrice", typeof(int));
+                dt.Columns.Add("ItemTotal", typeof(int));
+                dt.Columns.Add("ItemDetailPrice", typeof(String));
+                dt.Columns.Add("TitleBotom", typeof(String));
+                dt.Columns.Add("PhieuDV", typeof(String));
+                dt.Columns.Add("Image", typeof(byte[]));
+
+                BarcodeLib.Barcode barcode = new BarcodeLib.Barcode()
+                {
+                    BarWidth = 1,
+                };
+                Image img = barcode.Encode(BarcodeLib.TYPE.CODE128B, this.customer.MaPhieu, Color.Black, Color.White, 100, 30);
+                MemoryStream ms = new MemoryStream();
+                img.Save(ms, ImageFormat.Png);
+
+                List<ItemSell> itemSell = new List<ItemSell>();
+                if (this.customer != null)
+                {
+                    string url = @"http://api.ototienthu.com.vn/api/v1/customers/BillService?serviceOrderId=" + this.customer.MaPhieu;
+                    var client = new HttpClient();
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+                    var response = await client.SendAsync(request);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var body = await response.Content.ReadAsStringAsync();
+                        var dataList = JsonConvert.DeserializeObject<DataModel>(body);
+                        if (dataList.data == null)
+                        {
+                            MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return null;
+                        }
+                        if (dataList.data.Count == 0)
+                        {
+                            DialogResult result = MessageBox.Show("Không tìm thấy khách hàng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            return null;
+                        }
+                        foreach (var item in dataList.data)
+                        {
+                            var data = item.Split(';');
+                            ItemSell items = new ItemSell();
+                            items.itemName = data[0];
+                            items.itemQuality = Convert.ToInt32(Convert.ToDecimal(data[1]));
+                            items.itemType = data[2];
+                            items.itemPrice = Convert.ToInt32(Convert.ToDecimal(data[3]));
+                            itemSell.Add(items);
+                        }
+                    }
+                    int i = 0;
+                    foreach (var item in itemSell)
+                    {
+                        dt.Rows.Add(i, "Ngày in bill: " + this.customer.Date, this.customer.Company, this.customer.Adress, "Biển số: " + this.customer.BS, "Loại xe:" + this.customer.LX,
+                            this.customer.Discount, item.itemName, item.itemQuality, item.itemPrice, Convert.ToInt32(Convert.ToDecimal(this.customer.Total)), "(Bằng chữ:" + this.customer.DetailMoney + ")", this.titleBottom, "Phiếu DV:" + this.customer.MaPhieu, ms.ToArray());
+                        i++;
+                    }
+                }
+                return dt;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
         }
     }
 }

@@ -38,16 +38,17 @@
             this.reportViewer1.Location = new System.Drawing.Point(1, 1);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(396, 527);
+            this.reportViewer1.Size = new System.Drawing.Size(372, 1040);
             this.reportViewer1.TabIndex = 0;
             // 
             // PrintInvoiceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(401, 540);
+            this.ClientSize = new System.Drawing.Size(385, 1053);
             this.Controls.Add(this.reportViewer1);
             this.Name = "PrintInvoiceForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PrintInvoiceForm";
             this.Load += new System.EventHandler(this.PrintInvoiceForm_Load);
             this.ResumeLayout(false);
