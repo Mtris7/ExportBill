@@ -1,18 +1,13 @@
-﻿using System;
+﻿using DevExpress.XtraGrid.Views.Grid;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.Utils.Drawing;
+using System.Windows.Forms;
 
 namespace ExportBill
 {
@@ -47,13 +42,16 @@ namespace ExportBill
 
         #endregion
         //##############################################################################################
+        #region constructor
         public DXMain()
         {
             InitializeComponent();
             gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             gridView1.RowCellClick += gridView1_RowCellClick;
         }
-        
+        #endregion
+        //##############################################################################################
+        #region event
 
         private void DXMain_Load(object sender, EventArgs e)
         {
@@ -160,6 +158,7 @@ namespace ExportBill
                 new PrintInvoiceForm(cs, true).ShowDialog(); ;
             }
         }
+        #endregion
         //##############################################################################################
         #region method
         public async void getToken()
