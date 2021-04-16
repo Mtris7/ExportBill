@@ -1,6 +1,8 @@
-﻿using System;
-using System.DirectoryServices.Protocols;
-using System.Net;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Windows.Forms;
 
 namespace ExportBill
@@ -10,57 +12,63 @@ namespace ExportBill
         public Login()
         {
             InitializeComponent();
+            DXMain dXMain = new DXMain();
+            dXMain.getToken();
         }
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             try
             {
+                this.Enabled = false;
                 if (string.IsNullOrWhiteSpace(UserNameTxt.Text))
                 {
                     MessageBox.Show("Vui lòng nhập tên đăng nhập!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Enabled = true;
                     return;
                 }
                 if (string.IsNullOrWhiteSpace(PassWordTxt.Text))
                 {
                     MessageBox.Show("Vui lòng nhập mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Enabled = true;
                     return;
                 }
-                string _adHostname = @"LDAP://tienthu.vn";
-                string _adUserName = UserNameTxt.Text + @"@tienthu.vn";
-                string _adPassword = PassWordTxt.Text;
-                bool loged = false;
-
-                LdapDirectoryIdentifier identifier = new LdapDirectoryIdentifier(_adHostname, 636);
-                NetworkCredential credential = new NetworkCredential(_adUserName, _adPassword);
-                using (LdapConnection connection = new LdapConnection(identifier, credential))
+                if(!string.IsNullOrEmpty(DXMain.token))
                 {
-                    connection.SessionOptions.SecureSocketLayer = true;
-                    connection.SessionOptions.VerifyServerCertificate += delegate { return true; };
-                    connection.AuthType = AuthType.Basic;
-                    connection.Bind(credential);
-
-                    loged = connection.SessionOptions.Signing;
-                    if (loged)
+                    string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierCheckLogin";
+                    var client = new HttpClient();
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    var request = new HttpRequestMessage(HttpMethod.Post, url);
+                    var formContent = new FormUrlEncodedContent(new[]
+                        {
+                        new KeyValuePair<string, string>("personnalNumberId", UserNameTxt.Text),
+                        new KeyValuePair<string, string>("retailStaffPassword", PassWordTxt.Text),
+                    });
+                    request.Content = formContent;
+                    var response = await client.SendAsync(request);
+                    if (response.IsSuccessStatusCode)
                     {
-                        //var membersrv = ApplicationContext.Current.Services.MemberService;
-                        //var member = membersrv.GetByUsername(UserNameTxt.Text);
-                        //if (member != null && member.IsApproved)
-                        //{
-                        //    this.Close();
-                        //    new FindCustomer().ShowDialog();
-                        //}
-                        //else
-                        //{
-                        //    MessageBox.Show("Tài khoản không tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        //}
+                        var body = await response.Content.ReadAsStringAsync();
+                        var dataList = JsonConvert.DeserializeObject<DataModelString>(body);
+                        if (dataList.data.ToString() == "true")
+                        {
+                            this.Hide();
+                            DXMain dx = new DXMain();
+                            dx.Closed += (s, args) => this.Close();
+                            dx.ShowDialog();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     else
-                    {
-                        MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                        MessageBox.Show("Không kết nối được với máy chủ, vui lòng thử lại sau!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                else
+                    MessageBox.Show("Không kết nối được với máy chủ, vui lòng thử lại sau!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                
+                this.Enabled = true;
             }
             catch(Exception ex)
             {

@@ -42,9 +42,14 @@
             this.TSC = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DG = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Total = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Payment = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.cmbPayment = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.PrintBill = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PostBill = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.repositoryItemZoomTrackBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemZoomTrackBar();
+            this.repositoryItemPopupContainerEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPopupContainerEdit();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -76,8 +81,11 @@
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbPayment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemZoomTrackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPopupContainerEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -137,7 +145,10 @@
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEdit1,
-            this.repositoryItemButtonEdit2});
+            this.repositoryItemButtonEdit2,
+            this.repositoryItemZoomTrackBar1,
+            this.repositoryItemPopupContainerEdit1,
+            this.cmbPayment});
             this.gridControl1.Size = new System.Drawing.Size(1165, 413);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -153,6 +164,8 @@
             this.TSC,
             this.DG,
             this.Total,
+            this.Payment,
+            this.PrintBill,
             this.PostBill});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.GroupFormat = "= {0:C}VNĐ";
@@ -165,13 +178,13 @@
             // MaPhieu
             // 
             this.MaPhieu.AppearanceCell.BackColor = System.Drawing.Color.Transparent;
-            this.MaPhieu.AppearanceCell.ForeColor = System.Drawing.Color.Lime;
+            this.MaPhieu.AppearanceCell.ForeColor = System.Drawing.Color.DodgerBlue;
             this.MaPhieu.AppearanceCell.Options.UseBackColor = true;
             this.MaPhieu.AppearanceCell.Options.UseForeColor = true;
             this.MaPhieu.AppearanceCell.Options.UseTextOptions = true;
             this.MaPhieu.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.MaPhieu.AppearanceHeader.Options.UseTextOptions = true;
-            this.MaPhieu.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.MaPhieu.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.MaPhieu.Caption = "Số phiếu";
             this.MaPhieu.FieldName = "MaPhieu";
             this.MaPhieu.Name = "MaPhieu";
@@ -272,8 +285,47 @@
             this.Total.Visible = true;
             this.Total.VisibleIndex = 6;
             // 
+            // Payment
+            // 
+            this.Payment.AppearanceCell.Options.UseTextOptions = true;
+            this.Payment.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.Payment.AppearanceHeader.Options.UseTextOptions = true;
+            this.Payment.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.Payment.Caption = "Hình thức thanh toán";
+            this.Payment.ColumnEdit = this.cmbPayment;
+            this.Payment.FieldName = "Payment";
+            this.Payment.Name = "Payment";
+            this.Payment.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.Payment.Visible = true;
+            this.Payment.VisibleIndex = 7;
+            // 
+            // cmbPayment
+            // 
+            this.cmbPayment.AutoHeight = false;
+            this.cmbPayment.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cmbPayment.Name = "cmbPayment";
+            // 
+            // PrintBill
+            // 
+            this.PrintBill.AppearanceCell.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.PrintBill.AppearanceCell.Options.UseForeColor = true;
+            this.PrintBill.AppearanceCell.Options.UseTextOptions = true;
+            this.PrintBill.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.PrintBill.AppearanceHeader.Options.UseTextOptions = true;
+            this.PrintBill.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.PrintBill.Caption = "In Bill";
+            this.PrintBill.FieldName = "PrintBill";
+            this.PrintBill.Name = "PrintBill";
+            this.PrintBill.OptionsColumn.AllowEdit = false;
+            this.PrintBill.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            this.PrintBill.Visible = true;
+            this.PrintBill.VisibleIndex = 8;
+            // 
             // PostBill
             // 
+            this.PostBill.AppearanceCell.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.PostBill.AppearanceCell.Options.UseForeColor = true;
             this.PostBill.AppearanceCell.Options.UseTextOptions = true;
             this.PostBill.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.PostBill.AppearanceHeader.Options.UseTextOptions = true;
@@ -284,7 +336,7 @@
             this.PostBill.OptionsColumn.AllowEdit = false;
             this.PostBill.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.PostBill.Visible = true;
-            this.PostBill.VisibleIndex = 7;
+            this.PostBill.VisibleIndex = 9;
             // 
             // repositoryItemButtonEdit1
             // 
@@ -299,6 +351,17 @@
             this.repositoryItemButtonEdit2.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.repositoryItemButtonEdit2.Name = "repositoryItemButtonEdit2";
+            // 
+            // repositoryItemZoomTrackBar1
+            // 
+            this.repositoryItemZoomTrackBar1.Name = "repositoryItemZoomTrackBar1";
+            // 
+            // repositoryItemPopupContainerEdit1
+            // 
+            this.repositoryItemPopupContainerEdit1.AutoHeight = false;
+            this.repositoryItemPopupContainerEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemPopupContainerEdit1.Name = global::ExportBill.Properties.Settings.Default.Cash;
             // 
             // groupControl1
             // 
@@ -566,8 +629,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1182, 553);
             this.Controls.Add(this.xtraTabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DXMain";
-            this.Text = "DXMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Tiến Thu";
             this.Load += new System.EventHandler(this.DXMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
@@ -576,8 +641,11 @@
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbPayment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemZoomTrackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPopupContainerEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
@@ -641,5 +709,10 @@
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
         private DevExpress.XtraGrid.Columns.GridColumn PostBill;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private DevExpress.XtraGrid.Columns.GridColumn PrintBill;
+        private DevExpress.XtraGrid.Columns.GridColumn Payment;
+        private DevExpress.XtraEditors.Repository.RepositoryItemPopupContainerEdit repositoryItemPopupContainerEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemZoomTrackBar repositoryItemZoomTrackBar1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cmbPayment;
     }
 }

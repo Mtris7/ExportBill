@@ -1,4 +1,6 @@
-﻿using DevExpress.XtraGrid.Views.Grid;
+﻿using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraGrid.Views.Grid;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,7 +20,9 @@ namespace ExportBill
         private const string URL = @"http://api.ototienthu.com.vn/api/v1/oauth/token";
         private const string username = "apitest@tienthu.vn";
         private const string password = "62&z!]r*RV";
-        private const string PBill = "Post Bill";
+        private const string PrBill = "PrintBill";
+        private const string PBill = "PostBill";
+        private const string MPhieu = "MaPhieu";
         public static string token = string.Empty;
         #endregion
         //###############################################################################################
@@ -27,19 +31,43 @@ namespace ExportBill
         #endregion
         //###############################################################################################
         #region Initialize
-        public void MainLoad()
+
+        private void DXMain_Load(object sender, EventArgs e)
+        {
+            this.getToken();
+            this.SetCombobox();
+            this.SetDefault();
+        }
+        private void SetCombobox()
         {
             try
             {
-                this.getToken();
-                SetDefault();
+                string[] payments = { "Cash", "Net07", "Net15", "Net30", "Net45", "Net60" };
+                foreach (var item in payments)
+                {
+                    cmbPayment.Items.Add(item);
+                }
+                //cmbPayment.SelectedIndexChanged += SelectItemChange();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-
+        private void SetDefault()
+        {
+            try
+            {
+                this.DatetimeLbl.Text = this.DatetimeLbl2.Text = DateTime.Now.ToLocalTime().ToShortDateString();
+                this.dateTimePicker1.Value = DateTime.Now;
+                //this.egencylb.Text = this.egencylb2.Text = "";
+                //this.Diemltn.Text = this.Diemltn2.Text = "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #endregion
         //##############################################################################################
         #region constructor
@@ -53,12 +81,10 @@ namespace ExportBill
         //##############################################################################################
         #region event
 
-        private void DXMain_Load(object sender, EventArgs e)
+        void SelectItemChange()
         {
-            this.getToken();
-            SetDefault();
-        }
 
+        }
 
         private void DatetimeLbl_Click(object sender, EventArgs e)
         {
@@ -74,7 +100,7 @@ namespace ExportBill
             try
             {
                 this.ds.Clear();
-                string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId=TT_0762_16092016&serviceDate=" + this.dateTimePicker1.Text;
+                string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId=TT_0762_16092016&serviceDate=" + this.dateTimePicker1.Value.ToString("dd/MM/yyyy");
                 if(!string.IsNullOrWhiteSpace(this.SearchControl1Txt.Text))
                 {
                     url += "&plateId=" + this.SearchControl1Txt.Text;
@@ -102,8 +128,13 @@ namespace ExportBill
                     foreach (var item in dataList.data)
                     {
                         var data = item.Split(';');
+                        var postBill = data[11] == "Open" ? "Post Bill" : "Posted";
+                        var payment = data[12];
                         //public Customer(string maPhieu, string userName, string bs, string lx, string tsc, string dg, decimal discount, decimal total, string detaiMoney, string company, string adress, string date, string print)
-                        ds.Add(new Customer(data[0], data[1], data[2], data[3], data[4], data[5], Convert.ToInt32(Convert.ToDecimal(data[6])), Convert.ToInt32(Convert.ToDecimal(data[7])), data[8], data[9], data[10],this.dateTimePicker1.Text, PBill));
+                        ds.Add(new Customer(data[0], data[1], data[2], data[3], data[4], data[5], 
+                            Convert.ToInt32(Convert.ToDecimal(data[6])), Convert.ToInt32(Convert.ToDecimal(data[7])),
+                            data[8], data[9], data[10],this.dateTimePicker1.Value.ToString("dd/MM/yyyy"), "Print",
+                            postBill,payment));
                     }
                     this.gridControl1.DataSource = ds;
                 }
@@ -118,44 +149,76 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
-        void gridView1_RowCellClick(object sender, RowCellClickEventArgs e)
+        async void gridView1_RowCellClick(object sender, RowCellClickEventArgs e)
         {
-            if (e.Column.FieldName == "MaPhieu")
+            try
             {
-                var getData = ds.Where(x => x.MaPhieu == (string)e.CellValue).FirstOrDefault();
-                Customer cs = new Customer();
-                cs.MaPhieu = getData.MaPhieu;
-                cs.UserName = getData.UserName;
-                cs.BS = getData.BS;
-                cs.LX = getData.LX;
-                cs.TSC = getData.TSC;
-                cs.DG = getData.DG;
-                cs.Total = getData.Total;
-                cs.Company = getData.Company;
-                cs.Adress = getData.Adress;
-                cs.Discount = getData.Discount;
-                cs.DetailMoney = getData.DetailMoney;
-                cs.Date = getData.Date;
-                new PrintInvoiceForm(cs).ShowDialog();
+                if (e.Column.FieldName == MPhieu)
+                {
+                    var getData = ds.Where(x => x.MaPhieu == (string)e.CellValue).FirstOrDefault();
+                    Customer cs = new Customer();
+                    cs.MaPhieu = getData.MaPhieu;
+                    cs.UserName = getData.UserName;
+                    cs.BS = getData.BS;
+                    cs.LX = getData.LX;
+                    cs.TSC = getData.TSC;
+                    cs.DG = getData.DG;
+                    cs.Total = getData.Total;
+                    cs.Company = getData.Company;
+                    cs.Adress = getData.Adress;
+                    cs.Discount = getData.Discount;
+                    cs.DetailMoney = getData.DetailMoney;
+                    cs.Date = getData.Date;
+                    new PrintInvoiceForm(cs).ShowDialog();
+                }
+                if (e.Column.FieldName == PrBill)
+                {
+                    var MaPhieu = this.gridView1.GetRowCellValue(e.RowHandle, MPhieu)?.ToString();
+                    var getData = ds.Where(x => x.MaPhieu == MaPhieu).FirstOrDefault();
+                    Customer cs = new Customer();
+                    cs.MaPhieu = getData.MaPhieu;
+                    cs.UserName = getData.UserName;
+                    cs.BS = getData.BS;
+                    cs.LX = getData.LX;
+                    cs.TSC = getData.TSC;
+                    cs.DG = getData.DG;
+                    cs.Total = getData.Total;
+                    cs.Company = getData.Company;
+                    cs.Adress = getData.Adress;
+                    cs.Discount = getData.Discount;
+                    cs.DetailMoney = getData.DetailMoney;
+                    cs.Date = getData.Date;
+                    new PrintInvoiceForm(cs, true).ShowDialog(); ;
+                }
+                if (e.Column.FieldName == PBill && (string)e.CellValue == "Post Bill")
+                {
+                    var MaPhieu = this.gridView1.GetRowCellValue(e.RowHandle, MPhieu)?.ToString();
+                    var payment = this.gridView1.GetRowCellValue(e.RowHandle, Payment)?.ToString();
+                    string url = @"http://api.ototienthu.com.vn/api/v1/customers/PostBillService";
+                    var client = new HttpClient();
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    var request = new HttpRequestMessage(HttpMethod.Post, url);
+                    var formContent = new FormUrlEncodedContent(new[]
+                        {
+                        new KeyValuePair<string, string>("ServiceOrderId", MaPhieu),
+                        new KeyValuePair<string, string>("PaymTermId", payment),
+                    });
+                    request.Content = formContent;
+                    var response = await client.SendAsync(request);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        gridView1.SetRowCellValue(e.RowHandle, PBill, "Posted");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Post bill không thành công, vui lòng kiểm tra lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
-            if(e.Column.FieldName == PBill)
+            catch (Exception ex)
             {
-                var MaPhieu = this.gridView1.GetRowCellValue(e.RowHandle, "MaPhieu")?.ToString();
-                var getData = ds.Where(x => x.MaPhieu == MaPhieu).FirstOrDefault();
-                Customer cs = new Customer();
-                cs.MaPhieu = getData.MaPhieu;
-                cs.UserName = getData.UserName;
-                cs.BS = getData.BS;
-                cs.LX = getData.LX;
-                cs.TSC = getData.TSC;
-                cs.DG = getData.DG;
-                cs.Total = getData.Total;
-                cs.Company = getData.Company;
-                cs.Adress = getData.Adress;
-                cs.Discount = getData.Discount;
-                cs.DetailMoney = getData.DetailMoney;
-                cs.Date = getData.Date;
-                new PrintInvoiceForm(cs, true).ShowDialog(); ;
+                MessageBox.Show(ex.Message);
             }
         }
         #endregion
@@ -181,19 +244,6 @@ namespace ExportBill
                     var tokenData = JsonConvert.DeserializeObject<Token>(body);
                     DXMain.token = tokenData.access_token;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        private void SetDefault()
-        {
-            try
-            {
-                this.DatetimeLbl.Text = this.DatetimeLbl2.Text = DateTime.Now.ToLocalTime().ToShortDateString();
-                //this.egencylb.Text = this.egencylb2.Text = "";
-                //this.Diemltn.Text = this.Diemltn2.Text = "";
             }
             catch (Exception ex)
             {
