@@ -49,11 +49,12 @@ namespace ExportBill
                     if (response.IsSuccessStatusCode)
                     {
                         var body = await response.Content.ReadAsStringAsync();
-                        var dataList = JsonConvert.DeserializeObject<DataModelString>(body);
-                        if (dataList.data.ToString() == "true")
+                         var dataList = JsonConvert.DeserializeObject<DataModelString>(body);
+                        var data = dataList.data.Split(';');
+                        if (data[0] == "true")
                         {
                             this.Hide();
-                            DXMain dx = new DXMain();
+                            DXMain dx = new DXMain(data[1],data[2]);
                             dx.Closed += (s, args) => this.Close();
                             dx.ShowDialog();
                         }
@@ -72,9 +73,20 @@ namespace ExportBill
             }
             catch(Exception ex)
             {
+                this.Enabled = true;
                 MessageBox.Show(ex.Message);
             }
             
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

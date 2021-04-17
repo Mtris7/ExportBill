@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -74,6 +75,12 @@ namespace ExportBill
         public DXMain()
         {
             InitializeComponent();
+        }
+        public DXMain(string userName, string companyName)
+        {
+            InitializeComponent();
+            this.CompanyLbl.Text = companyName;
+            this.UserNamelbl.Text = userName;
             gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             gridView1.RowCellClick += gridView1_RowCellClick;
         }
@@ -209,6 +216,7 @@ namespace ExportBill
                     if (response.IsSuccessStatusCode)
                     {
                         gridView1.SetRowCellValue(e.RowHandle, PBill, "Posted");
+                        gridView1.GetRowCellDisplayText(e.RowHandle, PBill);
                     }
                     else
                     {
@@ -221,6 +229,19 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+        private void GridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (e.Column.FieldName == PBill)
+            {
+                var cellValue = e.CellValue.ToString();
+                if ("Posted" == cellValue)
+                {
+                    e.Appearance.ForeColor = Color.Black;
+                }
+            }
+        }
+
         #endregion
         //##############################################################################################
         #region method
@@ -250,6 +271,7 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+
         #endregion
         //##############################################################################################
     }
