@@ -22,7 +22,9 @@ namespace ExportBill
         private const string username = "apitest@tienthu.vn";
         private const string password = "62&z!]r*RV";
         private const string PrBill = "PrintBill";
-        private const string PBill = "PostBill";
+        private const string PBill = "PostBill"; 
+        private const string PostBillStr = "Post Bill"; 
+        private const string Posted = "Posted"; 
         private const string MPhieu = "MaPhieu";
         public static string token = string.Empty;
         #endregion
@@ -88,11 +90,6 @@ namespace ExportBill
         //##############################################################################################
         #region event
 
-        void SelectItemChange()
-        {
-
-        }
-
         private void DatetimeLbl_Click(object sender, EventArgs e)
         {
             dateTimePicker1.Visible = true;
@@ -135,7 +132,7 @@ namespace ExportBill
                     foreach (var item in dataList.data)
                     {
                         var data = item.Split(';');
-                        var postBill = data[11] == "Open" ? "Post Bill" : "Posted";
+                        var postBill = data[11] == "Open" ? PostBillStr : Posted;
                         var payment = data[12];
                         //public Customer(string maPhieu, string userName, string bs, string lx, string tsc, string dg, decimal discount, decimal total, string detaiMoney, string company, string adress, string date, string print)
                         ds.Add(new Customer(data[0], data[1], data[2], data[3], data[4], data[5], 
@@ -156,7 +153,7 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
-        async void gridView1_RowCellClick(object sender, RowCellClickEventArgs e)
+        void gridView1_RowCellClick(object sender, RowCellClickEventArgs e)
         {
             try
             {
@@ -181,6 +178,7 @@ namespace ExportBill
                 if (e.Column.FieldName == PrBill)
                 {
                     var MaPhieu = this.gridView1.GetRowCellValue(e.RowHandle, MPhieu)?.ToString();
+                    var pbill = this.gridView1.GetRowCellValue(e.RowHandle, PBill)?.ToString();
                     var getData = ds.Where(x => x.MaPhieu == MaPhieu).FirstOrDefault();
                     Customer cs = new Customer();
                     cs.MaPhieu = getData.MaPhieu;
@@ -195,33 +193,24 @@ namespace ExportBill
                     cs.Discount = getData.Discount;
                     cs.DetailMoney = getData.DetailMoney;
                     cs.Date = getData.Date;
-                    new PrintInvoiceForm(cs, true).ShowDialog(); ;
-                }
-                if (e.Column.FieldName == PBill && (string)e.CellValue == "Post Bill")
-                {
-                    var MaPhieu = this.gridView1.GetRowCellValue(e.RowHandle, MPhieu)?.ToString();
-                    var payment = this.gridView1.GetRowCellValue(e.RowHandle, Payment)?.ToString();
-                    string url = @"http://api.ototienthu.com.vn/api/v1/customers/PostBillService";
-                    var client = new HttpClient();
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    var request = new HttpRequestMessage(HttpMethod.Post, url);
-                    var formContent = new FormUrlEncodedContent(new[]
+                    new PrintInvoiceForm(cs, true).ShowDialog();
+                    var timer = new Timer();
+                    timer.Tick += new EventHandler(timer1_Tick);
+                    timer.Interval = 10000; // 10 second
+                    if(pbill != Posted)
+                    {
+                        var result = MessageBox.Show("Bạn có muốn Post Bill không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                        if (result == DialogResult.OK)
                         {
-                        new KeyValuePair<string, string>("ServiceOrderId", MaPhieu),
-                        new KeyValuePair<string, string>("PaymTermId", payment),
-                    });
-                    request.Content = formContent;
-                    var response = await client.SendAsync(request);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        gridView1.SetRowCellValue(e.RowHandle, PBill, "Posted");
-                        gridView1.GetRowCellDisplayText(e.RowHandle, PBill);
+                            RunPostBill(e.RowHandle);
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show("Post bill không thành công, vui lòng kiểm tra lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                        
+                }
+                if (e.Column.FieldName == PBill && (string)e.CellValue == PostBillStr)
+                {
+                    RunPostBill(e.RowHandle);
                 }
             }
             catch (Exception ex)
@@ -229,13 +218,21 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+        private int counter = 10;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            counter--;
+            if (counter == 0)
+                timer1.Stop();
+            //lblCountDown.Text = counter.ToString();
+        }
         private void GridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
         {
             GridView view = sender as GridView;
             if (e.Column.FieldName == PBill)
             {
                 var cellValue = e.CellValue.ToString();
-                if ("Posted" == cellValue)
+                if (Posted == cellValue)
                 {
                     e.Appearance.ForeColor = Color.Black;
                 }
@@ -245,6 +242,32 @@ namespace ExportBill
         #endregion
         //##############################################################################################
         #region method
+        private async void RunPostBill(int row)
+        {
+            var MaPhieu = this.gridView1.GetRowCellValue(row, MPhieu)?.ToString();
+            var payment = this.gridView1.GetRowCellValue(row, Payment)?.ToString();
+            string url = @"http://api.ototienthu.com.vn/api/v1/customers/PostBillService";
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var request = new HttpRequestMessage(HttpMethod.Post, url);
+            var formContent = new FormUrlEncodedContent(new[]
+                {
+                        new KeyValuePair<string, string>("ServiceOrderId", MaPhieu),
+                        new KeyValuePair<string, string>("PaymTermId", payment),
+                    });
+            request.Content = formContent;
+            var response = await client.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                gridView1.SetRowCellValue(row, PBill, Posted);
+                gridView1.GetRowCellDisplayText(row, PBill);
+            }
+            else
+            {
+                MessageBox.Show("Post bill không thành công, vui lòng kiểm tra lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         public async void getToken()
         {
             try
