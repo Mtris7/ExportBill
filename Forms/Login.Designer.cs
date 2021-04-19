@@ -58,7 +58,7 @@
             this.button2.Location = new System.Drawing.Point(357, 5);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(38, 33);
-            this.button2.TabIndex = 6;
+            this.button2.TabIndex = 7;
             this.button2.Text = "X";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -83,7 +83,7 @@
             this.PassWordTxt.MaxLength = 32767;
             this.PassWordTxt.Name = "PassWordTxt";
             this.PassWordTxt.Size = new System.Drawing.Size(351, 38);
-            this.PassWordTxt.TabIndex = 7;
+            this.PassWordTxt.TabIndex = 3;
             this.PassWordTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // UserNameTxt
@@ -106,7 +106,7 @@
             this.UserNameTxt.MaxLength = 32767;
             this.UserNameTxt.Name = "UserNameTxt";
             this.UserNameTxt.Size = new System.Drawing.Size(351, 38);
-            this.UserNameTxt.TabIndex = 10;
+            this.UserNameTxt.TabIndex = 1;
             this.UserNameTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // button1
@@ -119,7 +119,7 @@
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(352, 42);
-            this.button1.TabIndex = 12;
+            this.button1.TabIndex = 5;
             this.button1.Text = "Đăng Nhập";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);

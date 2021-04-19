@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DXMain));
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
@@ -54,7 +53,6 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.UserNamelbl = new System.Windows.Forms.Label();
             this.CompanyLbl = new System.Windows.Forms.Label();
             this.DatetimeLbl = new System.Windows.Forms.Label();
@@ -73,7 +71,6 @@
             this.DatetimeLbl2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.Search2Txt = new ExportBill.PlaceHolderTextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
@@ -90,7 +87,6 @@
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             this.groupControl4.SuspendLayout();
@@ -193,6 +189,7 @@
             this.MaPhieu.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.MaPhieu.Visible = true;
             this.MaPhieu.VisibleIndex = 0;
+            this.MaPhieu.Width = 123;
             // 
             // UserName
             // 
@@ -207,6 +204,7 @@
             this.UserName.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.UserName.Visible = true;
             this.UserName.VisibleIndex = 1;
+            this.UserName.Width = 190;
             // 
             // BS
             // 
@@ -221,6 +219,7 @@
             this.BS.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.BS.Visible = true;
             this.BS.VisibleIndex = 2;
+            this.BS.Width = 103;
             // 
             // LX
             // 
@@ -235,6 +234,7 @@
             this.LX.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.LX.Visible = true;
             this.LX.VisibleIndex = 3;
+            this.LX.Width = 103;
             // 
             // TSC
             // 
@@ -249,6 +249,7 @@
             this.TSC.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.TSC.Visible = true;
             this.TSC.VisibleIndex = 4;
+            this.TSC.Width = 178;
             // 
             // DG
             // 
@@ -265,6 +266,7 @@
             this.DG.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.DG.Visible = true;
             this.DG.VisibleIndex = 5;
+            this.DG.Width = 87;
             // 
             // Total
             // 
@@ -279,11 +281,12 @@
             this.Total.Name = "Total";
             this.Total.OptionsColumn.AllowEdit = false;
             this.Total.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total", "= {0:N0}VNĐ"),
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total", "{0:N0}VNĐ"),
             new DevExpress.XtraGrid.GridColumnSummaryItem()});
             this.Total.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this.Total.Visible = true;
             this.Total.VisibleIndex = 6;
+            this.Total.Width = 124;
             // 
             // Payment
             // 
@@ -298,6 +301,7 @@
             this.Payment.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Payment.Visible = true;
             this.Payment.VisibleIndex = 7;
+            this.Payment.Width = 149;
             // 
             // cmbPayment
             // 
@@ -337,6 +341,7 @@
             this.PostBill.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.PostBill.Visible = true;
             this.PostBill.VisibleIndex = 9;
+            this.PostBill.Width = 87;
             // 
             // repositoryItemButtonEdit1
             // 
@@ -372,7 +377,6 @@
             this.groupControl1.Controls.Add(this.dateTimePicker1);
             this.groupControl1.Controls.Add(this.pictureBox3);
             this.groupControl1.Controls.Add(this.pictureBox2);
-            this.groupControl1.Controls.Add(this.pictureBox1);
             this.groupControl1.Controls.Add(this.UserNamelbl);
             this.groupControl1.Controls.Add(this.CompanyLbl);
             this.groupControl1.Controls.Add(this.DatetimeLbl);
@@ -387,7 +391,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(66, 70);
+            this.dateTimePicker1.Location = new System.Drawing.Point(21, 40);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(126, 23);
             this.dateTimePicker1.TabIndex = 18;
@@ -416,17 +420,6 @@
             this.pictureBox2.TabIndex = 16;
             this.pictureBox2.TabStop = false;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(21, 68);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(35, 32);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
-            // 
             // UserNamelbl
             // 
             this.UserNamelbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -451,7 +444,7 @@
             // 
             this.DatetimeLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.DatetimeLbl.AutoSize = true;
-            this.DatetimeLbl.Location = new System.Drawing.Point(63, 75);
+            this.DatetimeLbl.Location = new System.Drawing.Point(25, 40);
             this.DatetimeLbl.Name = "DatetimeLbl";
             this.DatetimeLbl.Size = new System.Drawing.Size(63, 17);
             this.DatetimeLbl.TabIndex = 12;
@@ -464,7 +457,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(181, 33);
+            this.button1.Location = new System.Drawing.Point(179, 72);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(109, 30);
             this.button1.TabIndex = 5;
@@ -478,7 +471,7 @@
             this.SearchControl1Txt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SearchControl1Txt.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
             this.SearchControl1Txt.ForeColor = System.Drawing.Color.Gray;
-            this.SearchControl1Txt.Location = new System.Drawing.Point(23, 37);
+            this.SearchControl1Txt.Location = new System.Drawing.Point(21, 76);
             this.SearchControl1Txt.Name = "SearchControl1Txt";
             this.SearchControl1Txt.PlaceHolderText = "Nhập biển số xe";
             this.SearchControl1Txt.Size = new System.Drawing.Size(126, 23);
@@ -652,7 +645,6 @@
             this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
             this.groupControl4.ResumeLayout(false);
@@ -689,7 +681,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn Total;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label UserNamelbl;
         private System.Windows.Forms.Label CompanyLbl;
         private System.Windows.Forms.Label DatetimeLbl;
@@ -713,6 +704,5 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemPopupContainerEdit repositoryItemPopupContainerEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemZoomTrackBar repositoryItemZoomTrackBar1;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cmbPayment;
-        private System.Windows.Forms.Timer timer1;
     }
 }

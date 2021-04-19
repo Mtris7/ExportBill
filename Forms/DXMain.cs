@@ -174,6 +174,8 @@ namespace ExportBill
                     cs.DetailMoney = getData.DetailMoney;
                     cs.Date = getData.Date;
                     new PrintInvoiceForm(cs).ShowDialog();
+
+                    var pbill = this.gridView1.GetRowCellValue(e.RowHandle, PBill)?.ToString();
                 }
                 if (e.Column.FieldName == PrBill)
                 {
@@ -194,14 +196,10 @@ namespace ExportBill
                     cs.DetailMoney = getData.DetailMoney;
                     cs.Date = getData.Date;
                     new PrintInvoiceForm(cs, true).ShowDialog();
-                    var timer = new Timer();
-                    timer.Tick += new EventHandler(timer1_Tick);
-                    timer.Interval = 10000; // 10 second
                     if(pbill != Posted)
                     {
-                        var result = MessageBox.Show("Bạn có muốn Post Bill không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-                        if (result == DialogResult.OK)
+                        var userResult = AutoClosingMessageBox.Show("Bạn có muốn Post Bill không?", "Thông báo", 5000, MessageBoxButtons.YesNo,DialogResult.No);
+                        if (userResult == DialogResult.Yes)
                         {
                             RunPostBill(e.RowHandle);
                         }
@@ -218,24 +216,23 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
-        private int counter = 10;
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            counter--;
-            if (counter == 0)
-                timer1.Stop();
-            //lblCountDown.Text = counter.ToString();
-        }
         private void GridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
         {
-            GridView view = sender as GridView;
-            if (e.Column.FieldName == PBill)
+            try
             {
-                var cellValue = e.CellValue.ToString();
-                if (Posted == cellValue)
+                GridView view = sender as GridView;
+                if (e.Column.FieldName == PBill)
                 {
-                    e.Appearance.ForeColor = Color.Black;
+                    var cellValue = e.CellValue.ToString();
+                    if (Posted == cellValue)
+                    {
+                        e.Appearance.ForeColor = Color.Black;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -244,28 +241,46 @@ namespace ExportBill
         #region method
         private async void RunPostBill(int row)
         {
-            var MaPhieu = this.gridView1.GetRowCellValue(row, MPhieu)?.ToString();
-            var payment = this.gridView1.GetRowCellValue(row, Payment)?.ToString();
-            string url = @"http://api.ototienthu.com.vn/api/v1/customers/PostBillService";
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var request = new HttpRequestMessage(HttpMethod.Post, url);
-            var formContent = new FormUrlEncodedContent(new[]
-                {
+            try
+            {
+                this.Enabled = false;
+                var MaPhieu = this.gridView1.GetRowCellValue(row, MPhieu)?.ToString();
+                var payment = this.gridView1.GetRowCellValue(row, Payment)?.ToString();
+                string url = @"http://api.ototienthu.com.vn/api/v1/customers/PostBillService";
+                var client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var request = new HttpRequestMessage(HttpMethod.Post, url);
+                var formContent = new FormUrlEncodedContent(new[]
+                    {
                         new KeyValuePair<string, string>("ServiceOrderId", MaPhieu),
                         new KeyValuePair<string, string>("PaymTermId", payment),
                     });
-            request.Content = formContent;
-            var response = await client.SendAsync(request);
-            if (response.IsSuccessStatusCode)
-            {
-                gridView1.SetRowCellValue(row, PBill, Posted);
-                gridView1.GetRowCellDisplayText(row, PBill);
+                request.Content = formContent;
+                var response = await client.SendAsync(request);
+                this.Enabled = true;
+                if (response.IsSuccessStatusCode)
+                {
+                    var body = await response.Content.ReadAsStringAsync();
+                    var result = JsonConvert.DeserializeObject<DataModelString>(body);
+                    if(result.data.Contains("Post bill thành công"))
+                    {
+                        MessageBox.Show(result.data, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        gridView1.SetRowCellValue(row, PBill, Posted);
+                        //gridView1.GetRowCellDisplayText(row, PBill);
+                    }
+                    else
+                        MessageBox.Show(result.data, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Post bill không thành công, vui lòng kiểm tra lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch(Exception ex)
             {
-                MessageBox.Show("Post bill không thành công, vui lòng kiểm tra lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Enabled = true;
+                MessageBox.Show(ex.Message);
             }
         }
         public async void getToken()
