@@ -422,3 +422,11 @@ bin/Debug/Bunifu.UI.WinForms.BunifuUserControl.dll
 bin/Debug/Bunifu.UI.WinForms.BunifuUserControl.xml
 bin/Debug/Bunifu.UI.WinForms.Deprecated.dll
 obj/Debug/ExportBill.BunifuTextBox.resources
+.vs/config/applicationhost.config
+.vs/ExportBill/DesignTimeBuild/.dtbcache
+.vs/ExportBill/v15/.suo
+.vs/ExportBill/v15/Server/sqlite3/db.lock
+.vs/ExportBill/v15/Server/sqlite3/storage.ide
+.vs/ExportBill/v15/Server/sqlite3/storage.ide-shm
+.vs/ExportBill/v15/Server/sqlite3/storage.ide-wal
+.vs/ExportBill/v16/.suo
