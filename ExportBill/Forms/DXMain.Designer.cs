@@ -170,6 +170,7 @@
             this.gridView1.OptionsView.ShowFooter = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.GridView1_RowCellStyle);
+            this.gridView1.ShowingEditor += new System.ComponentModel.CancelEventHandler(this.gridView1_ShowingEditor);
             // 
             // MaPhieu
             // 
@@ -391,7 +392,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(21, 40);
+            this.dateTimePicker1.Location = new System.Drawing.Point(21, 38);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(126, 23);
             this.dateTimePicker1.TabIndex = 18;
@@ -401,9 +402,10 @@
             // 
             this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(786, 70);
+            this.pictureBox3.InitialImage = global::ExportBill.Properties.Resources.user1;
+            this.pictureBox3.Location = new System.Drawing.Point(795, 73);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(32, 31);
+            this.pictureBox3.Size = new System.Drawing.Size(24, 24);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 17;
             this.pictureBox3.TabStop = false;
@@ -412,10 +414,10 @@
             // 
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(784, 36);
+            this.pictureBox2.Image = global::ExportBill.Properties.Resources.company;
+            this.pictureBox2.Location = new System.Drawing.Point(795, 37);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(35, 33);
+            this.pictureBox2.Size = new System.Drawing.Size(24, 24);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 16;
             this.pictureBox2.TabStop = false;
@@ -442,13 +444,13 @@
             // 
             // DatetimeLbl
             // 
-            this.DatetimeLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.DatetimeLbl.AutoSize = true;
             this.DatetimeLbl.Location = new System.Drawing.Point(25, 40);
             this.DatetimeLbl.Name = "DatetimeLbl";
             this.DatetimeLbl.Size = new System.Drawing.Size(63, 17);
             this.DatetimeLbl.TabIndex = 12;
             this.DatetimeLbl.Text = "Datetime";
+            this.DatetimeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.DatetimeLbl.Click += new System.EventHandler(this.DatetimeLbl_Click);
             // 
             // button1

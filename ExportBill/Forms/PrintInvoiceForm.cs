@@ -44,6 +44,7 @@ namespace ExportBill
                     reportViewer1.LocalReport.DataSources.Add(dataSource);
                     reportViewer1.LocalReport.Refresh();
                     reportViewer1.RefreshReport();
+                    reportViewer1.ShowPrintButton = false;
                 }
                 else
                     Run();
@@ -56,14 +57,6 @@ namespace ExportBill
         private int m_currentPageIndex;
         private IList<Stream> m_streams;
 
-        private DataTable LoadSalesData()
-        {
-            // Create a new DataSet and read sales data file 
-            //    data.xml into the first DataTable.
-            DataSet dataSet = new DataSet();
-            dataSet.ReadXml(@"..\..\data.xml");
-            return dataSet.Tables[0];
-        }
         // Routine to provide to the report renderer, in order to
         //    save an image for each page of the report.
         private Stream CreateStream(string name,
@@ -139,7 +132,6 @@ namespace ExportBill
         private async void Run()
         {
             DataTable dt = await LoadData();
-            //dt.Rows.Add(1, "04052021", "Cửa hàng xe máy honda", "179 Phan Châu Trinh", "92E1-33719", "Exciter", 50, "nhớt", 1, 180000, 90000, "chín mươi ngàn đồng", "title bot", "OK", ms.ToArray());
 
             ReportDataSource dataSource = new ReportDataSource("DataSet1", dt);
 

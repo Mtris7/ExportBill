@@ -228,6 +228,12 @@ namespace ExportBill
                     {
                         e.Appearance.ForeColor = Color.Black;
                     }
+                    else
+                        e.Appearance.ForeColor = Color.Blue;
+                }
+                if (e.Column.FieldName == PrBill || e.Column.FieldName == MPhieu)
+                {
+                    e.Appearance.ForeColor = Color.Blue;
                 }
             }
             catch (Exception ex)
@@ -236,6 +242,17 @@ namespace ExportBill
             }
         }
 
+        private void gridView1_ShowingEditor(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                e.Cancel = gridView1.FocusedColumn.FieldName == "Payment" && gridView1.GetFocusedRowCellValue(PostBill).ToString() == Posted;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #endregion
         //##############################################################################################
         #region method
