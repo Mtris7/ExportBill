@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Printing;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -153,12 +154,13 @@ namespace ExportBill
                 dt.Columns.Add("Address", typeof(String));
                 dt.Columns.Add("BS", typeof(String));
                 dt.Columns.Add("Loaixe", typeof(String));
-                dt.Columns.Add("Discount", typeof(int));
+                dt.Columns.Add("Discount", typeof(String));
 
                 dt.Columns.Add("ItemName", typeof(String));
-                dt.Columns.Add("ItemQuality", typeof(int));
-                dt.Columns.Add("ItemPrice", typeof(int));
-                dt.Columns.Add("ItemTotal", typeof(int));
+                dt.Columns.Add("ItemQuality", typeof(String));
+                dt.Columns.Add("ItemPrice", typeof(String));
+                dt.Columns.Add("TotalBeforeDiscount", typeof(String));
+                dt.Columns.Add("ItemTotal", typeof(String));
                 dt.Columns.Add("ItemDetailPrice", typeof(String));
                 dt.Columns.Add("TitleBotom", typeof(String));
                 dt.Columns.Add("PhieuDV", typeof(String));
@@ -201,17 +203,19 @@ namespace ExportBill
                             var data = item.Split(';');
                             ItemSell items = new ItemSell();
                             items.itemName = data[0];
-                            items.itemQuality = Convert.ToInt32(Convert.ToDecimal(data[1]));
-                            items.itemType = data[2];
-                            items.itemPrice = Convert.ToInt32(Convert.ToDecimal(data[3]));
+                            items.itemQuality = Convert.ToDecimal(data[1]).ToString("N0");
+                            items.itemUnit = data[2];
+                            items.itemPrice = Convert.ToDecimal(data[3]).ToString("N0");
+                            items.TotalBeforeDiscount = Convert.ToDecimal(data[3]).ToString("N0");
                             itemSell.Add(items);
                         }
+                        foreach(var item in itemSell) item.TotalBeforeDiscount = itemSell.Sum(x=> Convert.ToDecimal(x.itemPrice)).ToString("N0");
                     }
                     int i = 0;
                     foreach (var item in itemSell)
                     {
                         dt.Rows.Add(i, "Ngày in bill: " + this.customer.Date, this.customer.Company, this.customer.Adress, "Biển số: " + this.customer.BS, "Loại xe:" + this.customer.LX,
-                            this.customer.Discount, item.itemName, item.itemQuality, item.itemPrice, Convert.ToInt32(Convert.ToDecimal(this.customer.Total)), "(Bằng chữ:" + this.customer.DetailMoney + ")", this.titleBottom, "Phiếu DV:" + this.customer.MaPhieu, ms.ToArray());
+                            this.customer.Discount.ToString("N0"), item.itemName, item.itemQuality, item.itemPrice, item.TotalBeforeDiscount, Convert.ToDecimal(this.customer.Total).ToString("N0"), "(" + this.customer.DetailMoney + ")", this.titleBottom, "Phiếu DV:" + this.customer.MaPhieu, ms.ToArray());
                         i++;
                     }
                 }
@@ -222,6 +226,11 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
                 return null;
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

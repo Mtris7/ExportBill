@@ -8,5 +8,11 @@
     <Setting Name="Net" Type="System.String" Scope="User">
       <Value Profile="(Default)">repositoryItemPopupContainerEdit1</Value>
     </Setting>
+    <Setting Name="userName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="passWord" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

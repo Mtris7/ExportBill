@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.1433
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportBill", "ExportBill\ExportBill.csproj", "{E63E30B2-3830-4722-83AB-99B813BE014D}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{5DF3D8B0-F784-400F-8AE8-A236975276B6}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TienThuSetup", "TienThuSetup\TienThuSetup.vdproj", "{EB952016-5AFD-4C1C-B5CD-0408F2114014}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +17,8 @@ Global
 		{E63E30B2-3830-4722-83AB-99B813BE014D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E63E30B2-3830-4722-83AB-99B813BE014D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E63E30B2-3830-4722-83AB-99B813BE014D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5DF3D8B0-F784-400F-8AE8-A236975276B6}.Debug|Any CPU.ActiveCfg = Debug
-		{5DF3D8B0-F784-400F-8AE8-A236975276B6}.Release|Any CPU.ActiveCfg = Release
+		{EB952016-5AFD-4C1C-B5CD-0408F2114014}.Debug|Any CPU.ActiveCfg = Debug
+		{EB952016-5AFD-4C1C-B5CD-0408F2114014}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

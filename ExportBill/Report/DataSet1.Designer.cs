@@ -299,6 +299,8 @@ namespace ExportBill.Report {
             
             private global::System.Data.DataColumn columnItemName;
             
+            private global::System.Data.DataColumn columnTotalBeforeDiscount;
+            
             private global::System.Data.DataColumn columnItemTotal;
             
             private global::System.Data.DataColumn columnItemDetailPrice;
@@ -424,6 +426,14 @@ namespace ExportBill.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn TotalBeforeDiscountColumn {
+                get {
+                    return this.columnTotalBeforeDiscount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn ItemTotalColumn {
                 get {
                     return this.columnItemTotal;
@@ -499,7 +509,23 @@ namespace ExportBill.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable_ReportRow AddDataTable_ReportRow(string InvoiceID, string InvoiceDate, string CompanyName, string Address, string BS, string Loaixe, string Discount, string ItemPrice, string ItemQuality, string ItemName, string ItemTotal, string ItemDetailPrice, string TitleBotom, string PhieuDV, byte[] Image) {
+            public DataTable_ReportRow AddDataTable_ReportRow(
+                        string InvoiceID, 
+                        string InvoiceDate, 
+                        string CompanyName, 
+                        string Address, 
+                        string BS, 
+                        string Loaixe, 
+                        string Discount, 
+                        string ItemPrice, 
+                        string ItemQuality, 
+                        string ItemName, 
+                        string TotalBeforeDiscount, 
+                        string ItemTotal, 
+                        string ItemDetailPrice, 
+                        string TitleBotom, 
+                        string PhieuDV, 
+                        byte[] Image) {
                 DataTable_ReportRow rowDataTable_ReportRow = ((DataTable_ReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         InvoiceID,
@@ -512,6 +538,7 @@ namespace ExportBill.Report {
                         ItemPrice,
                         ItemQuality,
                         ItemName,
+                        TotalBeforeDiscount,
                         ItemTotal,
                         ItemDetailPrice,
                         TitleBotom,
@@ -549,6 +576,7 @@ namespace ExportBill.Report {
                 this.columnItemPrice = base.Columns["ItemPrice"];
                 this.columnItemQuality = base.Columns["ItemQuality"];
                 this.columnItemName = base.Columns["ItemName"];
+                this.columnTotalBeforeDiscount = base.Columns["TotalBeforeDiscount"];
                 this.columnItemTotal = base.Columns["ItemTotal"];
                 this.columnItemDetailPrice = base.Columns["ItemDetailPrice"];
                 this.columnTitleBotom = base.Columns["TitleBotom"];
@@ -579,6 +607,8 @@ namespace ExportBill.Report {
                 base.Columns.Add(this.columnItemQuality);
                 this.columnItemName = new global::System.Data.DataColumn("ItemName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnItemName);
+                this.columnTotalBeforeDiscount = new global::System.Data.DataColumn("TotalBeforeDiscount", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalBeforeDiscount);
                 this.columnItemTotal = new global::System.Data.DataColumn("ItemTotal", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnItemTotal);
                 this.columnItemDetailPrice = new global::System.Data.DataColumn("ItemDetailPrice", typeof(string), null, global::System.Data.MappingType.Element);
@@ -891,6 +921,23 @@ namespace ExportBill.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string TotalBeforeDiscount {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable_Report.TotalBeforeDiscountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalBeforeDiscount\' in table \'DataTable_Report\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable_Report.TotalBeforeDiscountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string ItemTotal {
                 get {
                     try {
@@ -1087,6 +1134,18 @@ namespace ExportBill.Report {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetItemNameNull() {
                 this[this.tableDataTable_Report.ItemNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsTotalBeforeDiscountNull() {
+                return this.IsNull(this.tableDataTable_Report.TotalBeforeDiscountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetTotalBeforeDiscountNull() {
+                this[this.tableDataTable_Report.TotalBeforeDiscountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

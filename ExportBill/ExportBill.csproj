@@ -256,6 +256,11 @@
   <ItemGroup>
     <None Include="image\user1.png" />
     <None Include="image\company.png" />
+    <None Include="Resources\logo.ico" />
+    <None Include="Resources\logo.png" />
+    <None Include="Resources\logo - Copy.png" />
+    <None Include="Resources\find2.png" />
+    <None Include="Resources\find21.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

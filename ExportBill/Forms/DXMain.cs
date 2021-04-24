@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace ExportBill
 {
-    public partial class DXMain : DevExpress.XtraEditors.XtraForm
+    public partial class DXMain : XtraForm
     {
         //##############################################################################################
         #region const
@@ -61,7 +61,7 @@ namespace ExportBill
         {
             try
             {
-                this.DatetimeLbl.Text = this.DatetimeLbl2.Text = DateTime.Now.ToLocalTime().ToShortDateString();
+                this.DatetimeLbl.Text = DateTime.Now.ToLocalTime().ToShortDateString();
                 this.dateTimePicker1.Value = DateTime.Now;
                 //this.egencylb.Text = this.egencylb2.Text = "";
                 //this.Diemltn.Text = this.Diemltn2.Text = "";
@@ -85,6 +85,7 @@ namespace ExportBill
             this.UserNamelbl.Text = userName;
             gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             gridView1.RowCellClick += gridView1_RowCellClick;
+            this.gridView1.Columns["Total"].DisplayFormat.FormatString = "N0";
         }
         #endregion
         //##############################################################################################
@@ -103,6 +104,7 @@ namespace ExportBill
         {
             try
             {
+                this.Enabled = false;
                 this.ds.Clear();
                 string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId=TT_0762_16092016&serviceDate=" + this.dateTimePicker1.Value.ToString("dd/MM/yyyy");
                 if(!string.IsNullOrWhiteSpace(this.SearchControl1Txt.Text))
@@ -115,6 +117,7 @@ namespace ExportBill
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
 
                 var response = await client.SendAsync(request);
+                this.Enabled = true;
                 if (response.IsSuccessStatusCode)
                 {
                     var body = await response.Content.ReadAsStringAsync();

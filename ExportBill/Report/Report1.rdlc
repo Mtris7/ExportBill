@@ -3,7 +3,7 @@
   <Body>
     <ReportItems>
       <Line Name="Line1">
-        <Top>0.04167in</Top>
+        <Top>0.05in</Top>
         <Left>0.03556in</Left>
         <Height>0in</Height>
         <Width>2.7in</Width>
@@ -17,13 +17,13 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>1.29166in</Width>
+              <Width>1.50851in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.46204in</Width>
+              <Width>0.25334in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.92685in</Width>
+              <Width>0.9187in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -39,7 +39,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Nội dung sữa chữa</Value>
+                              <Value>Nội dung sửa chữa</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -107,7 +107,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Item Price</Value>
+                              <Value>Giá tiền</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
                               </Style>
@@ -164,7 +164,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <VerticalAlign>Middle</VerticalAlign>
+                        <VerticalAlign>Bottom</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -199,7 +199,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <VerticalAlign>Middle</VerticalAlign>
+                        <VerticalAlign>Bottom</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -234,7 +234,7 @@
                           <Color>LightGrey</Color>
                           <Style>Solid</Style>
                         </Border>
-                        <VerticalAlign>Middle</VerticalAlign>
+                        <VerticalAlign>Bottom</VerticalAlign>
                         <PaddingLeft>2pt</PaddingLeft>
                         <PaddingRight>2pt</PaddingRight>
                         <PaddingTop>2pt</PaddingTop>
@@ -285,6 +285,7 @@
               <TextRun>
                 <Value>Giảm giá</Value>
                 <Style>
+                  <FontSize>9pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -295,15 +296,16 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.19445in</Top>
-        <Left>0.01611in</Left>
+        <Top>1.45278in</Top>
+        <Left>0.05001in</Left>
         <Height>0.25in</Height>
-        <Width>1.77315in</Width>
+        <Width>1.7474in</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
+          <VerticalAlign>Bottom</VerticalAlign>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
@@ -319,6 +321,7 @@
               <TextRun>
                 <Value>Tổng tiền thanh toán</Value>
                 <Style>
+                  <FontSize>9pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -329,15 +332,16 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>1.47223in</Top>
-        <Left>0.01611in</Left>
+        <Top>1.72223in</Top>
+        <Left>0.05001in</Left>
         <Height>0.25in</Height>
-        <Width>1.77315in</Width>
+        <Width>1.73925in</Width>
         <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
+          <VerticalAlign>Bottom</VerticalAlign>
           <PaddingLeft>2pt</PaddingLeft>
           <PaddingRight>2pt</PaddingRight>
           <PaddingTop>2pt</PaddingTop>
@@ -353,7 +357,9 @@
               <TextRun>
                 <Value>=First(Fields!ItemDetailPrice.Value, "DataSet1")</Value>
                 <Style>
+                  <FontStyle>Italic</FontStyle>
                   <FontSize>8pt</FontSize>
+                  <FontWeight>Thin</FontWeight>
                 </Style>
               </TextRun>
             </TextRuns>
@@ -363,10 +369,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>ItemDetailPrice</rd:DefaultName>
-        <Top>1.7639in</Top>
-        <Left>0.005in</Left>
+        <Top>2.0139in</Top>
         <Height>0.25in</Height>
-        <Width>2.71111in</Width>
+        <Width>2.70166in</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
@@ -397,7 +402,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>BS</rd:DefaultName>
-        <Top>0.08334in</Top>
+        <Top>0.09167in</Top>
         <Left>0.05001in</Left>
         <Height>0.25in</Height>
         <Width>1.27721in</Width>
@@ -431,7 +436,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Loaixe</rd:DefaultName>
-        <Top>0.36112in</Top>
+        <Top>0.36945in</Top>
         <Left>0.05001in</Left>
         <Height>0.25in</Height>
         <Width>1.27721in</Width>
@@ -488,7 +493,9 @@
             <TextRuns>
               <TextRun>
                 <Value>=First(Fields!Discount.Value, "DataSet1")</Value>
-                <Style />
+                <Style>
+                  <FontSize>9pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style>
@@ -497,9 +504,9 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Discount</rd:DefaultName>
-        <Top>1.22223in</Top>
+        <Top>1.47223in</Top>
         <Left>1.81704in</Left>
-        <Height>0.25in</Height>
+        <Height>0.23611in</Height>
         <Width>0.89907in</Width>
         <ZIndex>8</ZIndex>
         <Style>
@@ -521,7 +528,10 @@
             <TextRuns>
               <TextRun>
                 <Value>=First(Fields!ItemTotal.Value, "DataSet1")</Value>
-                <Style />
+                <Style>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style>
@@ -530,7 +540,7 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>ItemTotal</rd:DefaultName>
-        <Top>1.48612in</Top>
+        <Top>1.70834in</Top>
         <Left>1.80315in</Left>
         <Height>0.25in</Height>
         <Width>0.91796in</Width>
@@ -597,10 +607,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>TitleBotom</rd:DefaultName>
-        <Top>3.07685in</Top>
-        <Left>0.01611in</Left>
+        <Top>3.32685in</Top>
+        <Left>0.03556in</Left>
         <Height>0.41795in</Height>
-        <Width>2.68055in</Width>
+        <Width>2.6611in</Width>
         <ZIndex>11</ZIndex>
         <Style>
           <Border>
@@ -631,10 +641,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox17</rd:DefaultName>
-        <Top>3.52258in</Top>
-        <Left>0.01611in</Left>
+        <Top>3.77258in</Top>
+        <Left>0.03556in</Left>
         <Height>0.25in</Height>
-        <Width>2.68555in</Width>
+        <Width>2.6661in</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>
@@ -651,7 +661,7 @@
         <Value>=First(Fields!Image.Value, "DataSet1")</Value>
         <MIMEType>image/png</MIMEType>
         <Sizing>FitProportional</Sizing>
-        <Top>6.70044cm</Top>
+        <Top>7.5118cm</Top>
         <Left>1.48025cm</Left>
         <Height>0.86784cm</Height>
         <Width>4.08372cm</Width>
@@ -707,10 +717,10 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>2.08334in</Top>
-        <Left>0.04056in</Left>
-        <Height>0.49907in</Height>
-        <Width>2.7in</Width>
+        <Top>2.33334in</Top>
+        <Left>0.05001in</Left>
+        <Height>0.55462in</Height>
+        <Width>2.64999in</Width>
         <ZIndex>14</ZIndex>
         <Style>
           <Border>
@@ -722,11 +732,80 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
+      <Textbox Name="Textbox10">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Tổng tiền</Value>
+                <Style>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>1.21667in</Top>
+        <Left>0.05001in</Left>
+        <Height>0.25in</Height>
+        <Width>1.73925in</Width>
+        <ZIndex>15</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="TotalBeforeDiscount">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=First(Fields!TotalBeforeDiscount.Value, "DataSet1")</Value>
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>TotalBeforeDiscount</rd:DefaultName>
+        <Top>3.06918cm</Top>
+        <Left>4.55742cm</Left>
+        <Height>0.6cm</Height>
+        <Width>2.3542cm</Width>
+        <ZIndex>16</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
     </ReportItems>
-    <Height>9.69762cm</Height>
+    <Height>10.26912cm</Height>
     <Style />
   </Body>
-  <Width>7.11435cm</Width>
+  <Width>6.98219cm</Width>
   <Page>
     <PageHeader>
       <Height>4.826cm</Height>
@@ -738,7 +817,7 @@
           <Value>logohinhvuongTienThuđentrắng2</Value>
           <Sizing>FitProportional</Sizing>
           <Top>0.07315in</Top>
-          <Left>0.99056in</Left>
+          <Left>0.86556in</Left>
           <Height>2.5cm</Height>
           <Width>2.5cm</Width>
           <Style>
@@ -767,7 +846,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>CompanyName</rd:DefaultName>
-          <Top>1.08518in</Top>
+          <Top>1.10093in</Top>
           <Left>0.03556in</Left>
           <Height>0.4713in</Height>
           <Width>2.68555in</Width>
@@ -801,7 +880,7 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Address</rd:DefaultName>
-          <Top>1.60556in</Top>
+          <Top>1.61389in</Top>
           <Left>0.03556in</Left>
           <Height>0.25in</Height>
           <Width>2.68055in</Width>
@@ -824,8 +903,8 @@
       </Style>
     </PageHeader>
     <PageHeight>50cm</PageHeight>
-    <PageWidth>7.21cm</PageWidth>
-    <LeftMargin>0.1cm</LeftMargin>
+    <PageWidth>7.20999cm</PageWidth>
+    <LeftMargin>0.5cm</LeftMargin>
     <RightMargin>0cm</RightMargin>
     <TopMargin>0cm</TopMargin>
     <BottomMargin>0.5cm</BottomMargin>
@@ -889,6 +968,10 @@
           <DataField>ItemName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="TotalBeforeDiscount">
+          <DataField>TotalBeforeDiscount</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="ItemTotal">
           <DataField>ItemTotal</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -912,7 +995,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DataSet1</rd:DataSetName>
-        <rd:SchemaPath>D:\c#\2017\ExportBill\ExportBill\Report\DataSet1.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\c#\code\ExportBill\ExportBill\Report\DataSet1.xsd</rd:SchemaPath>
         <rd:TableName>DataTable_Report</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
