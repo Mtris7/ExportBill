@@ -33,10 +33,8 @@
             this.bunifuCheckbox1 = new Bunifu.Framework.UI.BunifuCheckbox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.UserNameTxt = new Bunifu.Framework.UI.BunifuMaterialTextbox();
             this.PassWordTxt = new Bunifu.Framework.UI.BunifuMaterialTextbox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -44,7 +42,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(54, 319);
+            this.label1.Location = new System.Drawing.Point(59, 397);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 17);
             this.label1.TabIndex = 17;
@@ -57,7 +55,7 @@
             this.bunifuCheckbox1.Checked = false;
             this.bunifuCheckbox1.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(26)))), ((int)(((byte)(74)))));
             this.bunifuCheckbox1.ForeColor = System.Drawing.Color.White;
-            this.bunifuCheckbox1.Location = new System.Drawing.Point(26, 317);
+            this.bunifuCheckbox1.Location = new System.Drawing.Point(31, 395);
             this.bunifuCheckbox1.Margin = new System.Windows.Forms.Padding(5);
             this.bunifuCheckbox1.Name = "bunifuCheckbox1";
             this.bunifuCheckbox1.Size = new System.Drawing.Size(20, 20);
@@ -70,7 +68,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(25, 349);
+            this.button1.Location = new System.Drawing.Point(30, 427);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(352, 42);
@@ -86,24 +84,13 @@
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(37)))), ((int)(((byte)(52)))));
-            this.button2.Location = new System.Drawing.Point(359, 2);
+            this.button2.Location = new System.Drawing.Point(378, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(38, 33);
             this.button2.TabIndex = 15;
             this.button2.Text = "X";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox1.Location = new System.Drawing.Point(100, 87);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(245, 47);
-            this.pictureBox1.TabIndex = 14;
-            this.pictureBox1.TabStop = false;
             // 
             // UserNameTxt
             // 
@@ -121,7 +108,7 @@
             this.UserNameTxt.LineIdleColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(37)))), ((int)(((byte)(52)))));
             this.UserNameTxt.LineMouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(37)))), ((int)(((byte)(52)))));
             this.UserNameTxt.LineThickness = 3;
-            this.UserNameTxt.Location = new System.Drawing.Point(26, 197);
+            this.UserNameTxt.Location = new System.Drawing.Point(31, 275);
             this.UserNameTxt.Margin = new System.Windows.Forms.Padding(5);
             this.UserNameTxt.MaxLength = 32767;
             this.UserNameTxt.Name = "UserNameTxt";
@@ -146,7 +133,7 @@
             this.PassWordTxt.LineIdleColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(37)))), ((int)(((byte)(52)))));
             this.PassWordTxt.LineMouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(37)))), ((int)(((byte)(52)))));
             this.PassWordTxt.LineThickness = 3;
-            this.PassWordTxt.Location = new System.Drawing.Point(26, 255);
+            this.PassWordTxt.Location = new System.Drawing.Point(31, 333);
             this.PassWordTxt.Margin = new System.Windows.Forms.Padding(5);
             this.PassWordTxt.MaxLength = 32767;
             this.PassWordTxt.Name = "PassWordTxt";
@@ -160,16 +147,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::ExportBill.Properties.Resources.LoginBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(400, 500);
+            this.ClientSize = new System.Drawing.Size(419, 625);
             this.Controls.Add(this.PassWordTxt);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.bunifuCheckbox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.UserNameTxt);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.pictureBox1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -177,7 +163,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng nhập Tiến Thu";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Login_KeyDown);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,7 +176,6 @@
         private System.Windows.Forms.Button button1;
         private Bunifu.Framework.UI.BunifuMaterialTextbox UserNameTxt;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private Bunifu.Framework.UI.BunifuMaterialTextbox PassWordTxt;
     }
 }

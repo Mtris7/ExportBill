@@ -180,6 +180,7 @@
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.GridView1_RowCellStyle);
             this.gridView1.ShowingEditor += new System.ComponentModel.CancelEventHandler(this.gridView1_ShowingEditor);
+            this.gridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView1_KeyDown);
             // 
             // MaPhieu
             // 
@@ -206,9 +207,7 @@
             // UserName
             // 
             this.UserName.AppearanceCell.Options.UseTextOptions = true;
-            this.UserName.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.UserName.AppearanceHeader.Options.UseTextOptions = true;
-            this.UserName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.UserName.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.UserName.Caption = "Khách hàng";
             this.UserName.FieldName = "UserName";
             this.UserName.Name = "UserName";
@@ -216,7 +215,7 @@
             this.UserName.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.UserName.Visible = true;
             this.UserName.VisibleIndex = 1;
-            this.UserName.Width = 190;
+            this.UserName.Width = 154;
             // 
             // BS
             // 
@@ -250,10 +249,6 @@
             // 
             // TSC
             // 
-            this.TSC.AppearanceCell.Options.UseTextOptions = true;
-            this.TSC.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.TSC.AppearanceHeader.Options.UseTextOptions = true;
-            this.TSC.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.TSC.Caption = "Thợ sửa chữa";
             this.TSC.FieldName = "TSC";
             this.TSC.Name = "TSC";
@@ -261,14 +256,10 @@
             this.TSC.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.TSC.Visible = true;
             this.TSC.VisibleIndex = 4;
-            this.TSC.Width = 178;
+            this.TSC.Width = 136;
             // 
             // DG
             // 
-            this.DG.AppearanceCell.Options.UseTextOptions = true;
-            this.DG.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.DG.AppearanceHeader.Options.UseTextOptions = true;
-            this.DG.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.DG.Caption = "Diễn giải";
             this.DG.FieldName = "DG";
             this.DG.Name = "DG";
@@ -278,7 +269,7 @@
             this.DG.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.DG.Visible = true;
             this.DG.VisibleIndex = 5;
-            this.DG.Width = 87;
+            this.DG.Width = 253;
             // 
             // Total
             // 
@@ -306,14 +297,14 @@
             this.Payment.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.Payment.AppearanceHeader.Options.UseTextOptions = true;
             this.Payment.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.Payment.Caption = "Hình thức thanh toán";
+            this.Payment.Caption = "Payment";
             this.Payment.ColumnEdit = this.cmbPayment;
             this.Payment.FieldName = "Payment";
             this.Payment.Name = "Payment";
             this.Payment.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Payment.Visible = true;
             this.Payment.VisibleIndex = 7;
-            this.Payment.Width = 149;
+            this.Payment.Width = 67;
             // 
             // cmbPayment
             // 
@@ -481,7 +472,6 @@
             // 
             // SearchControl1Txt
             // 
-            this.SearchControl1Txt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SearchControl1Txt.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
             this.SearchControl1Txt.ForeColor = System.Drawing.Color.Gray;
             this.SearchControl1Txt.Location = new System.Drawing.Point(21, 76);

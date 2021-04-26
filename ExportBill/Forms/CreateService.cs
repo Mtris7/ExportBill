@@ -14,7 +14,6 @@ namespace ExportBill
         public CreateService(string makh,string tenkh, string bs)
         {
             InitializeComponent();
-            this.MaKH.Text = makh + " | " + tenkh;
         }
         #endregion
         //######################################################
@@ -113,5 +112,10 @@ namespace ExportBill
             }
         }
         #endregion
+
+        private void dataGridView1_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

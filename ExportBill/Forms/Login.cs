@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace ExportBill
@@ -14,6 +15,21 @@ namespace ExportBill
             InitializeComponent();
             DXMain dXMain = new DXMain();
             dXMain.getToken();
+        }
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        private void Form1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
         private async void button1_Click(object sender, EventArgs e)
         {
@@ -65,8 +81,11 @@ namespace ExportBill
                         var data = dataList.data.Split(';');
                         if (data[0] == "true")
                         {
+                            Staff st = new Staff();
+                            st.maNV = user;
+                            st.passWord = passw;
                             this.Hide();
-                            DXMain dx = new DXMain(data[1],data[2]);
+                            DXMain dx = new DXMain(data[1],data[2], st);
                             dx.Closed += (s, args) => this.Close();
                             dx.ShowDialog();
                         }

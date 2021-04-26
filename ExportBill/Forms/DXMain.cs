@@ -31,6 +31,7 @@ namespace ExportBill
         //###############################################################################################
         #region field
         private BindingList<Customer> ds = new BindingList<Customer>();
+        private Staff _staff = new Staff();
         #endregion
         //###############################################################################################
         #region Initialize
@@ -78,11 +79,12 @@ namespace ExportBill
         {
             InitializeComponent();
         }
-        public DXMain(string userName, string companyName)
+        public DXMain(string userName, string companyName, Staff st)
         {
             InitializeComponent();
             this.CompanyLbl.Text = companyName;
             this.UserNamelbl.Text = userName;
+            _staff.maNV = st.maNV;
             gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             gridView1.RowCellClick += gridView1_RowCellClick;
             this.gridView1.Columns["Total"].DisplayFormat.FormatString = "N0";
@@ -106,7 +108,7 @@ namespace ExportBill
             {
                 this.Enabled = false;
                 this.ds.Clear();
-                string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId=TT_0762_16092016&serviceDate=" + this.dateTimePicker1.Value.ToString("dd/MM/yyyy");
+                string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId="+ _staff.maNV + "&serviceDate=" + this.dateTimePicker1.Value.ToString("dd/MM/yyyy");
                 if(!string.IsNullOrWhiteSpace(this.SearchControl1Txt.Text))
                 {
                     url += "&plateId=" + this.SearchControl1Txt.Text;
@@ -153,6 +155,7 @@ namespace ExportBill
             }
             catch (Exception ex)
             {
+                this.Enabled = true;
                 MessageBox.Show(ex.Message);
             }
         }
@@ -162,52 +165,11 @@ namespace ExportBill
             {
                 if (e.Column.FieldName == MPhieu)
                 {
-                    var getData = ds.Where(x => x.MaPhieu == (string)e.CellValue).FirstOrDefault();
-                    Customer cs = new Customer();
-                    cs.MaPhieu = getData.MaPhieu;
-                    cs.UserName = getData.UserName;
-                    cs.BS = getData.BS;
-                    cs.LX = getData.LX;
-                    cs.TSC = getData.TSC;
-                    cs.DG = getData.DG;
-                    cs.Total = getData.Total;
-                    cs.Company = getData.Company;
-                    cs.Adress = getData.Adress;
-                    cs.Discount = getData.Discount;
-                    cs.DetailMoney = getData.DetailMoney;
-                    cs.Date = getData.Date;
-                    new PrintInvoiceForm(cs).ShowDialog();
-
-                    var pbill = this.gridView1.GetRowCellValue(e.RowHandle, PBill)?.ToString();
+                    RunViewBill(e.RowHandle);
                 }
                 if (e.Column.FieldName == PrBill)
                 {
-                    var MaPhieu = this.gridView1.GetRowCellValue(e.RowHandle, MPhieu)?.ToString();
-                    var pbill = this.gridView1.GetRowCellValue(e.RowHandle, PBill)?.ToString();
-                    var getData = ds.Where(x => x.MaPhieu == MaPhieu).FirstOrDefault();
-                    Customer cs = new Customer();
-                    cs.MaPhieu = getData.MaPhieu;
-                    cs.UserName = getData.UserName;
-                    cs.BS = getData.BS;
-                    cs.LX = getData.LX;
-                    cs.TSC = getData.TSC;
-                    cs.DG = getData.DG;
-                    cs.Total = getData.Total;
-                    cs.Company = getData.Company;
-                    cs.Adress = getData.Adress;
-                    cs.Discount = getData.Discount;
-                    cs.DetailMoney = getData.DetailMoney;
-                    cs.Date = getData.Date;
-                    new PrintInvoiceForm(cs, true).ShowDialog();
-                    if(pbill != Posted)
-                    {
-                        var userResult = AutoClosingMessageBox.Show("Bạn có muốn Post Bill không?", "Thông báo", 5000, MessageBoxButtons.YesNo,DialogResult.No);
-                        if (userResult == DialogResult.Yes)
-                        {
-                            RunPostBill(e.RowHandle);
-                        }
-                    }
-                        
+                    RunPrintBill(e.RowHandle);
                 }
                 if (e.Column.FieldName == PBill && (string)e.CellValue == PostBillStr)
                 {
@@ -217,6 +179,30 @@ namespace ExportBill
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void gridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                GridView view = sender as GridView;
+                var rowIndex = view.FocusedRowHandle;
+                var colI = view.FocusedColumn;
+                if (colI == MaPhieu)
+                {
+                    RunViewBill(rowIndex);
+                }
+                if (colI == PrintBill)
+                {
+                    RunPrintBill(rowIndex);
+                }
+                else if (colI == PostBill)
+                {
+                    string TheID_Val = view.GetFocusedRowCellValue(PostBill).ToString();
+                    if(TheID_Val == PostBillStr)
+                        RunPostBill(rowIndex);
+                }
             }
         }
         private void GridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
@@ -249,7 +235,7 @@ namespace ExportBill
         {
             try
             {
-                e.Cancel = gridView1.FocusedColumn.FieldName == "Payment" && gridView1.GetFocusedRowCellValue(PostBill).ToString() == Posted;
+                    e.Cancel = gridView1.FocusedColumn.FieldName == "Payment" && gridView1.GetFocusedRowCellValue(PostBill).ToString() == Posted;
             }
             catch (Exception ex)
             {
@@ -283,7 +269,7 @@ namespace ExportBill
                 {
                     var body = await response.Content.ReadAsStringAsync();
                     var result = JsonConvert.DeserializeObject<DataModelString>(body);
-                    if(result.data.Contains("Post bill thành công"))
+                    if(result.data.ToUpper().Contains(("POST BILL THÀNH CÔNG")))
                     {
                         MessageBox.Show(result.data, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         gridView1.SetRowCellValue(row, PBill, Posted);
@@ -298,6 +284,71 @@ namespace ExportBill
                 }
             }
             catch(Exception ex)
+            {
+                this.Enabled = true;
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void RunPrintBill(int rowIndex)
+        {
+            try
+            {
+                var MaPhieu = this.gridView1.GetRowCellValue(rowIndex, MPhieu)?.ToString();
+                var pbill = this.gridView1.GetRowCellValue(rowIndex, PBill)?.ToString();
+                var getData = ds.Where(x => x.MaPhieu == MaPhieu).FirstOrDefault();
+                Customer cs = new Customer();
+                cs.MaPhieu = getData.MaPhieu;
+                cs.UserName = getData.UserName;
+                cs.BS = getData.BS;
+                cs.LX = getData.LX;
+                cs.TSC = getData.TSC;
+                cs.DG = getData.DG;
+                cs.Total = getData.Total;
+                cs.Company = getData.Company;
+                cs.Adress = getData.Adress;
+                cs.Discount = getData.Discount;
+                cs.DetailMoney = getData.DetailMoney;
+                cs.Date = getData.Date;
+                new PrintInvoiceForm(cs, true).ShowDialog();
+                if (pbill != Posted)
+                {
+                    var userResult = AutoClosingMessageBox.Show("Bạn có muốn Post Bill không?", "Thông báo", 5000, MessageBoxButtons.YesNo, DialogResult.No);
+                    if (userResult == DialogResult.Yes)
+                    {
+                        RunPostBill(rowIndex);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Enabled = true;
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void RunViewBill(int rowIndex)
+        {
+            try
+            {
+                var MaPhieu = this.gridView1.GetRowCellValue(rowIndex, MPhieu)?.ToString();
+                var getData = ds.Where(x => x.MaPhieu == MaPhieu).FirstOrDefault();
+                Customer cs = new Customer();
+                cs.MaPhieu = getData.MaPhieu;
+                cs.UserName = getData.UserName;
+                cs.BS = getData.BS;
+                cs.LX = getData.LX;
+                cs.TSC = getData.TSC;
+                cs.DG = getData.DG;
+                cs.Total = getData.Total;
+                cs.Company = getData.Company;
+                cs.Adress = getData.Adress;
+                cs.Discount = getData.Discount;
+                cs.DetailMoney = getData.DetailMoney;
+                cs.Date = getData.Date;
+                new PrintInvoiceForm(cs).ShowDialog();
+
+                var pbill = this.gridView1.GetRowCellValue(rowIndex, PBill)?.ToString();
+            }
+            catch (Exception ex)
             {
                 this.Enabled = true;
                 MessageBox.Show(ex.Message);
@@ -329,7 +380,7 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
-
+        
         #endregion
         //##############################################################################################
     }

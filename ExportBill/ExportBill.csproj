@@ -178,6 +178,7 @@
     <Compile Include="Model\DataModel.cs" />
     <Compile Include="Model\DataModelString.cs" />
     <Compile Include="Model\ItemSell.cs" />
+    <Compile Include="Model\Staff.cs" />
     <Compile Include="Model\Token.cs" />
     <Compile Include="PlaceHolderTextBox.cs">
       <SubType>Component</SubType>
@@ -261,6 +262,7 @@
     <None Include="Resources\logo - Copy.png" />
     <None Include="Resources\find2.png" />
     <None Include="Resources\find21.png" />
+    <None Include="Resources\LoginBackground.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
