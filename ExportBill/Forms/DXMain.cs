@@ -2,6 +2,7 @@
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Grid;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,7 +32,7 @@ namespace ExportBill
         //###############################################################################################
         #region field
         private BindingList<Customer> ds = new BindingList<Customer>();
-        private Staff _staff = new Staff();
+        private BindingList<CustomerModel> ListCustomerSearch = new BindingList<CustomerModel>();
         #endregion
         //###############################################################################################
         #region Initialize
@@ -79,12 +80,11 @@ namespace ExportBill
         {
             InitializeComponent();
         }
-        public DXMain(string userName, string companyName, Staff st)
+        public DXMain(string userName, string companyName)
         {
             InitializeComponent();
             this.CompanyLbl.Text = companyName;
             this.UserNamelbl.Text = userName;
-            _staff.maNV = st.maNV;
             gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             gridView1.RowCellClick += gridView1_RowCellClick;
             this.gridView1.Columns["Total"].DisplayFormat.FormatString = "N0";
@@ -98,8 +98,69 @@ namespace ExportBill
             dateTimePicker1.Visible = true;
             DatetimeLbl.Visible = false;
         }
-        private  void button2_Click(object sender, EventArgs e)
+
+        /// <summary>
+        /// Tạo phiếu dịch vụ
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void button2_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if(string.IsNullOrWhiteSpace(Search2Txt.Text))
+                {
+                    Point Search2TxtLocation = new Point(groupControl3.Location.X + Search2Txt.Location.X - 10, groupControl3.Location.Y + Search2Txt.Location.Y - 15);
+                    toolTip1.Show("Mục bắt buộc nhập.", Search2Txt, Search2TxtLocation);
+                    System.Threading.Thread.Sleep(1000);
+                    toolTip1.Active = false;
+                    toolTip1.Active = true;
+                    return;
+                }
+                string url = @"http://api.ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext="+ Search2Txt.Text+ "&searchtype=";
+                if (bsCheck.Checked)
+                    url += "LicensePlate";
+                else
+                    url += "CustomerPhone";
+                var client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+                var response = await client.SendAsync(request);
+                this.Enabled = true;
+                if (response.IsSuccessStatusCode)
+                {
+                    var body = await response.Content.ReadAsStringAsync();
+                    var dataList = JsonConvert.DeserializeObject<DataModel>(body);
+                    if (dataList.data == null)
+                    {
+                        MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    if (dataList.data.Count == 0)
+                    {
+                        DialogResult result = MessageBox.Show("Không tìm thấy khách hàng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    foreach (var item in dataList.data)
+                    {
+                        var data = item.Split(';');
+                        //"C15-030575;LÊ THỊ DIỆU ANH;BẦU CÂU - HÒA CHÂU - HV - ĐN\nHOAVANG\nDANANG\nVNM;0979300094;43H1-16861;2"
+                        ListCustomerSearch.Add(new CustomerModel(data[0], data[1],data[2],data[3],data[4],null,data[5]));
+                    }
+                    this.gridControl3.DataSource = ListCustomerSearch;
+                }
+                else
+                {
+                    MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -108,7 +169,7 @@ namespace ExportBill
             {
                 this.Enabled = false;
                 this.ds.Clear();
-                string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId="+ _staff.maNV + "&serviceDate=" + this.dateTimePicker1.Value.ToString("dd/MM/yyyy");
+                string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId="+ Staff.UserID + "&serviceDate=" + this.dateTimePicker1.Value.ToString("dd/MM/yyyy");
                 if(!string.IsNullOrWhiteSpace(this.SearchControl1Txt.Text))
                 {
                     url += "&plateId=" + this.SearchControl1Txt.Text;
@@ -242,9 +303,80 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+        private void gridView3_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+                if (e.Column == CreateService)
+                {
+                    e.Appearance.ForeColor = Color.Blue;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void gridView3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                GridView view = sender as GridView;
+                var rowIndex = view.FocusedRowHandle;
+                var colI = view.FocusedColumn;
+                if (colI == CreateService)
+                {
+                    RunCreateService(rowIndex);
+                }
+            }
+
+        }
+
+        private void gridView3_RowCellClick(object sender, RowCellClickEventArgs e)
+        {
+            try
+            {
+                if (e.Column == CreateService)
+                {
+                    RunCreateService(e.RowHandle);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #endregion
         //##############################################################################################
         #region method
+        public async void getToken()
+        {
+            try
+            {
+                var client = new HttpClient();
+                var request = new HttpRequestMessage(HttpMethod.Post, URL);
+                var formContent = new FormUrlEncodedContent(new[]
+                    {
+                        new KeyValuePair<string, string>("username", username),
+                        new KeyValuePair<string, string>("password", password),
+                        new KeyValuePair<string, string>("grant_type", "password"),
+                    });
+                request.Content = formContent;
+                var response = await client.SendAsync(request);
+                if (response.IsSuccessStatusCode)
+                {
+                    var body = await response.Content.ReadAsStringAsync();
+                    var tokenData = JsonConvert.DeserializeObject<Token>(body);
+                    DXMain.token = tokenData.access_token;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private async void RunPostBill(int row)
         {
             try
@@ -354,33 +486,73 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
-        public async void getToken()
+        private void RunCreateService(int rowIndex)
         {
             try
             {
-                var client = new HttpClient();
-                var request = new HttpRequestMessage(HttpMethod.Post, URL);
-                var formContent = new FormUrlEncodedContent(new[]
-                    {
-                        new KeyValuePair<string, string>("username", username),
-                        new KeyValuePair<string, string>("password", password),
-                        new KeyValuePair<string, string>("grant_type", "password"),
-                    });
-                request.Content = formContent;
-                var response = await client.SendAsync(request);
-                if (response.IsSuccessStatusCode)
+                var CustomerNumber = this.gridView3.GetRowCellValue(rowIndex, _CustomerNumber)?.ToString();
+                var getData = ListCustomerSearch.Where(x => x.CustomerNumber == CustomerNumber).FirstOrDefault();
+                
+                var cl = new HttpClient();
+                string url = "http://api.ototienthu.com.vn/api/v1/customers/createserviceorder";
+                cl.BaseAddress = new Uri(url);
+                int _TimeoutSec = 90;
+                cl.Timeout = new TimeSpan(0, 0, _TimeoutSec);
+                string _ContentType = "application/x-www-form-urlencoded";
+                cl.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_ContentType));
+                cl.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+                var nvc = new List<KeyValuePair<string, string>>();
+                nvc.Add(new KeyValuePair<string, string>("CustAccount", CustomerNumber));
+                if (!string.IsNullOrEmpty(getData.PlateID))
+                    nvc.Add(new KeyValuePair<string, string>("PlateId", getData.PlateID));
+
+                if (!string.IsNullOrWhiteSpace(CurrentKm.Text))
+                    nvc.Add(new KeyValuePair<string, string>("CurrentKM", CurrentKm.Text));
+
+                if (!string.IsNullOrWhiteSpace(ServicePool.Text))
+                    nvc.Add(new KeyValuePair<string, string>("ServicePool", ServicePool.Text));
+
+                nvc.Add(new KeyValuePair<string, string>("DimensionStore", Staff.AddressID));
+
+                if (!string.IsNullOrWhiteSpace(NoteTxt.Text))
+                    nvc.Add(new KeyValuePair<string, string>("CustRef", NoteTxt.Text));
+
+                //if (!string.IsNullOrEmpty(textBox7.Text))
+                //    nvc.Add(new KeyValuePair<string, string>("EngineID", Staff.UserID));
+
+                nvc.Add(new KeyValuePair<string, string>("PersonnelNumberId", Staff.UserID));
+
+                //if (!string.IsNullOrEmpty(textBox9.Text))
+                //    nvc.Add(new KeyValuePair<string, string>("InventSerialId", textBox9.Text));
+                var req = new HttpRequestMessage(HttpMethod.Post, url);
+                req.Content = new FormUrlEncodedContent(nvc);
+                var res = cl.SendAsync(req).Result;
+                string apiResponse = res.Content.ReadAsStringAsync().Result;
+                if (apiResponse != "")
                 {
-                    var body = await response.Content.ReadAsStringAsync();
-                    var tokenData = JsonConvert.DeserializeObject<Token>(body);
-                    DXMain.token = tokenData.access_token;
+                    var result = (JObject)JsonConvert.DeserializeObject(apiResponse);
+                    if (result["data"].Value<string>() != null)
+                    {
+                        MessageBox.Show("Tạo phiếu thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //new PrintInvoiceForm().ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tạo phiếu thất bại, vui lòng thử lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Tạo phiếu thất bại, vui lòng thử lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
+                this.Enabled = true;
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
         #endregion
         //##############################################################################################
     }

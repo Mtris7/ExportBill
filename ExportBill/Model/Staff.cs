@@ -1,8 +1,11 @@
 ﻿namespace ExportBill
 {
-    public struct Staff
+    public static class Staff
     {
-        public string maNV;
-        public string passWord;
+        public static string UserID;
+        public static string UserName;
+        public static string passWord;
+        public static string Address;
+        public static string AddressID;
     }
 }

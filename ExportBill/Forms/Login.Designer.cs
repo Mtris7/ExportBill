@@ -32,9 +32,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.bunifuCheckbox1 = new Bunifu.Framework.UI.BunifuCheckbox();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.UserNameTxt = new Bunifu.Framework.UI.BunifuMaterialTextbox();
             this.PassWordTxt = new Bunifu.Framework.UI.BunifuMaterialTextbox();
+            this.UserNameTxt = new Bunifu.Framework.UI.BunifuMaterialTextbox();
+            this.button13 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -50,7 +50,7 @@
             // 
             // bunifuCheckbox1
             // 
-            this.bunifuCheckbox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
+            this.bunifuCheckbox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(26)))), ((int)(((byte)(74)))));
             this.bunifuCheckbox1.ChechedOffColor = System.Drawing.Color.FromArgb(((int)(((byte)(132)))), ((int)(((byte)(135)))), ((int)(((byte)(140)))));
             this.bunifuCheckbox1.Checked = false;
             this.bunifuCheckbox1.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(26)))), ((int)(((byte)(74)))));
@@ -77,20 +77,30 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // PassWordTxt
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackColor = System.Drawing.Color.Transparent;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(37)))), ((int)(((byte)(52)))));
-            this.button2.Location = new System.Drawing.Point(378, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(38, 33);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "X";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.PassWordTxt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.PassWordTxt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.PassWordTxt.characterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.PassWordTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.PassWordTxt.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ExportBill.Properties.Settings.Default, "passWord", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.PassWordTxt.Font = new System.Drawing.Font("Century Gothic", 9.75F);
+            this.PassWordTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.PassWordTxt.HintForeColor = System.Drawing.Color.Empty;
+            this.PassWordTxt.HintText = "Password";
+            this.PassWordTxt.isPassword = true;
+            this.PassWordTxt.LineFocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(37)))), ((int)(((byte)(52)))));
+            this.PassWordTxt.LineIdleColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(37)))), ((int)(((byte)(52)))));
+            this.PassWordTxt.LineMouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(37)))), ((int)(((byte)(52)))));
+            this.PassWordTxt.LineThickness = 3;
+            this.PassWordTxt.Location = new System.Drawing.Point(31, 333);
+            this.PassWordTxt.Margin = new System.Windows.Forms.Padding(5);
+            this.PassWordTxt.MaxLength = 32767;
+            this.PassWordTxt.Name = "PassWordTxt";
+            this.PassWordTxt.Size = new System.Drawing.Size(351, 38);
+            this.PassWordTxt.TabIndex = 3;
+            this.PassWordTxt.Text = global::ExportBill.Properties.Settings.Default.passWord;
+            this.PassWordTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // UserNameTxt
             // 
@@ -117,45 +127,36 @@
             this.UserNameTxt.Text = global::ExportBill.Properties.Settings.Default.userName;
             this.UserNameTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
-            // PassWordTxt
+            // button13
             // 
-            this.PassWordTxt.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.PassWordTxt.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.PassWordTxt.characterCasing = System.Windows.Forms.CharacterCasing.Normal;
-            this.PassWordTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.PassWordTxt.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ExportBill.Properties.Settings.Default, "passWord", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.PassWordTxt.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.PassWordTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.PassWordTxt.HintForeColor = System.Drawing.Color.Empty;
-            this.PassWordTxt.HintText = "Password";
-            this.PassWordTxt.isPassword = true;
-            this.PassWordTxt.LineFocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(37)))), ((int)(((byte)(52)))));
-            this.PassWordTxt.LineIdleColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(37)))), ((int)(((byte)(52)))));
-            this.PassWordTxt.LineMouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(37)))), ((int)(((byte)(52)))));
-            this.PassWordTxt.LineThickness = 3;
-            this.PassWordTxt.Location = new System.Drawing.Point(31, 333);
-            this.PassWordTxt.Margin = new System.Windows.Forms.Padding(5);
-            this.PassWordTxt.MaxLength = 32767;
-            this.PassWordTxt.Name = "PassWordTxt";
-            this.PassWordTxt.Size = new System.Drawing.Size(351, 38);
-            this.PassWordTxt.TabIndex = 3;
-            this.PassWordTxt.Text = global::ExportBill.Properties.Settings.Default.passWord;
-            this.PassWordTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.button13.FlatAppearance.BorderSize = 0;
+            this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button13.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button13.ForeColor = System.Drawing.Color.White;
+            this.button13.Image = ((System.Drawing.Image)(resources.GetObject("button13.Image")));
+            this.button13.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button13.Location = new System.Drawing.Point(378, 1);
+            this.button13.Margin = new System.Windows.Forms.Padding(4);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(42, 43);
+            this.button13.TabIndex = 18;
+            this.button13.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::ExportBill.Properties.Resources.LoginBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(419, 625);
+            this.Controls.Add(this.button13);
             this.Controls.Add(this.PassWordTxt);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.bunifuCheckbox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.UserNameTxt);
-            this.Controls.Add(this.button2);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -175,7 +176,7 @@
         private Bunifu.Framework.UI.BunifuCheckbox bunifuCheckbox1;
         private System.Windows.Forms.Button button1;
         private Bunifu.Framework.UI.BunifuMaterialTextbox UserNameTxt;
-        private System.Windows.Forms.Button button2;
         private Bunifu.Framework.UI.BunifuMaterialTextbox PassWordTxt;
+        private System.Windows.Forms.Button button13;
     }
 }

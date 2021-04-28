@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ExportBill
+﻿namespace ExportBill
 {
 
     public class Customer
     {
         public Customer() { }
-        public Customer(string maPhieu, string userName, string bs, string lx, string tsc, string dg, decimal discount,
-                        int total, string detaiMoney, string company, string adress, string date, string print,
-                        string pBill, string payment)
+        public Customer(string maPhieu, string userName , string bs = null, string lx = null, string tsc = null, string dg = null, decimal discount = 0,
+                        int total = 0, string detaiMoney = null, string company = null, string adress = null, string date = null, string print = "print",
+                        string pBill = null, string payment = null)
         {
             MaPhieu = maPhieu;
             UserName = userName;

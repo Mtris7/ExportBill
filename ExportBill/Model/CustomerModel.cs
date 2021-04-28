@@ -2,13 +2,27 @@
 {
     public class CustomerModel
     {
-        public string MaKH { get; set; }
-        public string TenKH { get; set; }
-        public string DC { get; set; }
-        public string SDT { get; set; }
-        public string BS { get; set; }
-        public string CMND { get; set; }
-        public string SoLanKTDK { get; set; }
-        public string Loaixe { get; set; }
+        public string CustomerNumber { get; set; }
+        public string CustomerName { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string PlateID { get; set; }
+        public string IdentityCard { get; set; }
+        public string CountCheck { get; set; }
+        public string VehicleType { get; set; }
+        public string CreateService { get; set; }
+        public CustomerModel(string customerNumber, string customerName, string address = null, string phone = null,
+                            string plateID = null, string identityCard = null, string countCheck = null, string vehicleType = null, string createService = "+")
+        {
+            CustomerNumber = customerNumber;
+            CustomerName = customerName;
+            Address = address;
+            Phone = phone;
+            PlateID = plateID;
+            IdentityCard = identityCard;
+            CountCheck = countCheck; 
+            VehicleType = vehicleType;
+            CreateService = createService;
+        }
     }
 }

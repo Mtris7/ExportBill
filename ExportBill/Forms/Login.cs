@@ -81,11 +81,13 @@ namespace ExportBill
                         var data = dataList.data.Split(';');
                         if (data[0] == "true")
                         {
-                            Staff st = new Staff();
-                            st.maNV = user;
-                            st.passWord = passw;
+                            Staff.UserID = user;
+                            Staff.passWord = passw;
+                            Staff.UserName = data[1];
+                            Staff.Address = data[2];
+                            Staff.AddressID = data[3];
                             this.Hide();
-                            DXMain dx = new DXMain(data[1],data[2], st);
+                            DXMain dx = new DXMain(data[1],data[2]);
                             dx.Closed += (s, args) => this.Close();
                             dx.ShowDialog();
                         }
@@ -108,11 +110,6 @@ namespace ExportBill
             
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void Login_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -127,6 +124,11 @@ namespace ExportBill
             {
                 bunifuCheckbox1.Checked = !bunifuCheckbox1.Checked;
             }
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
