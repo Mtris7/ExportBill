@@ -33,11 +33,11 @@
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelInfo = new System.Windows.Forms.Panel();
+            this.pHeader = new System.Windows.Forms.Panel();
             this.NoteTxt = new ExportBill.PlaceHolderTextBox();
             this.CurrentKm = new ExportBill.PlaceHolderTextBox();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.CreateServicelbl = new DevExpress.XtraEditors.LabelControl();
             this.ServicePool = new DevExpress.XtraEditors.ComboBoxEdit();
             this.panel3 = new System.Windows.Forms.Panel();
             this.gridControl3 = new DevExpress.XtraGrid.GridControl();
@@ -49,17 +49,6 @@
             this._PlateID = new DevExpress.XtraGrid.Columns.GridColumn();
             this._CountCheck = new DevExpress.XtraGrid.Columns.GridColumn();
             this.CreateService = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridControl2 = new DevExpress.XtraGrid.GridControl();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this._service = new DevExpress.XtraGrid.Columns.GridColumn();
-            this._count = new DevExpress.XtraGrid.Columns.GridColumn();
-            this._unit = new DevExpress.XtraGrid.Columns.GridColumn();
-            this._price = new DevExpress.XtraGrid.Columns.GridColumn();
-            this._discount = new DevExpress.XtraGrid.Columns.GridColumn();
-            this._total = new DevExpress.XtraGrid.Columns.GridColumn();
-            this._technician = new DevExpress.XtraGrid.Columns.GridColumn();
-            this._consultant = new DevExpress.XtraGrid.Columns.GridColumn();
-            this._inventory = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.bsCheck = new System.Windows.Forms.RadioButton();
@@ -93,19 +82,31 @@
             this.button1 = new System.Windows.Forms.Button();
             this.SearchControl1Txt = new ExportBill.PlaceHolderTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.gridControl2 = new DevExpress.XtraGrid.GridControl();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this._serviceId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._count = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._unit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._ItemPrice = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._Discount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._total = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._technician = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._consultant = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._inventory = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.CreatePrintBill = new System.Windows.Forms.Button();
+            this.CreatePostbill = new System.Windows.Forms.Button();
+            this.RemoveCol = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             this.groupControl4.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panelInfo.SuspendLayout();
+            this.pHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicePool.Properties)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
@@ -122,6 +123,8 @@
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // xtraTabControl1
@@ -146,34 +149,37 @@
             // 
             // groupControl4
             // 
-            this.groupControl4.Controls.Add(this.panel2);
+            this.groupControl4.Controls.Add(this.panelInfo);
             this.groupControl4.Location = new System.Drawing.Point(3, 105);
             this.groupControl4.Name = "groupControl4";
             this.groupControl4.Size = new System.Drawing.Size(1169, 419);
             this.groupControl4.TabIndex = 2;
             // 
-            // panel2
+            // panelInfo
             // 
-            this.panel2.Controls.Add(this.panel1);
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Controls.Add(this.gridControl2);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(2, 25);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1165, 392);
-            this.panel2.TabIndex = 1;
+            this.panelInfo.Controls.Add(this.RemoveCol);
+            this.panelInfo.Controls.Add(this.CreatePostbill);
+            this.panelInfo.Controls.Add(this.CreatePrintBill);
+            this.panelInfo.Controls.Add(this.gridControl2);
+            this.panelInfo.Controls.Add(this.pHeader);
+            this.panelInfo.Controls.Add(this.panel3);
+            this.panelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelInfo.Location = new System.Drawing.Point(2, 25);
+            this.panelInfo.Name = "panelInfo";
+            this.panelInfo.Size = new System.Drawing.Size(1165, 392);
+            this.panelInfo.TabIndex = 1;
             // 
-            // panel1
+            // pHeader
             // 
-            this.panel1.Controls.Add(this.NoteTxt);
-            this.panel1.Controls.Add(this.CurrentKm);
-            this.panel1.Controls.Add(this.labelControl1);
-            this.panel1.Controls.Add(this.ServicePool);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 86);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1165, 174);
-            this.panel1.TabIndex = 2;
+            this.pHeader.Controls.Add(this.NoteTxt);
+            this.pHeader.Controls.Add(this.CurrentKm);
+            this.pHeader.Controls.Add(this.CreateServicelbl);
+            this.pHeader.Controls.Add(this.ServicePool);
+            this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pHeader.Location = new System.Drawing.Point(0, 86);
+            this.pHeader.Name = "pHeader";
+            this.pHeader.Size = new System.Drawing.Size(1165, 91);
+            this.pHeader.TabIndex = 2;
             // 
             // NoteTxt
             // 
@@ -182,7 +188,7 @@
             this.NoteTxt.Location = new System.Drawing.Point(460, 48);
             this.NoteTxt.Name = "NoteTxt";
             this.NoteTxt.PlaceHolderText = "Nội dung yêu cầu dịch vụ";
-            this.NoteTxt.Size = new System.Drawing.Size(633, 23);
+            this.NoteTxt.Size = new System.Drawing.Size(694, 23);
             this.NoteTxt.TabIndex = 3;
             this.NoteTxt.Text = "Nội dung yêu cầu dịch vụ";
             // 
@@ -197,24 +203,35 @@
             this.CurrentKm.TabIndex = 2;
             this.CurrentKm.Text = "Số kilomet";
             // 
-            // labelControl1
+            // CreateServicelbl
             // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(9, 13);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(170, 21);
-            this.labelControl1.TabIndex = 1;
-            this.labelControl1.Text = "Phiếu yêu cầu dịch vụ: ";
+            this.CreateServicelbl.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.CreateServicelbl.Appearance.Options.UseFont = true;
+            this.CreateServicelbl.Location = new System.Drawing.Point(9, 13);
+            this.CreateServicelbl.Name = "CreateServicelbl";
+            this.CreateServicelbl.Size = new System.Drawing.Size(170, 21);
+            this.CreateServicelbl.TabIndex = 1;
+            this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: ";
             // 
             // ServicePool
             // 
+            this.ServicePool.EditValue = "Kiểm tra định kỳ";
             this.ServicePool.Location = new System.Drawing.Point(6, 49);
             this.ServicePool.Name = "ServicePool";
             this.ServicePool.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.ServicePool.Properties.Items.AddRange(new object[] {
+            "Kiểm tra định kỳ",
+            "Kiểm tra định kỳ thiện chí",
+            "Sửa chữa lưu động",
+            "Sửa chữa - thay thế phụ tùng",
+            "Sửa chữa thiện chí",
+            "Sửa chữa xe bảo hiểm",
+            "Sửa chữa xe bảo hành",
+            "Sửa chữa xe tai nạn"});
             this.ServicePool.Size = new System.Drawing.Size(287, 22);
             this.ServicePool.TabIndex = 0;
+            this.ServicePool.EditValueChanged += new System.EventHandler(this.ServicePool_EditValueChanged);
             // 
             // panel3
             // 
@@ -325,105 +342,6 @@
             this.CreateService.OptionsColumn.AllowEdit = false;
             this.CreateService.Visible = true;
             this.CreateService.VisibleIndex = 6;
-            // 
-            // gridControl2
-            // 
-            this.gridControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gridControl2.Location = new System.Drawing.Point(0, 260);
-            this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(1165, 132);
-            this.gridControl2.TabIndex = 0;
-            this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView2});
-            // 
-            // gridView2
-            // 
-            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this._service,
-            this._count,
-            this._unit,
-            this._price,
-            this._discount,
-            this._total,
-            this._technician,
-            this._consultant,
-            this._inventory});
-            this.gridView2.GridControl = this.gridControl2;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsView.ShowGroupPanel = false;
-            // 
-            // _service
-            // 
-            this._service.Caption = "Hàng hóa, dịch vụ";
-            this._service.FieldName = "service";
-            this._service.Name = "_service";
-            this._service.Visible = true;
-            this._service.VisibleIndex = 0;
-            // 
-            // _count
-            // 
-            this._count.Caption = "SL";
-            this._count.FieldName = "count";
-            this._count.Name = "_count";
-            this._count.Visible = true;
-            this._count.VisibleIndex = 1;
-            // 
-            // _unit
-            // 
-            this._unit.Caption = "ĐVT";
-            this._unit.FieldName = "unit";
-            this._unit.Name = "_unit";
-            this._unit.Visible = true;
-            this._unit.VisibleIndex = 2;
-            // 
-            // _price
-            // 
-            this._price.Caption = "Đơn giá";
-            this._price.FieldName = "price";
-            this._price.Name = "_price";
-            this._price.Visible = true;
-            this._price.VisibleIndex = 3;
-            // 
-            // _discount
-            // 
-            this._discount.Caption = "Giảm giá";
-            this._discount.FieldName = "discount";
-            this._discount.Name = "_discount";
-            this._discount.Visible = true;
-            this._discount.VisibleIndex = 4;
-            // 
-            // _total
-            // 
-            this._total.Caption = "Thành tiền";
-            this._total.FieldName = "total";
-            this._total.Name = "_total";
-            this._total.Visible = true;
-            this._total.VisibleIndex = 5;
-            // 
-            // _technician
-            // 
-            this._technician.Caption = "Kỹ thuật";
-            this._technician.FieldName = "technician";
-            this._technician.Name = "_technician";
-            this._technician.Visible = true;
-            this._technician.VisibleIndex = 6;
-            // 
-            // _consultant
-            // 
-            this._consultant.Caption = "Tư vấn";
-            this._consultant.FieldName = "consultant";
-            this._consultant.Name = "_consultant";
-            this._consultant.Visible = true;
-            this._consultant.VisibleIndex = 7;
-            // 
-            // _inventory
-            // 
-            this._inventory.Caption = "Tồn kho";
-            this._inventory.FieldName = "inventory";
-            this._inventory.Name = "_inventory";
-            this._inventory.Visible = true;
-            this._inventory.VisibleIndex = 8;
             // 
             // groupControl3
             // 
@@ -836,6 +754,147 @@
             this.SearchControl1Txt.TabIndex = 0;
             this.SearchControl1Txt.Text = "Nhập biển số xe";
             // 
+            // gridControl2
+            // 
+            this.gridControl2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gridControl2.Location = new System.Drawing.Point(0, 177);
+            this.gridControl2.MainView = this.gridView2;
+            this.gridControl2.Name = "gridControl2";
+            this.gridControl2.Size = new System.Drawing.Size(1165, 182);
+            this.gridControl2.TabIndex = 3;
+            this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView2});
+            // 
+            // gridView2
+            // 
+            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this._serviceId,
+            this._count,
+            this._unit,
+            this._ItemPrice,
+            this._Discount,
+            this._total,
+            this._technician,
+            this._consultant,
+            this._inventory});
+            this.gridView2.GridControl = this.gridControl2;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsView.ShowGroupPanel = false;
+            this.gridView2.FocusedColumnChanged += new DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventHandler(this.gridView2_FocusedColumnChanged);
+            // 
+            // _serviceId
+            // 
+            this._serviceId.Caption = "Hàng hóa, dịch vụ";
+            this._serviceId.FieldName = "serviceID";
+            this._serviceId.Name = "_serviceId";
+            this._serviceId.Visible = true;
+            this._serviceId.VisibleIndex = 0;
+            // 
+            // _count
+            // 
+            this._count.Caption = "SL";
+            this._count.FieldName = "count";
+            this._count.Name = "_count";
+            this._count.Visible = true;
+            this._count.VisibleIndex = 1;
+            // 
+            // _unit
+            // 
+            this._unit.Caption = "ĐVT";
+            this._unit.FieldName = "Unit";
+            this._unit.Name = "_unit";
+            this._unit.Visible = true;
+            this._unit.VisibleIndex = 2;
+            // 
+            // _ItemPrice
+            // 
+            this._ItemPrice.Caption = "Đơn giá";
+            this._ItemPrice.FieldName = "Price";
+            this._ItemPrice.Name = "_ItemPrice";
+            this._ItemPrice.Visible = true;
+            this._ItemPrice.VisibleIndex = 3;
+            // 
+            // _Discount
+            // 
+            this._Discount.Caption = "Giảm giá";
+            this._Discount.FieldName = "Discount";
+            this._Discount.Name = "_Discount";
+            this._Discount.Visible = true;
+            this._Discount.VisibleIndex = 4;
+            // 
+            // _total
+            // 
+            this._total.Caption = "Thành tiền";
+            this._total.FieldName = "total";
+            this._total.Name = "_total";
+            this._total.Visible = true;
+            this._total.VisibleIndex = 5;
+            // 
+            // _technician
+            // 
+            this._technician.Caption = "Kỹ thuật";
+            this._technician.FieldName = "technician";
+            this._technician.Name = "_technician";
+            this._technician.Visible = true;
+            this._technician.VisibleIndex = 6;
+            // 
+            // _consultant
+            // 
+            this._consultant.Caption = "Tư vấn";
+            this._consultant.FieldName = "consultant";
+            this._consultant.Name = "_consultant";
+            this._consultant.Visible = true;
+            this._consultant.VisibleIndex = 7;
+            // 
+            // _inventory
+            // 
+            this._inventory.Caption = "Tồn kho";
+            this._inventory.FieldName = "inventory";
+            this._inventory.Name = "_inventory";
+            this._inventory.Visible = true;
+            this._inventory.VisibleIndex = 8;
+            // 
+            // CreatePrintBill
+            // 
+            this.CreatePrintBill.BackColor = System.Drawing.Color.Blue;
+            this.CreatePrintBill.FlatAppearance.BorderSize = 0;
+            this.CreatePrintBill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CreatePrintBill.ForeColor = System.Drawing.Color.White;
+            this.CreatePrintBill.Location = new System.Drawing.Point(998, 363);
+            this.CreatePrintBill.Name = "CreatePrintBill";
+            this.CreatePrintBill.Size = new System.Drawing.Size(75, 23);
+            this.CreatePrintBill.TabIndex = 4;
+            this.CreatePrintBill.Text = "Print Bill";
+            this.CreatePrintBill.UseVisualStyleBackColor = false;
+            this.CreatePrintBill.Click += new System.EventHandler(this.CreatePrintBill_Click);
+            // 
+            // CreatePostbill
+            // 
+            this.CreatePostbill.BackColor = System.Drawing.Color.Blue;
+            this.CreatePostbill.FlatAppearance.BorderSize = 0;
+            this.CreatePostbill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CreatePostbill.ForeColor = System.Drawing.Color.White;
+            this.CreatePostbill.Location = new System.Drawing.Point(1079, 363);
+            this.CreatePostbill.Name = "CreatePostbill";
+            this.CreatePostbill.Size = new System.Drawing.Size(75, 23);
+            this.CreatePostbill.TabIndex = 5;
+            this.CreatePostbill.Text = "Post Bill";
+            this.CreatePostbill.UseVisualStyleBackColor = false;
+            // 
+            // RemoveCol
+            // 
+            this.RemoveCol.BackColor = System.Drawing.Color.Blue;
+            this.RemoveCol.FlatAppearance.BorderSize = 0;
+            this.RemoveCol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RemoveCol.ForeColor = System.Drawing.Color.White;
+            this.RemoveCol.Location = new System.Drawing.Point(4, 362);
+            this.RemoveCol.Name = "RemoveCol";
+            this.RemoveCol.Size = new System.Drawing.Size(75, 23);
+            this.RemoveCol.TabIndex = 6;
+            this.RemoveCol.Text = "Remove";
+            this.RemoveCol.UseVisualStyleBackColor = false;
+            this.RemoveCol.Click += new System.EventHandler(this.RemoveCol_Click);
+            // 
             // DXMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -852,15 +911,13 @@
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
             this.groupControl4.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panelInfo.ResumeLayout(false);
+            this.pHeader.ResumeLayout(false);
+            this.pHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicePool.Properties)).EndInit();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             this.groupControl3.PerformLayout();
@@ -879,6 +936,8 @@
             this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -918,22 +977,11 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemZoomTrackBar repositoryItemZoomTrackBar1;
         private DevExpress.XtraEditors.Repository.RepositoryItemPopupContainerEdit repositoryItemPopupContainerEdit1;
         private DevExpress.XtraEditors.GroupControl groupControl4;
-        private System.Windows.Forms.Panel panel2;
-        private DevExpress.XtraGrid.GridControl gridControl2;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
-        private DevExpress.XtraGrid.Columns.GridColumn _service;
-        private DevExpress.XtraGrid.Columns.GridColumn _count;
-        private DevExpress.XtraGrid.Columns.GridColumn _unit;
-        private DevExpress.XtraGrid.Columns.GridColumn _price;
-        private DevExpress.XtraGrid.Columns.GridColumn _discount;
-        private DevExpress.XtraGrid.Columns.GridColumn _total;
-        private DevExpress.XtraGrid.Columns.GridColumn _technician;
-        private DevExpress.XtraGrid.Columns.GridColumn _consultant;
-        private DevExpress.XtraGrid.Columns.GridColumn _inventory;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelInfo;
+        private System.Windows.Forms.Panel pHeader;
         private PlaceHolderTextBox NoteTxt;
         private PlaceHolderTextBox CurrentKm;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.LabelControl CreateServicelbl;
         private DevExpress.XtraEditors.ComboBoxEdit ServicePool;
         private System.Windows.Forms.Panel panel3;
         private DevExpress.XtraGrid.GridControl gridControl3;
@@ -948,5 +996,19 @@
         private DevExpress.XtraGrid.Columns.GridColumn _Address;
         private DevExpress.XtraGrid.Columns.GridColumn _CountCheck;
         private DevExpress.XtraGrid.Columns.GridColumn CreateService;
+        private System.Windows.Forms.Button CreatePostbill;
+        private System.Windows.Forms.Button CreatePrintBill;
+        private DevExpress.XtraGrid.GridControl gridControl2;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.Columns.GridColumn _serviceId;
+        private DevExpress.XtraGrid.Columns.GridColumn _count;
+        private DevExpress.XtraGrid.Columns.GridColumn _unit;
+        private DevExpress.XtraGrid.Columns.GridColumn _ItemPrice;
+        private DevExpress.XtraGrid.Columns.GridColumn _Discount;
+        private DevExpress.XtraGrid.Columns.GridColumn _total;
+        private DevExpress.XtraGrid.Columns.GridColumn _technician;
+        private DevExpress.XtraGrid.Columns.GridColumn _consultant;
+        private DevExpress.XtraGrid.Columns.GridColumn _inventory;
+        private System.Windows.Forms.Button RemoveCol;
     }
 }

@@ -8,5 +8,10 @@
         public string itemUnit { get; set; }
         public string itemPrice { get; set; }
         public string TotalBeforeDiscount { get; set; }
+        public string Discount { get; set; }
+        public string Total { get; set; }
+        public string workerId { get; set; }
+        public string adviserId { get; set; }
+        public decimal lineDisc { get; set; }
     }
 }
