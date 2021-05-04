@@ -32,6 +32,8 @@ namespace ExportBill
         #region field
         private BindingList<Customer> ds = new BindingList<Customer>();
         private BindingList<CustomerModel> ListCustomerSearch = new BindingList<CustomerModel>();
+        private BindingList<ItemSell> ListIS = new BindingList<ItemSell>();
+        private BindingList<StaffModel> ListSM = new BindingList<StaffModel>();
         private CustomerModel sSelect;
         private string servicePool = "KTDK";
         private string ServiceId = string.Empty;
@@ -42,24 +44,7 @@ namespace ExportBill
         private void DXMain_Load(object sender, EventArgs e)
         {
             this.getToken();
-            this.SetCombobox();
             this.SetDefault();
-        }
-        private void SetCombobox()
-        {
-            try
-            {
-                string[] payments = { "Cash", "Net07", "Net15", "Net30", "Net45", "Net60" };
-                foreach (var item in payments)
-                {
-                    cmbPayment.Items.Add(item);
-                }
-                //cmbPayment.SelectedIndexChanged += SelectItemChange();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
         private void SetDefault()
         {
@@ -85,6 +70,7 @@ namespace ExportBill
         public DXMain(string userName, string companyName)
         {
             InitializeComponent();
+            InitializeGrid();
             InitializeCombobox();
             this.CompanyLbl.Text = companyName;
             this.UserNamelbl.Text = userName;
@@ -92,16 +78,45 @@ namespace ExportBill
             gridView1.RowCellClick += gridView1_RowCellClick;
             this.gridView1.Columns["Total"].DisplayFormat.FormatString = "N0";
 
-            //gridView2
-            BindingList<ItemSell> ds = new BindingList<ItemSell>();
-            this.gridControl2.DataSource = ds;
-            this.gridView2.AddNewRow();
         }
         #endregion
         //##############################################################################################
         #region Initialize
+        public void InitializeGrid()
+        {
+
+            try
+            {
+                //gridView2
+                BindingList<ItemSell> ds = new BindingList<ItemSell>();
+                //var a = new ItemSell("b");
+                //ds.Add(a);
+                this.gridControl2.DataSource = ds;
+                this.gridView2.AddNewRow();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
         public void InitializeCombobox()
         {
+
+            try
+            {
+                string[] payments = { "Cash", "Net07", "Net15", "Net30", "Net45", "Net60" };
+                foreach (var item in payments)
+                {
+                    cmbPayment.Items.Add(item);
+                }
+                LoadItemCombobox();
+                LoadWorkerCombobox();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
         #endregion
@@ -340,8 +355,12 @@ namespace ExportBill
                     var CustomerNumber = this.gridView3.GetRowCellValue(e.RowHandle, _CustomerNumber)?.ToString();
                     sSelect = ListCustomerSearch.Where(x => x.CustomerNumber == CustomerNumber).FirstOrDefault();
 
+                    //label customer
                     this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: " + sSelect.PlateID + " | " + sSelect.CustomerName;
-                    //RunCreateService(e.RowHandle);
+                    
+                    //enable button
+                    this.CreatePrintBill.Enabled = true;
+                    this.CreatePostbill.Enabled = true;
                 }
             }
             catch (Exception ex)
@@ -690,6 +709,113 @@ namespace ExportBill
             }
         }
 
+
+        private async void LoadItemCombobox()
+        {
+            try
+            {
+
+                this.Enabled = false;
+                var cl = new HttpClient();
+                string url = "http://api.ototienthu.com.vn/api/v1/customers/LookupItemCashier";
+                cl.BaseAddress = new Uri(url);
+                int _TimeoutSec = 90;
+                cl.Timeout = new TimeSpan(0, 0, _TimeoutSec);
+                string _ContentType = "application/x-www-form-urlencoded";
+                cl.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_ContentType));
+                cl.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+                var nvc = new List<KeyValuePair<string, string>>();
+                nvc.Add(new KeyValuePair<string, string>("personnalNumberId", Staff.UserID));
+
+                var req = new HttpRequestMessage(HttpMethod.Post, url);
+                req.Content = new FormUrlEncodedContent(nvc);
+                var res = cl.SendAsync(req).Result;
+                this.Enabled = true;
+                if (res.IsSuccessStatusCode)
+                {
+                    var body = await res.Content.ReadAsStringAsync();
+                    var dataList = JsonConvert.DeserializeObject<DataModel>(body);
+                    if (dataList.data == null)
+                    {
+                        MessageBox.Show("Load dữ liệu không thành công, vui lòng đăng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    if (dataList.data.Count == 0)
+                    {
+                        MessageBox.Show("Không tìm thấy dữ liệu, vui lòng đăng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    foreach (var item in dataList.data)
+                    {
+                        var data = item.Split(';');
+                        ItemSell iS = new ItemSell(data[0], data[1]);
+                        ListIS.Add(iS);
+                        ServiceCombobox.Items.Add(iS.ItemName);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Load dữ liệu không thành công, vui lòng đăng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private async void LoadWorkerCombobox()
+        {
+            try
+            {
+                this.Enabled = false;
+                var cl = new HttpClient();
+                string url = "http://api.ototienthu.com.vn/api/v1/customers/LookupWorkerCashier";
+                cl.BaseAddress = new Uri(url);
+                int _TimeoutSec = 90;
+                cl.Timeout = new TimeSpan(0, 0, _TimeoutSec);
+                string _ContentType = "application/x-www-form-urlencoded";
+                cl.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_ContentType));
+                cl.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+                var nvc = new List<KeyValuePair<string, string>>();
+                nvc.Add(new KeyValuePair<string, string>("personnalNumberId", Staff.UserID));
+
+                var req = new HttpRequestMessage(HttpMethod.Post, url);
+                req.Content = new FormUrlEncodedContent(nvc);
+                var res = cl.SendAsync(req).Result;
+                this.Enabled = true;
+                if (res.IsSuccessStatusCode)
+                {
+                    var body = await res.Content.ReadAsStringAsync();
+                    var dataList = JsonConvert.DeserializeObject<DataModel>(body);
+                    if (dataList.data == null)
+                    {
+                        MessageBox.Show("Load dữ liệu không thành công, vui lòng đăng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    if (dataList.data.Count == 0)
+                    {
+                        MessageBox.Show("Không tìm thấy dữ liệu, vui lòng đăng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    foreach (var item in dataList.data)
+                    {
+                        var data = item.Split(';');
+                        StaffModel SM = new StaffModel(data[0], data[1]);
+                        ListSM.Add(SM);
+                        TechnicianCombobox.Items.Add(SM.UserName);
+                        ConsultantCombobox.Items.Add(SM.UserName);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Load dữ liệu không thành công, vui lòng đăng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
 
 

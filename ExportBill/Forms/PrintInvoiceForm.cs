@@ -202,20 +202,20 @@ namespace ExportBill
                         {
                             var data = item.Split(';');
                             ItemSell items = new ItemSell();
-                            items.itemName = data[0];
-                            items.itemQuality = Convert.ToDecimal(data[1]).ToString("N0");
-                            items.itemUnit = data[2];
-                            items.itemPrice = Convert.ToDecimal(data[3]).ToString("N0");
+                            items.ItemName = data[0];
+                            items.ItemQuality = Convert.ToDecimal(data[1]).ToString("N0");
+                            items.ItemUnit = data[2];
+                            items.ItemPrice = Convert.ToDecimal(data[3]).ToString("N0");
                             items.TotalBeforeDiscount = Convert.ToDecimal(data[3]).ToString("N0");
                             itemSell.Add(items);
                         }
-                        foreach(var item in itemSell) item.TotalBeforeDiscount = itemSell.Sum(x=> Convert.ToDecimal(x.itemPrice)).ToString("N0");
+                        foreach(var item in itemSell) item.TotalBeforeDiscount = itemSell.Sum(x=> Convert.ToDecimal(x.ItemPrice)).ToString("N0");
                     }
                     int i = 0;
                     foreach (var item in itemSell)
                     {
                         dt.Rows.Add(i, "Ngày in bill: " + this.customer.Date, this.customer.Company, this.customer.Adress, "Biển số: " + this.customer.BS, "Loại xe:" + this.customer.LX,
-                            this.customer.Discount.ToString("N0"), item.itemName, item.itemQuality, item.itemPrice, item.TotalBeforeDiscount, Convert.ToDecimal(this.customer.Total).ToString("N0"), "(" + this.customer.DetailMoney + ")", this.titleBottom, "Phiếu DV:" + this.customer.MaPhieu, ms.ToArray());
+                            this.customer.Discount.ToString("N0"), item.ItemName, item.ItemQuality, item.ItemPrice, item.TotalBeforeDiscount, Convert.ToDecimal(this.customer.Total).ToString("N0"), "(" + this.customer.DetailMoney + ")", this.titleBottom, "Phiếu DV:" + this.customer.MaPhieu, ms.ToArray());
                         i++;
                     }
                 }

@@ -182,6 +182,7 @@
     <Compile Include="Model\DataModelString.cs" />
     <Compile Include="Model\ItemSell.cs" />
     <Compile Include="Model\Staff.cs" />
+    <Compile Include="Model\StaffModel.cs" />
     <Compile Include="Model\Token.cs" />
     <Compile Include="PlaceHolderTextBox.cs">
       <SubType>Component</SubType>
