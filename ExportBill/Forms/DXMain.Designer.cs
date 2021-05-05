@@ -34,18 +34,18 @@
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.panelInfo = new System.Windows.Forms.Panel();
-            this.RemoveCol = new System.Windows.Forms.Button();
+            this.BtnRemove = new System.Windows.Forms.Button();
             this.CreatePostbill = new System.Windows.Forms.Button();
             this.CreatePrintBill = new System.Windows.Forms.Button();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this._serviceId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._ItemName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ServiceCombobox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this._count = new DevExpress.XtraGrid.Columns.GridColumn();
-            this._unit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._ItemQuality = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._ItemUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this._ItemPrice = new DevExpress.XtraGrid.Columns.GridColumn();
-            this._Discount = new DevExpress.XtraGrid.Columns.GridColumn();
-            this._total = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._DiscountGrid2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._TotalGrid2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this._technician = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TechnicianCombobox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this._consultant = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -99,6 +99,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.SearchControl1Txt = new ExportBill.PlaceHolderTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.pFooter = new System.Windows.Forms.Panel();
+            this.btnAdđLine = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage2.SuspendLayout();
@@ -132,6 +135,7 @@
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.pFooter.SuspendLayout();
             this.SuspendLayout();
             // 
             // xtraTabControl1
@@ -164,9 +168,7 @@
             // 
             // panelInfo
             // 
-            this.panelInfo.Controls.Add(this.RemoveCol);
-            this.panelInfo.Controls.Add(this.CreatePostbill);
-            this.panelInfo.Controls.Add(this.CreatePrintBill);
+            this.panelInfo.Controls.Add(this.pFooter);
             this.panelInfo.Controls.Add(this.gridControl2);
             this.panelInfo.Controls.Add(this.pHeader);
             this.panelInfo.Controls.Add(this.panel3);
@@ -176,28 +178,29 @@
             this.panelInfo.Size = new System.Drawing.Size(1165, 392);
             this.panelInfo.TabIndex = 1;
             // 
-            // RemoveCol
+            // BtnRemove
             // 
-            this.RemoveCol.BackColor = System.Drawing.Color.DodgerBlue;
-            this.RemoveCol.FlatAppearance.BorderSize = 0;
-            this.RemoveCol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RemoveCol.ForeColor = System.Drawing.Color.White;
-            this.RemoveCol.Location = new System.Drawing.Point(4, 362);
-            this.RemoveCol.Name = "RemoveCol";
-            this.RemoveCol.Size = new System.Drawing.Size(75, 23);
-            this.RemoveCol.TabIndex = 6;
-            this.RemoveCol.Text = "Remove";
-            this.RemoveCol.UseVisualStyleBackColor = false;
-            this.RemoveCol.Click += new System.EventHandler(this.RemoveCol_Click);
+            this.BtnRemove.BackColor = System.Drawing.Color.DodgerBlue;
+            this.BtnRemove.FlatAppearance.BorderSize = 0;
+            this.BtnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnRemove.ForeColor = System.Drawing.Color.White;
+            this.BtnRemove.Location = new System.Drawing.Point(87, 4);
+            this.BtnRemove.Name = "BtnRemove";
+            this.BtnRemove.Size = new System.Drawing.Size(75, 23);
+            this.BtnRemove.TabIndex = 6;
+            this.BtnRemove.Text = "Remove";
+            this.BtnRemove.UseVisualStyleBackColor = false;
+            this.BtnRemove.Click += new System.EventHandler(this.RemoveCol_Click);
             // 
             // CreatePostbill
             // 
+            this.CreatePostbill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CreatePostbill.BackColor = System.Drawing.Color.DodgerBlue;
             this.CreatePostbill.Enabled = false;
             this.CreatePostbill.FlatAppearance.BorderSize = 0;
             this.CreatePostbill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CreatePostbill.ForeColor = System.Drawing.Color.White;
-            this.CreatePostbill.Location = new System.Drawing.Point(1079, 363);
+            this.CreatePostbill.Location = new System.Drawing.Point(1087, 4);
             this.CreatePostbill.Name = "CreatePostbill";
             this.CreatePostbill.Size = new System.Drawing.Size(75, 23);
             this.CreatePostbill.TabIndex = 5;
@@ -211,7 +214,7 @@
             this.CreatePrintBill.FlatAppearance.BorderSize = 0;
             this.CreatePrintBill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CreatePrintBill.ForeColor = System.Drawing.Color.White;
-            this.CreatePrintBill.Location = new System.Drawing.Point(998, 363);
+            this.CreatePrintBill.Location = new System.Drawing.Point(1006, 4);
             this.CreatePrintBill.Name = "CreatePrintBill";
             this.CreatePrintBill.Size = new System.Drawing.Size(75, 23);
             this.CreatePrintBill.TabIndex = 4;
@@ -238,27 +241,28 @@
             // gridView2
             // 
             this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this._serviceId,
-            this._count,
-            this._unit,
+            this._ItemName,
+            this._ItemQuality,
+            this._ItemUnit,
             this._ItemPrice,
-            this._Discount,
-            this._total,
+            this._DiscountGrid2,
+            this._TotalGrid2,
             this._technician,
             this._consultant});
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ShowGroupPanel = false;
             this.gridView2.FocusedColumnChanged += new DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventHandler(this.gridView2_FocusedColumnChanged);
+            this.gridView2.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
             // 
-            // _serviceId
+            // _ItemName
             // 
-            this._serviceId.Caption = "Hàng hóa, dịch vụ";
-            this._serviceId.ColumnEdit = this.ServiceCombobox;
-            this._serviceId.FieldName = "ItemName";
-            this._serviceId.Name = "_serviceId";
-            this._serviceId.Visible = true;
-            this._serviceId.VisibleIndex = 0;
+            this._ItemName.Caption = "Hàng hóa, dịch vụ";
+            this._ItemName.ColumnEdit = this.ServiceCombobox;
+            this._ItemName.FieldName = "ItemName";
+            this._ItemName.Name = "_ItemName";
+            this._ItemName.Visible = true;
+            this._ItemName.VisibleIndex = 0;
             // 
             // ServiceCombobox
             // 
@@ -267,45 +271,47 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.ServiceCombobox.Name = "ServiceCombobox";
             // 
-            // _count
+            // _ItemQuality
             // 
-            this._count.Caption = "SL";
-            this._count.FieldName = "ItemQuality";
-            this._count.Name = "_count";
-            this._count.Visible = true;
-            this._count.VisibleIndex = 1;
+            this._ItemQuality.Caption = "SL";
+            this._ItemQuality.FieldName = "ItemQuality";
+            this._ItemQuality.Name = "_ItemQuality";
+            this._ItemQuality.Visible = true;
+            this._ItemQuality.VisibleIndex = 1;
             // 
-            // _unit
+            // _ItemUnit
             // 
-            this._unit.Caption = "ĐVT";
-            this._unit.FieldName = "ItemUnit";
-            this._unit.Name = "_unit";
-            this._unit.Visible = true;
-            this._unit.VisibleIndex = 2;
+            this._ItemUnit.Caption = "ĐVT";
+            this._ItemUnit.FieldName = "ItemUnit";
+            this._ItemUnit.Name = "_ItemUnit";
+            this._ItemUnit.OptionsColumn.AllowEdit = false;
+            this._ItemUnit.Visible = true;
+            this._ItemUnit.VisibleIndex = 2;
             // 
             // _ItemPrice
             // 
             this._ItemPrice.Caption = "Đơn giá";
             this._ItemPrice.FieldName = "ItemPrice";
             this._ItemPrice.Name = "_ItemPrice";
+            this._ItemPrice.OptionsColumn.AllowEdit = false;
             this._ItemPrice.Visible = true;
             this._ItemPrice.VisibleIndex = 3;
             // 
-            // _Discount
+            // _DiscountGrid2
             // 
-            this._Discount.Caption = "Giảm giá";
-            this._Discount.FieldName = "Discount";
-            this._Discount.Name = "_Discount";
-            this._Discount.Visible = true;
-            this._Discount.VisibleIndex = 4;
+            this._DiscountGrid2.Caption = "Giảm giá";
+            this._DiscountGrid2.FieldName = "Discount";
+            this._DiscountGrid2.Name = "_DiscountGrid2";
+            this._DiscountGrid2.Visible = true;
+            this._DiscountGrid2.VisibleIndex = 4;
             // 
-            // _total
+            // _TotalGrid2
             // 
-            this._total.Caption = "Thành tiền";
-            this._total.FieldName = "Total";
-            this._total.Name = "_total";
-            this._total.Visible = true;
-            this._total.VisibleIndex = 5;
+            this._TotalGrid2.Caption = "Thành tiền";
+            this._TotalGrid2.FieldName = "Total";
+            this._TotalGrid2.Name = "_TotalGrid2";
+            this._TotalGrid2.Visible = true;
+            this._TotalGrid2.VisibleIndex = 5;
             // 
             // _technician
             // 
@@ -931,6 +937,46 @@
             this.SearchControl1Txt.TabIndex = 0;
             this.SearchControl1Txt.Text = "Nhập biển số xe";
             // 
+            // pFooter
+            // 
+            this.pFooter.Controls.Add(this.btnBack);
+            this.pFooter.Controls.Add(this.btnAdđLine);
+            this.pFooter.Controls.Add(this.BtnRemove);
+            this.pFooter.Controls.Add(this.CreatePostbill);
+            this.pFooter.Controls.Add(this.CreatePrintBill);
+            this.pFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pFooter.Location = new System.Drawing.Point(0, 358);
+            this.pFooter.Name = "pFooter";
+            this.pFooter.Size = new System.Drawing.Size(1165, 34);
+            this.pFooter.TabIndex = 7;
+            // 
+            // btnAdđLine
+            // 
+            this.btnAdđLine.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnAdđLine.FlatAppearance.BorderSize = 0;
+            this.btnAdđLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdđLine.ForeColor = System.Drawing.Color.White;
+            this.btnAdđLine.Location = new System.Drawing.Point(6, 4);
+            this.btnAdđLine.Name = "btnAdđLine";
+            this.btnAdđLine.Size = new System.Drawing.Size(75, 23);
+            this.btnAdđLine.TabIndex = 7;
+            this.btnAdđLine.Text = "Add";
+            this.btnAdđLine.UseVisualStyleBackColor = false;
+            // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.ForeColor = System.Drawing.Color.White;
+            this.btnBack.Location = new System.Drawing.Point(168, 4);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(75, 23);
+            this.btnBack.TabIndex = 8;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // DXMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -978,6 +1024,7 @@
             this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.pFooter.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1040,18 +1087,21 @@
         private System.Windows.Forms.Button CreatePrintBill;
         private DevExpress.XtraGrid.GridControl gridControl2;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
-        private DevExpress.XtraGrid.Columns.GridColumn _serviceId;
-        private DevExpress.XtraGrid.Columns.GridColumn _count;
-        private DevExpress.XtraGrid.Columns.GridColumn _unit;
+        private DevExpress.XtraGrid.Columns.GridColumn _ItemName;
+        private DevExpress.XtraGrid.Columns.GridColumn _ItemQuality;
+        private DevExpress.XtraGrid.Columns.GridColumn _ItemUnit;
         private DevExpress.XtraGrid.Columns.GridColumn _ItemPrice;
-        private DevExpress.XtraGrid.Columns.GridColumn _Discount;
-        private DevExpress.XtraGrid.Columns.GridColumn _total;
+        private DevExpress.XtraGrid.Columns.GridColumn _DiscountGrid2;
+        private DevExpress.XtraGrid.Columns.GridColumn _TotalGrid2;
         private DevExpress.XtraGrid.Columns.GridColumn _technician;
         private DevExpress.XtraGrid.Columns.GridColumn _consultant;
-        private System.Windows.Forms.Button RemoveCol;
+        private System.Windows.Forms.Button BtnRemove;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox ServiceCombobox;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox TechnicianCombobox;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox ConsultantCombobox;
+        private System.Windows.Forms.Panel pFooter;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnAdđLine;
     }
 }

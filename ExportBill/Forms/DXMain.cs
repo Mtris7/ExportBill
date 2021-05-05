@@ -76,7 +76,7 @@ namespace ExportBill
             this.UserNamelbl.Text = userName;
             gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             gridView1.RowCellClick += gridView1_RowCellClick;
-            this.gridView1.Columns["Total"].DisplayFormat.FormatString = "N0";
+            InitializeDefaultStyle();
 
         }
         #endregion
@@ -100,6 +100,7 @@ namespace ExportBill
             }
 
         }
+        
         public void InitializeCombobox()
         {
 
@@ -112,6 +113,21 @@ namespace ExportBill
                 }
                 LoadItemCombobox();
                 LoadWorkerCombobox();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+        public void InitializeDefaultStyle()
+        {
+            try
+            {
+                this.gridView1.Columns["Total"].DisplayFormat.FormatString = "N0";
+                this.pHeader.Enabled = false;
+                this.gridControl2.Enabled = false;
+                this.pFooter.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -250,9 +266,34 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+
+        #region grid 1 danh sách xe
         void gridView1_RowCellClick(object sender, RowCellClickEventArgs e)
         {
-
+            try
+            {
+                GridView view = sender as GridView;
+                var rowIndex = view.FocusedRowHandle;
+                var colI = view.FocusedColumn;
+                if (colI == MaPhieu)
+                {
+                    RunViewBill(rowIndex);
+                }
+                if (colI == PrintBill)
+                {
+                    RunPrintBill(rowIndex);
+                }
+                else if (colI == PostBill)
+                {
+                    string TheID_Val = view.GetFocusedRowCellValue(PostBill).ToString();
+                    if (TheID_Val == PostBillStr)
+                        RunPostBill(rowIndex);
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void gridView1_KeyDown(object sender, KeyEventArgs e)
@@ -315,59 +356,9 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
-        private void gridView3_RowCellStyle(object sender, RowCellStyleEventArgs e)
-        {
-            try
-            {
-                GridView view = sender as GridView;
-                if (e.Column == CreateService)
-                {
-                    e.Appearance.ForeColor = Color.Blue;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        #endregion
 
-        private void gridView3_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                GridView view = sender as GridView;
-                var rowIndex = view.FocusedRowHandle;
-                var colI = view.FocusedColumn;
-                if (colI == CreateService)
-                {
-                    //RunCreateService(rowIndex);
-                }
-            }
-
-        }
-
-        private void gridView3_RowCellClick(object sender, RowCellClickEventArgs e)
-        {
-            try
-            {
-                if (e.Column == CreateService)
-                {
-                    var CustomerNumber = this.gridView3.GetRowCellValue(e.RowHandle, _CustomerNumber)?.ToString();
-                    sSelect = ListCustomerSearch.Where(x => x.CustomerNumber == CustomerNumber).FirstOrDefault();
-
-                    //label customer
-                    this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: " + sSelect.PlateID + " | " + sSelect.CustomerName;
-                    
-                    //enable button
-                    this.CreatePrintBill.Enabled = true;
-                    this.CreatePostbill.Enabled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        #region Grid2 Create ServiceLine
         private void ServicePool_EditValueChanged(object sender, EventArgs e)
         {
             switch(ServicePool.SelectedIndex)
@@ -453,9 +444,130 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+
+
+        private void gridView2_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(e.Value?.ToString())) return;
+
+                var check = e.Value?.ToString().All(char.IsDigit);
+
+                if (e.Column.Equals(_DiscountGrid2))
+                {
+                    if (check ?? false)
+                        this.gridView2.SetRowCellValue(e.RowHandle, _DiscountGrid2, Convert.ToDecimal(e.Value ?? 0).ToString("N0"));
+                }
+
+               
+                if (e.Column.Equals(_ItemName))
+                {
+                    //Mã SP; Tên SP; Giá bán: số lượng bán mặc định; tồn kho; ĐVT
+                    var item = ListIS.Where(x => x.ItemName.Equals(this.gridView2.GetRowCellValue(e.RowHandle, _ItemName)));
+                    if (!item.Any()) return;
+                    var itemID = item.First().ItemID;
+                    var itemPrice = item.First().ItemPrice;
+                    var itemUnit = item.First().ItemUnit;
+                    //var itemInventory = item.First().Inventory;
+                    var itemTotal = item.First().Total;
+                    this.gridView2.SetRowCellValue(e.RowHandle, _ItemName, e.Value);
+                    this.gridView2.SetRowCellValue(e.RowHandle, _ItemPrice, Convert.ToDecimal(itemPrice).ToString("N0"));
+                    this.gridView2.SetRowCellValue(e.RowHandle, _TotalGrid2, Convert.ToDecimal(itemTotal).ToString("N0"));
+                    this.gridView2.SetRowCellValue(e.RowHandle, _ItemUnit, itemUnit);
+
+                }
+                if (e.Column.Equals(_ItemUnit))
+                {
+                    var itemPrice = this.gridView2.GetRowCellValue(e.RowHandle, _ItemPrice);
+                    var total = Convert.ToDecimal(itemPrice) * Convert.ToDecimal(e.Value);
+                    if (check ?? false)
+                    {
+                        this.gridView2.SetRowCellValue(e.RowHandle, _TotalGrid2, total.ToString("N0"));
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        #endregion
+        #region grid3 Create Service Header
+
+        private void gridView3_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+                if (e.Column == CreateService)
+                {
+                    e.Appearance.ForeColor = Color.Blue;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void gridView3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                GridView view = sender as GridView;
+                var rowIndex = view.FocusedRowHandle;
+                var colI = view.FocusedColumn;
+                if (colI == CreateService)
+                {
+                    //RunCreateService(rowIndex);
+                }
+            }
+
+        }
+
+        private void gridView3_RowCellClick(object sender, RowCellClickEventArgs e)
+        {
+            try
+            {
+                if (e.Column == CreateService)
+                {
+                    var CustomerNumber = this.gridView3.GetRowCellValue(e.RowHandle, _CustomerNumber)?.ToString();
+                    sSelect = ListCustomerSearch.Where(x => x.CustomerNumber == CustomerNumber).FirstOrDefault();
+
+                    //label customer
+                    this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: " + sSelect.PlateID + " | " + sSelect.CustomerName;
+
+                    //enable 
+                    this.pHeader.Enabled = true;
+                    this.gridControl2.Enabled = true;
+                    this.pFooter.Enabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.pHeader.Enabled = false;
+                this.gridControl2.Enabled = false;
+                this.pFooter.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #endregion
         //##############################################################################################
-        #region method
+        #region method  
         public async void getToken()
         {
             try
@@ -663,44 +775,48 @@ namespace ExportBill
             {
                 for(int i = 0; i < gridView2.RowCount;i++)
                 {
-                    var ServiceorderID = gridView2.GetRowCellValue(i, _serviceId);
-                }
-                var cl = new HttpClient();
-                string url = "http://api.ototienthu.com.vn/api/v1/customers/CreateServiceLine";
-                cl.BaseAddress = new Uri(url);
-                int _TimeoutSec = 90;
-                cl.Timeout = new TimeSpan(0, 0, _TimeoutSec);
-                string _ContentType = "application/x-www-form-urlencoded";
-                cl.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_ContentType));
-                cl.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
-                var nvc = new List<KeyValuePair<string, string>>();
-                nvc.Add(new KeyValuePair<string, string>("serviceOrderId", this.ServiceId));
-                nvc.Add(new KeyValuePair<string, string>("itemId", "06430-KVB-950"));
-                nvc.Add(new KeyValuePair<string, string>("qty", "1"));
-                nvc.Add(new KeyValuePair<string, string>("workerId", "TT_0853_29122016"));
-                nvc.Add(new KeyValuePair<string, string>("adviserId", "TT_0001_01071991"));
-                nvc.Add(new KeyValuePair<string, string>("lineDisc", "0"));
+                    var item =  ListIS.Where(x=>x.ItemName.Equals(this.gridView2.GetRowCellValue(i, _ItemName)));
+                    if (!item.Any()) return false;
+                    var itemID = item.First().ItemID;
+                    var ServiceorderID = gridView2.GetRowCellValue(i, _ItemName);
+                    var cl = new HttpClient();
+                    string url = "http://api.ototienthu.com.vn/api/v1/customers/CreateServiceLine";
+                    cl.BaseAddress = new Uri(url);
+                    int _TimeoutSec = 90;
+                    cl.Timeout = new TimeSpan(0, 0, _TimeoutSec);
+                    string _ContentType = "application/x-www-form-urlencoded";
+                    cl.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_ContentType));
+                    cl.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+                    var nvc = new List<KeyValuePair<string, string>>();
+                    nvc.Add(new KeyValuePair<string, string>("serviceOrderId", this.ServiceId));
+                    nvc.Add(new KeyValuePair<string, string>("itemId", itemID));
+                    nvc.Add(new KeyValuePair<string, string>("qty", this.gridView2.GetRowCellValue(i, _ItemQuality) != null? "1" : this.gridView2.GetRowCellValue(i, _ItemQuality).ToString()));
+                    nvc.Add(new KeyValuePair<string, string>("workerId", this.gridView2.GetRowCellValue(i, _technician)?.ToString()));
+                    nvc.Add(new KeyValuePair<string, string>("adviserId", this.gridView2.GetRowCellValue(i, _consultant)?.ToString()));
+                    nvc.Add(new KeyValuePair<string, string>("lineDisc", this.gridView2.GetRowCellValue(i, _DiscountGrid2) != null ? "0" : this.gridView2.GetRowCellValue(i, _DiscountGrid2).ToString()));
 
-                var req = new HttpRequestMessage(HttpMethod.Post, url);
-                req.Content = new FormUrlEncodedContent(nvc);
-                var res = cl.SendAsync(req).Result;
-                string apiResponse = res.Content.ReadAsStringAsync().Result;
-                if (apiResponse != "")
-                {
-                    var result = (JObject)JsonConvert.DeserializeObject(apiResponse);
-                    if (result["data"].Value<string>() != null)
+                    var req = new HttpRequestMessage(HttpMethod.Post, url);
+                    req.Content = new FormUrlEncodedContent(nvc);
+                    var res = cl.SendAsync(req).Result;
+                    string apiResponse = res.Content.ReadAsStringAsync().Result;
+                    if (apiResponse != "")
                     {
-                        return true;
+                        var result = (JObject)JsonConvert.DeserializeObject(apiResponse);
+                        if (result["data"].Value<string>() != null)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
                     else
                     {
                         return false;
                     }
                 }
-                else
-                {
-                    return false;
-                }
+                return true;
             }
             catch (Exception ex)
             {
@@ -747,8 +863,14 @@ namespace ExportBill
                     }
                     foreach (var item in dataList.data)
                     {
+                        //Mã SP; Tên SP; Giá bán: gía mặc định; tồn kho; ĐVT
                         var data = item.Split(';');
                         ItemSell iS = new ItemSell(data[0], data[1]);
+                        iS.ItemID = data[0];
+                        iS.ItemName = data[1];
+                        iS.ItemPrice = data[3];
+                        iS.Inventory = Convert.ToDecimal(data[4]);
+                        iS.ItemUnit = data[5];
                         ListIS.Add(iS);
                         ServiceCombobox.Items.Add(iS.ItemName);
                     }
@@ -816,6 +938,7 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+
 
 
 

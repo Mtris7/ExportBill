@@ -13,13 +13,14 @@
         public string Total { get; set; }
         public string WorkerId { get; set; }
         public string AdviserId { get; set; }
+        public decimal Inventory { get; set; }
         public decimal LineDisc { get; set; }
         public ItemSell()
         {
         }
         public ItemSell(string itemID ,string itemName , string itemQuality = null, string itemUnit = null, string itemPrice = null,
                             string totalBeforeDiscount = null, string discount = null, string total = null
-                            , string workerId = null, string adviserId = null, decimal lineDisc = 0)
+                            , string workerId = null, string adviserId = null,decimal inventory = 0, decimal lineDisc = 0)
         {
             ItemID = itemID;
             ItemName = itemName;
@@ -31,6 +32,7 @@
             Total = total;
             WorkerId = workerId;
             AdviserId = adviserId;
+            Inventory = inventory;
             LineDisc = lineDisc;
         }
     }
