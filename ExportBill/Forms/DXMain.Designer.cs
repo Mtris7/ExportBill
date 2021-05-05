@@ -34,6 +34,9 @@
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.panelInfo = new System.Windows.Forms.Panel();
+            this.pFooter = new System.Windows.Forms.Panel();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.btnAdđLine = new System.Windows.Forms.Button();
             this.BtnRemove = new System.Windows.Forms.Button();
             this.CreatePostbill = new System.Windows.Forms.Button();
             this.CreatePrintBill = new System.Windows.Forms.Button();
@@ -99,15 +102,15 @@
             this.button1 = new System.Windows.Forms.Button();
             this.SearchControl1Txt = new ExportBill.PlaceHolderTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.pFooter = new System.Windows.Forms.Panel();
-            this.btnAdđLine = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
+            this.repositoryItemGridLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
+            this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             this.groupControl4.SuspendLayout();
             this.panelInfo.SuspendLayout();
+            this.pFooter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceCombobox)).BeginInit();
@@ -135,7 +138,8 @@
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.pFooter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
             this.SuspendLayout();
             // 
             // xtraTabControl1
@@ -177,6 +181,47 @@
             this.panelInfo.Name = "panelInfo";
             this.panelInfo.Size = new System.Drawing.Size(1165, 392);
             this.panelInfo.TabIndex = 1;
+            // 
+            // pFooter
+            // 
+            this.pFooter.Controls.Add(this.btnBack);
+            this.pFooter.Controls.Add(this.btnAdđLine);
+            this.pFooter.Controls.Add(this.BtnRemove);
+            this.pFooter.Controls.Add(this.CreatePostbill);
+            this.pFooter.Controls.Add(this.CreatePrintBill);
+            this.pFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pFooter.Location = new System.Drawing.Point(0, 358);
+            this.pFooter.Name = "pFooter";
+            this.pFooter.Size = new System.Drawing.Size(1165, 34);
+            this.pFooter.TabIndex = 7;
+            // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.ForeColor = System.Drawing.Color.White;
+            this.btnBack.Location = new System.Drawing.Point(168, 4);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(75, 23);
+            this.btnBack.TabIndex = 8;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // btnAdđLine
+            // 
+            this.btnAdđLine.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnAdđLine.FlatAppearance.BorderSize = 0;
+            this.btnAdđLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdđLine.ForeColor = System.Drawing.Color.White;
+            this.btnAdđLine.Location = new System.Drawing.Point(6, 4);
+            this.btnAdđLine.Name = "btnAdđLine";
+            this.btnAdđLine.Size = new System.Drawing.Size(75, 23);
+            this.btnAdđLine.TabIndex = 7;
+            this.btnAdđLine.Text = "Add";
+            this.btnAdđLine.UseVisualStyleBackColor = false;
+            this.btnAdđLine.Click += new System.EventHandler(this.btnAdđLine_Click);
             // 
             // BtnRemove
             // 
@@ -232,7 +277,8 @@
             this.repositoryItemComboBox1,
             this.ServiceCombobox,
             this.TechnicianCombobox,
-            this.ConsultantCombobox});
+            this.ConsultantCombobox,
+            this.repositoryItemGridLookUpEdit1});
             this.gridControl2.Size = new System.Drawing.Size(1165, 182);
             this.gridControl2.TabIndex = 3;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -254,6 +300,7 @@
             this.gridView2.OptionsView.ShowGroupPanel = false;
             this.gridView2.FocusedColumnChanged += new DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventHandler(this.gridView2_FocusedColumnChanged);
             this.gridView2.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
+            this.gridView2.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanging);
             // 
             // _ItemName
             // 
@@ -263,6 +310,7 @@
             this._ItemName.Name = "_ItemName";
             this._ItemName.Visible = true;
             this._ItemName.VisibleIndex = 0;
+            this._ItemName.Width = 308;
             // 
             // ServiceCombobox
             // 
@@ -278,6 +326,7 @@
             this._ItemQuality.Name = "_ItemQuality";
             this._ItemQuality.Visible = true;
             this._ItemQuality.VisibleIndex = 1;
+            this._ItemQuality.Width = 52;
             // 
             // _ItemUnit
             // 
@@ -287,6 +336,7 @@
             this._ItemUnit.OptionsColumn.AllowEdit = false;
             this._ItemUnit.Visible = true;
             this._ItemUnit.VisibleIndex = 2;
+            this._ItemUnit.Width = 56;
             // 
             // _ItemPrice
             // 
@@ -296,6 +346,7 @@
             this._ItemPrice.OptionsColumn.AllowEdit = false;
             this._ItemPrice.Visible = true;
             this._ItemPrice.VisibleIndex = 3;
+            this._ItemPrice.Width = 113;
             // 
             // _DiscountGrid2
             // 
@@ -304,6 +355,7 @@
             this._DiscountGrid2.Name = "_DiscountGrid2";
             this._DiscountGrid2.Visible = true;
             this._DiscountGrid2.VisibleIndex = 4;
+            this._DiscountGrid2.Width = 105;
             // 
             // _TotalGrid2
             // 
@@ -312,6 +364,7 @@
             this._TotalGrid2.Name = "_TotalGrid2";
             this._TotalGrid2.Visible = true;
             this._TotalGrid2.VisibleIndex = 5;
+            this._TotalGrid2.Width = 98;
             // 
             // _technician
             // 
@@ -321,6 +374,7 @@
             this._technician.Name = "_technician";
             this._technician.Visible = true;
             this._technician.VisibleIndex = 6;
+            this._technician.Width = 213;
             // 
             // TechnicianCombobox
             // 
@@ -337,6 +391,7 @@
             this._consultant.Name = "_consultant";
             this._consultant.Visible = true;
             this._consultant.VisibleIndex = 7;
+            this._consultant.Width = 200;
             // 
             // ConsultantCombobox
             // 
@@ -937,45 +992,20 @@
             this.SearchControl1Txt.TabIndex = 0;
             this.SearchControl1Txt.Text = "Nhập biển số xe";
             // 
-            // pFooter
+            // repositoryItemGridLookUpEdit1
             // 
-            this.pFooter.Controls.Add(this.btnBack);
-            this.pFooter.Controls.Add(this.btnAdđLine);
-            this.pFooter.Controls.Add(this.BtnRemove);
-            this.pFooter.Controls.Add(this.CreatePostbill);
-            this.pFooter.Controls.Add(this.CreatePrintBill);
-            this.pFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pFooter.Location = new System.Drawing.Point(0, 358);
-            this.pFooter.Name = "pFooter";
-            this.pFooter.Size = new System.Drawing.Size(1165, 34);
-            this.pFooter.TabIndex = 7;
+            this.repositoryItemGridLookUpEdit1.AutoHeight = false;
+            this.repositoryItemGridLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemGridLookUpEdit1.Name = "repositoryItemGridLookUpEdit1";
+            this.repositoryItemGridLookUpEdit1.PopupView = this.repositoryItemGridLookUpEdit1View;
             // 
-            // btnAdđLine
+            // repositoryItemGridLookUpEdit1View
             // 
-            this.btnAdđLine.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnAdđLine.FlatAppearance.BorderSize = 0;
-            this.btnAdđLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdđLine.ForeColor = System.Drawing.Color.White;
-            this.btnAdđLine.Location = new System.Drawing.Point(6, 4);
-            this.btnAdđLine.Name = "btnAdđLine";
-            this.btnAdđLine.Size = new System.Drawing.Size(75, 23);
-            this.btnAdđLine.TabIndex = 7;
-            this.btnAdđLine.Text = "Add";
-            this.btnAdđLine.UseVisualStyleBackColor = false;
-            // 
-            // btnBack
-            // 
-            this.btnBack.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnBack.FlatAppearance.BorderSize = 0;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.ForeColor = System.Drawing.Color.White;
-            this.btnBack.Location = new System.Drawing.Point(168, 4);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(75, 23);
-            this.btnBack.TabIndex = 8;
-            this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            this.repositoryItemGridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.repositoryItemGridLookUpEdit1View.Name = "repositoryItemGridLookUpEdit1View";
+            this.repositoryItemGridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.repositoryItemGridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
             // DXMain
             // 
@@ -994,6 +1024,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
             this.groupControl4.ResumeLayout(false);
             this.panelInfo.ResumeLayout(false);
+            this.pFooter.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceCombobox)).EndInit();
@@ -1024,7 +1055,8 @@
             this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.pFooter.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1103,5 +1135,7 @@
         private System.Windows.Forms.Panel pFooter;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnAdđLine;
+        private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit repositoryItemGridLookUpEdit1;
+        private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
     }
 }

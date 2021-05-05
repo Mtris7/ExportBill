@@ -70,5 +70,17 @@ namespace ExportBill.Properties {
                 this["passWord"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int EditValueChanged {
+            get {
+                return ((int)(this["EditValueChanged"]));
+            }
+            set {
+                this["EditValueChanged"] = value;
+            }
+        }
     }
 }

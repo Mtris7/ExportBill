@@ -419,14 +419,21 @@ namespace ExportBill
             }
         }
 
-
+        private void EditValueChanged(object sender, EventArgs e)
+        {
+            TextEdit textEditor = (TextEdit)sender;
+            if (Equals(textEditor.EditValue, "000"))
+            {
+                //...
+            }
+        }
         private void gridView2_FocusedColumnChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventArgs e)
         {
             try
-            {
-                GridView view = sender as GridView;
-                if (view.FocusedRowHandle == this.gridView2.RowCount - 1 && !string.IsNullOrWhiteSpace(this.gridView2.GetRowCellValue(view.FocusedRowHandle, e.FocusedColumn)?.ToString()))
-                    this.gridView2.AddNewRow();
+                {
+                //GridView view = sender as GridView;
+                //if (view.FocusedRowHandle == this.gridView2.RowCount - 1 && !string.IsNullOrWhiteSpace(this.gridView2.GetRowCellValue(view.FocusedRowHandle, e.FocusedColumn)?.ToString()))
+                //    this.gridView2.AddNewRow();
             }
             catch (Exception ex)
             {
@@ -459,25 +466,8 @@ namespace ExportBill
                     if (check ?? false)
                         this.gridView2.SetRowCellValue(e.RowHandle, _DiscountGrid2, Convert.ToDecimal(e.Value ?? 0).ToString("N0"));
                 }
-
                
-                if (e.Column.Equals(_ItemName))
-                {
-                    //Mã SP; Tên SP; Giá bán: số lượng bán mặc định; tồn kho; ĐVT
-                    var item = ListIS.Where(x => x.ItemName.Equals(this.gridView2.GetRowCellValue(e.RowHandle, _ItemName)));
-                    if (!item.Any()) return;
-                    var itemID = item.First().ItemID;
-                    var itemPrice = item.First().ItemPrice;
-                    var itemUnit = item.First().ItemUnit;
-                    //var itemInventory = item.First().Inventory;
-                    var itemTotal = item.First().Total;
-                    this.gridView2.SetRowCellValue(e.RowHandle, _ItemName, e.Value);
-                    this.gridView2.SetRowCellValue(e.RowHandle, _ItemPrice, Convert.ToDecimal(itemPrice).ToString("N0"));
-                    this.gridView2.SetRowCellValue(e.RowHandle, _TotalGrid2, Convert.ToDecimal(itemTotal).ToString("N0"));
-                    this.gridView2.SetRowCellValue(e.RowHandle, _ItemUnit, itemUnit);
-
-                }
-                if (e.Column.Equals(_ItemUnit))
+                if (e.Column.Equals(_ItemQuality))
                 {
                     var itemPrice = this.gridView2.GetRowCellValue(e.RowHandle, _ItemPrice);
                     var total = Convert.ToDecimal(itemPrice) * Convert.ToDecimal(e.Value);
@@ -488,6 +478,33 @@ namespace ExportBill
                 }
             }
             catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void gridView2_CellValueChanging(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            try
+            {
+                if (e.Column.Equals(_ItemName))
+                {
+                    //Mã SP; Tên SP; Giá bán: số lượng bán mặc định; tồn kho; ĐVT
+                    var item = ListIS.Where(x => x.ItemName.Equals(this.gridView2.GetRowCellValue(e.RowHandle, _ItemName)));
+                    if (!item.Any()) return;
+                    var itemID = item.First().ItemID;
+                    var itemPrice = Convert.ToDecimal(item.First().ItemPrice) ;
+                    var itemUnit = item.First().ItemUnit;
+                    //var itemInventory = item.First().Inventory;
+                    var itemTotal = itemPrice * 1;
+                    this.gridView2.SetRowCellValue(e.RowHandle, _ItemName, e.Value);
+                    this.gridView2.SetRowCellValue(e.RowHandle, _ItemPrice, itemPrice.ToString("N0"));
+                    this.gridView2.SetRowCellValue(e.RowHandle, _TotalGrid2, itemTotal.ToString("N0"));
+                    this.gridView2.SetRowCellValue(e.RowHandle, _ItemUnit, itemUnit);
+
+                }
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -551,20 +568,6 @@ namespace ExportBill
             }
         }
         #endregion
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.pHeader.Enabled = false;
-                this.gridControl2.Enabled = false;
-                this.pFooter.Enabled = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
         #endregion
         //##############################################################################################
         #region method  
@@ -864,12 +867,14 @@ namespace ExportBill
                     foreach (var item in dataList.data)
                     {
                         //Mã SP; Tên SP; Giá bán: gía mặc định; tồn kho; ĐVT
+                        //";Dầusố.00;1.00;0.00;BÌNH",
                         var data = item.Split(';');
-                        ItemSell iS = new ItemSell(data[0], data[1]);
+                        ItemSell iS = new ItemSell();
                         iS.ItemID = data[0];
                         iS.ItemName = data[1];
-                        iS.ItemPrice = data[3];
-                        iS.Inventory = Convert.ToDecimal(data[4]);
+                        iS.ItemPrice = data[2];
+                        iS.ItemQuality = data[3];
+                        iS.Inventory = Convert.ToDecimal(data[3]);
                         iS.ItemUnit = data[5];
                         ListIS.Add(iS);
                         ServiceCombobox.Items.Add(iS.ItemName);
@@ -939,9 +944,32 @@ namespace ExportBill
             }
         }
 
+        private void btnAdđLine_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.gridView2.AddNewRow();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
 
-
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: ";
+                this.pHeader.Enabled = false;
+                this.gridControl2.Enabled = false;
+                this.pFooter.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         #endregion
         //##############################################################################################
