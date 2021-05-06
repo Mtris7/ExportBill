@@ -459,22 +459,21 @@ namespace ExportBill
             {
                 if (string.IsNullOrWhiteSpace(e.Value?.ToString())) return;
 
-                var check = e.Value?.ToString().All(char.IsDigit);
-
                 if (e.Column.Equals(_DiscountGrid2))
                 {
-                    if (check ?? false)
-                        this.gridView2.SetRowCellValue(e.RowHandle, _DiscountGrid2, Convert.ToDecimal(e.Value ?? 0).ToString("N0"));
+                    //this.gridView2.SetRowCellValue(e.RowHandle, _DiscountGrid2, Convert.ToDecimal(e.Value ?? 0).ToString("N0"));
+                    var itemPrice = this.gridView2.GetRowCellValue(e.RowHandle, _ItemPrice);
+                    var itemQuatity = this.gridView2.GetRowCellValue(e.RowHandle, _ItemQuality) ?? 1;
+                    var total = Convert.ToDecimal(itemPrice) * Convert.ToDecimal(itemQuatity) - Convert.ToDecimal(e.Value);
+                    this.gridView2.SetRowCellValue(e.RowHandle, _TotalGrid2, total.ToString("N0"));
                 }
                
                 if (e.Column.Equals(_ItemQuality))
                 {
                     var itemPrice = this.gridView2.GetRowCellValue(e.RowHandle, _ItemPrice);
-                    var total = Convert.ToDecimal(itemPrice) * Convert.ToDecimal(e.Value);
-                    if (check ?? false)
-                    {
-                        this.gridView2.SetRowCellValue(e.RowHandle, _TotalGrid2, total.ToString("N0"));
-                    }
+                    var itemDiscount = this.gridView2.GetRowCellValue(e.RowHandle, _DiscountGrid2);
+                    var total = Convert.ToDecimal(itemPrice) * Convert.ToDecimal(e.Value) - Convert.ToDecimal(itemDiscount);
+                    this.gridView2.SetRowCellValue(e.RowHandle, _TotalGrid2, total.ToString("N0"));
                 }
             }
             catch(Exception ex)
@@ -490,7 +489,7 @@ namespace ExportBill
                 if (e.Column.Equals(_ItemName))
                 {
                     //Mã SP; Tên SP; Giá bán: số lượng bán mặc định; tồn kho; ĐVT
-                    var item = ListIS.Where(x => x.ItemName.Equals(this.gridView2.GetRowCellValue(e.RowHandle, _ItemName)));
+                    var item = ListIS.Where(x => x.ItemName.Equals(e.Value));
                     if (!item.Any()) return;
                     var itemID = item.First().ItemID;
                     var itemPrice = Convert.ToDecimal(item.First().ItemPrice) ;
@@ -560,6 +559,9 @@ namespace ExportBill
                     this.pHeader.Enabled = true;
                     this.gridControl2.Enabled = true;
                     this.pFooter.Enabled = true;
+                    this.panel3.Enabled = false;
+
+                    this.gridView2.FocusedRowHandle = 0;
                 }
             }
             catch (Exception ex)
@@ -877,7 +879,7 @@ namespace ExportBill
                         iS.Inventory = Convert.ToDecimal(data[3]);
                         iS.ItemUnit = data[5];
                         ListIS.Add(iS);
-                        ServiceCombobox.Items.Add(iS.ItemName);
+                        ItemNameCbx.Items.Add(iS.ItemName);
                     }
                 }
                 else
@@ -929,8 +931,8 @@ namespace ExportBill
                         var data = item.Split(';');
                         StaffModel SM = new StaffModel(data[0], data[1]);
                         ListSM.Add(SM);
-                        TechnicianCombobox.Items.Add(SM.UserName);
-                        ConsultantCombobox.Items.Add(SM.UserName);
+                        WorkerIdCbx.Items.Add(SM.UserName);
+                        AdviserIdCbx.Items.Add(SM.UserName);
                     }
                 }
                 else
@@ -964,6 +966,7 @@ namespace ExportBill
                 this.pHeader.Enabled = false;
                 this.gridControl2.Enabled = false;
                 this.pFooter.Enabled = false;
+                this.panel3.Enabled = true;
             }
             catch (Exception ex)
             {

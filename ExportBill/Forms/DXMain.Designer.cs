@@ -43,17 +43,19 @@
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this._ItemName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.ServiceCombobox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.ItemNameCbx = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this._ItemQuality = new DevExpress.XtraGrid.Columns.GridColumn();
             this._ItemUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this._ItemPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this._DiscountGrid2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this._TotalGrid2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this._technician = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.TechnicianCombobox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.WorkerIdCbx = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this._consultant = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.ConsultantCombobox = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.AdviserIdCbx = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.repositoryItemGridLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
+            this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.pHeader = new System.Windows.Forms.Panel();
             this.NoteTxt = new ExportBill.PlaceHolderTextBox();
             this.CurrentKm = new ExportBill.PlaceHolderTextBox();
@@ -102,8 +104,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.SearchControl1Txt = new ExportBill.PlaceHolderTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.repositoryItemGridLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
-            this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage2.SuspendLayout();
@@ -113,10 +113,12 @@
             this.pFooter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ServiceCombobox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TechnicianCombobox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ConsultantCombobox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemNameCbx)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WorkerIdCbx)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AdviserIdCbx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
             this.pHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicePool.Properties)).BeginInit();
             this.panel3.SuspendLayout();
@@ -138,8 +140,6 @@
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
             this.SuspendLayout();
             // 
             // xtraTabControl1
@@ -197,13 +197,12 @@
             // 
             // btnBack
             // 
-            this.btnBack.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.ForeColor = System.Drawing.Color.White;
+            this.btnBack.ForeColor = System.Drawing.Color.Black;
             this.btnBack.Location = new System.Drawing.Point(168, 4);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(75, 23);
+            this.btnBack.Size = new System.Drawing.Size(75, 25);
             this.btnBack.TabIndex = 8;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
@@ -211,13 +210,12 @@
             // 
             // btnAdđLine
             // 
-            this.btnAdđLine.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnAdđLine.FlatAppearance.BorderSize = 0;
+            this.btnAdđLine.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnAdđLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdđLine.ForeColor = System.Drawing.Color.White;
+            this.btnAdđLine.ForeColor = System.Drawing.Color.Black;
             this.btnAdđLine.Location = new System.Drawing.Point(6, 4);
             this.btnAdđLine.Name = "btnAdđLine";
-            this.btnAdđLine.Size = new System.Drawing.Size(75, 23);
+            this.btnAdđLine.Size = new System.Drawing.Size(75, 25);
             this.btnAdđLine.TabIndex = 7;
             this.btnAdđLine.Text = "Add";
             this.btnAdđLine.UseVisualStyleBackColor = false;
@@ -225,13 +223,12 @@
             // 
             // BtnRemove
             // 
-            this.BtnRemove.BackColor = System.Drawing.Color.DodgerBlue;
-            this.BtnRemove.FlatAppearance.BorderSize = 0;
+            this.BtnRemove.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.BtnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnRemove.ForeColor = System.Drawing.Color.White;
+            this.BtnRemove.ForeColor = System.Drawing.Color.Black;
             this.BtnRemove.Location = new System.Drawing.Point(87, 4);
             this.BtnRemove.Name = "BtnRemove";
-            this.BtnRemove.Size = new System.Drawing.Size(75, 23);
+            this.BtnRemove.Size = new System.Drawing.Size(75, 25);
             this.BtnRemove.TabIndex = 6;
             this.BtnRemove.Text = "Remove";
             this.BtnRemove.UseVisualStyleBackColor = false;
@@ -240,28 +237,24 @@
             // CreatePostbill
             // 
             this.CreatePostbill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CreatePostbill.BackColor = System.Drawing.Color.DodgerBlue;
-            this.CreatePostbill.Enabled = false;
-            this.CreatePostbill.FlatAppearance.BorderSize = 0;
+            this.CreatePostbill.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.CreatePostbill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CreatePostbill.ForeColor = System.Drawing.Color.White;
+            this.CreatePostbill.ForeColor = System.Drawing.Color.Black;
             this.CreatePostbill.Location = new System.Drawing.Point(1087, 4);
             this.CreatePostbill.Name = "CreatePostbill";
-            this.CreatePostbill.Size = new System.Drawing.Size(75, 23);
+            this.CreatePostbill.Size = new System.Drawing.Size(75, 25);
             this.CreatePostbill.TabIndex = 5;
             this.CreatePostbill.Text = "Post Bill";
             this.CreatePostbill.UseVisualStyleBackColor = false;
             // 
             // CreatePrintBill
             // 
-            this.CreatePrintBill.BackColor = System.Drawing.Color.DodgerBlue;
-            this.CreatePrintBill.Enabled = false;
-            this.CreatePrintBill.FlatAppearance.BorderSize = 0;
+            this.CreatePrintBill.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.CreatePrintBill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CreatePrintBill.ForeColor = System.Drawing.Color.White;
+            this.CreatePrintBill.ForeColor = System.Drawing.Color.Black;
             this.CreatePrintBill.Location = new System.Drawing.Point(1006, 4);
             this.CreatePrintBill.Name = "CreatePrintBill";
-            this.CreatePrintBill.Size = new System.Drawing.Size(75, 23);
+            this.CreatePrintBill.Size = new System.Drawing.Size(75, 25);
             this.CreatePrintBill.TabIndex = 4;
             this.CreatePrintBill.Text = "Print Bill";
             this.CreatePrintBill.UseVisualStyleBackColor = false;
@@ -270,14 +263,14 @@
             // gridControl2
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gridControl2.Location = new System.Drawing.Point(0, 177);
+            this.gridControl2.Location = new System.Drawing.Point(0, 209);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Name = "gridControl2";
             this.gridControl2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1,
-            this.ServiceCombobox,
-            this.TechnicianCombobox,
-            this.ConsultantCombobox,
+            this.ItemNameCbx,
+            this.WorkerIdCbx,
+            this.AdviserIdCbx,
             this.repositoryItemGridLookUpEdit1});
             this.gridControl2.Size = new System.Drawing.Size(1165, 182);
             this.gridControl2.TabIndex = 3;
@@ -305,23 +298,24 @@
             // _ItemName
             // 
             this._ItemName.Caption = "Hàng hóa, dịch vụ";
-            this._ItemName.ColumnEdit = this.ServiceCombobox;
+            this._ItemName.ColumnEdit = this.ItemNameCbx;
             this._ItemName.FieldName = "ItemName";
             this._ItemName.Name = "_ItemName";
             this._ItemName.Visible = true;
             this._ItemName.VisibleIndex = 0;
             this._ItemName.Width = 308;
             // 
-            // ServiceCombobox
+            // ItemNameCbx
             // 
-            this.ServiceCombobox.AutoHeight = false;
-            this.ServiceCombobox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.ItemNameCbx.AutoHeight = false;
+            this.ItemNameCbx.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.ServiceCombobox.Name = "ServiceCombobox";
+            this.ItemNameCbx.Name = "ItemNameCbx";
             // 
             // _ItemQuality
             // 
             this._ItemQuality.Caption = "SL";
+            this._ItemQuality.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this._ItemQuality.FieldName = "ItemQuality";
             this._ItemQuality.Name = "_ItemQuality";
             this._ItemQuality.Visible = true;
@@ -351,6 +345,8 @@
             // _DiscountGrid2
             // 
             this._DiscountGrid2.Caption = "Giảm giá";
+            this._DiscountGrid2.DisplayFormat.FormatString = "N0";
+            this._DiscountGrid2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this._DiscountGrid2.FieldName = "Discount";
             this._DiscountGrid2.Name = "_DiscountGrid2";
             this._DiscountGrid2.Visible = true;
@@ -362,6 +358,7 @@
             this._TotalGrid2.Caption = "Thành tiền";
             this._TotalGrid2.FieldName = "Total";
             this._TotalGrid2.Name = "_TotalGrid2";
+            this._TotalGrid2.OptionsColumn.AllowEdit = false;
             this._TotalGrid2.Visible = true;
             this._TotalGrid2.VisibleIndex = 5;
             this._TotalGrid2.Width = 98;
@@ -369,36 +366,36 @@
             // _technician
             // 
             this._technician.Caption = "Kỹ thuật";
-            this._technician.ColumnEdit = this.TechnicianCombobox;
+            this._technician.ColumnEdit = this.WorkerIdCbx;
             this._technician.FieldName = "WorkerId";
             this._technician.Name = "_technician";
             this._technician.Visible = true;
             this._technician.VisibleIndex = 6;
             this._technician.Width = 213;
             // 
-            // TechnicianCombobox
+            // WorkerIdCbx
             // 
-            this.TechnicianCombobox.AutoHeight = false;
-            this.TechnicianCombobox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.WorkerIdCbx.AutoHeight = false;
+            this.WorkerIdCbx.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.TechnicianCombobox.Name = "TechnicianCombobox";
+            this.WorkerIdCbx.Name = "WorkerIdCbx";
             // 
             // _consultant
             // 
             this._consultant.Caption = "Tư vấn";
-            this._consultant.ColumnEdit = this.ConsultantCombobox;
-            this._consultant.FieldName = "AdviserID";
+            this._consultant.ColumnEdit = this.AdviserIdCbx;
+            this._consultant.FieldName = "AdviserId";
             this._consultant.Name = "_consultant";
             this._consultant.Visible = true;
             this._consultant.VisibleIndex = 7;
             this._consultant.Width = 200;
             // 
-            // ConsultantCombobox
+            // AdviserIdCbx
             // 
-            this.ConsultantCombobox.AutoHeight = false;
-            this.ConsultantCombobox.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.AdviserIdCbx.AutoHeight = false;
+            this.AdviserIdCbx.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.ConsultantCombobox.Name = "ConsultantCombobox";
+            this.AdviserIdCbx.Name = "AdviserIdCbx";
             // 
             // repositoryItemComboBox1
             // 
@@ -407,6 +404,21 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
             // 
+            // repositoryItemGridLookUpEdit1
+            // 
+            this.repositoryItemGridLookUpEdit1.AutoHeight = false;
+            this.repositoryItemGridLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemGridLookUpEdit1.Name = "repositoryItemGridLookUpEdit1";
+            this.repositoryItemGridLookUpEdit1.PopupView = this.repositoryItemGridLookUpEdit1View;
+            // 
+            // repositoryItemGridLookUpEdit1View
+            // 
+            this.repositoryItemGridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.repositoryItemGridLookUpEdit1View.Name = "repositoryItemGridLookUpEdit1View";
+            this.repositoryItemGridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.repositoryItemGridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
             // pHeader
             // 
             this.pHeader.Controls.Add(this.NoteTxt);
@@ -414,7 +426,7 @@
             this.pHeader.Controls.Add(this.CreateServicelbl);
             this.pHeader.Controls.Add(this.ServicePool);
             this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pHeader.Location = new System.Drawing.Point(0, 86);
+            this.pHeader.Location = new System.Drawing.Point(0, 118);
             this.pHeader.Name = "pHeader";
             this.pHeader.Size = new System.Drawing.Size(1165, 91);
             this.pHeader.TabIndex = 2;
@@ -477,7 +489,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1165, 86);
+            this.panel3.Size = new System.Drawing.Size(1165, 118);
             this.panel3.TabIndex = 1;
             // 
             // gridControl3
@@ -486,7 +498,7 @@
             this.gridControl3.Location = new System.Drawing.Point(0, 0);
             this.gridControl3.MainView = this.gridView3;
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(1165, 86);
+            this.gridControl3.Size = new System.Drawing.Size(1165, 118);
             this.gridControl3.TabIndex = 1;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -992,21 +1004,6 @@
             this.SearchControl1Txt.TabIndex = 0;
             this.SearchControl1Txt.Text = "Nhập biển số xe";
             // 
-            // repositoryItemGridLookUpEdit1
-            // 
-            this.repositoryItemGridLookUpEdit1.AutoHeight = false;
-            this.repositoryItemGridLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemGridLookUpEdit1.Name = "repositoryItemGridLookUpEdit1";
-            this.repositoryItemGridLookUpEdit1.PopupView = this.repositoryItemGridLookUpEdit1View;
-            // 
-            // repositoryItemGridLookUpEdit1View
-            // 
-            this.repositoryItemGridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.repositoryItemGridLookUpEdit1View.Name = "repositoryItemGridLookUpEdit1View";
-            this.repositoryItemGridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.repositoryItemGridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
             // DXMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -1027,10 +1024,12 @@
             this.pFooter.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ServiceCombobox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TechnicianCombobox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ConsultantCombobox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemNameCbx)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WorkerIdCbx)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AdviserIdCbx)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
             this.pHeader.ResumeLayout(false);
             this.pHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicePool.Properties)).EndInit();
@@ -1055,8 +1054,6 @@
             this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1128,10 +1125,10 @@
         private DevExpress.XtraGrid.Columns.GridColumn _technician;
         private DevExpress.XtraGrid.Columns.GridColumn _consultant;
         private System.Windows.Forms.Button BtnRemove;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox ServiceCombobox;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox ItemNameCbx;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox TechnicianCombobox;
-        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox ConsultantCombobox;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox WorkerIdCbx;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox AdviserIdCbx;
         private System.Windows.Forms.Panel pFooter;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnAdđLine;
