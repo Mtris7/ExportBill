@@ -30,18 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DXMain));
-            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
+            this.CreateServiceTab = new DevExpress.XtraTab.XtraTabPage();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.panelInfo = new System.Windows.Forms.Panel();
             this.pFooter = new System.Windows.Forms.Panel();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnAdđLine = new System.Windows.Forms.Button();
             this.BtnRemove = new System.Windows.Forms.Button();
-            this.CreatePostbill = new System.Windows.Forms.Button();
             this.CreatePrintBill = new System.Windows.Forms.Button();
-            this.gridControl2 = new DevExpress.XtraGrid.GridControl();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.ServiceLineCtr = new DevExpress.XtraGrid.GridControl();
+            this.gvServiceLine = new DevExpress.XtraGrid.Views.Grid.GridView();
             this._ItemName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.ItemNameCbx = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this._ItemQuality = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -62,8 +61,8 @@
             this.CreateServicelbl = new DevExpress.XtraEditors.LabelControl();
             this.ServicePool = new DevExpress.XtraEditors.ComboBoxEdit();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.gridControl3 = new DevExpress.XtraGrid.GridControl();
-            this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.ServiceHeaderCtr = new DevExpress.XtraGrid.GridControl();
+            this.gvServiceHeader = new DevExpress.XtraGrid.Views.Grid.GridView();
             this._CustomerNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this._Customer = new DevExpress.XtraGrid.Columns.GridColumn();
             this._Address = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -76,7 +75,7 @@
             this.bsCheck = new System.Windows.Forms.RadioButton();
             this.button2 = new System.Windows.Forms.Button();
             this.Search2Txt = new ExportBill.PlaceHolderTextBox();
-            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.ServiceListTab = new DevExpress.XtraTab.XtraTabPage();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -85,7 +84,7 @@
             this.LX = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TSC = new DevExpress.XtraGrid.Columns.GridColumn();
             this.DG = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Total = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._TotalGridListItem = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Payment = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cmbPayment = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.PrintBill = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -104,15 +103,15 @@
             this.button1 = new System.Windows.Forms.Button();
             this.SearchControl1Txt = new ExportBill.PlaceHolderTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
-            this.xtraTabControl1.SuspendLayout();
-            this.xtraTabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
+            this.xtraTabControl.SuspendLayout();
+            this.CreateServiceTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             this.groupControl4.SuspendLayout();
             this.panelInfo.SuspendLayout();
             this.pFooter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ServiceLineCtr)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvServiceLine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemNameCbx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WorkerIdCbx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdviserIdCbx)).BeginInit();
@@ -122,11 +121,11 @@
             this.pHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicePool.Properties)).BeginInit();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ServiceHeaderCtr)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvServiceHeader)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
-            this.xtraTabPage1.SuspendLayout();
+            this.ServiceListTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -142,25 +141,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
-            // xtraTabControl1
+            // xtraTabControl
             // 
-            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
-            this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage2;
-            this.xtraTabControl1.Size = new System.Drawing.Size(1182, 553);
-            this.xtraTabControl1.TabIndex = 0;
-            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage1,
-            this.xtraTabPage2});
+            this.xtraTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControl.Location = new System.Drawing.Point(0, 0);
+            this.xtraTabControl.Name = "xtraTabControl";
+            this.xtraTabControl.SelectedTabPage = this.ServiceListTab;
+            this.xtraTabControl.Size = new System.Drawing.Size(1182, 553);
+            this.xtraTabControl.TabIndex = 0;
+            this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.ServiceListTab,
+            this.CreateServiceTab});
             // 
-            // xtraTabPage2
+            // CreateServiceTab
             // 
-            this.xtraTabPage2.Controls.Add(this.groupControl4);
-            this.xtraTabPage2.Controls.Add(this.groupControl3);
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1175, 518);
-            this.xtraTabPage2.Text = "Tạo phiếu dịch vụ";
+            this.CreateServiceTab.Controls.Add(this.groupControl4);
+            this.CreateServiceTab.Controls.Add(this.groupControl3);
+            this.CreateServiceTab.Name = "CreateServiceTab";
+            this.CreateServiceTab.Size = new System.Drawing.Size(1175, 518);
+            this.CreateServiceTab.Text = "Tạo phiếu dịch vụ";
             // 
             // groupControl4
             // 
@@ -173,7 +172,7 @@
             // panelInfo
             // 
             this.panelInfo.Controls.Add(this.pFooter);
-            this.panelInfo.Controls.Add(this.gridControl2);
+            this.panelInfo.Controls.Add(this.ServiceLineCtr);
             this.panelInfo.Controls.Add(this.pHeader);
             this.panelInfo.Controls.Add(this.panel3);
             this.panelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -187,7 +186,6 @@
             this.pFooter.Controls.Add(this.btnBack);
             this.pFooter.Controls.Add(this.btnAdđLine);
             this.pFooter.Controls.Add(this.BtnRemove);
-            this.pFooter.Controls.Add(this.CreatePostbill);
             this.pFooter.Controls.Add(this.CreatePrintBill);
             this.pFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pFooter.Location = new System.Drawing.Point(0, 358);
@@ -234,52 +232,39 @@
             this.BtnRemove.UseVisualStyleBackColor = false;
             this.BtnRemove.Click += new System.EventHandler(this.RemoveCol_Click);
             // 
-            // CreatePostbill
-            // 
-            this.CreatePostbill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CreatePostbill.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.CreatePostbill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CreatePostbill.ForeColor = System.Drawing.Color.Black;
-            this.CreatePostbill.Location = new System.Drawing.Point(1087, 4);
-            this.CreatePostbill.Name = "CreatePostbill";
-            this.CreatePostbill.Size = new System.Drawing.Size(75, 25);
-            this.CreatePostbill.TabIndex = 5;
-            this.CreatePostbill.Text = "Post Bill";
-            this.CreatePostbill.UseVisualStyleBackColor = false;
-            // 
             // CreatePrintBill
             // 
             this.CreatePrintBill.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.CreatePrintBill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CreatePrintBill.ForeColor = System.Drawing.Color.Black;
-            this.CreatePrintBill.Location = new System.Drawing.Point(1006, 4);
+            this.CreatePrintBill.Location = new System.Drawing.Point(1037, 4);
             this.CreatePrintBill.Name = "CreatePrintBill";
-            this.CreatePrintBill.Size = new System.Drawing.Size(75, 25);
+            this.CreatePrintBill.Size = new System.Drawing.Size(117, 25);
             this.CreatePrintBill.TabIndex = 4;
-            this.CreatePrintBill.Text = "Print Bill";
+            this.CreatePrintBill.Text = "Create Bill";
             this.CreatePrintBill.UseVisualStyleBackColor = false;
             this.CreatePrintBill.Click += new System.EventHandler(this.CreatePrintBill_Click);
             // 
-            // gridControl2
+            // ServiceLineCtr
             // 
-            this.gridControl2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gridControl2.Location = new System.Drawing.Point(0, 209);
-            this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Name = "gridControl2";
-            this.gridControl2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.ServiceLineCtr.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ServiceLineCtr.Location = new System.Drawing.Point(0, 209);
+            this.ServiceLineCtr.MainView = this.gvServiceLine;
+            this.ServiceLineCtr.Name = "ServiceLineCtr";
+            this.ServiceLineCtr.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1,
             this.ItemNameCbx,
             this.WorkerIdCbx,
             this.AdviserIdCbx,
             this.repositoryItemGridLookUpEdit1});
-            this.gridControl2.Size = new System.Drawing.Size(1165, 182);
-            this.gridControl2.TabIndex = 3;
-            this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView2});
+            this.ServiceLineCtr.Size = new System.Drawing.Size(1165, 182);
+            this.ServiceLineCtr.TabIndex = 3;
+            this.ServiceLineCtr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvServiceLine});
             // 
-            // gridView2
+            // gvServiceLine
             // 
-            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gvServiceLine.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this._ItemName,
             this._ItemQuality,
             this._ItemUnit,
@@ -288,12 +273,12 @@
             this._TotalGrid2,
             this._technician,
             this._consultant});
-            this.gridView2.GridControl = this.gridControl2;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsView.ShowGroupPanel = false;
-            this.gridView2.FocusedColumnChanged += new DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventHandler(this.gridView2_FocusedColumnChanged);
-            this.gridView2.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
-            this.gridView2.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanging);
+            this.gvServiceLine.GridControl = this.ServiceLineCtr;
+            this.gvServiceLine.Name = "gvServiceLine";
+            this.gvServiceLine.OptionsView.ShowGroupPanel = false;
+            this.gvServiceLine.FocusedColumnChanged += new DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventHandler(this.gridView2_FocusedColumnChanged);
+            this.gvServiceLine.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
+            this.gvServiceLine.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanging);
             // 
             // _ItemName
             // 
@@ -349,6 +334,7 @@
             this._DiscountGrid2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this._DiscountGrid2.FieldName = "Discount";
             this._DiscountGrid2.Name = "_DiscountGrid2";
+            this._DiscountGrid2.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this._DiscountGrid2.Visible = true;
             this._DiscountGrid2.VisibleIndex = 4;
             this._DiscountGrid2.Width = 105;
@@ -485,27 +471,27 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.gridControl3);
+            this.panel3.Controls.Add(this.ServiceHeaderCtr);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1165, 118);
             this.panel3.TabIndex = 1;
             // 
-            // gridControl3
+            // ServiceHeaderCtr
             // 
-            this.gridControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl3.Location = new System.Drawing.Point(0, 0);
-            this.gridControl3.MainView = this.gridView3;
-            this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(1165, 118);
-            this.gridControl3.TabIndex = 1;
-            this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView3});
+            this.ServiceHeaderCtr.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ServiceHeaderCtr.Location = new System.Drawing.Point(0, 0);
+            this.ServiceHeaderCtr.MainView = this.gvServiceHeader;
+            this.ServiceHeaderCtr.Name = "ServiceHeaderCtr";
+            this.ServiceHeaderCtr.Size = new System.Drawing.Size(1165, 118);
+            this.ServiceHeaderCtr.TabIndex = 1;
+            this.ServiceHeaderCtr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvServiceHeader});
             // 
-            // gridView3
+            // gvServiceHeader
             // 
-            this.gridView3.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gvServiceHeader.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this._CustomerNumber,
             this._Customer,
             this._Address,
@@ -513,12 +499,12 @@
             this._PlateID,
             this._CountCheck,
             this.CreateService});
-            this.gridView3.GridControl = this.gridControl3;
-            this.gridView3.Name = "gridView3";
-            this.gridView3.OptionsView.ShowGroupPanel = false;
-            this.gridView3.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gridView3_RowCellClick);
-            this.gridView3.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridView3_RowCellStyle);
-            this.gridView3.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView3_KeyDown);
+            this.gvServiceHeader.GridControl = this.ServiceHeaderCtr;
+            this.gvServiceHeader.Name = "gvServiceHeader";
+            this.gvServiceHeader.OptionsView.ShowGroupPanel = false;
+            this.gvServiceHeader.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.gridView3_RowCellClick);
+            this.gvServiceHeader.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridView3_RowCellStyle);
+            this.gvServiceHeader.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridView3_KeyDown);
             // 
             // _CustomerNumber
             // 
@@ -656,13 +642,13 @@
             this.Search2Txt.TabIndex = 0;
             this.Search2Txt.Text = "Tìm khách hàng: Biển số/SDT ";
             // 
-            // xtraTabPage1
+            // ServiceListTab
             // 
-            this.xtraTabPage1.Controls.Add(this.groupControl2);
-            this.xtraTabPage1.Controls.Add(this.groupControl1);
-            this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(1175, 518);
-            this.xtraTabPage1.Text = "Danh sách xe làm dịch vụ";
+            this.ServiceListTab.Controls.Add(this.groupControl2);
+            this.ServiceListTab.Controls.Add(this.groupControl1);
+            this.ServiceListTab.Name = "ServiceListTab";
+            this.ServiceListTab.Size = new System.Drawing.Size(1175, 518);
+            this.ServiceListTab.Text = "Danh sách xe làm dịch vụ";
             // 
             // groupControl2
             // 
@@ -702,7 +688,7 @@
             this.LX,
             this.TSC,
             this.DG,
-            this.Total,
+            this._TotalGridListItem,
             this.Payment,
             this.PrintBill,
             this.PostBill});
@@ -793,25 +779,25 @@
             this.DG.VisibleIndex = 4;
             this.DG.Width = 352;
             // 
-            // Total
+            // _TotalGridListItem
             // 
-            this.Total.AppearanceCell.Options.UseTextOptions = true;
-            this.Total.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.Total.AppearanceHeader.Options.UseTextOptions = true;
-            this.Total.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.Total.Caption = "Thành tiền";
-            this.Total.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.Total.FieldName = "Total";
-            this.Total.GroupFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this.Total.Name = "Total";
-            this.Total.OptionsColumn.AllowEdit = false;
-            this.Total.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            this._TotalGridListItem.AppearanceCell.Options.UseTextOptions = true;
+            this._TotalGridListItem.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this._TotalGridListItem.AppearanceHeader.Options.UseTextOptions = true;
+            this._TotalGridListItem.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this._TotalGridListItem.Caption = "Thành tiền";
+            this._TotalGridListItem.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this._TotalGridListItem.FieldName = "Total";
+            this._TotalGridListItem.GroupFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this._TotalGridListItem.Name = "_TotalGridListItem";
+            this._TotalGridListItem.OptionsColumn.AllowEdit = false;
+            this._TotalGridListItem.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total", "{0:N0}VNĐ"),
             new DevExpress.XtraGrid.GridColumnSummaryItem()});
-            this.Total.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
-            this.Total.Visible = true;
-            this.Total.VisibleIndex = 5;
-            this.Total.Width = 126;
+            this._TotalGridListItem.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
+            this._TotalGridListItem.Visible = true;
+            this._TotalGridListItem.VisibleIndex = 5;
+            this._TotalGridListItem.Width = 126;
             // 
             // Payment
             // 
@@ -1009,21 +995,21 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1182, 553);
-            this.Controls.Add(this.xtraTabControl1);
+            this.Controls.Add(this.xtraTabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DXMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tiến Thu";
             this.Load += new System.EventHandler(this.DXMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
-            this.xtraTabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).EndInit();
+            this.xtraTabControl.ResumeLayout(false);
+            this.CreateServiceTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
             this.groupControl4.ResumeLayout(false);
             this.panelInfo.ResumeLayout(false);
             this.pFooter.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ServiceLineCtr)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvServiceLine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemNameCbx)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WorkerIdCbx)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdviserIdCbx)).EndInit();
@@ -1034,12 +1020,12 @@
             this.pHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicePool.Properties)).EndInit();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ServiceHeaderCtr)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvServiceHeader)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             this.groupControl3.PerformLayout();
-            this.xtraTabPage1.ResumeLayout(false);
+            this.ServiceListTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
@@ -1060,9 +1046,9 @@
 
         #endregion
 
-        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl;
+        private DevExpress.XtraTab.XtraTabPage ServiceListTab;
+        private DevExpress.XtraTab.XtraTabPage CreateServiceTab;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private PlaceHolderTextBox SearchControl1Txt;
         private System.Windows.Forms.Button button1;
@@ -1083,7 +1069,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn LX;
         private DevExpress.XtraGrid.Columns.GridColumn TSC;
         private DevExpress.XtraGrid.Columns.GridColumn DG;
-        private DevExpress.XtraGrid.Columns.GridColumn Total;
+        private DevExpress.XtraGrid.Columns.GridColumn _TotalGridListItem;
         private DevExpress.XtraGrid.Columns.GridColumn Payment;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cmbPayment;
         private DevExpress.XtraGrid.Columns.GridColumn PrintBill;
@@ -1100,8 +1086,8 @@
         private DevExpress.XtraEditors.LabelControl CreateServicelbl;
         private DevExpress.XtraEditors.ComboBoxEdit ServicePool;
         private System.Windows.Forms.Panel panel3;
-        private DevExpress.XtraGrid.GridControl gridControl3;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
+        private DevExpress.XtraGrid.GridControl ServiceHeaderCtr;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvServiceHeader;
         private DevExpress.XtraGrid.Columns.GridColumn _Customer;
         private DevExpress.XtraGrid.Columns.GridColumn _PlateID;
         private DevExpress.XtraGrid.Columns.GridColumn _Phone;
@@ -1112,10 +1098,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn _Address;
         private DevExpress.XtraGrid.Columns.GridColumn _CountCheck;
         private DevExpress.XtraGrid.Columns.GridColumn CreateService;
-        private System.Windows.Forms.Button CreatePostbill;
         private System.Windows.Forms.Button CreatePrintBill;
-        private DevExpress.XtraGrid.GridControl gridControl2;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.GridControl ServiceLineCtr;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvServiceLine;
         private DevExpress.XtraGrid.Columns.GridColumn _ItemName;
         private DevExpress.XtraGrid.Columns.GridColumn _ItemQuality;
         private DevExpress.XtraGrid.Columns.GridColumn _ItemUnit;

@@ -91,8 +91,8 @@ namespace ExportBill
                 BindingList<ItemSell> ds = new BindingList<ItemSell>();
                 //var a = new ItemSell("b");
                 //ds.Add(a);
-                this.gridControl2.DataSource = ds;
-                this.gridView2.AddNewRow();
+                this.ServiceLineCtr.DataSource = ds;
+                this.gvServiceLine.AddNewRow();
             }
             catch (Exception ex)
             {
@@ -126,7 +126,7 @@ namespace ExportBill
             {
                 this.gridView1.Columns["Total"].DisplayFormat.FormatString = "N0";
                 this.pHeader.Enabled = false;
-                this.gridControl2.Enabled = false;
+                this.ServiceLineCtr.Enabled = false;
                 this.pFooter.Enabled = false;
             }
             catch (Exception ex)
@@ -163,7 +163,7 @@ namespace ExportBill
                     toolTip1.Active = true;
                     return;
                 }
-                string url = @"http://api.ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext="+ Search2Txt.Text+ "&searchtype=";
+                string url = @"http://api.ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + Search2Txt.Text + "&searchtype=";
                 if (bsCheck.Checked)
                     url += "LicensePlate";
                 else
@@ -193,9 +193,9 @@ namespace ExportBill
                     {
                         var data = item.Split(';');
                         //"C15-030575;LÊ THỊ DIỆU ANH;BẦU CÂU - HÒA CHÂU - HV - ĐN\nHOAVANG\nDANANG\nVNM;0979300094;43H1-16861;2"
-                        ListCustomerSearch.Add(new CustomerModel(data[0], data[1],data[2],data[3],data[4],null,data[5]));
+                        ListCustomerSearch.Add(new CustomerModel(data[0], data[1], data[2], data[3], data[4], null, data[5]));
                     }
-                    this.gridControl3.DataSource = ListCustomerSearch;
+                    this.ServiceHeaderCtr.DataSource = ListCustomerSearch;
                 }
                 else
                 {
@@ -209,55 +209,11 @@ namespace ExportBill
             }
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                this.Enabled = false;
-                this.ds.Clear();
-                string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId="+ Staff.UserID + "&serviceDate=" + this.dateTimePicker1.Value.ToString("dd/MM/yyyy");
-                if(!string.IsNullOrWhiteSpace(this.SearchControl1Txt.Text))
-                {
-                    url += "&plateId=" + this.SearchControl1Txt.Text;
-                }
-                var client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var request = new HttpRequestMessage(HttpMethod.Get, url);
-
-                var response = await client.SendAsync(request);
-                this.Enabled = true;
-                if (response.IsSuccessStatusCode)
-                {
-                    var body = await response.Content.ReadAsStringAsync();
-                    var dataList = JsonConvert.DeserializeObject<DataModel>(body);
-                    if (dataList.data == null)
-                    {
-                        MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    if (dataList.data.Count == 0)
-                    {
-                        DialogResult result = MessageBox.Show("Không tìm thấy khách hàng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        return;
-                    }
-                    foreach (var item in dataList.data)
-                    {
-                        var data = item.Split(';');
-                        var postBill = data[11] == "Open" ? PostBillStr : Posted;
-                        var payment = data[12];
-                        //public Customer(string maPhieu, string userName, string bs, string lx, string tsc, string dg, decimal discount, decimal total, string detaiMoney, string company, string adress, string date, string print)
-                        ds.Add(new Customer(data[0], data[1], data[2], data[3], data[4], data[5], 
-                            Convert.ToInt32(Convert.ToDecimal(data[6])), Convert.ToInt32(Convert.ToDecimal(data[7])),
-                            data[8], data[9], data[10],this.dateTimePicker1.Value.ToString("dd/MM/yyyy"), "Print",
-                            postBill,payment));
-                    }
-                    this.gridControl1.DataSource = ds;
-                }
-                else
-                {
-                    MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                this.LoadListBike();
 
             }
             catch (Exception ex)
@@ -389,8 +345,7 @@ namespace ExportBill
                     break;
             }
         }
-
-
+        
         private void CreatePrintBill_Click(object sender, EventArgs e)
         {
             try
@@ -402,6 +357,8 @@ namespace ExportBill
                     {
                         this.Enabled = true;
                         MessageBox.Show("Tạo phiếu thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        xtraTabControl.SelectedTabPage = ServiceListTab;
+                        this.LoadListBike(true);
                     }
                         
                     else
@@ -444,7 +401,7 @@ namespace ExportBill
         {
             try
             {
-                this.gridView2.DeleteRow(this.gridView2.FocusedRowHandle);
+                this.gvServiceLine.DeleteRow(this.gvServiceLine.FocusedRowHandle);
             }
             catch (Exception ex)
             {
@@ -458,22 +415,22 @@ namespace ExportBill
             try
             {
                 if (string.IsNullOrWhiteSpace(e.Value?.ToString())) return;
-
-                if (e.Column.Equals(_DiscountGrid2))
+                var check = e.Value?.ToString().All(char.IsDigit);
+                if (e.Column.Equals(_DiscountGrid2) && (check?? false))
                 {
                     //this.gridView2.SetRowCellValue(e.RowHandle, _DiscountGrid2, Convert.ToDecimal(e.Value ?? 0).ToString("N0"));
-                    var itemPrice = this.gridView2.GetRowCellValue(e.RowHandle, _ItemPrice);
-                    var itemQuatity = this.gridView2.GetRowCellValue(e.RowHandle, _ItemQuality) ?? 1;
+                    var itemPrice = this.gvServiceLine.GetRowCellValue(e.RowHandle, _ItemPrice);
+                    var itemQuatity = this.gvServiceLine.GetRowCellValue(e.RowHandle, _ItemQuality) ?? 1;
                     var total = Convert.ToDecimal(itemPrice) * Convert.ToDecimal(itemQuatity) - Convert.ToDecimal(e.Value);
-                    this.gridView2.SetRowCellValue(e.RowHandle, _TotalGrid2, total.ToString("N0"));
+                    this.gvServiceLine.SetRowCellValue(e.RowHandle, _TotalGrid2, total.ToString("N0"));
                 }
                
-                if (e.Column.Equals(_ItemQuality))
+                if (e.Column.Equals(_ItemQuality) && (check ?? false))
                 {
-                    var itemPrice = this.gridView2.GetRowCellValue(e.RowHandle, _ItemPrice);
-                    var itemDiscount = this.gridView2.GetRowCellValue(e.RowHandle, _DiscountGrid2);
+                    var itemPrice = this.gvServiceLine.GetRowCellValue(e.RowHandle, _ItemPrice);
+                    var itemDiscount = this.gvServiceLine.GetRowCellValue(e.RowHandle, _DiscountGrid2);
                     var total = Convert.ToDecimal(itemPrice) * Convert.ToDecimal(e.Value) - Convert.ToDecimal(itemDiscount);
-                    this.gridView2.SetRowCellValue(e.RowHandle, _TotalGrid2, total.ToString("N0"));
+                    this.gvServiceLine.SetRowCellValue(e.RowHandle, _TotalGrid2, total.ToString("N0"));
                 }
             }
             catch(Exception ex)
@@ -496,10 +453,10 @@ namespace ExportBill
                     var itemUnit = item.First().ItemUnit;
                     //var itemInventory = item.First().Inventory;
                     var itemTotal = itemPrice * 1;
-                    this.gridView2.SetRowCellValue(e.RowHandle, _ItemName, e.Value);
-                    this.gridView2.SetRowCellValue(e.RowHandle, _ItemPrice, itemPrice.ToString("N0"));
-                    this.gridView2.SetRowCellValue(e.RowHandle, _TotalGrid2, itemTotal.ToString("N0"));
-                    this.gridView2.SetRowCellValue(e.RowHandle, _ItemUnit, itemUnit);
+                    this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemName, e.Value);
+                    this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemPrice, itemPrice.ToString("N0"));
+                    this.gvServiceLine.SetRowCellValue(e.RowHandle, _TotalGrid2, itemTotal.ToString("N0"));
+                    this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemUnit, itemUnit);
 
                 }
             }
@@ -510,6 +467,7 @@ namespace ExportBill
         }
 
         #endregion
+
         #region grid3 Create Service Header
 
         private void gridView3_RowCellStyle(object sender, RowCellStyleEventArgs e)
@@ -549,19 +507,19 @@ namespace ExportBill
             {
                 if (e.Column == CreateService)
                 {
-                    var CustomerNumber = this.gridView3.GetRowCellValue(e.RowHandle, _CustomerNumber)?.ToString();
-                    sSelect = ListCustomerSearch.Where(x => x.CustomerNumber == CustomerNumber).FirstOrDefault();
+                    var CustomerNumber = this.gvServiceHeader.GetRowCellValue(e.RowHandle, _CustomerNumber)?.ToString();
+                    this.sSelect = ListCustomerSearch.Where(x => x.CustomerNumber == CustomerNumber).FirstOrDefault();
 
                     //label customer
-                    this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: " + sSelect.PlateID + " | " + sSelect.CustomerName;
+                    this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: " + this.sSelect.PlateID + " | " + this.sSelect.CustomerName;
 
                     //enable 
                     this.pHeader.Enabled = true;
-                    this.gridControl2.Enabled = true;
+                    this.ServiceLineCtr.Enabled = true;
                     this.pFooter.Enabled = true;
                     this.panel3.Enabled = false;
 
-                    this.gridView2.FocusedRowHandle = 0;
+                    this.gvServiceLine.FocusedRowHandle = 0;
                 }
             }
             catch (Exception ex)
@@ -570,6 +528,36 @@ namespace ExportBill
             }
         }
         #endregion
+
+
+        private void btnAdđLine_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.gvServiceLine.AddNewRow();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: ";
+                this.pHeader.Enabled = false;
+                this.ServiceLineCtr.Enabled = false;
+                this.pFooter.Enabled = false;
+                this.panel3.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #endregion
         //##############################################################################################
         #region method  
@@ -753,19 +741,15 @@ namespace ExportBill
                     {
                         this.ServiceId = result["data"].Value<string>();
                         return true;
-                        //MessageBox.Show("Tạo phiếu thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        //new PrintInvoiceForm().ShowDialog();
                     }
                     else
                     {
                         return false;
-                        //MessageBox.Show("Tạo phiếu thất bại, vui lòng thử lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
                     return false;
-                    //MessageBox.Show("Tạo phiếu thất bại, vui lòng thử lại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -778,12 +762,12 @@ namespace ExportBill
         {
             try
             {
-                for(int i = 0; i < gridView2.RowCount;i++)
+                for(int i = 0; i < gvServiceLine.RowCount; i++)
                 {
-                    var item =  ListIS.Where(x=>x.ItemName.Equals(this.gridView2.GetRowCellValue(i, _ItemName)));
+                    var item =  ListIS.Where(x=>x.ItemName.Equals(this.gvServiceLine.GetRowCellValue(i, _ItemName)));
                     if (!item.Any()) return false;
                     var itemID = item.First().ItemID;
-                    var ServiceorderID = gridView2.GetRowCellValue(i, _ItemName);
+                    var ServiceorderID = gvServiceLine.GetRowCellValue(i, _ItemName);
                     var cl = new HttpClient();
                     string url = "http://api.ototienthu.com.vn/api/v1/customers/CreateServiceLine";
                     cl.BaseAddress = new Uri(url);
@@ -795,10 +779,10 @@ namespace ExportBill
                     var nvc = new List<KeyValuePair<string, string>>();
                     nvc.Add(new KeyValuePair<string, string>("serviceOrderId", this.ServiceId));
                     nvc.Add(new KeyValuePair<string, string>("itemId", itemID));
-                    nvc.Add(new KeyValuePair<string, string>("qty", this.gridView2.GetRowCellValue(i, _ItemQuality) != null? "1" : this.gridView2.GetRowCellValue(i, _ItemQuality).ToString()));
-                    nvc.Add(new KeyValuePair<string, string>("workerId", this.gridView2.GetRowCellValue(i, _technician)?.ToString()));
-                    nvc.Add(new KeyValuePair<string, string>("adviserId", this.gridView2.GetRowCellValue(i, _consultant)?.ToString()));
-                    nvc.Add(new KeyValuePair<string, string>("lineDisc", this.gridView2.GetRowCellValue(i, _DiscountGrid2) != null ? "0" : this.gridView2.GetRowCellValue(i, _DiscountGrid2).ToString()));
+                    nvc.Add(new KeyValuePair<string, string>("qty", this.gvServiceLine.GetRowCellValue(i, _ItemQuality) == null? "1" : this.gvServiceLine.GetRowCellValue(i, _ItemQuality).ToString()));
+                    nvc.Add(new KeyValuePair<string, string>("workerId", this.gvServiceLine.GetRowCellValue(i, _technician)?.ToString()));
+                    nvc.Add(new KeyValuePair<string, string>("adviserId", this.gvServiceLine.GetRowCellValue(i, _consultant)?.ToString()));
+                    nvc.Add(new KeyValuePair<string, string>("lineDisc", this.gvServiceLine.GetRowCellValue(i, _DiscountGrid2) == null ? "0" : this.gvServiceLine.GetRowCellValue(i, _DiscountGrid2).ToString()));
 
                     var req = new HttpRequestMessage(HttpMethod.Post, url);
                     req.Content = new FormUrlEncodedContent(nvc);
@@ -946,29 +930,61 @@ namespace ExportBill
             }
         }
 
-        private void btnAdđLine_Click(object sender, EventArgs e)
+        private async void LoadListBike(bool check = false)
         {
             try
             {
-                this.gridView2.AddNewRow();
-            }catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+                if(check)
+                {
+                    SearchControl1Txt.Text = this.sSelect.PlateID;
+                }
+                this.Enabled = false;
+                this.ds.Clear();
+                string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId=" + Staff.UserID + "&serviceDate=" + this.dateTimePicker1.Value.ToString("dd/MM/yyyy");
+                if (!string.IsNullOrWhiteSpace(this.SearchControl1Txt.Text))
+                {
+                    url += "&plateId=" + this.SearchControl1Txt.Text;
+                }
+                var client = new HttpClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var request = new HttpRequestMessage(HttpMethod.Get, url);
 
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: ";
-                this.pHeader.Enabled = false;
-                this.gridControl2.Enabled = false;
-                this.pFooter.Enabled = false;
-                this.panel3.Enabled = true;
+                var response = await client.SendAsync(request);
+                this.Enabled = true;
+                if (response.IsSuccessStatusCode)
+                {
+                    var body = await response.Content.ReadAsStringAsync();
+                    var dataList = JsonConvert.DeserializeObject<DataModel>(body);
+                    if (dataList.data == null)
+                    {
+                        MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    if (dataList.data.Count == 0)
+                    {
+                        DialogResult result = MessageBox.Show("Không tìm thấy khách hàng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    foreach (var item in dataList.data)
+                    {
+                        var data = item.Split(';');
+                        var postBill = data[11] == "Open" ? PostBillStr : Posted;
+                        var payment = data[12];
+                        //public Customer(string maPhieu, string userName, string bs, string lx, string tsc, string dg, decimal discount, decimal total, string detaiMoney, string company, string adress, string date, string print)
+                        ds.Add(new Customer(data[0], data[1], data[2], data[3], data[4], data[5],
+                            Convert.ToInt32(Convert.ToDecimal(data[6])), Convert.ToInt32(Convert.ToDecimal(data[7])),
+                            data[8], data[9], data[10], this.dateTimePicker1.Value.ToString("dd/MM/yyyy"), "Print",
+                            postBill, payment));
+                    }
+                    this.gridControl1.DataSource = ds;
+                }
+                else
+                {
+                    MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
