@@ -105,6 +105,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this._Inventory = new DevExpress.XtraGrid.Columns.GridColumn();
             this._CustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._RecallBill = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
             this.xtraTabControl.SuspendLayout();
             this.ServiceListTab.SuspendLayout();
@@ -205,7 +206,8 @@
             this._TotalGridListItem,
             this.Payment,
             this.PrintBill,
-            this.PostBill});
+            this.PostBill,
+            this._RecallBill});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.GroupFormat = "= {0:C}VNĐ";
             this.gridView1.Name = "gridView1";
@@ -937,6 +939,8 @@
             // 
             // groupControl3
             // 
+            this.groupControl3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControl3.Controls.Add(this.radioButton2);
             this.groupControl3.Controls.Add(this.bsCheck);
             this.groupControl3.Controls.Add(this.button2);
@@ -1012,9 +1016,25 @@
             this._CustomerName.Caption = "Khách hàng";
             this._CustomerName.FieldName = "UserName";
             this._CustomerName.Name = "_CustomerName";
+            this._CustomerName.OptionsColumn.AllowEdit = false;
             this._CustomerName.Visible = true;
             this._CustomerName.VisibleIndex = 1;
             this._CustomerName.Width = 183;
+            // 
+            // _RecallBill
+            // 
+            this._RecallBill.AppearanceCell.ForeColor = System.Drawing.Color.DodgerBlue;
+            this._RecallBill.AppearanceCell.Options.UseForeColor = true;
+            this._RecallBill.AppearanceCell.Options.UseTextOptions = true;
+            this._RecallBill.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this._RecallBill.AppearanceHeader.Options.UseTextOptions = true;
+            this._RecallBill.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this._RecallBill.Caption = "Hủy Bill";
+            this._RecallBill.FieldName = "RecallBill";
+            this._RecallBill.Name = "_RecallBill";
+            this._RecallBill.OptionsColumn.AllowEdit = false;
+            this._RecallBill.Visible = true;
+            this._RecallBill.VisibleIndex = 10;
             // 
             // DXMain
             // 
@@ -1147,5 +1167,6 @@
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
         private DevExpress.XtraGrid.Columns.GridColumn _Inventory;
         private DevExpress.XtraGrid.Columns.GridColumn _CustomerName;
+        private DevExpress.XtraGrid.Columns.GridColumn _RecallBill;
     }
 }

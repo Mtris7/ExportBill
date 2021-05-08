@@ -128,6 +128,7 @@ namespace ExportBill
                 this.ServicePool.SelectedIndex = 3;//Sửa chữa - thay thế phụ tùng
 
                 this.gridView1.Columns["Total"].DisplayFormat.FormatString = "N0";
+                this.gvServiceLine.Columns["Inventory"].DisplayFormat.FormatString = "N0";
                 this.pHeader.Enabled = false;
                 this.ServiceLineCtr.Enabled = false;
                 this.pFooter.Enabled = false;
@@ -251,6 +252,10 @@ namespace ExportBill
                     string TheID_Val = view.GetFocusedRowCellValue(PostBill).ToString();
                     if (TheID_Val == PostBillStr)
                         RunPostBill(rowIndex);
+                }
+                if (colI == _RecallBill)
+                {
+                    RunRecallBill(rowIndex);
                 }
             }
             catch (Exception ex)
@@ -704,6 +709,48 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+        private void RunRecallBill(int rowIndex)
+        {
+            try
+            {
+                var MaPhieu = this.gridView1.GetRowCellValue(rowIndex, MPhieu)?.ToString();
+                var getData = ds.Where(x => x.MaPhieu == MaPhieu).FirstOrDefault();
+                var cl = new HttpClient();
+                string url = "http://api.ototienthu.com.vn/api/v1/customers/RunRecallBill";
+                cl.BaseAddress = new Uri(url);
+                int _TimeoutSec = 90;
+                cl.Timeout = new TimeSpan(0, 0, _TimeoutSec);
+                string _ContentType = "application/x-www-form-urlencoded";
+                cl.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_ContentType));
+                cl.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+                var nvc = new List<KeyValuePair<string, string>>();
+                nvc.Add(new KeyValuePair<string, string>("SMAServiceOrderId", MaPhieu));
+
+                var req = new HttpRequestMessage(HttpMethod.Post, url);
+                req.Content = new FormUrlEncodedContent(nvc);
+                var res = cl.SendAsync(req).Result;
+                string apiResponse = res.Content.ReadAsStringAsync().Result;
+                if (apiResponse != "")
+                {
+                    var result = (JObject)JsonConvert.DeserializeObject(apiResponse);
+                    if (result["data"].Value<string>().ToUpper().Contains("TRUE"))
+                    {
+                        MessageBox.Show("Hủy bill thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                        MessageBox.Show("Hủy bill không thành công, vui lòng kiểm tra lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Hủy bill không thành công, vui lòng kiểm tra lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.Enabled = true;
+                MessageBox.Show(ex.Message);
+            }
+        }
         private bool RunCreateHeader()
         {
             try
@@ -912,7 +959,7 @@ namespace ExportBill
                         iS.ItemName = data[1];
                         iS.ItemPrice = data[2];
                         iS.ItemQuality = data[3];
-                        iS.Inventory = Convert.ToDecimal(Convert.ToInt32(data[4]));
+                        iS.Inventory = Convert.ToDecimal(data[4]);
                         iS.ItemUnit = data[5];
                         ListIS.Add(iS);
                         ItemNameCbx.Items.Add(iS.ItemName);
@@ -1026,8 +1073,8 @@ namespace ExportBill
                         //public Customer(string maPhieu, string userName, string bs, string lx, string tsc, string dg, decimal discount, decimal total, string detaiMoney, string company, string adress, string date, string print)
                         ds.Add(new Customer(data[0], data[1], data[2], data[3], data[4], data[5],
                             Convert.ToInt32(Convert.ToDecimal(data[6])), Convert.ToInt32(Convert.ToDecimal(data[7])),
-                            data[8], data[9], data[10], this.dateTimePicker1.Value.ToString("dd/MM/yyyy"), "Print",
-                            postBill, payment));
+                            data[8], data[9], data[10], this.dateTimePicker1.Value.ToString("dd/MM/yyyy"),
+                            postBill, payment, "Print"));
                     }
                     this.gridControl1.DataSource = ds;
                 }

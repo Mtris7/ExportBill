@@ -5,8 +5,8 @@
     {
         public Customer() { }
         public Customer(string maPhieu, string userName , string bs = null, string lx = null, string tsc = null, string dg = null, decimal discount = 0,
-                        int total = 0, string detaiMoney = null, string company = null, string adress = null, string date = null, string print = "print",
-                        string pBill = null, string payment = null)
+                        int total = 0, string detaiMoney = null, string company = null, string adress = null, string date = null,
+                        string pBill = null, string payment = null, string print = "print", string recallBill = "Hủy")
         {
             MaPhieu = maPhieu;
             UserName = userName;
@@ -20,9 +20,10 @@
             Company = company;
             Adress = adress;
             Date = date;
-            PrintBill = print;
             PostBill = pBill;
             Payment = payment;
+            PrintBill = print;
+            RecallBill = recallBill;
         }
         public string MaPhieu { get; set; }
         public string UserName { get; set; }
@@ -39,5 +40,6 @@
         public string PostBill { get; set; }
         public string Date { get; set; }
         public string Payment { get; set; }
+        public string RecallBill { get; set; }
     }
 }
