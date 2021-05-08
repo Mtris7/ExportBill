@@ -276,7 +276,6 @@
             this.gvServiceLine.GridControl = this.ServiceLineCtr;
             this.gvServiceLine.Name = "gvServiceLine";
             this.gvServiceLine.OptionsView.ShowGroupPanel = false;
-            this.gvServiceLine.FocusedColumnChanged += new DevExpress.XtraGrid.Views.Base.FocusedColumnChangedEventHandler(this.gridView2_FocusedColumnChanged);
             this.gvServiceLine.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
             this.gvServiceLine.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanging);
             // 

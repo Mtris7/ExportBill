@@ -4,11 +4,15 @@
     {
         public string UserID;
         public string UserName;
-        public StaffModel(){}
-        public StaffModel(string userID, string userName)
+        public string AdviserId;
+        public string NameAdviser;
+        public StaffModel() { }
+        public StaffModel(string userID, string userName, string adviserId, string nameAdviser)
         {
             UserID = userID;
             UserName = userName;
+            AdviserId = userID;
+            NameAdviser = nameAdviser;
         }
     }
 }
