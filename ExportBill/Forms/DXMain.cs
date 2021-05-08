@@ -809,6 +809,7 @@ namespace ExportBill
                 return false;
             }
         }
+
         private bool PostTransfer()
         {
             try
@@ -834,7 +835,7 @@ namespace ExportBill
                     var result = (JObject)JsonConvert.DeserializeObject(apiResponse);
                     if (result["data"].Value<string>() != null)
                     {
-                        MessageBox.Show(result["data"].Value<string>());
+                        MessageBox.Show(result["data"].Value<string>(), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else

@@ -104,6 +104,7 @@
             this.Search2Txt = new ExportBill.PlaceHolderTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this._Inventory = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._CustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
             this.xtraTabControl.SuspendLayout();
             this.ServiceListTab.SuspendLayout();
@@ -196,6 +197,7 @@
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.MaPhieu,
+            this._CustomerName,
             this.BS,
             this.LX,
             this.TSC,
@@ -235,7 +237,7 @@
             this.MaPhieu.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.MaPhieu.Visible = true;
             this.MaPhieu.VisibleIndex = 0;
-            this.MaPhieu.Width = 100;
+            this.MaPhieu.Width = 71;
             // 
             // BS
             // 
@@ -249,8 +251,8 @@
             this.BS.OptionsColumn.AllowEdit = false;
             this.BS.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.BS.Visible = true;
-            this.BS.VisibleIndex = 1;
-            this.BS.Width = 113;
+            this.BS.VisibleIndex = 2;
+            this.BS.Width = 95;
             // 
             // LX
             // 
@@ -264,8 +266,8 @@
             this.LX.OptionsColumn.AllowEdit = false;
             this.LX.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.LX.Visible = true;
-            this.LX.VisibleIndex = 2;
-            this.LX.Width = 113;
+            this.LX.VisibleIndex = 3;
+            this.LX.Width = 95;
             // 
             // TSC
             // 
@@ -275,8 +277,8 @@
             this.TSC.OptionsColumn.AllowEdit = false;
             this.TSC.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.TSC.Visible = true;
-            this.TSC.VisibleIndex = 3;
-            this.TSC.Width = 149;
+            this.TSC.VisibleIndex = 4;
+            this.TSC.Width = 125;
             // 
             // DG
             // 
@@ -288,8 +290,8 @@
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "DG", "Tổng cộng")});
             this.DG.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.DG.Visible = true;
-            this.DG.VisibleIndex = 4;
-            this.DG.Width = 352;
+            this.DG.VisibleIndex = 5;
+            this.DG.Width = 299;
             // 
             // _TotalGridListItem
             // 
@@ -308,8 +310,8 @@
             new DevExpress.XtraGrid.GridColumnSummaryItem()});
             this._TotalGridListItem.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this._TotalGridListItem.Visible = true;
-            this._TotalGridListItem.VisibleIndex = 5;
-            this._TotalGridListItem.Width = 126;
+            this._TotalGridListItem.VisibleIndex = 6;
+            this._TotalGridListItem.Width = 106;
             // 
             // Payment
             // 
@@ -323,8 +325,8 @@
             this.Payment.Name = "Payment";
             this.Payment.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Payment.Visible = true;
-            this.Payment.VisibleIndex = 6;
-            this.Payment.Width = 71;
+            this.Payment.VisibleIndex = 7;
+            this.Payment.Width = 59;
             // 
             // cmbPayment
             // 
@@ -347,8 +349,8 @@
             this.PrintBill.OptionsColumn.AllowEdit = false;
             this.PrintBill.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.PrintBill.Visible = true;
-            this.PrintBill.VisibleIndex = 7;
-            this.PrintBill.Width = 62;
+            this.PrintBill.VisibleIndex = 8;
+            this.PrintBill.Width = 52;
             // 
             // PostBill
             // 
@@ -364,8 +366,8 @@
             this.PostBill.OptionsColumn.AllowEdit = false;
             this.PostBill.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.PostBill.Visible = true;
-            this.PostBill.VisibleIndex = 8;
-            this.PostBill.Width = 59;
+            this.PostBill.VisibleIndex = 9;
+            this.PostBill.Width = 60;
             // 
             // repositoryItemButtonEdit1
             // 
@@ -512,6 +514,9 @@
             // 
             // groupControl4
             // 
+            this.groupControl4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControl4.Controls.Add(this.panelInfo);
             this.groupControl4.Location = new System.Drawing.Point(3, 105);
             this.groupControl4.Name = "groupControl4";
@@ -583,6 +588,7 @@
             // 
             // CreatePrintBill
             // 
+            this.CreatePrintBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CreatePrintBill.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.CreatePrintBill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CreatePrintBill.ForeColor = System.Drawing.Color.Black;
@@ -596,8 +602,8 @@
             // 
             // ServiceLineCtr
             // 
-            this.ServiceLineCtr.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ServiceLineCtr.Location = new System.Drawing.Point(0, 209);
+            this.ServiceLineCtr.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ServiceLineCtr.Location = new System.Drawing.Point(0, 243);
             this.ServiceLineCtr.MainView = this.gvServiceLine;
             this.ServiceLineCtr.Name = "ServiceLineCtr";
             this.ServiceLineCtr.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -606,7 +612,7 @@
             this.WorkerIdCbx,
             this.AdviserIdCbx,
             this.repositoryItemGridLookUpEdit1});
-            this.ServiceLineCtr.Size = new System.Drawing.Size(1165, 182);
+            this.ServiceLineCtr.Size = new System.Drawing.Size(1165, 149);
             this.ServiceLineCtr.TabIndex = 3;
             this.ServiceLineCtr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvServiceLine});
@@ -761,7 +767,7 @@
             this.pHeader.Controls.Add(this.CreateServicelbl);
             this.pHeader.Controls.Add(this.ServicePool);
             this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pHeader.Location = new System.Drawing.Point(0, 118);
+            this.pHeader.Location = new System.Drawing.Point(0, 152);
             this.pHeader.Name = "pHeader";
             this.pHeader.Size = new System.Drawing.Size(1165, 91);
             this.pHeader.TabIndex = 2;
@@ -824,7 +830,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1165, 118);
+            this.panel3.Size = new System.Drawing.Size(1165, 152);
             this.panel3.TabIndex = 1;
             // 
             // ServiceHeaderCtr
@@ -833,7 +839,7 @@
             this.ServiceHeaderCtr.Location = new System.Drawing.Point(0, 0);
             this.ServiceHeaderCtr.MainView = this.gvServiceHeader;
             this.ServiceHeaderCtr.Name = "ServiceHeaderCtr";
-            this.ServiceHeaderCtr.Size = new System.Drawing.Size(1165, 118);
+            this.ServiceHeaderCtr.Size = new System.Drawing.Size(1165, 152);
             this.ServiceHeaderCtr.TabIndex = 1;
             this.ServiceHeaderCtr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvServiceHeader});
@@ -999,6 +1005,15 @@
             this._Inventory.Visible = true;
             this._Inventory.VisibleIndex = 8;
             // 
+            // _CustomerName
+            // 
+            this._CustomerName.Caption = "Khách hàng";
+            this._CustomerName.FieldName = "UserName";
+            this._CustomerName.Name = "_CustomerName";
+            this._CustomerName.Visible = true;
+            this._CustomerName.VisibleIndex = 1;
+            this._CustomerName.Width = 183;
+            // 
             // DXMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -1129,5 +1144,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit repositoryItemGridLookUpEdit1;
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
         private DevExpress.XtraGrid.Columns.GridColumn _Inventory;
+        private DevExpress.XtraGrid.Columns.GridColumn _CustomerName;
     }
 }
