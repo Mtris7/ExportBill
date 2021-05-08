@@ -161,9 +161,8 @@ namespace ExportBill
                 {
                     Point Search2TxtLocation = new Point(groupControl3.Location.X + Search2Txt.Location.X - 10, groupControl3.Location.Y + Search2Txt.Location.Y - 15);
                     toolTip1.Show("Mục bắt buộc nhập.", Search2Txt, Search2TxtLocation);
-                    System.Threading.Thread.Sleep(1000);
-                    toolTip1.Active = false;
                     toolTip1.Active = true;
+                    System.Threading.Thread.Sleep(1000);
                     return;
                 }
                 string url = @"http://api.ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + Search2Txt.Text + "&searchtype=";
@@ -196,6 +195,7 @@ namespace ExportBill
                         }
                         return;
                     }
+                    this.ListCustomerSearch.Clear();
                     foreach (var item in dataList.data)
                     {
                         var data = item.Split(';');
@@ -1050,6 +1050,27 @@ namespace ExportBill
                 this.ServiceLineCtr.Enabled = false;
                 this.pFooter.Enabled = false;
                 this.panel3.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void CurrentKm_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int kilomet;
+                bool result = Int32.TryParse(CurrentKm.Text, out kilomet);
+                if (CurrentKm.Text == "Số kilomet" || CurrentKm.Text == "")
+                    return;
+                else if (result == false)
+                {
+                    CurrentKm.Text = "";
+                    MessageBox.Show("vui lòng chỉ nhập số", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
             catch (Exception ex)
             {

@@ -793,6 +793,7 @@
             this.CurrentKm.Size = new System.Drawing.Size(155, 23);
             this.CurrentKm.TabIndex = 2;
             this.CurrentKm.Text = "Số kilomet";
+            this.CurrentKm.TextChanged += new System.EventHandler(this.CurrentKm_TextChanged);
             // 
             // CreateServicelbl
             // 
