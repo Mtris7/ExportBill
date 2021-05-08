@@ -541,9 +541,9 @@ namespace ExportBill
         }
         #endregion
 
-
-        private void btnAdđLine_Click(object sender, EventArgs e)
+        private void btnAddLine_Click(object sender, EventArgs e)
         {
+
             try
             {
                 this.gvServiceLine.AddNewRow();
@@ -845,7 +845,11 @@ namespace ExportBill
                     var result = (JObject)JsonConvert.DeserializeObject(apiResponse);
                     if (result["data"].Value<string>() != null)
                     {
-                        MessageBox.Show(result["data"].Value<string>(), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if(result["data"].Value<string>().ToUpper().Contains("KHÔNG"))
+                            MessageBox.Show(result["data"].Value<string>(), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        else
+                            MessageBox.Show(result["data"].Value<string>(), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
@@ -908,7 +912,7 @@ namespace ExportBill
                         iS.ItemName = data[1];
                         iS.ItemPrice = data[2];
                         iS.ItemQuality = data[3];
-                        iS.Inventory = Convert.ToDecimal(data[3]);
+                        iS.Inventory = Convert.ToDecimal(Convert.ToInt32(data[4]));
                         iS.ItemUnit = data[5];
                         ListIS.Add(iS);
                         ItemNameCbx.Items.Add(iS.ItemName);

@@ -63,7 +63,7 @@
             this.panelInfo = new System.Windows.Forms.Panel();
             this.pFooter = new System.Windows.Forms.Panel();
             this.btnBack = new System.Windows.Forms.Button();
-            this.btnAdđLine = new System.Windows.Forms.Button();
+            this.btnAddLine = new System.Windows.Forms.Button();
             this.BtnRemove = new System.Windows.Forms.Button();
             this.CreatePrintBill = new System.Windows.Forms.Button();
             this.ServiceLineCtr = new DevExpress.XtraGrid.GridControl();
@@ -538,7 +538,7 @@
             // pFooter
             // 
             this.pFooter.Controls.Add(this.btnBack);
-            this.pFooter.Controls.Add(this.btnAdđLine);
+            this.pFooter.Controls.Add(this.btnAddLine);
             this.pFooter.Controls.Add(this.BtnRemove);
             this.pFooter.Controls.Add(this.CreatePrintBill);
             this.pFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -560,18 +560,18 @@
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // btnAdđLine
+            // btnAddLine
             // 
-            this.btnAdđLine.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnAdđLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdđLine.ForeColor = System.Drawing.Color.Black;
-            this.btnAdđLine.Location = new System.Drawing.Point(6, 4);
-            this.btnAdđLine.Name = "btnAdđLine";
-            this.btnAdđLine.Size = new System.Drawing.Size(75, 25);
-            this.btnAdđLine.TabIndex = 7;
-            this.btnAdđLine.Text = "Add";
-            this.btnAdđLine.UseVisualStyleBackColor = false;
-            this.btnAdđLine.Click += new System.EventHandler(this.btnAdđLine_Click);
+            this.btnAddLine.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnAddLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddLine.ForeColor = System.Drawing.Color.Black;
+            this.btnAddLine.Location = new System.Drawing.Point(6, 4);
+            this.btnAddLine.Name = "btnAddLine";
+            this.btnAddLine.Size = new System.Drawing.Size(75, 25);
+            this.btnAddLine.TabIndex = 7;
+            this.btnAddLine.Text = "Add";
+            this.btnAddLine.UseVisualStyleBackColor = false;
+            this.btnAddLine.Click += new System.EventHandler(this.btnAddLine_Click);
             // 
             // BtnRemove
             // 
@@ -1001,6 +1001,7 @@
             // _Inventory
             // 
             this._Inventory.Caption = "Tồn kho";
+            this._Inventory.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this._Inventory.FieldName = "Inventory";
             this._Inventory.Name = "_Inventory";
             this._Inventory.Visible = true;
@@ -1141,7 +1142,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox AdviserIdCbx;
         private System.Windows.Forms.Panel pFooter;
         private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.Button btnAdđLine;
+        private System.Windows.Forms.Button btnAddLine;
         private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit repositoryItemGridLookUpEdit1;
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
         private DevExpress.XtraGrid.Columns.GridColumn _Inventory;
