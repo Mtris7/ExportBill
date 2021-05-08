@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28307.1433
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportBill", "ExportBill\ExportBill.csproj", "{E63E30B2-3830-4722-83AB-99B813BE014D}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TienThuSetup", "TienThuSetup\TienThuSetup.vdproj", "{EB952016-5AFD-4C1C-B5CD-0408F2114014}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TienThuV1", "TienThuSetup\TienThuSetup.vdproj", "{EB952016-5AFD-4C1C-B5CD-0408F2114014}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TTVersion1.0", "TTVersion1.0\TTVersion1.0.vdproj", "{63F502D1-DA35-4820-B076-3AA6E9E474B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,8 @@ Global
 		{E63E30B2-3830-4722-83AB-99B813BE014D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB952016-5AFD-4C1C-B5CD-0408F2114014}.Debug|Any CPU.ActiveCfg = Debug
 		{EB952016-5AFD-4C1C-B5CD-0408F2114014}.Release|Any CPU.ActiveCfg = Release
+		{63F502D1-DA35-4820-B076-3AA6E9E474B9}.Debug|Any CPU.ActiveCfg = Debug
+		{63F502D1-DA35-4820-B076-3AA6E9E474B9}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

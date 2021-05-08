@@ -36,6 +36,7 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.MaPhieu = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._CustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.BS = new DevExpress.XtraGrid.Columns.GridColumn();
             this.LX = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TSC = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -45,6 +46,7 @@
             this.cmbPayment = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.PrintBill = new DevExpress.XtraGrid.Columns.GridColumn();
             this.PostBill = new DevExpress.XtraGrid.Columns.GridColumn();
+            this._RecallBill = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.repositoryItemZoomTrackBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemZoomTrackBar();
@@ -79,6 +81,7 @@
             this.WorkerIdCbx = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this._AdviserId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.AdviserIdCbx = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this._Inventory = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemGridLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
             this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -103,9 +106,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.Search2Txt = new ExportBill.PlaceHolderTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this._Inventory = new DevExpress.XtraGrid.Columns.GridColumn();
-            this._CustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this._RecallBill = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
             this.xtraTabControl.SuspendLayout();
             this.ServiceListTab.SuspendLayout();
@@ -241,6 +241,16 @@
             this.MaPhieu.VisibleIndex = 0;
             this.MaPhieu.Width = 71;
             // 
+            // _CustomerName
+            // 
+            this._CustomerName.Caption = "Khách hàng";
+            this._CustomerName.FieldName = "UserName";
+            this._CustomerName.Name = "_CustomerName";
+            this._CustomerName.OptionsColumn.AllowEdit = false;
+            this._CustomerName.Visible = true;
+            this._CustomerName.VisibleIndex = 1;
+            this._CustomerName.Width = 183;
+            // 
             // BS
             // 
             this.BS.AppearanceCell.Options.UseTextOptions = true;
@@ -258,10 +268,6 @@
             // 
             // LX
             // 
-            this.LX.AppearanceCell.Options.UseTextOptions = true;
-            this.LX.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.LX.AppearanceHeader.Options.UseTextOptions = true;
-            this.LX.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.LX.Caption = "Loại xe";
             this.LX.FieldName = "LX";
             this.LX.Name = "LX";
@@ -297,10 +303,6 @@
             // 
             // _TotalGridListItem
             // 
-            this._TotalGridListItem.AppearanceCell.Options.UseTextOptions = true;
-            this._TotalGridListItem.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this._TotalGridListItem.AppearanceHeader.Options.UseTextOptions = true;
-            this._TotalGridListItem.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this._TotalGridListItem.Caption = "Thành tiền";
             this._TotalGridListItem.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this._TotalGridListItem.FieldName = "Total";
@@ -370,6 +372,21 @@
             this.PostBill.Visible = true;
             this.PostBill.VisibleIndex = 9;
             this.PostBill.Width = 60;
+            // 
+            // _RecallBill
+            // 
+            this._RecallBill.AppearanceCell.ForeColor = System.Drawing.Color.DodgerBlue;
+            this._RecallBill.AppearanceCell.Options.UseForeColor = true;
+            this._RecallBill.AppearanceCell.Options.UseTextOptions = true;
+            this._RecallBill.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this._RecallBill.AppearanceHeader.Options.UseTextOptions = true;
+            this._RecallBill.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this._RecallBill.Caption = "Service Stage";
+            this._RecallBill.FieldName = "RecallBill";
+            this._RecallBill.Name = "_RecallBill";
+            this._RecallBill.OptionsColumn.AllowEdit = false;
+            this._RecallBill.Visible = true;
+            this._RecallBill.VisibleIndex = 10;
             // 
             // repositoryItemButtonEdit1
             // 
@@ -634,6 +651,7 @@
             this.gvServiceLine.GridControl = this.ServiceLineCtr;
             this.gvServiceLine.Name = "gvServiceLine";
             this.gvServiceLine.OptionsView.ShowGroupPanel = false;
+            this.gvServiceLine.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gvServiceLine_RowCellStyle);
             this.gvServiceLine.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
             this.gvServiceLine.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanging);
             // 
@@ -708,6 +726,11 @@
             // 
             // _WorkerId
             // 
+            this._WorkerId.AppearanceCell.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this._WorkerId.AppearanceCell.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this._WorkerId.AppearanceCell.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this._WorkerId.AppearanceCell.Options.UseBackColor = true;
+            this._WorkerId.AppearanceCell.Options.UseBorderColor = true;
             this._WorkerId.Caption = "Kỹ thuật";
             this._WorkerId.ColumnEdit = this.WorkerIdCbx;
             this._WorkerId.FieldName = "WorkerId";
@@ -739,6 +762,15 @@
             this.AdviserIdCbx.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.AdviserIdCbx.Name = "AdviserIdCbx";
+            // 
+            // _Inventory
+            // 
+            this._Inventory.Caption = "Tồn kho";
+            this._Inventory.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this._Inventory.FieldName = "Inventory";
+            this._Inventory.Name = "_Inventory";
+            this._Inventory.Visible = true;
+            this._Inventory.VisibleIndex = 8;
             // 
             // repositoryItemComboBox1
             // 
@@ -787,6 +819,7 @@
             // 
             // CurrentKm
             // 
+            this.CurrentKm.BackColor = System.Drawing.Color.Yellow;
             this.CurrentKm.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
             this.CurrentKm.ForeColor = System.Drawing.Color.Gray;
             this.CurrentKm.Location = new System.Drawing.Point(299, 49);
@@ -991,7 +1024,7 @@
             // 
             // Search2Txt
             // 
-            this.Search2Txt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.Search2Txt.BackColor = System.Drawing.Color.Yellow;
             this.Search2Txt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Search2Txt.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
             this.Search2Txt.ForeColor = System.Drawing.Color.Gray;
@@ -1002,42 +1035,12 @@
             this.Search2Txt.TabIndex = 0;
             this.Search2Txt.Text = "Tìm khách hàng: Biển số/SDT ";
             // 
-            // _Inventory
-            // 
-            this._Inventory.Caption = "Tồn kho";
-            this._Inventory.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-            this._Inventory.FieldName = "Inventory";
-            this._Inventory.Name = "_Inventory";
-            this._Inventory.Visible = true;
-            this._Inventory.VisibleIndex = 8;
-            // 
-            // _CustomerName
-            // 
-            this._CustomerName.Caption = "Khách hàng";
-            this._CustomerName.FieldName = "UserName";
-            this._CustomerName.Name = "_CustomerName";
-            this._CustomerName.OptionsColumn.AllowEdit = false;
-            this._CustomerName.Visible = true;
-            this._CustomerName.VisibleIndex = 1;
-            this._CustomerName.Width = 183;
-            // 
-            // _RecallBill
-            // 
-            this._RecallBill.AppearanceCell.ForeColor = System.Drawing.Color.DodgerBlue;
-            this._RecallBill.AppearanceCell.Options.UseForeColor = true;
-            this._RecallBill.AppearanceCell.Options.UseTextOptions = true;
-            this._RecallBill.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this._RecallBill.AppearanceHeader.Options.UseTextOptions = true;
-            this._RecallBill.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this._RecallBill.Caption = "Hủy Bill";
-            this._RecallBill.FieldName = "RecallBill";
-            this._RecallBill.Name = "_RecallBill";
-            this._RecallBill.OptionsColumn.AllowEdit = false;
-            this._RecallBill.Visible = true;
-            this._RecallBill.VisibleIndex = 10;
-            // 
             // DXMain
             // 
+            this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.Appearance.Options.UseBackColor = true;
+            this.Appearance.Options.UseForeColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1182, 553);

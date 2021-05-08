@@ -25,6 +25,7 @@ namespace ExportBill
         private const string PBill = "PostBill";
         private const string PostBillStr = "Post Bill";
         private const string Posted = "Posted";
+        private const string inProcess = "In process";
         private const string MPhieu = "MaPhieu";
         public static string token = string.Empty;
         #endregion
@@ -255,7 +256,9 @@ namespace ExportBill
                 }
                 if (colI == _RecallBill)
                 {
-                    RunRecallBill(rowIndex);
+                    string recallBill_Val = view.GetFocusedRowCellValue(_RecallBill).ToString();
+                    if (recallBill_Val == Posted)
+                        RunRecallBill(rowIndex);
                 }
             }
             catch (Exception ex)
@@ -285,6 +288,12 @@ namespace ExportBill
                     if (TheID_Val == PostBillStr)
                         RunPostBill(rowIndex);
                 }
+                if (colI == _RecallBill)
+                {
+                    string recallBill_Val = view.GetFocusedRowCellValue(_RecallBill).ToString();
+                    if (recallBill_Val == Posted)
+                        RunRecallBill(rowIndex);
+                }
             }
         }
         private void GridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
@@ -302,10 +311,21 @@ namespace ExportBill
                     else
                         e.Appearance.ForeColor = Color.Blue;
                 }
+                if (e.Column == _RecallBill)
+                {
+                    var cellValue = e.CellValue.ToString();
+                    if (Posted == cellValue)
+                    {
+                        e.Appearance.ForeColor = Color.Blue;
+                    }
+                    else
+                        e.Appearance.ForeColor = Color.Black;
+                }
                 if (e.Column.FieldName == PrBill || e.Column.FieldName == MPhieu)
                 {
                     e.Appearance.ForeColor = Color.Blue;
                 }
+
             }
             catch (Exception ex)
             {
@@ -368,6 +388,12 @@ namespace ExportBill
                         MessageBox.Show("Vui lòng chọn người làm việc", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
+                if(string.IsNullOrWhiteSpace(this.CurrentKm.Text) || this.CurrentKm.Text == this.CurrentKm.PlaceHolderText)
+                {
+                    MessageBox.Show("Vui lòng nhập Số kilomet", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.CurrentKm.Focus();
+                    return;
+                }
 
                 this.Enabled = false;
                 if (RunCreateHeader())
@@ -416,7 +442,7 @@ namespace ExportBill
             try
             {
                 if (string.IsNullOrWhiteSpace(e.Value?.ToString())) return;
-                var check = e.Value?.ToString().All(char.IsDigit);
+                var check = e.Value?.ToString().Replace(".","").All(char.IsDigit);
                 if (e.Column.Equals(_DiscountGrid2) && (check ?? false))
                 {
                     //this.gridView2.SetRowCellValue(e.RowHandle, _DiscountGrid2, Convert.ToDecimal(e.Value ?? 0).ToString("N0"));
@@ -457,9 +483,10 @@ namespace ExportBill
                     var itemPrice = Convert.ToDecimal(item.First().ItemPrice);
                     var itemUnit = item.First().ItemUnit;
                     //var itemInventory = item.First().Inventory;
-                    var itemTotal = itemPrice * 1;
+                    var itemQuality = item.First().ItemQuality;
+                    var itemTotal = itemPrice * Convert.ToDecimal(itemQuality);
                     this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemName, e.Value);
-                    this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemQuality, 1);
+                    this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemQuality, itemQuality);
                     this.gvServiceLine.SetRowCellValue(e.RowHandle, _DiscountGrid2, 0);
                     this.gvServiceLine.SetRowCellValue(e.RowHandle, _Inventory, item.First().Inventory);
                     this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemPrice, itemPrice.ToString("N0"));
@@ -665,6 +692,7 @@ namespace ExportBill
                 cs.DetailMoney = getData.DetailMoney;
                 cs.Date = getData.Date;
                 new PrintInvoiceForm(cs, true).ShowDialog();
+                gridView1.SetRowCellValue(rowIndex, _RecallBill, Posted);
                 if (pbill != Posted)
                 {
                     var userResult = AutoClosingMessageBox.Show("Bạn có muốn Post Bill không?", "Thông báo", 5000, MessageBoxButtons.YesNo, DialogResult.No);
@@ -736,6 +764,7 @@ namespace ExportBill
                     if (result["data"].Value<string>().ToUpper().Contains("TRUE"))
                     {
                         MessageBox.Show("Hủy bill thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        gridView1.SetRowCellValue(rowIndex, _RecallBill, inProcess);
                     }
                     else
                         MessageBox.Show("Hủy bill không thành công, vui lòng kiểm tra lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1070,11 +1099,12 @@ namespace ExportBill
                         var data = item.Split(';');
                         var postBill = data[11] == "Open" ? PostBillStr : Posted;
                         var payment = data[12];
+                        var recalbill = data[13] == Posted ? Posted : inProcess;
                         //public Customer(string maPhieu, string userName, string bs, string lx, string tsc, string dg, decimal discount, decimal total, string detaiMoney, string company, string adress, string date, string print)
                         ds.Add(new Customer(data[0], data[1], data[2], data[3], data[4], data[5],
                             Convert.ToInt32(Convert.ToDecimal(data[6])), Convert.ToInt32(Convert.ToDecimal(data[7])),
                             data[8], data[9], data[10], this.dateTimePicker1.Value.ToString("dd/MM/yyyy"),
-                            postBill, payment, "Print"));
+                            postBill, payment, "Print", recalbill));
                     }
                     this.gridControl1.DataSource = ds;
                 }
@@ -1131,6 +1161,22 @@ namespace ExportBill
                     CurrentKm.Text = "";
                     MessageBox.Show("vui lòng chỉ nhập số", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void gvServiceLine_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+                if (e.Column == _WorkerId)
+                {
+                    e.Appearance.BackColor = Color.Yellow;
                 }
             }
             catch (Exception ex)
