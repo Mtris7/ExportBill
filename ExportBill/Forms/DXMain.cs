@@ -162,7 +162,7 @@ namespace ExportBill
                     Point Search2TxtLocation = new Point(groupControl3.Location.X + Search2Txt.Location.X - 10, groupControl3.Location.Y + Search2Txt.Location.Y - 15);
                     toolTip1.Show("Mục bắt buộc nhập.", Search2Txt, Search2TxtLocation);
                     toolTip1.Active = true;
-                    System.Threading.Thread.Sleep(1000);
+                    System.Threading.Thread.Sleep(500);
                     return;
                 }
                 string url = @"http://api.ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + Search2Txt.Text + "&searchtype=";
@@ -461,6 +461,16 @@ namespace ExportBill
                     this.gvServiceLine.SetRowCellValue(e.RowHandle, _TotalGrid2, itemTotal.ToString("N0"));
                     this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemUnit, itemUnit);
 
+                }
+
+                if (e.Column.Equals(_WorkerId))
+                {
+                    ItemSell iS = new ItemSell();
+                    var item1 = ListSM.Where(x => x.UserName.Equals(e.Value));
+                    iS.WorkerId = item1.First().UserName;
+                    iS.AdviserId = item1.First().NameAdviser;
+                    ListIS.Add(iS);
+                    this.gvServiceLine.SetRowCellValue(e.RowHandle, _AdviserId, iS.AdviserId);
                 }
             }
             catch (Exception ex)
