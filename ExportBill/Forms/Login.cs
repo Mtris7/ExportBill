@@ -12,9 +12,16 @@ namespace ExportBill
     {
         public Login()
         {
-            InitializeComponent();
-            DXMain dXMain = new DXMain();
-            dXMain.getToken();
+            try
+            {
+                InitializeComponent();
+                DXMain dXMain = new DXMain();
+                dXMain.getToken();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
@@ -25,10 +32,17 @@ namespace ExportBill
 
         private void Form1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            try
             {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+                if (e.Button == MouseButtons.Left)
+                {
+                    ReleaseCapture();
+                    SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
         private async void button1_Click(object sender, EventArgs e)
@@ -112,23 +126,49 @@ namespace ExportBill
 
         private void Login_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
-                button1_Click(null, null);
+                if (e.KeyCode == Keys.Enter)
+                {
+                    button1_Click(null, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void bunifuCheckbox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Space)
+            try
             {
-                bunifuCheckbox1.Checked = !bunifuCheckbox1.Checked;
+                if (e.KeyCode == Keys.Space)
+                {
+                    bunifuCheckbox1.Checked = !bunifuCheckbox1.Checked;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                new ChangePassword().ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

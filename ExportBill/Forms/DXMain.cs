@@ -403,11 +403,13 @@ namespace ExportBill
                     {
                         this.Enabled = true;
                         MessageBox.Show("Tạo phiếu thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        PostTransfer();
-
+                        if (PostTransfer())
+                            SearchControl1Txt.Text = this.sSelect.PlateID;
+                        else
+                            SearchControl1Txt.Text = "TT_";
                         xtraTabControl.SelectedTabPage = ServiceListTab;
                         this.ComeBack();
-                        this.LoadListBike(true);
+                        this.LoadListBike();
                     }
 
                     else
@@ -967,12 +969,20 @@ namespace ExportBill
                     if (result["data"].Value<string>() != null)
                     {
                         if(result["data"].Value<string>().ToUpper().Contains("KHÔNG"))
+                        {
                             MessageBox.Show(result["data"].Value<string>(), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            this.LoadItemCombobox();
+                            return false;
+                        }
 
                         else
+                        {
                             MessageBox.Show(result["data"].Value<string>(), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.LoadItemCombobox();
+                            return true;
+                        }
+                        
                     }
-                    this.LoadItemCombobox();
                 }
                 else
                 {
@@ -1105,14 +1115,10 @@ namespace ExportBill
             }
         }
 
-        private async void LoadListBike(bool check = false)
+        private async void LoadListBike()
         {
             try
             {
-                if (check)
-                {
-                    SearchControl1Txt.Text = this.sSelect.PlateID;
-                }
                 this.Enabled = false;
                 this.ds.Clear();
                 string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId=" + Staff.UserID + "&serviceDate=" + this.dateTimePicker1.Value.ToString("dd/MM/yyyy");
