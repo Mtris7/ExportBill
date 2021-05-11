@@ -148,9 +148,10 @@
             // 
             this.xtraTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraTabControl.Location = new System.Drawing.Point(0, 0);
+            this.xtraTabControl.Margin = new System.Windows.Forms.Padding(2);
             this.xtraTabControl.Name = "xtraTabControl";
             this.xtraTabControl.SelectedTabPage = this.ServiceListTab;
-            this.xtraTabControl.Size = new System.Drawing.Size(1182, 553);
+            this.xtraTabControl.Size = new System.Drawing.Size(946, 450);
             this.xtraTabControl.TabIndex = 0;
             this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.ServiceListTab,
@@ -160,8 +161,9 @@
             // 
             this.ServiceListTab.Controls.Add(this.groupControl2);
             this.ServiceListTab.Controls.Add(this.groupControl1);
+            this.ServiceListTab.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceListTab.Name = "ServiceListTab";
-            this.ServiceListTab.Size = new System.Drawing.Size(1175, 518);
+            this.ServiceListTab.Size = new System.Drawing.Size(940, 422);
             this.ServiceListTab.Text = "Danh sách xe làm dịch vụ";
             // 
             // groupControl2
@@ -170,9 +172,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControl2.Controls.Add(this.gridControl1);
-            this.groupControl2.Location = new System.Drawing.Point(3, 117);
+            this.groupControl2.Location = new System.Drawing.Point(2, 94);
+            this.groupControl2.Margin = new System.Windows.Forms.Padding(2);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(1169, 401);
+            this.groupControl2.Size = new System.Drawing.Size(935, 329);
             this.groupControl2.TabIndex = 1;
             // 
             // gridControl1
@@ -180,8 +183,10 @@
             this.gridControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridControl1.Location = new System.Drawing.Point(2, 25);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
+            this.gridControl1.Location = new System.Drawing.Point(2, 20);
             this.gridControl1.MainView = this.gridView1;
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(2);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEdit1,
@@ -189,7 +194,7 @@
             this.repositoryItemZoomTrackBar1,
             this.repositoryItemPopupContainerEdit1,
             this.cmbPayment});
-            this.gridControl1.Size = new System.Drawing.Size(1165, 374);
+            this.gridControl1.Size = new System.Drawing.Size(932, 307);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -239,7 +244,7 @@
             this.MaPhieu.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.MaPhieu.Visible = true;
             this.MaPhieu.VisibleIndex = 0;
-            this.MaPhieu.Width = 71;
+            this.MaPhieu.Width = 73;
             // 
             // _CustomerName
             // 
@@ -249,7 +254,7 @@
             this._CustomerName.OptionsColumn.AllowEdit = false;
             this._CustomerName.Visible = true;
             this._CustomerName.VisibleIndex = 1;
-            this._CustomerName.Width = 183;
+            this._CustomerName.Width = 133;
             // 
             // BS
             // 
@@ -264,7 +269,7 @@
             this.BS.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.BS.Visible = true;
             this.BS.VisibleIndex = 2;
-            this.BS.Width = 95;
+            this.BS.Width = 69;
             // 
             // LX
             // 
@@ -275,7 +280,7 @@
             this.LX.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.LX.Visible = true;
             this.LX.VisibleIndex = 3;
-            this.LX.Width = 95;
+            this.LX.Width = 69;
             // 
             // TSC
             // 
@@ -286,7 +291,7 @@
             this.TSC.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.TSC.Visible = true;
             this.TSC.VisibleIndex = 4;
-            this.TSC.Width = 125;
+            this.TSC.Width = 90;
             // 
             // DG
             // 
@@ -299,7 +304,7 @@
             this.DG.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.DG.Visible = true;
             this.DG.VisibleIndex = 5;
-            this.DG.Width = 299;
+            this.DG.Width = 218;
             // 
             // _TotalGridListItem
             // 
@@ -315,7 +320,7 @@
             this._TotalGridListItem.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this._TotalGridListItem.Visible = true;
             this._TotalGridListItem.VisibleIndex = 6;
-            this._TotalGridListItem.Width = 106;
+            this._TotalGridListItem.Width = 76;
             // 
             // Payment
             // 
@@ -330,7 +335,7 @@
             this.Payment.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Payment.Visible = true;
             this.Payment.VisibleIndex = 7;
-            this.Payment.Width = 59;
+            this.Payment.Width = 55;
             // 
             // cmbPayment
             // 
@@ -354,7 +359,7 @@
             this.PrintBill.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.PrintBill.Visible = true;
             this.PrintBill.VisibleIndex = 8;
-            this.PrintBill.Width = 52;
+            this.PrintBill.Width = 36;
             // 
             // PostBill
             // 
@@ -371,7 +376,7 @@
             this.PostBill.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.PostBill.Visible = true;
             this.PostBill.VisibleIndex = 9;
-            this.PostBill.Width = 60;
+            this.PostBill.Width = 42;
             // 
             // _RecallBill
             // 
@@ -387,6 +392,7 @@
             this._RecallBill.OptionsColumn.AllowEdit = false;
             this._RecallBill.Visible = true;
             this._RecallBill.VisibleIndex = 10;
+            this._RecallBill.Width = 66;
             // 
             // repositoryItemButtonEdit1
             // 
@@ -427,18 +433,20 @@
             this.groupControl1.Controls.Add(this.DatetimeLbl);
             this.groupControl1.Controls.Add(this.button1);
             this.groupControl1.Controls.Add(this.SearchControl1Txt);
-            this.groupControl1.Location = new System.Drawing.Point(3, 3);
+            this.groupControl1.Location = new System.Drawing.Point(2, 2);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(2);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1169, 108);
+            this.groupControl1.Size = new System.Drawing.Size(935, 86);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "Thông tin tìm kiếm";
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(21, 38);
+            this.dateTimePicker1.Location = new System.Drawing.Point(17, 30);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(126, 23);
+            this.dateTimePicker1.Size = new System.Drawing.Size(102, 21);
             this.dateTimePicker1.TabIndex = 18;
             this.dateTimePicker1.Visible = false;
             // 
@@ -447,9 +455,10 @@
             this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
             this.pictureBox3.InitialImage = global::ExportBill.Properties.Resources.user1;
-            this.pictureBox3.Location = new System.Drawing.Point(795, 73);
+            this.pictureBox3.Location = new System.Drawing.Point(636, 58);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox3.Size = new System.Drawing.Size(19, 19);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 17;
             this.pictureBox3.TabStop = false;
@@ -459,9 +468,10 @@
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Image = global::ExportBill.Properties.Resources.company;
-            this.pictureBox2.Location = new System.Drawing.Point(795, 37);
+            this.pictureBox2.Location = new System.Drawing.Point(636, 30);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(24, 24);
+            this.pictureBox2.Size = new System.Drawing.Size(19, 19);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 16;
             this.pictureBox2.TabStop = false;
@@ -470,9 +480,10 @@
             // 
             this.UserNamelbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.UserNamelbl.AutoSize = true;
-            this.UserNamelbl.Location = new System.Drawing.Point(825, 78);
+            this.UserNamelbl.Location = new System.Drawing.Point(660, 62);
+            this.UserNamelbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.UserNamelbl.Name = "UserNamelbl";
-            this.UserNamelbl.Size = new System.Drawing.Size(54, 17);
+            this.UserNamelbl.Size = new System.Drawing.Size(42, 13);
             this.UserNamelbl.TabIndex = 14;
             this.UserNamelbl.Text = "Diemltn";
             // 
@@ -480,18 +491,20 @@
             // 
             this.CompanyLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CompanyLbl.AutoSize = true;
-            this.CompanyLbl.Location = new System.Drawing.Point(825, 43);
+            this.CompanyLbl.Location = new System.Drawing.Point(660, 34);
+            this.CompanyLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.CompanyLbl.Name = "CompanyLbl";
-            this.CompanyLbl.Size = new System.Drawing.Size(81, 17);
+            this.CompanyLbl.Size = new System.Drawing.Size(63, 13);
             this.CompanyLbl.TabIndex = 13;
             this.CompanyLbl.Text = "Tường phát";
             // 
             // DatetimeLbl
             // 
             this.DatetimeLbl.AutoSize = true;
-            this.DatetimeLbl.Location = new System.Drawing.Point(25, 40);
+            this.DatetimeLbl.Location = new System.Drawing.Point(20, 32);
+            this.DatetimeLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.DatetimeLbl.Name = "DatetimeLbl";
-            this.DatetimeLbl.Size = new System.Drawing.Size(63, 17);
+            this.DatetimeLbl.Size = new System.Drawing.Size(50, 13);
             this.DatetimeLbl.TabIndex = 12;
             this.DatetimeLbl.Text = "Datetime";
             this.DatetimeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -503,9 +516,10 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = global::ExportBill.Properties.Resources.find21;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(179, 73);
+            this.button1.Location = new System.Drawing.Point(143, 58);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 29);
+            this.button1.Size = new System.Drawing.Size(87, 23);
             this.button1.TabIndex = 5;
             this.button1.Text = "Tìm kiếm";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -516,10 +530,11 @@
             // 
             this.SearchControl1Txt.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
             this.SearchControl1Txt.ForeColor = System.Drawing.Color.Gray;
-            this.SearchControl1Txt.Location = new System.Drawing.Point(21, 76);
+            this.SearchControl1Txt.Location = new System.Drawing.Point(17, 61);
+            this.SearchControl1Txt.Margin = new System.Windows.Forms.Padding(2);
             this.SearchControl1Txt.Name = "SearchControl1Txt";
             this.SearchControl1Txt.PlaceHolderText = "Nhập biển số xe";
-            this.SearchControl1Txt.Size = new System.Drawing.Size(126, 23);
+            this.SearchControl1Txt.Size = new System.Drawing.Size(102, 20);
             this.SearchControl1Txt.TabIndex = 0;
             this.SearchControl1Txt.Text = "Nhập biển số xe";
             // 
@@ -527,8 +542,9 @@
             // 
             this.CreateServiceTab.Controls.Add(this.groupControl4);
             this.CreateServiceTab.Controls.Add(this.groupControl3);
+            this.CreateServiceTab.Margin = new System.Windows.Forms.Padding(2);
             this.CreateServiceTab.Name = "CreateServiceTab";
-            this.CreateServiceTab.Size = new System.Drawing.Size(1175, 518);
+            this.CreateServiceTab.Size = new System.Drawing.Size(940, 422);
             this.CreateServiceTab.Text = "Tạo phiếu dịch vụ";
             // 
             // groupControl4
@@ -537,9 +553,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControl4.Controls.Add(this.panelInfo);
-            this.groupControl4.Location = new System.Drawing.Point(3, 105);
+            this.groupControl4.Location = new System.Drawing.Point(2, 84);
+            this.groupControl4.Margin = new System.Windows.Forms.Padding(2);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(1169, 419);
+            this.groupControl4.Size = new System.Drawing.Size(935, 343);
             this.groupControl4.TabIndex = 2;
             // 
             // panelInfo
@@ -549,9 +566,10 @@
             this.panelInfo.Controls.Add(this.pHeader);
             this.panelInfo.Controls.Add(this.panel3);
             this.panelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelInfo.Location = new System.Drawing.Point(2, 25);
+            this.panelInfo.Location = new System.Drawing.Point(2, 20);
+            this.panelInfo.Margin = new System.Windows.Forms.Padding(2);
             this.panelInfo.Name = "panelInfo";
-            this.panelInfo.Size = new System.Drawing.Size(1165, 392);
+            this.panelInfo.Size = new System.Drawing.Size(931, 321);
             this.panelInfo.TabIndex = 1;
             // 
             // pFooter
@@ -561,9 +579,10 @@
             this.pFooter.Controls.Add(this.BtnRemove);
             this.pFooter.Controls.Add(this.CreatePrintBill);
             this.pFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pFooter.Location = new System.Drawing.Point(0, 358);
+            this.pFooter.Location = new System.Drawing.Point(0, 289);
+            this.pFooter.Margin = new System.Windows.Forms.Padding(2);
             this.pFooter.Name = "pFooter";
-            this.pFooter.Size = new System.Drawing.Size(1165, 34);
+            this.pFooter.Size = new System.Drawing.Size(931, 32);
             this.pFooter.TabIndex = 7;
             // 
             // btnBack
@@ -571,9 +590,10 @@
             this.btnBack.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.ForeColor = System.Drawing.Color.Black;
-            this.btnBack.Location = new System.Drawing.Point(168, 4);
+            this.btnBack.Location = new System.Drawing.Point(134, 1);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(75, 25);
+            this.btnBack.Size = new System.Drawing.Size(60, 25);
             this.btnBack.TabIndex = 8;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
@@ -584,9 +604,10 @@
             this.btnAddLine.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnAddLine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddLine.ForeColor = System.Drawing.Color.Black;
-            this.btnAddLine.Location = new System.Drawing.Point(6, 4);
+            this.btnAddLine.Location = new System.Drawing.Point(5, 1);
+            this.btnAddLine.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddLine.Name = "btnAddLine";
-            this.btnAddLine.Size = new System.Drawing.Size(75, 25);
+            this.btnAddLine.Size = new System.Drawing.Size(60, 25);
             this.btnAddLine.TabIndex = 7;
             this.btnAddLine.Text = "Add";
             this.btnAddLine.UseVisualStyleBackColor = false;
@@ -597,9 +618,10 @@
             this.BtnRemove.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.BtnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnRemove.ForeColor = System.Drawing.Color.Black;
-            this.BtnRemove.Location = new System.Drawing.Point(87, 4);
+            this.BtnRemove.Location = new System.Drawing.Point(70, 1);
+            this.BtnRemove.Margin = new System.Windows.Forms.Padding(2);
             this.BtnRemove.Name = "BtnRemove";
-            this.BtnRemove.Size = new System.Drawing.Size(75, 25);
+            this.BtnRemove.Size = new System.Drawing.Size(60, 25);
             this.BtnRemove.TabIndex = 6;
             this.BtnRemove.Text = "Remove";
             this.BtnRemove.UseVisualStyleBackColor = false;
@@ -611,9 +633,10 @@
             this.CreatePrintBill.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.CreatePrintBill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CreatePrintBill.ForeColor = System.Drawing.Color.Black;
-            this.CreatePrintBill.Location = new System.Drawing.Point(1037, 4);
+            this.CreatePrintBill.Location = new System.Drawing.Point(829, 1);
+            this.CreatePrintBill.Margin = new System.Windows.Forms.Padding(2);
             this.CreatePrintBill.Name = "CreatePrintBill";
-            this.CreatePrintBill.Size = new System.Drawing.Size(117, 25);
+            this.CreatePrintBill.Size = new System.Drawing.Size(94, 25);
             this.CreatePrintBill.TabIndex = 4;
             this.CreatePrintBill.Text = "Create Bill";
             this.CreatePrintBill.UseVisualStyleBackColor = false;
@@ -622,8 +645,10 @@
             // ServiceLineCtr
             // 
             this.ServiceLineCtr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ServiceLineCtr.Location = new System.Drawing.Point(0, 243);
+            this.ServiceLineCtr.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
+            this.ServiceLineCtr.Location = new System.Drawing.Point(0, 195);
             this.ServiceLineCtr.MainView = this.gvServiceLine;
+            this.ServiceLineCtr.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceLineCtr.Name = "ServiceLineCtr";
             this.ServiceLineCtr.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1,
@@ -631,7 +656,7 @@
             this.WorkerIdCbx,
             this.AdviserIdCbx,
             this.repositoryItemGridLookUpEdit1});
-            this.ServiceLineCtr.Size = new System.Drawing.Size(1165, 149);
+            this.ServiceLineCtr.Size = new System.Drawing.Size(931, 126);
             this.ServiceLineCtr.TabIndex = 3;
             this.ServiceLineCtr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvServiceLine});
@@ -801,31 +826,34 @@
             this.pHeader.Controls.Add(this.CreateServicelbl);
             this.pHeader.Controls.Add(this.ServicePool);
             this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pHeader.Location = new System.Drawing.Point(0, 152);
+            this.pHeader.Location = new System.Drawing.Point(0, 122);
+            this.pHeader.Margin = new System.Windows.Forms.Padding(2);
             this.pHeader.Name = "pHeader";
-            this.pHeader.Size = new System.Drawing.Size(1165, 91);
+            this.pHeader.Size = new System.Drawing.Size(931, 73);
             this.pHeader.TabIndex = 2;
             // 
             // NoteTxt
             // 
             this.NoteTxt.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
             this.NoteTxt.ForeColor = System.Drawing.Color.Gray;
-            this.NoteTxt.Location = new System.Drawing.Point(460, 48);
+            this.NoteTxt.Location = new System.Drawing.Point(368, 38);
+            this.NoteTxt.Margin = new System.Windows.Forms.Padding(2);
             this.NoteTxt.Name = "NoteTxt";
             this.NoteTxt.PlaceHolderText = "Nội dung yêu cầu dịch vụ";
-            this.NoteTxt.Size = new System.Drawing.Size(694, 23);
+            this.NoteTxt.Size = new System.Drawing.Size(556, 20);
             this.NoteTxt.TabIndex = 3;
             this.NoteTxt.Text = "Nội dung yêu cầu dịch vụ";
             // 
             // CurrentKm
             // 
-            this.CurrentKm.BackColor = System.Drawing.Color.Yellow;
+            this.CurrentKm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.CurrentKm.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
             this.CurrentKm.ForeColor = System.Drawing.Color.Gray;
-            this.CurrentKm.Location = new System.Drawing.Point(299, 49);
+            this.CurrentKm.Location = new System.Drawing.Point(239, 39);
+            this.CurrentKm.Margin = new System.Windows.Forms.Padding(2);
             this.CurrentKm.Name = "CurrentKm";
             this.CurrentKm.PlaceHolderText = "Số kilomet";
-            this.CurrentKm.Size = new System.Drawing.Size(155, 23);
+            this.CurrentKm.Size = new System.Drawing.Size(125, 20);
             this.CurrentKm.TabIndex = 2;
             this.CurrentKm.Text = "Số kilomet";
             this.CurrentKm.TextChanged += new System.EventHandler(this.CurrentKm_TextChanged);
@@ -834,16 +862,18 @@
             // 
             this.CreateServicelbl.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
             this.CreateServicelbl.Appearance.Options.UseFont = true;
-            this.CreateServicelbl.Location = new System.Drawing.Point(9, 13);
+            this.CreateServicelbl.Location = new System.Drawing.Point(7, 10);
+            this.CreateServicelbl.Margin = new System.Windows.Forms.Padding(2);
             this.CreateServicelbl.Name = "CreateServicelbl";
-            this.CreateServicelbl.Size = new System.Drawing.Size(170, 21);
+            this.CreateServicelbl.Size = new System.Drawing.Size(144, 17);
             this.CreateServicelbl.TabIndex = 1;
             this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: ";
             // 
             // ServicePool
             // 
             this.ServicePool.EditValue = "Kiểm tra định kỳ";
-            this.ServicePool.Location = new System.Drawing.Point(6, 49);
+            this.ServicePool.Location = new System.Drawing.Point(5, 39);
+            this.ServicePool.Margin = new System.Windows.Forms.Padding(2);
             this.ServicePool.Name = "ServicePool";
             this.ServicePool.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -856,7 +886,7 @@
             "Sửa chữa xe bảo hiểm",
             "Sửa chữa xe bảo hành",
             "Sửa chữa xe tai nạn"});
-            this.ServicePool.Size = new System.Drawing.Size(287, 22);
+            this.ServicePool.Size = new System.Drawing.Size(230, 20);
             this.ServicePool.TabIndex = 0;
             this.ServicePool.EditValueChanged += new System.EventHandler(this.ServicePool_EditValueChanged);
             // 
@@ -865,17 +895,20 @@
             this.panel3.Controls.Add(this.ServiceHeaderCtr);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1165, 152);
+            this.panel3.Size = new System.Drawing.Size(931, 122);
             this.panel3.TabIndex = 1;
             // 
             // ServiceHeaderCtr
             // 
             this.ServiceHeaderCtr.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ServiceHeaderCtr.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceHeaderCtr.Location = new System.Drawing.Point(0, 0);
             this.ServiceHeaderCtr.MainView = this.gvServiceHeader;
+            this.ServiceHeaderCtr.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceHeaderCtr.Name = "ServiceHeaderCtr";
-            this.ServiceHeaderCtr.Size = new System.Drawing.Size(1165, 152);
+            this.ServiceHeaderCtr.Size = new System.Drawing.Size(931, 122);
             this.ServiceHeaderCtr.TabIndex = 1;
             this.ServiceHeaderCtr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvServiceHeader});
@@ -978,18 +1011,20 @@
             this.groupControl3.Controls.Add(this.bsCheck);
             this.groupControl3.Controls.Add(this.button2);
             this.groupControl3.Controls.Add(this.Search2Txt);
-            this.groupControl3.Location = new System.Drawing.Point(3, 3);
+            this.groupControl3.Location = new System.Drawing.Point(2, 2);
+            this.groupControl3.Margin = new System.Windows.Forms.Padding(2);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(1169, 101);
+            this.groupControl3.Size = new System.Drawing.Size(935, 81);
             this.groupControl3.TabIndex = 1;
             this.groupControl3.Text = "Thông tin tìm kiếm";
             // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(104, 74);
+            this.radioButton2.Location = new System.Drawing.Point(83, 59);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(2);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(108, 21);
+            this.radioButton2.Size = new System.Drawing.Size(87, 17);
             this.radioButton2.TabIndex = 22;
             this.radioButton2.Text = "Số điện thoại";
             this.radioButton2.UseVisualStyleBackColor = true;
@@ -999,9 +1034,10 @@
             this.bsCheck.AutoSize = true;
             this.bsCheck.Checked = true;
             this.bsCheck.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.bsCheck.Location = new System.Drawing.Point(11, 74);
+            this.bsCheck.Location = new System.Drawing.Point(9, 59);
+            this.bsCheck.Margin = new System.Windows.Forms.Padding(2);
             this.bsCheck.Name = "bsCheck";
-            this.bsCheck.Size = new System.Drawing.Size(75, 22);
+            this.bsCheck.Size = new System.Drawing.Size(65, 18);
             this.bsCheck.TabIndex = 21;
             this.bsCheck.TabStop = true;
             this.bsCheck.Text = "Biển số";
@@ -1013,9 +1049,10 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Image = global::ExportBill.Properties.Resources.find21;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(227, 37);
+            this.button2.Location = new System.Drawing.Point(182, 30);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 30);
+            this.button2.Size = new System.Drawing.Size(87, 24);
             this.button2.TabIndex = 18;
             this.button2.Text = "Tìm kiếm";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1024,14 +1061,15 @@
             // 
             // Search2Txt
             // 
-            this.Search2Txt.BackColor = System.Drawing.Color.Yellow;
+            this.Search2Txt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.Search2Txt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Search2Txt.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
             this.Search2Txt.ForeColor = System.Drawing.Color.Gray;
-            this.Search2Txt.Location = new System.Drawing.Point(10, 41);
+            this.Search2Txt.Location = new System.Drawing.Point(8, 33);
+            this.Search2Txt.Margin = new System.Windows.Forms.Padding(2);
             this.Search2Txt.Name = "Search2Txt";
             this.Search2Txt.PlaceHolderText = "Tìm khách hàng: Biển số/SDT ";
-            this.Search2Txt.Size = new System.Drawing.Size(205, 23);
+            this.Search2Txt.Size = new System.Drawing.Size(164, 20);
             this.Search2Txt.TabIndex = 0;
             this.Search2Txt.Text = "Tìm khách hàng: Biển số/SDT ";
             // 
@@ -1041,11 +1079,12 @@
             this.Appearance.ForeColor = System.Drawing.Color.Black;
             this.Appearance.Options.UseBackColor = true;
             this.Appearance.Options.UseForeColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1182, 553);
+            this.ClientSize = new System.Drawing.Size(946, 450);
             this.Controls.Add(this.xtraTabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DXMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tiến Thu";

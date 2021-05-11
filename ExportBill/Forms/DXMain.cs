@@ -26,6 +26,7 @@ namespace ExportBill
         private const string PostBillStr = "Post Bill";
         private const string Posted = "Posted";
         private const string inProcess = "In process";
+        private const string invoiced = "Invoiced";
         private const string MPhieu = "MaPhieu";
         public static string token = string.Empty;
         #endregion
@@ -304,7 +305,7 @@ namespace ExportBill
                 if (e.Column.FieldName == PBill)
                 {
                     var cellValue = e.CellValue.ToString();
-                    if (Posted == cellValue)
+                    if (invoiced == cellValue)
                     {
                         e.Appearance.ForeColor = Color.Black;
                     }
@@ -337,7 +338,7 @@ namespace ExportBill
         {
             try
             {
-                e.Cancel = gridView1.FocusedColumn.FieldName == "Payment" && gridView1.GetFocusedRowCellValue(PostBill).ToString() == Posted;
+                e.Cancel = gridView1.FocusedColumn.FieldName == "Payment" && gridView1.GetFocusedRowCellValue(PostBill).ToString() == invoiced;
             }
             catch (Exception ex)
             {
@@ -654,7 +655,7 @@ namespace ExportBill
                     if (result.data.ToUpper().Contains(("POST BILL THÀNH CÔNG")))
                     {
                         MessageBox.Show(result.data, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        gridView1.SetRowCellValue(row, PBill, Posted);
+                        gridView1.SetRowCellValue(row, PBill, invoiced);
                         //gridView1.GetRowCellDisplayText(row, PBill);
                     }
                     else
@@ -693,7 +694,7 @@ namespace ExportBill
                 cs.Date = getData.Date;
                 new PrintInvoiceForm(cs, true).ShowDialog();
                 gridView1.SetRowCellValue(rowIndex, _RecallBill, Posted);
-                if (pbill != Posted)
+                if (pbill != invoiced)
                 {
                     var userResult = AutoClosingMessageBox.Show("Bạn có muốn Post Bill không?", "Thông báo", 5000, MessageBoxButtons.YesNo, DialogResult.No);
                     if (userResult == DialogResult.Yes)
@@ -1097,7 +1098,7 @@ namespace ExportBill
                     foreach (var item in dataList.data)
                     {
                         var data = item.Split(';');
-                        var postBill = data[11] == "Open" ? PostBillStr : Posted;
+                        var postBill = data[11] == "Open" ? PostBillStr : invoiced;
                         var payment = data[12];
                         var recalbill = data[13] == Posted ? Posted : inProcess;
                         //public Customer(string maPhieu, string userName, string bs, string lx, string tsc, string dg, decimal discount, decimal total, string detaiMoney, string company, string adress, string date, string print)
@@ -1176,7 +1177,7 @@ namespace ExportBill
                 GridView view = sender as GridView;
                 if (e.Column == _WorkerId)
                 {
-                    e.Appearance.BackColor = Color.Yellow;
+                    e.Appearance.BackColor = Color.FromArgb(255, 255, 128);
                 }
             }
             catch (Exception ex)
