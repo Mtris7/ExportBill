@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportBill", "ExportBill\Ex
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TTVersion1.0", "TTVersion1.0\TTVersion1.0.vdproj", "{63F502D1-DA35-4820-B076-3AA6E9E474B9}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TIENTHUPOS1.0.1", "TIENTHUPOS1.0.1\TIENTHUPOS1.0.1.vdproj", "{D3A3F9AC-8868-4FEB-8A7A-B829FD9DF0C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,8 @@ Global
 		{E63E30B2-3830-4722-83AB-99B813BE014D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{63F502D1-DA35-4820-B076-3AA6E9E474B9}.Debug|Any CPU.ActiveCfg = Debug
 		{63F502D1-DA35-4820-B076-3AA6E9E474B9}.Release|Any CPU.ActiveCfg = Release
+		{D3A3F9AC-8868-4FEB-8A7A-B829FD9DF0C5}.Debug|Any CPU.ActiveCfg = Debug
+		{D3A3F9AC-8868-4FEB-8A7A-B829FD9DF0C5}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -238,13 +238,14 @@
             this.MaPhieu.FieldName = "MaPhieu";
             this.MaPhieu.Name = "MaPhieu";
             this.MaPhieu.OptionsColumn.AllowEdit = false;
+            this.MaPhieu.OptionsColumn.AllowSize = false;
             this.MaPhieu.OptionsEditForm.UseEditorColRowSpan = false;
             this.MaPhieu.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "MaPhieu", "Tổng: {0} phiếu")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Count, "MaPhieu", "Tổng phiếu: {0} ")});
             this.MaPhieu.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.MaPhieu.Visible = true;
             this.MaPhieu.VisibleIndex = 0;
-            this.MaPhieu.Width = 73;
+            this.MaPhieu.Width = 101;
             // 
             // _CustomerName
             // 
@@ -254,7 +255,7 @@
             this._CustomerName.OptionsColumn.AllowEdit = false;
             this._CustomerName.Visible = true;
             this._CustomerName.VisibleIndex = 1;
-            this._CustomerName.Width = 133;
+            this._CustomerName.Width = 127;
             // 
             // BS
             // 
@@ -269,7 +270,7 @@
             this.BS.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.BS.Visible = true;
             this.BS.VisibleIndex = 2;
-            this.BS.Width = 69;
+            this.BS.Width = 66;
             // 
             // LX
             // 
@@ -280,7 +281,7 @@
             this.LX.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.LX.Visible = true;
             this.LX.VisibleIndex = 3;
-            this.LX.Width = 69;
+            this.LX.Width = 66;
             // 
             // TSC
             // 
@@ -291,7 +292,7 @@
             this.TSC.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.TSC.Visible = true;
             this.TSC.VisibleIndex = 4;
-            this.TSC.Width = 90;
+            this.TSC.Width = 86;
             // 
             // DG
             // 
@@ -304,7 +305,7 @@
             this.DG.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.DG.Visible = true;
             this.DG.VisibleIndex = 5;
-            this.DG.Width = 218;
+            this.DG.Width = 175;
             // 
             // _TotalGridListItem
             // 
@@ -320,7 +321,7 @@
             this._TotalGridListItem.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this._TotalGridListItem.Visible = true;
             this._TotalGridListItem.VisibleIndex = 6;
-            this._TotalGridListItem.Width = 76;
+            this._TotalGridListItem.Width = 64;
             // 
             // Payment
             // 
@@ -335,7 +336,7 @@
             this.Payment.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Payment.Visible = true;
             this.Payment.VisibleIndex = 7;
-            this.Payment.Width = 55;
+            this.Payment.Width = 53;
             // 
             // cmbPayment
             // 
@@ -359,7 +360,7 @@
             this.PrintBill.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.PrintBill.Visible = true;
             this.PrintBill.VisibleIndex = 8;
-            this.PrintBill.Width = 36;
+            this.PrintBill.Width = 47;
             // 
             // PostBill
             // 
@@ -376,7 +377,7 @@
             this.PostBill.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.PostBill.Visible = true;
             this.PostBill.VisibleIndex = 9;
-            this.PostBill.Width = 42;
+            this.PostBill.Width = 52;
             // 
             // _RecallBill
             // 
@@ -392,7 +393,7 @@
             this._RecallBill.OptionsColumn.AllowEdit = false;
             this._RecallBill.Visible = true;
             this._RecallBill.VisibleIndex = 10;
-            this._RecallBill.Width = 66;
+            this._RecallBill.Width = 76;
             // 
             // repositoryItemButtonEdit1
             // 
@@ -938,7 +939,7 @@
             this._CustomerNumber.OptionsColumn.AllowEdit = false;
             this._CustomerNumber.Visible = true;
             this._CustomerNumber.VisibleIndex = 0;
-            this._CustomerNumber.Width = 112;
+            this._CustomerNumber.Width = 87;
             // 
             // _Customer
             // 
@@ -948,7 +949,7 @@
             this._Customer.OptionsColumn.AllowEdit = false;
             this._Customer.Visible = true;
             this._Customer.VisibleIndex = 1;
-            this._Customer.Width = 251;
+            this._Customer.Width = 185;
             // 
             // _Address
             // 
@@ -958,7 +959,7 @@
             this._Address.OptionsColumn.AllowEdit = false;
             this._Address.Visible = true;
             this._Address.VisibleIndex = 2;
-            this._Address.Width = 336;
+            this._Address.Width = 249;
             // 
             // _Phone
             // 
@@ -968,7 +969,7 @@
             this._Phone.OptionsColumn.AllowEdit = false;
             this._Phone.Visible = true;
             this._Phone.VisibleIndex = 3;
-            this._Phone.Width = 187;
+            this._Phone.Width = 137;
             // 
             // _PlateID
             // 
@@ -978,7 +979,7 @@
             this._PlateID.OptionsColumn.AllowEdit = false;
             this._PlateID.Visible = true;
             this._PlateID.VisibleIndex = 4;
-            this._PlateID.Width = 107;
+            this._PlateID.Width = 79;
             // 
             // _CountCheck
             // 
@@ -988,7 +989,7 @@
             this._CountCheck.OptionsColumn.AllowEdit = false;
             this._CountCheck.Visible = true;
             this._CountCheck.VisibleIndex = 5;
-            this._CountCheck.Width = 152;
+            this._CountCheck.Width = 111;
             // 
             // CreateService
             // 
@@ -1002,6 +1003,7 @@
             this.CreateService.OptionsColumn.AllowEdit = false;
             this.CreateService.Visible = true;
             this.CreateService.VisibleIndex = 6;
+            this.CreateService.Width = 65;
             // 
             // groupControl3
             // 

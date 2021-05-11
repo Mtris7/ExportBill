@@ -459,6 +459,14 @@ namespace ExportBill
 
                 if (e.Column.Equals(_ItemQuality) && (check ?? false))
                 {
+                    var inventory = this.gvServiceLine.GetRowCellValue(e.RowHandle, _Inventory) ?? 1;
+                    if(Convert.ToDecimal(e.Value) > Convert.ToDecimal(inventory))
+                    {
+                        MessageBox.Show("Số luợng hàng trong kho không đủ, vui lòng nhập lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemQuality, 1);
+                        this.gvServiceLine.Focus();
+                        return;
+                    }
                     var itemPrice = this.gvServiceLine.GetRowCellValue(e.RowHandle, _ItemPrice);
                     var itemDiscount = this.gvServiceLine.GetRowCellValue(e.RowHandle, _DiscountGrid2);
                     var total = Convert.ToDecimal(itemPrice) * Convert.ToDecimal(e.Value) - Convert.ToDecimal(itemDiscount);
@@ -483,13 +491,13 @@ namespace ExportBill
                     var itemID = item.First().ItemID;
                     var itemPrice = Convert.ToDecimal(item.First().ItemPrice);
                     var itemUnit = item.First().ItemUnit;
-                    //var itemInventory = item.First().Inventory;
+                    var itemInventory = item.First().Inventory;
                     var itemQuality = item.First().ItemQuality;
                     var itemTotal = itemPrice * Convert.ToDecimal(itemQuality);
+                    this.gvServiceLine.SetRowCellValue(e.RowHandle, _Inventory, itemInventory);
                     this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemName, e.Value);
                     this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemQuality, itemQuality);
                     this.gvServiceLine.SetRowCellValue(e.RowHandle, _DiscountGrid2, 0);
-                    this.gvServiceLine.SetRowCellValue(e.RowHandle, _Inventory, item.First().Inventory);
                     this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemPrice, itemPrice.ToString("N0"));
                     this.gvServiceLine.SetRowCellValue(e.RowHandle, _TotalGrid2, itemTotal.ToString("N0"));
                     this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemUnit, itemUnit);
@@ -512,6 +520,21 @@ namespace ExportBill
             }
         }
 
+        private void gvServiceLine_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            try
+            {
+                GridView view = sender as GridView;
+                if (e.Column == _WorkerId)
+                {
+                    e.Appearance.BackColor = Color.FromArgb(255, 255, 128);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #endregion
 
         #region grid3 Create Service Header
@@ -593,6 +616,27 @@ namespace ExportBill
             try
             {
                 this.ComeBack();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void CurrentKm_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int kilomet;
+                bool result = Int32.TryParse(CurrentKm.Text, out kilomet);
+                if (CurrentKm.Text == "Số kilomet" || CurrentKm.Text == "")
+                    return;
+                else if (result == false)
+                {
+                    CurrentKm.Text = "";
+                    MessageBox.Show("vui lòng chỉ nhập số", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
             catch (Exception ex)
             {
@@ -928,6 +972,7 @@ namespace ExportBill
                         else
                             MessageBox.Show(result["data"].Value<string>(), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
+                    this.LoadItemCombobox();
                 }
                 else
                 {
@@ -979,6 +1024,7 @@ namespace ExportBill
                         MessageBox.Show("Không tìm thấy dữ liệu, vui lòng đăng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
+                    ListIS.Clear();
                     foreach (var item in dataList.data)
                     {
                         //Mã SP; Tên SP; Giá bán: gía mặc định; tồn kho; ĐVT
@@ -1142,43 +1188,6 @@ namespace ExportBill
                 this.ServiceLineCtr.Enabled = false;
                 this.pFooter.Enabled = false;
                 this.panel3.Enabled = true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void CurrentKm_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                int kilomet;
-                bool result = Int32.TryParse(CurrentKm.Text, out kilomet);
-                if (CurrentKm.Text == "Số kilomet" || CurrentKm.Text == "")
-                    return;
-                else if (result == false)
-                {
-                    CurrentKm.Text = "";
-                    MessageBox.Show("vui lòng chỉ nhập số", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void gvServiceLine_RowCellStyle(object sender, RowCellStyleEventArgs e)
-        {
-            try
-            {
-                GridView view = sender as GridView;
-                if (e.Column == _WorkerId)
-                {
-                    e.Appearance.BackColor = Color.FromArgb(255, 255, 128);
-                }
             }
             catch (Exception ex)
             {
