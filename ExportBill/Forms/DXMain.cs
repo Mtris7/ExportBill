@@ -461,14 +461,14 @@ namespace ExportBill
 
                 if (e.Column.Equals(_ItemQuality) && (check ?? false))
                 {
-                    var inventory = this.gvServiceLine.GetRowCellValue(e.RowHandle, _Inventory) ?? 1;
-                    if(Convert.ToDecimal(e.Value) > Convert.ToDecimal(inventory))
-                    {
-                        MessageBox.Show("Số luợng hàng trong kho không đủ, vui lòng nhập lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemQuality, 1);
-                        this.gvServiceLine.Focus();
-                        return;
-                    }
+                    //var inventory = this.gvServiceLine.GetRowCellValue(e.RowHandle, _Inventory) ?? 1;
+                    //if(Convert.ToDecimal(e.Value) > Convert.ToDecimal(inventory))
+                    //{
+                    //    MessageBox.Show("Số luợng hàng trong kho không đủ, vui lòng nhập lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //    this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemQuality, 1);
+                    //    this.gvServiceLine.Focus();
+                    //    return;
+                    //}
                     var itemPrice = this.gvServiceLine.GetRowCellValue(e.RowHandle, _ItemPrice);
                     var itemDiscount = this.gvServiceLine.GetRowCellValue(e.RowHandle, _DiscountGrid2);
                     var total = Convert.ToDecimal(itemPrice) * Convert.ToDecimal(e.Value) - Convert.ToDecimal(itemDiscount);
@@ -530,6 +530,12 @@ namespace ExportBill
                 if (e.Column == _WorkerId)
                 {
                     e.Appearance.BackColor = Color.FromArgb(255, 255, 128);
+                }
+                if(e.Column == _Inventory)
+                {
+                    var value = e.CellValue?.ToString();
+                    if (value == "0.00")
+                        e.Appearance.BackColor = Color.FromArgb(244, 37, 52);
                 }
             }
             catch (Exception ex)
