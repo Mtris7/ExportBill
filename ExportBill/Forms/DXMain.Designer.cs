@@ -101,6 +101,7 @@
             this._CountCheck = new DevExpress.XtraGrid.Columns.GridColumn();
             this.CreateService = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.btCreateUser = new System.Windows.Forms.Button();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.bsCheck = new System.Windows.Forms.RadioButton();
             this.button2 = new System.Windows.Forms.Button();
@@ -163,7 +164,7 @@
             this.ServiceListTab.Controls.Add(this.groupControl1);
             this.ServiceListTab.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceListTab.Name = "ServiceListTab";
-            this.ServiceListTab.Size = new System.Drawing.Size(940, 422);
+            this.ServiceListTab.Size = new System.Drawing.Size(944, 425);
             this.ServiceListTab.Text = "Danh sách xe làm dịch vụ";
             // 
             // groupControl2
@@ -545,7 +546,7 @@
             this.CreateServiceTab.Controls.Add(this.groupControl3);
             this.CreateServiceTab.Margin = new System.Windows.Forms.Padding(2);
             this.CreateServiceTab.Name = "CreateServiceTab";
-            this.CreateServiceTab.Size = new System.Drawing.Size(940, 422);
+            this.CreateServiceTab.Size = new System.Drawing.Size(944, 425);
             this.CreateServiceTab.Text = "Tạo phiếu dịch vụ";
             // 
             // groupControl4
@@ -567,10 +568,10 @@
             this.panelInfo.Controls.Add(this.pHeader);
             this.panelInfo.Controls.Add(this.panel3);
             this.panelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelInfo.Location = new System.Drawing.Point(2, 20);
+            this.panelInfo.Location = new System.Drawing.Point(2, 23);
             this.panelInfo.Margin = new System.Windows.Forms.Padding(2);
             this.panelInfo.Name = "panelInfo";
-            this.panelInfo.Size = new System.Drawing.Size(931, 321);
+            this.panelInfo.Size = new System.Drawing.Size(931, 318);
             this.panelInfo.TabIndex = 1;
             // 
             // pFooter
@@ -580,7 +581,7 @@
             this.pFooter.Controls.Add(this.BtnRemove);
             this.pFooter.Controls.Add(this.CreatePrintBill);
             this.pFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pFooter.Location = new System.Drawing.Point(0, 289);
+            this.pFooter.Location = new System.Drawing.Point(0, 286);
             this.pFooter.Margin = new System.Windows.Forms.Padding(2);
             this.pFooter.Name = "pFooter";
             this.pFooter.Size = new System.Drawing.Size(931, 32);
@@ -657,7 +658,7 @@
             this.WorkerIdCbx,
             this.AdviserIdCbx,
             this.repositoryItemGridLookUpEdit1});
-            this.ServiceLineCtr.Size = new System.Drawing.Size(931, 126);
+            this.ServiceLineCtr.Size = new System.Drawing.Size(931, 123);
             this.ServiceLineCtr.TabIndex = 3;
             this.ServiceLineCtr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvServiceLine});
@@ -1009,6 +1010,7 @@
             // 
             this.groupControl3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupControl3.Controls.Add(this.btCreateUser);
             this.groupControl3.Controls.Add(this.radioButton2);
             this.groupControl3.Controls.Add(this.bsCheck);
             this.groupControl3.Controls.Add(this.button2);
@@ -1019,6 +1021,22 @@
             this.groupControl3.Size = new System.Drawing.Size(935, 81);
             this.groupControl3.TabIndex = 1;
             this.groupControl3.Text = "Thông tin tìm kiếm";
+            // 
+            // btCreateUser
+            // 
+            this.btCreateUser.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btCreateUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btCreateUser.Image = global::ExportBill.Properties.Resources.user1;
+            this.btCreateUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btCreateUser.Location = new System.Drawing.Point(282, 30);
+            this.btCreateUser.Margin = new System.Windows.Forms.Padding(2);
+            this.btCreateUser.Name = "btCreateUser";
+            this.btCreateUser.Size = new System.Drawing.Size(149, 24);
+            this.btCreateUser.TabIndex = 23;
+            this.btCreateUser.Text = "Tạo khách hàng mới";
+            this.btCreateUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btCreateUser.UseVisualStyleBackColor = false;
+            this.btCreateUser.Click += new System.EventHandler(this.CreateUser_Click);
             // 
             // radioButton2
             // 
@@ -1065,15 +1083,16 @@
             // 
             this.Search2Txt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.Search2Txt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Search2Txt.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
+            this.Search2Txt.Font = new System.Drawing.Font("Tahoma", 8.5F, System.Drawing.FontStyle.Italic);
             this.Search2Txt.ForeColor = System.Drawing.Color.Gray;
             this.Search2Txt.Location = new System.Drawing.Point(8, 33);
             this.Search2Txt.Margin = new System.Windows.Forms.Padding(2);
             this.Search2Txt.Name = "Search2Txt";
             this.Search2Txt.PlaceHolderText = "Tìm khách hàng: Biển số/SDT ";
-            this.Search2Txt.Size = new System.Drawing.Size(164, 20);
+            this.Search2Txt.Size = new System.Drawing.Size(164, 21);
             this.Search2Txt.TabIndex = 0;
             this.Search2Txt.Text = "Tìm khách hàng: Biển số/SDT ";
+            this.Search2Txt.TextChanged += new System.EventHandler(this.Search_Changed);
             // 
             // DXMain
             // 
@@ -1085,7 +1104,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(946, 450);
             this.Controls.Add(this.xtraTabControl);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("DXMain.IconOptions.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "DXMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1212,5 +1231,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn _Inventory;
         private DevExpress.XtraGrid.Columns.GridColumn _CustomerName;
         private DevExpress.XtraGrid.Columns.GridColumn _RecallBill;
+        private System.Windows.Forms.Button btCreateUser;
     }
 }

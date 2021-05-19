@@ -44,134 +44,164 @@
             this.SaveBtn = new System.Windows.Forms.Button();
             this.placeHolderTextBox1 = new ExportBill.PlaceHolderTextBox();
             this.BSTxt = new ExportBill.PlaceHolderTextBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // NameTxt
             // 
-            this.NameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic);
+            this.NameTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic);
             this.NameTxt.ForeColor = System.Drawing.Color.Gray;
-            this.NameTxt.Location = new System.Drawing.Point(21, 12);
+            this.NameTxt.Location = new System.Drawing.Point(16, 10);
+            this.NameTxt.Margin = new System.Windows.Forms.Padding(2);
             this.NameTxt.Name = "NameTxt";
             this.NameTxt.PlaceHolderText = "Họ và Tên";
-            this.NameTxt.Size = new System.Drawing.Size(213, 22);
+            this.NameTxt.Size = new System.Drawing.Size(161, 21);
             this.NameTxt.TabIndex = 0;
             this.NameTxt.Text = "Họ và Tên";
+            this.NameTxt.WordWrap = false;
             // 
             // CMNDTxt
             // 
-            this.CMNDTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic);
+            this.CMNDTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic);
             this.CMNDTxt.ForeColor = System.Drawing.Color.Gray;
-            this.CMNDTxt.Location = new System.Drawing.Point(21, 48);
+            this.CMNDTxt.Location = new System.Drawing.Point(16, 44);
+            this.CMNDTxt.Margin = new System.Windows.Forms.Padding(2);
             this.CMNDTxt.Name = "CMNDTxt";
             this.CMNDTxt.PlaceHolderText = "Số CMND/CCDC";
-            this.CMNDTxt.Size = new System.Drawing.Size(213, 22);
+            this.CMNDTxt.Size = new System.Drawing.Size(161, 21);
             this.CMNDTxt.TabIndex = 1;
             this.CMNDTxt.Text = "Số CMND/CCDC";
             // 
             // CityTxt
             // 
-            this.CityTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic);
+            this.CityTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic);
             this.CityTxt.ForeColor = System.Drawing.Color.Gray;
-            this.CityTxt.Location = new System.Drawing.Point(21, 82);
+            this.CityTxt.Location = new System.Drawing.Point(16, 77);
+            this.CityTxt.Margin = new System.Windows.Forms.Padding(2);
             this.CityTxt.Name = "CityTxt";
             this.CityTxt.PlaceHolderText = "Tỉnh/Thành phố";
-            this.CityTxt.Size = new System.Drawing.Size(213, 22);
+            this.CityTxt.Size = new System.Drawing.Size(161, 21);
             this.CityTxt.TabIndex = 2;
             this.CityTxt.Text = "Tỉnh/Thành phố";
             // 
             // SDTTxt
             // 
-            this.SDTTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic);
+            this.SDTTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic);
             this.SDTTxt.ForeColor = System.Drawing.Color.Gray;
-            this.SDTTxt.Location = new System.Drawing.Point(264, 48);
+            this.SDTTxt.Location = new System.Drawing.Point(181, 44);
+            this.SDTTxt.Margin = new System.Windows.Forms.Padding(2);
             this.SDTTxt.Name = "SDTTxt";
             this.SDTTxt.PlaceHolderText = "Số điện thoại";
-            this.SDTTxt.Size = new System.Drawing.Size(204, 22);
+            this.SDTTxt.Size = new System.Drawing.Size(171, 21);
             this.SDTTxt.TabIndex = 3;
             this.SDTTxt.Text = "Số điện thoại";
             // 
             // DictrictTxt
             // 
-            this.DictrictTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic);
+            this.DictrictTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic);
             this.DictrictTxt.ForeColor = System.Drawing.Color.Gray;
-            this.DictrictTxt.Location = new System.Drawing.Point(264, 82);
+            this.DictrictTxt.Location = new System.Drawing.Point(181, 77);
+            this.DictrictTxt.Margin = new System.Windows.Forms.Padding(2);
             this.DictrictTxt.Name = "DictrictTxt";
             this.DictrictTxt.PlaceHolderText = "Quận/Huyện";
-            this.DictrictTxt.Size = new System.Drawing.Size(204, 22);
+            this.DictrictTxt.Size = new System.Drawing.Size(171, 21);
             this.DictrictTxt.TabIndex = 4;
             this.DictrictTxt.Text = "Quận/Huyện";
             // 
             // StreetTxt
             // 
-            this.StreetTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic);
+            this.StreetTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic);
             this.StreetTxt.ForeColor = System.Drawing.Color.Gray;
-            this.StreetTxt.Location = new System.Drawing.Point(21, 118);
+            this.StreetTxt.Location = new System.Drawing.Point(16, 111);
+            this.StreetTxt.Margin = new System.Windows.Forms.Padding(2);
             this.StreetTxt.Name = "StreetTxt";
             this.StreetTxt.PlaceHolderText = "Số nhà/Tên đường phố";
-            this.StreetTxt.Size = new System.Drawing.Size(447, 22);
+            this.StreetTxt.Size = new System.Drawing.Size(336, 21);
             this.StreetTxt.TabIndex = 5;
             this.StreetTxt.Text = "Số nhà/Tên đường phố";
             // 
             // comboBox1
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.comboBox1.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Nam",
             "Nữ",
             "Khác"});
-            this.comboBox1.Location = new System.Drawing.Point(264, 12);
+            this.comboBox1.Location = new System.Drawing.Point(181, 10);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(87, 24);
+            this.comboBox1.Size = new System.Drawing.Size(83, 23);
             this.comboBox1.TabIndex = 6;
             this.comboBox1.Text = "Giới tính";
             // 
             // comboBox3
             // 
+            this.comboBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.comboBox3.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(21, 186);
+            this.comboBox3.Items.AddRange(new object[] {
+            "Kiểm tra định kỳ",
+            "Kiểm tra định kỳ thiện chí",
+            "Sữa chữa lưu động ",
+            "Sữa chữa - thay thế phụ tùng",
+            "Sữa chữa thiện chí",
+            "Sữa chữa xe bảo hiểm",
+            "Sữa chữa xe bảo hành",
+            "Sữa chữa xe tai nạn"});
+            this.comboBox3.Location = new System.Drawing.Point(16, 178);
+            this.comboBox3.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(217, 24);
+            this.comboBox3.Size = new System.Drawing.Size(181, 23);
             this.comboBox3.TabIndex = 8;
+            this.comboBox3.Text = "sữa chửa thay thế phụ tùng";
             // 
             // KilometerTxt
             // 
-            this.KilometerTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic);
+            this.KilometerTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic);
             this.KilometerTxt.ForeColor = System.Drawing.Color.Gray;
-            this.KilometerTxt.Location = new System.Drawing.Point(264, 186);
+            this.KilometerTxt.Location = new System.Drawing.Point(201, 178);
+            this.KilometerTxt.Margin = new System.Windows.Forms.Padding(2);
             this.KilometerTxt.Name = "KilometerTxt";
             this.KilometerTxt.PlaceHolderText = "Số kilomet";
-            this.KilometerTxt.Size = new System.Drawing.Size(204, 22);
+            this.KilometerTxt.Size = new System.Drawing.Size(151, 21);
             this.KilometerTxt.TabIndex = 9;
             this.KilometerTxt.Text = "Số kilomet";
             // 
             // NoteTxt
             // 
-            this.NoteTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic);
+            this.NoteTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic);
             this.NoteTxt.ForeColor = System.Drawing.Color.Gray;
-            this.NoteTxt.Location = new System.Drawing.Point(21, 226);
+            this.NoteTxt.Location = new System.Drawing.Point(16, 215);
+            this.NoteTxt.Margin = new System.Windows.Forms.Padding(2);
             this.NoteTxt.Multiline = true;
             this.NoteTxt.Name = "NoteTxt";
             this.NoteTxt.PlaceHolderText = "Ghi chú";
-            this.NoteTxt.Size = new System.Drawing.Size(447, 84);
+            this.NoteTxt.Size = new System.Drawing.Size(336, 69);
             this.NoteTxt.TabIndex = 10;
             this.NoteTxt.Text = "Ghi chú";
             // 
             // dateTimePicker1
             // 
+            this.dateTimePicker1.CalendarForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(357, 14);
+            this.dateTimePicker1.Location = new System.Drawing.Point(268, 11);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(111, 22);
+            this.dateTimePicker1.Size = new System.Drawing.Size(84, 21);
             this.dateTimePicker1.TabIndex = 11;
             // 
             // CreateSaveBtn
             // 
+            this.CreateSaveBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.CreateSaveBtn.Image = ((System.Drawing.Image)(resources.GetObject("CreateSaveBtn.Image")));
             this.CreateSaveBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.CreateSaveBtn.Location = new System.Drawing.Point(306, 316);
+            this.CreateSaveBtn.Location = new System.Drawing.Point(217, 303);
+            this.CreateSaveBtn.Margin = new System.Windows.Forms.Padding(2);
             this.CreateSaveBtn.Name = "CreateSaveBtn";
-            this.CreateSaveBtn.Size = new System.Drawing.Size(162, 43);
+            this.CreateSaveBtn.Size = new System.Drawing.Size(135, 35);
             this.CreateSaveBtn.TabIndex = 12;
             this.CreateSaveBtn.Text = "Lưu và tạo phiếu";
             this.CreateSaveBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -180,11 +210,13 @@
             // 
             // SaveBtn
             // 
+            this.SaveBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.SaveBtn.Image = ((System.Drawing.Image)(resources.GetObject("SaveBtn.Image")));
             this.SaveBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.SaveBtn.Location = new System.Drawing.Point(238, 316);
+            this.SaveBtn.Location = new System.Drawing.Point(153, 303);
+            this.SaveBtn.Margin = new System.Windows.Forms.Padding(2);
             this.SaveBtn.Name = "SaveBtn";
-            this.SaveBtn.Size = new System.Drawing.Size(68, 43);
+            this.SaveBtn.Size = new System.Drawing.Size(60, 35);
             this.SaveBtn.TabIndex = 13;
             this.SaveBtn.Text = "Lưu";
             this.SaveBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -193,31 +225,45 @@
             // 
             // placeHolderTextBox1
             // 
-            this.placeHolderTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic);
+            this.placeHolderTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic);
             this.placeHolderTextBox1.ForeColor = System.Drawing.Color.Gray;
-            this.placeHolderTextBox1.Location = new System.Drawing.Point(265, 153);
+            this.placeHolderTextBox1.Location = new System.Drawing.Point(130, 144);
+            this.placeHolderTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.placeHolderTextBox1.Name = "placeHolderTextBox1";
             this.placeHolderTextBox1.PlaceHolderText = "Loại xe";
-            this.placeHolderTextBox1.Size = new System.Drawing.Size(204, 22);
+            this.placeHolderTextBox1.Size = new System.Drawing.Size(134, 21);
             this.placeHolderTextBox1.TabIndex = 15;
             this.placeHolderTextBox1.Text = "Loại xe";
             // 
             // BSTxt
             // 
-            this.BSTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic);
+            this.BSTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic);
             this.BSTxt.ForeColor = System.Drawing.Color.Gray;
-            this.BSTxt.Location = new System.Drawing.Point(22, 153);
+            this.BSTxt.Location = new System.Drawing.Point(16, 144);
+            this.BSTxt.Margin = new System.Windows.Forms.Padding(2);
             this.BSTxt.Name = "BSTxt";
             this.BSTxt.PlaceHolderText = "Biển số xe";
-            this.BSTxt.Size = new System.Drawing.Size(213, 22);
+            this.BSTxt.Size = new System.Drawing.Size(110, 21);
             this.BSTxt.TabIndex = 14;
             this.BSTxt.Text = "Biển số xe";
             // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker2.Location = new System.Drawing.Point(268, 144);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(84, 21);
+            this.dateTimePicker2.TabIndex = 16;
+            // 
             // CreateUser
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(491, 367);
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.ClientSize = new System.Drawing.Size(368, 359);
+            this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.placeHolderTextBox1);
             this.Controls.Add(this.BSTxt);
             this.Controls.Add(this.SaveBtn);
@@ -233,6 +279,7 @@
             this.Controls.Add(this.CityTxt);
             this.Controls.Add(this.CMNDTxt);
             this.Controls.Add(this.NameTxt);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CreateUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tạo mới khách hàng";
@@ -259,5 +306,6 @@
         private System.Windows.Forms.Button SaveBtn;
         private PlaceHolderTextBox placeHolderTextBox1;
         private PlaceHolderTextBox BSTxt;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
     }
 }

@@ -1,4 +1,6 @@
 ﻿using ExportBill.Interface;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -29,43 +31,76 @@ namespace ExportBill
         {
         }
 
-        private async void SaveBtn_Click(object sender, EventArgs e)
+        private void SaveBtn_Click(object sender, EventArgs e)
         {
             try
             { 
                 if (string.IsNullOrWhiteSpace(NameTxt.Text) ||
-                    string.IsNullOrWhiteSpace(CMNDTxt.Text))
+                    string.IsNullOrWhiteSpace(BSTxt.Text) ||
+                    string.IsNullOrWhiteSpace(SDTTxt.Text))
                 {
-                    MessageBox.Show("Họ Tên và Mã ID không được để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Tên Khách hàng, Biển số và SĐT Không được để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
                     this.Enabled = false;
                     string url = @"http://api.ototienthu.com.vn/api/v1/customers/createcustomer";
-                    var client = new HttpClient();
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    var request = new HttpRequestMessage(HttpMethod.Post, url);
-                    var formContent = new FormUrlEncodedContent(new[]
-                        {
-                            new KeyValuePair<string, string>("HcmPersonnelNumberId", CMNDTxt.Text),
-                            new KeyValuePair<string, string>("FirstName", NameTxt.Text),
-                            new KeyValuePair<string, string>("Gender", comboBox1.Text),
-                            new KeyValuePair<string, string>("CMND", CMNDTxt.Text),
-                            new KeyValuePair<string, string>("CustomerAddress", StreetTxt.Text + ";" + DictrictTxt.Text + ";" + CityTxt.Text),
-                            new KeyValuePair<string, string>("Phone", SDTTxt.Text),
-                            new KeyValuePair<string, string>("Provine", NoteTxt.Text),
-                        });
-                    request.Content = formContent;
-                    var response = getApi.post(url, formContent);
+                    var data_create = new List<KeyValuePair<string, string>>();
+                    data_create.Add(new KeyValuePair<string, string>("FirstName", NameTxt.Text));
+                    data_create.Add(new KeyValuePair<string, string>("HcmPersonnelNumberId", Staff.UserID));
+                    data_create.Add(new KeyValuePair<string, string>("Fax", "0979300094"));
+                    if (!string.IsNullOrEmpty(comboBox1.Text))
+                        data_create.Add(new KeyValuePair<string, string>("Gender", comboBox1.Text));
+                    if (!string.IsNullOrEmpty(dateTimePicker1.Text))
+                        data_create.Add(new KeyValuePair<string, string>("DateOfBirth", dateTimePicker1.Text));
+                    if (!string.IsNullOrEmpty(SDTTxt.Text))
+                        data_create.Add(new KeyValuePair<string, string>("Phone", SDTTxt.Text));
+                    if (!string.IsNullOrEmpty(CMNDTxt.Text))
+                        data_create.Add(new KeyValuePair<string, string>("CMND", CMNDTxt.Text));
+                    if (!string.IsNullOrEmpty(StreetTxt.Text))
+                        data_create.Add(new KeyValuePair<string, string>("CustomerAddress", StreetTxt.Text));
+                    if (!string.IsNullOrEmpty(DictrictTxt.Text))
+                        data_create.Add(new KeyValuePair<string, string>("District", DictrictTxt.Text));
+        
+                                FormUrlEncodedContent formContent = new FormUrlEncodedContent(data_create);
+                    GetAPI get_API = new GetAPI();
+                    var response = get_API.Post_NoAsyn(url, formContent);
+
+                    string _url = @"http://api.ototienthu.com.vn/api/v1/customers/createplate";
+                    var data_create1 = new List<KeyValuePair<string, string>>();
+                    data_create1.Add(new KeyValuePair<string, string>("LicensePlate", BSTxt.Text));
+                    if (!string.IsNullOrEmpty(comboBox3.Text))
+                        data_create1.Add(new KeyValuePair<string, string>("CategoryName", comboBox3.Text));
+                    if (!string.IsNullOrEmpty(dateTimePicker2.Text))
+                        data_create1.Add(new KeyValuePair<string, string>("InvoceDate", dateTimePicker2.Text));
+                    if (!string.IsNullOrEmpty(SDTTxt.Text))
+                        data_create1.Add(new KeyValuePair<string, string>("CustomerPhone", SDTTxt.Text));
+                    FormUrlEncodedContent _formContent = new FormUrlEncodedContent(data_create1);
+                    var _response = get_API.Post_NoAsyn(_url, _formContent);
                     this.Enabled = true;
-                    if (response.Result.IsSuccessStatusCode)
+                    if(!response.Equals("") && !_response.Equals(""))
+
                     {
-                        MessageBox.Show("Đăng kí thành công", "Thông báo");
+                        
+                        var result = (JObject)JsonConvert.DeserializeObject(response);
+                        var result1 = (JObject)JsonConvert.DeserializeObject(_response);
+                        string test = result["data"].Value<string>();
+                        bool check = response.ToString().Contains("status: true");
+                        if (result["status"].Value<string>().ToUpper().Contains("TRUE")  && result1["status"].Value<string>().ToUpper().Contains("TRUE"))
+                        {
+                            MessageBox.Show("Đăng kí thành công", "Thông báo");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Đăng kí không thành công", "Thông báo");
+                        }
+                        return;
+                        
                     }
                     else
                     {
                         MessageBox.Show("Đăng kí không thành công", "Thông báo");
+                        return;
                     }
                 }
             
@@ -75,5 +110,6 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+
     }
 }

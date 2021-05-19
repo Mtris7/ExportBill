@@ -195,6 +195,7 @@
     <Compile Include="Forms\PrintInvoiceForm.Designer.cs">
       <DependentUpon>PrintInvoiceForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="fsm_BtBack.cs" />
     <Compile Include="GetAPI.cs" />
     <Compile Include="Interface\IGetAPI.cs" />
     <Compile Include="Model\Customer.cs" />
