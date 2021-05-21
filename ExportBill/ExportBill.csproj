@@ -293,6 +293,7 @@
     <None Include="Resources\find2.png" />
     <None Include="Resources\find21.png" />
     <None Include="Resources\LoginBackground.png" />
+    <Content Include="image\addUser.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

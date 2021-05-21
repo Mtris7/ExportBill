@@ -11,6 +11,7 @@
         public string CountCheck { get; set; }
         public string VehicleType { get; set; }
         public string CreateService { get; set; }
+        public CustomerModel(){}
         public CustomerModel(string customerNumber, string customerName, string address = null, string phone = null,
                             string plateID = null, string identityCard = null, string countCheck = null, string vehicleType = null, string createService = "+")
         {

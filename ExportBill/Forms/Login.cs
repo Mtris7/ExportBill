@@ -71,17 +71,19 @@ namespace ExportBill
                 {
                     this.Enabled = false;
                     string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierCheckLogin";
-                    var client = new HttpClient();
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    var request = new HttpRequestMessage(HttpMethod.Post, url);
+                    //var client = new HttpClient();
+                    //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+                    //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    //var request = new HttpRequestMessage(HttpMethod.Post, url);
                     var formContent = new FormUrlEncodedContent(new[]
                         {
                         new KeyValuePair<string, string>("personnalNumberId", user),
                         new KeyValuePair<string, string>("retailStaffPassword", passw),
                     });
-                    request.Content = formContent;
-                    var response = await client.SendAsync(request);
+                    //request.Content = formContent;
+                    //var response = await client.SendAsync(request);
+                    GetAPI Login = new GetAPI();
+                    var response = await Login.post(url, formContent);
                     this.Enabled = true;
                     if (response.IsSuccessStatusCode)
                     {

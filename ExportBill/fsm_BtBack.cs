@@ -11,6 +11,7 @@ namespace ExportBill
         fsm_delete_grid3,
         fsm_delete_grid2,
         fsm_delete_number,
+        fsm_status4,
         fsm_nothing
     }
 }

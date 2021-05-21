@@ -681,6 +681,7 @@
             this.gvServiceLine.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gvServiceLine_RowCellStyle);
             this.gvServiceLine.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
             this.gvServiceLine.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanging);
+            this.gvServiceLine.Click += new System.EventHandler(this.Click_Change_Grid3);
             // 
             // _ItemName
             // 
@@ -1026,7 +1027,7 @@
             // 
             this.btCreateUser.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.btCreateUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btCreateUser.Image = global::ExportBill.Properties.Resources.user1;
+            this.btCreateUser.Image = ((System.Drawing.Image)(resources.GetObject("btCreateUser.Image")));
             this.btCreateUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btCreateUser.Location = new System.Drawing.Point(282, 30);
             this.btCreateUser.Margin = new System.Windows.Forms.Padding(2);
