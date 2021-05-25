@@ -38,6 +38,8 @@
             this.NewPasswordTxt = new Bunifu.Framework.UI.BunifuMaterialTextbox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // PassWordTxt
@@ -61,7 +63,7 @@
             this.PassWordTxt.MaxLength = 32767;
             this.PassWordTxt.Name = "PassWordTxt";
             this.PassWordTxt.Size = new System.Drawing.Size(351, 38);
-            this.PassWordTxt.TabIndex = 19;
+            this.PassWordTxt.TabIndex = 2;
             this.PassWordTxt.Text = global::ExportBill.Properties.Settings.Default.passWord;
             this.PassWordTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
@@ -75,8 +77,8 @@
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(352, 42);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "Đăng Nhập";
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Change Password";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -101,7 +103,7 @@
             this.UserNameTxt.MaxLength = 32767;
             this.UserNameTxt.Name = "UserNameTxt";
             this.UserNameTxt.Size = new System.Drawing.Size(351, 38);
-            this.UserNameTxt.TabIndex = 18;
+            this.UserNameTxt.TabIndex = 0;
             this.UserNameTxt.Text = global::ExportBill.Properties.Settings.Default.userName;
             this.UserNameTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
@@ -126,7 +128,7 @@
             this.ConfirmPasswordTxt.MaxLength = 32767;
             this.ConfirmPasswordTxt.Name = "ConfirmPasswordTxt";
             this.ConfirmPasswordTxt.Size = new System.Drawing.Size(351, 38);
-            this.ConfirmPasswordTxt.TabIndex = 24;
+            this.ConfirmPasswordTxt.TabIndex = 6;
             this.ConfirmPasswordTxt.Text = global::ExportBill.Properties.Settings.Default.passWord;
             this.ConfirmPasswordTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
@@ -139,10 +141,10 @@
             this.button13.ForeColor = System.Drawing.Color.White;
             this.button13.Image = ((System.Drawing.Image)(resources.GetObject("button13.Image")));
             this.button13.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button13.Location = new System.Drawing.Point(377, 1);
+            this.button13.Location = new System.Drawing.Point(374, 1);
             this.button13.Margin = new System.Windows.Forms.Padding(4);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(42, 43);
+            this.button13.Size = new System.Drawing.Size(42, 34);
             this.button13.TabIndex = 25;
             this.button13.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button13.UseVisualStyleBackColor = true;
@@ -179,7 +181,7 @@
             this.NewPasswordTxt.MaxLength = 32767;
             this.NewPasswordTxt.Name = "NewPasswordTxt";
             this.NewPasswordTxt.Size = new System.Drawing.Size(351, 38);
-            this.NewPasswordTxt.TabIndex = 27;
+            this.NewPasswordTxt.TabIndex = 4;
             this.NewPasswordTxt.Text = global::ExportBill.Properties.Settings.Default.passWord;
             this.NewPasswordTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
@@ -203,6 +205,16 @@
             this.label3.TabIndex = 29;
             this.label3.Text = "Xác nhận lại mật khẩu";
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panel1.Controls.Add(this.button13);
+            this.panel1.Location = new System.Drawing.Point(0, 1);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(419, 39);
+            this.panel1.TabIndex = 30;
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            // 
             // ChangePassword
             // 
             this.Appearance.BackColor = System.Drawing.Color.White;
@@ -210,11 +222,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(419, 450);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.NewPasswordTxt);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button13);
             this.Controls.Add(this.ConfirmPasswordTxt);
             this.Controls.Add(this.PassWordTxt);
             this.Controls.Add(this.button1);
@@ -223,8 +235,7 @@
             this.Name = "ChangePassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ChangePassword";
-            this.Load += new System.EventHandler(this.ChangePassword_Load);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,5 +252,6 @@
         private Bunifu.Framework.UI.BunifuMaterialTextbox NewPasswordTxt;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel1;
     }
 }

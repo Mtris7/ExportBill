@@ -157,6 +157,7 @@
             this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.ServiceListTab,
             this.CreateServiceTab});
+            this.xtraTabControl.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.xtraTabControl_SelectedPageChanged);
             // 
             // ServiceListTab
             // 
@@ -215,7 +216,7 @@
             this.PostBill,
             this._RecallBill});
             this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.GroupFormat = "= {0:C}VNĐ";
+            this.gridView1.GroupFormat = "= {0:C}";
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsEditForm.EditFormColumnCount = 1;
             this.gridView1.OptionsMenu.ShowFooterItem = true;
@@ -302,7 +303,7 @@
             this.DG.Name = "DG";
             this.DG.OptionsColumn.AllowEdit = false;
             this.DG.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "DG", "Tổng cộng")});
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "DG", "Tổng cộng(VNĐ)")});
             this.DG.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.DG.Visible = true;
             this.DG.VisibleIndex = 5;
@@ -317,7 +318,7 @@
             this._TotalGridListItem.Name = "_TotalGridListItem";
             this._TotalGridListItem.OptionsColumn.AllowEdit = false;
             this._TotalGridListItem.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total", "{0:N0}VNĐ"),
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total", "{0:N0}"),
             new DevExpress.XtraGrid.GridColumnSummaryItem()});
             this._TotalGridListItem.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this._TotalGridListItem.Visible = true;
@@ -1037,6 +1038,7 @@
             this.btCreateUser.Text = "Tạo khách hàng mới";
             this.btCreateUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btCreateUser.UseVisualStyleBackColor = false;
+            this.btCreateUser.Visible = false;
             this.btCreateUser.Click += new System.EventHandler(this.CreateUser_Click);
             // 
             // radioButton2

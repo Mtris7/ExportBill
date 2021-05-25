@@ -171,21 +171,15 @@ namespace ExportBill
                     System.Threading.Thread.Sleep(500);
                     return;
                 }
-                //if (DXMain.ChangeBso)
-                //{
-                //    Search2Txt.Text = Bso;
-                //}
                 string url = @"http://api.ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + Search2Txt.Text + "&searchtype=";
                 if (bsCheck.Checked)
                     url += "LicensePlate";
                 else
                     url += "CustomerPhone";
                 GetAPI Search = new GetAPI();
+                this.Enabled = false;
                 var response = await Search.Only_url(url);
                 this.Enabled = true;
-                this.pHeader.Enabled = false;
-                //this.pFooter.Enabled = false;
-                this.groupControl3.Enabled = false;
                 this.fsm = fsm_BtBack.fsm_delete_grid2;
                 if (response.IsSuccessStatusCode)
                 {
@@ -210,7 +204,6 @@ namespace ExportBill
                         
                     }
                     this.ListCustomerSearch.Clear();
-                    this.panel3.Enabled = true;
                     this.delete_grid3();
                     
                     foreach (var item in dataList.data)
@@ -330,6 +323,7 @@ namespace ExportBill
             }
             
         }
+
         private void GridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
         {
             try
@@ -478,23 +472,34 @@ namespace ExportBill
             try
             {
                 if (string.IsNullOrWhiteSpace(e.Value?.ToString())) return;
-                var check = e.Value?.ToString().Replace(",","").All(char.IsDigit);
-                if (e.Column.Equals(_DiscountGrid2) && (check ?? false))
+                var check = e.Value?.ToString().Replace(",","").Replace(".","").All(char.IsDigit) ?? false;
+                
+                if (e.Column.Equals(_DiscountGrid2))
                 {
-                    
+                    if (!check)
+                    {
+                        MessageBox.Show("Vui lòng nhập chữ số.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        this.gvServiceLine.SetRowCellValue(e.RowHandle, _DiscountGrid2, 0);
+                        return;
+                    }
                     var itemPrice = this.gvServiceLine.GetRowCellValue(e.RowHandle, _ItemPrice);
                     var itemQuatity = this.gvServiceLine.GetRowCellValue(e.RowHandle, _ItemQuality) ?? 1;
                     var total = Convert.ToDecimal(itemPrice) * Convert.ToDecimal(itemQuatity) - Convert.ToDecimal(e.Value);
                     this.gvServiceLine.SetRowCellValue(e.RowHandle, _TotalGrid2, total.ToString("N0"));
 
                     this.gvServiceLine.CellValueChanged -= new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
-                    //string discount = this.gvServiceLine.GetRowCellValue(e.RowHandle, _DiscountGrid2).ToString().Replace(",","");
                     this.gvServiceLine.SetRowCellValue(e.RowHandle, _DiscountGrid2, Convert.ToDecimal(e.Value).ToString("N0"));
                     this.gvServiceLine.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
                 }
 
-                if (e.Column.Equals(_ItemQuality) && (check ?? false))
+                if (e.Column.Equals(_ItemQuality))
                 {
+                    if (!check)
+                    {
+                        MessageBox.Show("Vui lòng nhập chữ số.", "Thông báo",  MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        this.gvServiceLine.SetRowCellValue(e.RowHandle, _ItemQuality, 1);
+                        return;
+                    }
                     var itemPrice = this.gvServiceLine.GetRowCellValue(e.RowHandle, _ItemPrice);
                     var itemDiscount = this.gvServiceLine.GetRowCellValue(e.RowHandle, _DiscountGrid2);
                     var total = Convert.ToDecimal(itemPrice) * Convert.ToDecimal(e.Value) - Convert.ToDecimal(itemDiscount);
@@ -948,7 +953,7 @@ namespace ExportBill
                     nvc.Add(new KeyValuePair<string, string>("qty", qty));
                     nvc.Add(new KeyValuePair<string, string>("workerId", workerId));
                     nvc.Add(new KeyValuePair<string, string>("adviserId", adviserId));
-                    nvc.Add(new KeyValuePair<string, string>("lineDisc", Disc));
+                    nvc.Add(new KeyValuePair<string, string>("lineDisc", Convert.ToDecimal(Disc).ToString()));
                     GetAPI get_API = new GetAPI();
                     FormUrlEncodedContent formContent = new FormUrlEncodedContent(nvc);
                     var apiResponse = get_API.Post_NoAsyn(url, formContent);
@@ -1218,7 +1223,10 @@ namespace ExportBill
                 this.pHeader.Enabled = false;
                 this.ServiceLineCtr.Enabled = false;
                 this.pFooter.Enabled = false;
-                this.panel3.Enabled = true;
+                this.groupControl3.Enabled = true;
+
+                this.ServiceHeaderCtr.DataSource = null;
+                this.Search2Txt.Text = string.Empty;
             }
             catch (Exception ex)
             {
@@ -1286,6 +1294,21 @@ namespace ExportBill
 
         }
 
+        private void xtraTabControl_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+        {
+            try
+            {
+                //if (e.Page == ServiceListTab)
+                //    this.SearchControl1Txt.Focus();
+                //else
+                //    this.Search2Txt.Focus();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         public async void CreateNewService(int rowIndex, bool check = false)
         {
             try
@@ -1293,16 +1316,13 @@ namespace ExportBill
                 
                 if(check)
                 {
-                    //this.sSelect = new CustomerModel();
-                    //this.sSelect.PlateID = CreateUser.Bso;
-                    //this.sSelect.CustomerName = CreateUser.User;
+                    this.CurrentKm.Text = CreateUser.kmTxt;
+                    this.NoteTxt.Text = CreateUser.Note;
                     this.fsm = fsm_BtBack.fsm_status4;
                     this.groupControl3.Enabled = false;
                     this.ServiceHeaderCtr.Enabled = false;
                     //
-                    dynamic IDUser;
-                    string url = @"http://api.ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + CreateUser.Bso + "&searchtype=";
-                    url += "LicensePlate";
+                    string url = @"http://api.ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + CreateUser.Bso + "&searchtype=LicensePlate";
 
                     GetAPI Search = new GetAPI();
                     var response = await Search.Only_url(url);
