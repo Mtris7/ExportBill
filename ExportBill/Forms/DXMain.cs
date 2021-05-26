@@ -41,7 +41,7 @@ namespace ExportBill
         private string ServiceId = string.Empty;
         private List<string> ListItemID = new List<string>();
         private fsm_BtBack fsm;
-        private string Bso, SDT;
+        private string Bso;
         public static bool checkCreateUser = false;
         public static bool ChangeBso = false;
         #endregion
@@ -52,8 +52,6 @@ namespace ExportBill
         {
             this.getToken();
             this.SetDefault();
-            //Bso = CreateUser.Bso;
-            //SDT = CreateUser.SDT;
         }
         private void SetDefault()
         {
@@ -195,7 +193,7 @@ namespace ExportBill
                         DialogResult result = MessageBox.Show("Không tìm thấy khách hàng, Tạo khách hàng mới không?.", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (result == DialogResult.Yes)
                         {
-                            new CreateUser().ShowDialog();
+                            this.RunCreateUser();
                         }
                         else
                         {
@@ -1236,25 +1234,7 @@ namespace ExportBill
 
         private void CreateUser_Click(object sender, EventArgs e)
         {
-            try
-            {
-                CreateUser createUser = new CreateUser();
-                if (createUser.ShowDialog(this) == DialogResult.OK)
-                {
-                    CreateNewService(0, true);
-                    DXMain.checkCreateUser = false;
-                    
-                }
-                //if(DXMain.checkCreateUser)
-                //{
-                //    CreateNewService(0, true);
-                //    DXMain.checkCreateUser = false;
-                //}
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            this.RunCreateUser();
             
         }
         private void delete_grid3()
@@ -1316,8 +1296,6 @@ namespace ExportBill
                 
                 if(check)
                 {
-                    this.CurrentKm.Text = CreateUser.kmTxt;
-                    this.NoteTxt.Text = CreateUser.Note;
                     this.fsm = fsm_BtBack.fsm_status4;
                     this.groupControl3.Enabled = false;
                     this.ServiceHeaderCtr.Enabled = false;
@@ -1351,11 +1329,9 @@ namespace ExportBill
                                 ListCustomerSearch.Add(new CustomerModel(data[0], data[1], data[2], data[3], data[4], null, data[5]));
                                 this.sSelect = ListCustomerSearch.Where(x => x.CustomerNumber == data[0]).FirstOrDefault();
                             }
-                            //new CustomerModel(data[0], data[1], data[2], data[3], data[4], null, data[5]);
-
-                            //"C15-030575;LÊ THỊ DIỆU ANH;BẦU CÂU - HÒA CHÂU - HV - ĐN\nHOAVANG\nDANANG\nVNM;0979300094;43H1-16861;2"
-
                         }
+                        this.CurrentKm.PlaceHolderText = CreateUser.kmTxt;
+                        this.NoteTxt.Text = CreateUser.Note;
                     }
                     else
                     {
@@ -1388,6 +1364,23 @@ namespace ExportBill
             }
         }
         
+        private void RunCreateUser()
+        {
+            try
+            {
+                CreateUser createUser = new CreateUser();
+                if (createUser.ShowDialog(this) == DialogResult.OK)
+                {
+                    CreateNewService(0, true);
+                    DXMain.checkCreateUser = false;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #endregion
         //##############################################################################################
     }
