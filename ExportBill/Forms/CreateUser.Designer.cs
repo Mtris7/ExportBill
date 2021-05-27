@@ -37,7 +37,6 @@
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.ProvinceCbx = new System.Windows.Forms.ComboBox();
             this.DistrictCbx = new System.Windows.Forms.ComboBox();
-            this.placeHolderTextBox1 = new ExportBill.PlaceHolderTextBox();
             this.BSTxt = new ExportBill.PlaceHolderTextBox();
             this.NoteTxt = new ExportBill.PlaceHolderTextBox();
             this.KilometerTxt = new ExportBill.PlaceHolderTextBox();
@@ -45,6 +44,7 @@
             this.SDTTxt = new ExportBill.PlaceHolderTextBox();
             this.CMNDTxt = new ExportBill.PlaceHolderTextBox();
             this.NameTxt = new ExportBill.PlaceHolderTextBox();
+            this.ProductCbx = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -152,18 +152,6 @@
             this.DistrictCbx.Size = new System.Drawing.Size(169, 21);
             this.DistrictCbx.TabIndex = 12;
             // 
-            // placeHolderTextBox1
-            // 
-            this.placeHolderTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic);
-            this.placeHolderTextBox1.ForeColor = System.Drawing.Color.Gray;
-            this.placeHolderTextBox1.Location = new System.Drawing.Point(130, 144);
-            this.placeHolderTextBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.placeHolderTextBox1.Name = "placeHolderTextBox1";
-            this.placeHolderTextBox1.PlaceHolderText = "Loại xe";
-            this.placeHolderTextBox1.Size = new System.Drawing.Size(134, 21);
-            this.placeHolderTextBox1.TabIndex = 18;
-            this.placeHolderTextBox1.Text = "Loại xe";
-            // 
             // BSTxt
             // 
             this.BSTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic);
@@ -250,16 +238,24 @@
             this.NameTxt.Text = "Họ và Tên";
             this.NameTxt.WordWrap = false;
             // 
+            // ProductCbx
+            // 
+            this.ProductCbx.FormattingEnabled = true;
+            this.ProductCbx.Location = new System.Drawing.Point(131, 144);
+            this.ProductCbx.Name = "ProductCbx";
+            this.ProductCbx.Size = new System.Drawing.Size(132, 21);
+            this.ProductCbx.TabIndex = 18;
+            // 
             // CreateUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(368, 359);
+            this.Controls.Add(this.ProductCbx);
             this.Controls.Add(this.DistrictCbx);
             this.Controls.Add(this.ProvinceCbx);
             this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.placeHolderTextBox1);
             this.Controls.Add(this.BSTxt);
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.CreateSaveBtn);
@@ -295,10 +291,10 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button CreateSaveBtn;
         private System.Windows.Forms.Button SaveBtn;
-        private PlaceHolderTextBox placeHolderTextBox1;
         private PlaceHolderTextBox BSTxt;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.ComboBox ProvinceCbx;
         private System.Windows.Forms.ComboBox DistrictCbx;
+        private System.Windows.Forms.ComboBox ProductCbx;
     }
 }

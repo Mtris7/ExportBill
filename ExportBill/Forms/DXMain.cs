@@ -41,7 +41,6 @@ namespace ExportBill
         private string ServiceId = string.Empty;
         private List<string> ListItemID = new List<string>();
         private fsm_BtBack fsm;
-        private string Bso;
         public static bool checkCreateUser = false;
         public static bool ChangeBso = false;
         #endregion
@@ -178,7 +177,7 @@ namespace ExportBill
                 this.Enabled = false;
                 var response = await Search.Only_url(url);
                 this.Enabled = true;
-                this.fsm = fsm_BtBack.fsm_delete_grid2;
+                this.fsm = fsm_BtBack.fsm_delete_gvServiceHeader;
                 if (response.IsSuccessStatusCode)
                 {
                     var body = await response.Content.ReadAsStringAsync();
@@ -202,7 +201,7 @@ namespace ExportBill
                         
                     }
                     this.ListCustomerSearch.Clear();
-                    this.delete_grid3();
+                    this.delete_gvServiceLin();
                     
                     foreach (var item in dataList.data)
                     {
@@ -648,15 +647,14 @@ namespace ExportBill
             {
                 switch (fsm)
                 {
-                    case fsm_BtBack.fsm_delete_grid3:
+                    case fsm_BtBack.fsm_delete_gvServiceLin:
                         {
-                            this.delete_grid3();
+                            this.delete_gvServiceLin();
                             break;
                         }
-                    case fsm_BtBack.fsm_delete_grid2:
+                    case fsm_BtBack.fsm_delete_gvServiceHeader:
                         {
-
-                            this.delete_grid2();
+                            this.delete_gvServiceHeader();
                             break;
                         }
                     case fsm_BtBack.fsm_delete_number:
@@ -667,8 +665,8 @@ namespace ExportBill
                         }
                     case fsm_BtBack.fsm_status4:
                         {
-                            this.delete_grid3();
-                            this.delete_grid2();
+                            this.delete_gvServiceLin();
+                            this.delete_gvServiceHeader();
                             break;
                         }
                     default:
@@ -677,8 +675,8 @@ namespace ExportBill
                             break;
                         }
                 }
-                if (this.fsm.Equals(fsm_BtBack.fsm_delete_grid3)) { this.fsm = fsm_BtBack.fsm_delete_grid2; }
-                else if (this.fsm.Equals(fsm_BtBack.fsm_delete_grid2)) { this.fsm = fsm_BtBack.fsm_delete_number; }
+                if (this.fsm.Equals(fsm_BtBack.fsm_delete_gvServiceLin)) { this.fsm = fsm_BtBack.fsm_delete_gvServiceHeader; }
+                else if (this.fsm.Equals(fsm_BtBack.fsm_delete_gvServiceHeader)) { this.fsm = fsm_BtBack.fsm_delete_number; }
                 else if (this.fsm.Equals(fsm_BtBack.fsm_delete_number)) { this.fsm = fsm_BtBack.fsm_nothing; }
             }
             catch (Exception ex)
@@ -1034,25 +1032,12 @@ namespace ExportBill
                 this.Enabled = false;
                 //var cl = new HttpClient();
                 string url = "http://api.ototienthu.com.vn/api/v1/customers/LookupItemCashier";
-                //cl.BaseAddress = new Uri(url);
-                //int _TimeoutSec = 90;
-                //cl.Timeout = new TimeSpan(0, 0, _TimeoutSec);
-                //string _ContentType = "application/x-www-form-urlencoded";
-                //cl.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_ContentType));
-                //cl.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
-                //var nvc = new List<KeyValuePair<string, string>>();
-                //nvc.Add(new KeyValuePair<string, string>("personnalNumberId", Staff.UserID));
                 var formContent = new FormUrlEncodedContent(new[]
                         {
                         new KeyValuePair<string, string>("personnalNumberId", Staff.UserID),
-                        //new KeyValuePair<string, string>("retailStaffPassword", passw),
                     });
-                //var req = new HttpRequestMessage(HttpMethod.Post, url);
-
-                //req.Content = formContent; // new FormUrlEncodedContent();
                 GetAPI Load_Item_CbBox = new GetAPI();
                 var res = await Load_Item_CbBox.post(url, formContent);
-                //var res = cl.SendAsync(req).Result;
                 this.Enabled = true;
                 if (res.IsSuccessStatusCode)
                 {
@@ -1237,26 +1222,24 @@ namespace ExportBill
             this.RunCreateUser();
             
         }
-        private void delete_grid3()
+        private void delete_gvServiceLin()
         {
             while (this.gvServiceLine.RowCount > 0)
                 this.gvServiceLine.DeleteRow(this.gvServiceLine.FocusedRowHandle);
-            this.CurrentKm.Text = "";
+            this.CurrentKm.Text = string.Empty;
             this.CurrentKm.Focus();
-            this.NoteTxt.Text = "";
+            this.NoteTxt.Text = string.Empty;
             this.NoteTxt.Focus();
             this.gvServiceLine.AddNewRow();
             this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: ";
             this.pHeader.Enabled = false;
             this.ServiceLineCtr.Enabled = false;
-            this.panel3.Enabled = true;
         }
-        private void delete_grid2()
+        private void delete_gvServiceHeader()
         {
             while (this.gvServiceHeader.RowCount > 0)
                 this.gvServiceHeader.DeleteRow(this.gvServiceHeader.FocusedRowHandle);
             this.gvServiceHeader.AddNewRow();
-            this.panel3.Enabled = false;
             this.groupControl3.Enabled = true;
         }
 
@@ -1266,7 +1249,7 @@ namespace ExportBill
         }
         private void BsoChange()
         {
-            Search2Txt.Text = Bso;
+            Search2Txt.Text = CreateUser.Bso;
         }
         
         private void Click_Change_Grid3(object sender, EventArgs e)
@@ -1344,7 +1327,7 @@ namespace ExportBill
                 {
                     var CustomerNumber = this.gvServiceHeader.GetRowCellValue(rowIndex, _CustomerNumber)?.ToString();
                     this.sSelect = ListCustomerSearch.Where(x => x.CustomerNumber == CustomerNumber).FirstOrDefault();
-                    this.fsm = fsm_BtBack.fsm_delete_grid3;
+                    this.fsm = fsm_BtBack.fsm_delete_gvServiceLin;
                 }
                 
                 
@@ -1354,7 +1337,6 @@ namespace ExportBill
                 this.pHeader.Enabled = true;
                 this.ServiceLineCtr.Enabled = true;
                 this.pFooter.Enabled = true;
-                this.panel3.Enabled = false;
 
                 this.gvServiceLine.FocusedRowHandle = 0;
             }

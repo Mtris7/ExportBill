@@ -8,8 +8,8 @@ namespace ExportBill
 {
     enum fsm_BtBack
     {
-        fsm_delete_grid3,
-        fsm_delete_grid2,
+        fsm_delete_gvServiceLin,
+        fsm_delete_gvServiceHeader,
         fsm_delete_number,
         fsm_status4,
         fsm_nothing

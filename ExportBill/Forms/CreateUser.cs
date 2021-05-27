@@ -73,7 +73,7 @@ namespace ExportBill
                 var data_create = new List<KeyValuePair<string, string>>();
                 data_create.Add(new KeyValuePair<string, string>("FirstName", NameTxt.Text));
                 data_create.Add(new KeyValuePair<string, string>("HcmPersonnelNumberId", Staff.UserID));
-                data_create.Add(new KeyValuePair<string, string>("Fax", "0979300094"));
+                //data_create.Add(new KeyValuePair<string, string>("Fax", ""));
                 if (!string.IsNullOrEmpty(comboBox1.Text))
                     data_create.Add(new KeyValuePair<string, string>("Gender", comboBox1.Text));
                 if (!string.IsNullOrEmpty(dateTimePicker1.Text))
@@ -95,8 +95,9 @@ namespace ExportBill
                 string _url = @"http://api.ototienthu.com.vn/api/v1/customers/createplate";
                 var data_create1 = new List<KeyValuePair<string, string>>();
                 data_create1.Add(new KeyValuePair<string, string>("LicensePlate", BSTxt.Text));
-                if (!string.IsNullOrEmpty(comboBox3.Text))
-                    data_create1.Add(new KeyValuePair<string, string>("CategoryName", comboBox3.Text));
+                var Product = this.ProductCbx.SelectedItem as ComboboxItem;
+                if (Product != null)
+                    data_create1.Add(new KeyValuePair<string, string>("CategoryName", Product.Value.ToString()));
                 if (!string.IsNullOrEmpty(dateTimePicker2.Text))
                     data_create1.Add(new KeyValuePair<string, string>("InvoceDate", dateTimePicker2.Text));
                 if (!string.IsNullOrEmpty(SDTTxt.Text))
@@ -104,7 +105,7 @@ namespace ExportBill
                 FormUrlEncodedContent _formContent = new FormUrlEncodedContent(data_create1);
                 var _response = get_API.Post_NoAsyn(_url, _formContent);
                 this.Enabled = true;
-                if (!response.Equals("") && !_response.Equals(""))
+                if (!string.IsNullOrEmpty(response) && !string.IsNullOrEmpty(_response))
 
                 {
 
@@ -124,7 +125,7 @@ namespace ExportBill
                         MessageBox.Show("Tài khoản đã tồn tại hoặc đã có sự cố trong quá trình đăng ký", "Thông báo");
                         return false;
                     }
-                    
+
 
                 }
                 else
@@ -134,12 +135,58 @@ namespace ExportBill
                 }
             }
         }
+        private void lookupProduct()
+        {
+            try
+            {
+                this.Enabled = false;
+                string url = @"http://api.ototienthu.com.vn/api/v1/customers/LookupProduct";
+                var data_create = new List<KeyValuePair<string, string>>();
+                data_create.Add(new KeyValuePair<string, string>("HcmPersonnelNumberId", Staff.UserID));
+
+                FormUrlEncodedContent formContent = new FormUrlEncodedContent(data_create);
+                GetAPI get_API = new GetAPI();
+                var response = get_API.Post_NoAsyn(url, formContent);
+                this.Enabled = true;
+                if (!string.IsNullOrEmpty(response))
+                {
+                    var result = JsonConvert.DeserializeObject<DataModel>(response);
+                    if (result.data != null)
+                    {
+                        this.ProductCbx.Items.Clear();
+                        foreach (var item in result.data)
+                        {
+                            var itemDetail = item.ToString().Split(';');
+                            ComboboxItem itemcbx = new ComboboxItem();
+                            itemcbx.Text = itemDetail[1];
+                            itemcbx.Value = itemDetail[0];
+
+                            this.ProductCbx.Items.Add(itemcbx);
+                        }
+                        this.ProductCbx.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Có lỗi xảy ra , không tải xuống được loai xe. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Có lỗi xảy ra , không kết nối được máy chủ. Vui lòng thử lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         //####################################################################
         private void SetComboBox()
         {
             try
             {
-
                 #region combobox Province 
                 Dictionary<string, string> ListProvince = new Dictionary<string, string>();
                 ListProvince.Add("DANANG", "Đà Nẵng");
@@ -292,6 +339,7 @@ namespace ExportBill
         private void CreateUser_Load(object sender, EventArgs e)
         {
             this.SetComboBox();
+            this.lookupProduct();
         }
 
         private void ProvinceCbx_SelectedIndexChanged(object sender, EventArgs e)
