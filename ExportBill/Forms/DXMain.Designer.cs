@@ -52,7 +52,7 @@
             this.repositoryItemZoomTrackBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemZoomTrackBar();
             this.repositoryItemPopupContainerEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPopupContainerEdit();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimeBill = new System.Windows.Forms.DateTimePicker();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.UserNamelbl = new System.Windows.Forms.Label();
@@ -152,7 +152,7 @@
             this.xtraTabControl.Margin = new System.Windows.Forms.Padding(2);
             this.xtraTabControl.Name = "xtraTabControl";
             this.xtraTabControl.SelectedTabPage = this.ServiceListTab;
-            this.xtraTabControl.Size = new System.Drawing.Size(946, 450);
+            this.xtraTabControl.Size = new System.Drawing.Size(946, 465);
             this.xtraTabControl.TabIndex = 0;
             this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.ServiceListTab,
@@ -335,6 +335,7 @@
             this.Payment.ColumnEdit = this.cmbPayment;
             this.Payment.FieldName = "Payment";
             this.Payment.Name = "Payment";
+            this.Payment.OptionsColumn.AllowEdit = false;
             this.Payment.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Payment.Visible = true;
             this.Payment.VisibleIndex = 7;
@@ -428,7 +429,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControl1.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.groupControl1.Appearance.Options.UseBackColor = true;
-            this.groupControl1.Controls.Add(this.dateTimePicker1);
+            this.groupControl1.Controls.Add(this.dateTimeBill);
             this.groupControl1.Controls.Add(this.pictureBox3);
             this.groupControl1.Controls.Add(this.pictureBox2);
             this.groupControl1.Controls.Add(this.UserNamelbl);
@@ -443,15 +444,15 @@
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "Thông tin tìm kiếm";
             // 
-            // dateTimePicker1
+            // dateTimeBill
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(17, 30);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(102, 21);
-            this.dateTimePicker1.TabIndex = 18;
-            this.dateTimePicker1.Visible = false;
+            this.dateTimeBill.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimeBill.Location = new System.Drawing.Point(17, 30);
+            this.dateTimeBill.Margin = new System.Windows.Forms.Padding(2);
+            this.dateTimeBill.Name = "dateTimeBill";
+            this.dateTimeBill.Size = new System.Drawing.Size(102, 21);
+            this.dateTimeBill.TabIndex = 18;
+            this.dateTimeBill.Visible = false;
             // 
             // pictureBox3
             // 
@@ -547,7 +548,7 @@
             this.CreateServiceTab.Controls.Add(this.groupControl3);
             this.CreateServiceTab.Margin = new System.Windows.Forms.Padding(2);
             this.CreateServiceTab.Name = "CreateServiceTab";
-            this.CreateServiceTab.Size = new System.Drawing.Size(944, 425);
+            this.CreateServiceTab.Size = new System.Drawing.Size(944, 440);
             this.CreateServiceTab.Text = "Tạo phiếu dịch vụ";
             // 
             // groupControl4
@@ -559,7 +560,7 @@
             this.groupControl4.Location = new System.Drawing.Point(2, 84);
             this.groupControl4.Margin = new System.Windows.Forms.Padding(2);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(935, 343);
+            this.groupControl4.Size = new System.Drawing.Size(935, 358);
             this.groupControl4.TabIndex = 2;
             // 
             // panelInfo
@@ -572,7 +573,7 @@
             this.panelInfo.Location = new System.Drawing.Point(2, 23);
             this.panelInfo.Margin = new System.Windows.Forms.Padding(2);
             this.panelInfo.Name = "panelInfo";
-            this.panelInfo.Size = new System.Drawing.Size(931, 318);
+            this.panelInfo.Size = new System.Drawing.Size(931, 333);
             this.panelInfo.TabIndex = 1;
             // 
             // pFooter
@@ -582,7 +583,7 @@
             this.pFooter.Controls.Add(this.BtnRemove);
             this.pFooter.Controls.Add(this.CreatePrintBill);
             this.pFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pFooter.Location = new System.Drawing.Point(0, 286);
+            this.pFooter.Location = new System.Drawing.Point(0, 301);
             this.pFooter.Margin = new System.Windows.Forms.Padding(2);
             this.pFooter.Name = "pFooter";
             this.pFooter.Size = new System.Drawing.Size(931, 32);
@@ -598,7 +599,7 @@
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(60, 25);
             this.btnBack.TabIndex = 8;
-            this.btnBack.Text = "Back";
+            this.btnBack.Text = "Quay lại";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
@@ -612,7 +613,7 @@
             this.btnAddLine.Name = "btnAddLine";
             this.btnAddLine.Size = new System.Drawing.Size(60, 25);
             this.btnAddLine.TabIndex = 7;
-            this.btnAddLine.Text = "Add";
+            this.btnAddLine.Text = "Thêm";
             this.btnAddLine.UseVisualStyleBackColor = false;
             this.btnAddLine.Click += new System.EventHandler(this.btnAddLine_Click);
             // 
@@ -626,7 +627,7 @@
             this.BtnRemove.Name = "BtnRemove";
             this.BtnRemove.Size = new System.Drawing.Size(60, 25);
             this.BtnRemove.TabIndex = 6;
-            this.BtnRemove.Text = "Remove";
+            this.BtnRemove.Text = "Xóa";
             this.BtnRemove.UseVisualStyleBackColor = false;
             this.BtnRemove.Click += new System.EventHandler(this.RemoveCol_Click);
             // 
@@ -641,15 +642,14 @@
             this.CreatePrintBill.Name = "CreatePrintBill";
             this.CreatePrintBill.Size = new System.Drawing.Size(94, 25);
             this.CreatePrintBill.TabIndex = 4;
-            this.CreatePrintBill.Text = "Create Bill";
+            this.CreatePrintBill.Text = "Tạo phiếu";
             this.CreatePrintBill.UseVisualStyleBackColor = false;
             this.CreatePrintBill.Click += new System.EventHandler(this.CreatePrintBill_Click);
             // 
             // ServiceLineCtr
             // 
-            this.ServiceLineCtr.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ServiceLineCtr.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
-            this.ServiceLineCtr.Location = new System.Drawing.Point(0, 195);
+            this.ServiceLineCtr.Location = new System.Drawing.Point(0, 168);
             this.ServiceLineCtr.MainView = this.gvServiceLine;
             this.ServiceLineCtr.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceLineCtr.Name = "ServiceLineCtr";
@@ -659,7 +659,7 @@
             this.WorkerIdCbx,
             this.AdviserIdCbx,
             this.repositoryItemGridLookUpEdit1});
-            this.ServiceLineCtr.Size = new System.Drawing.Size(931, 123);
+            this.ServiceLineCtr.Size = new System.Drawing.Size(931, 130);
             this.ServiceLineCtr.TabIndex = 3;
             this.ServiceLineCtr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvServiceLine});
@@ -678,6 +678,8 @@
             this._Inventory});
             this.gvServiceLine.GridControl = this.ServiceLineCtr;
             this.gvServiceLine.Name = "gvServiceLine";
+            this.gvServiceLine.OptionsMenu.ShowFooterItem = true;
+            this.gvServiceLine.OptionsView.ShowFooter = true;
             this.gvServiceLine.OptionsView.ShowGroupPanel = false;
             this.gvServiceLine.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gvServiceLine_RowCellStyle);
             this.gvServiceLine.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
@@ -703,6 +705,8 @@
             // 
             // _ItemQuality
             // 
+            this._ItemQuality.AppearanceCell.Options.UseTextOptions = true;
+            this._ItemQuality.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this._ItemQuality.Caption = "SL";
             this._ItemQuality.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this._ItemQuality.FieldName = "ItemQuality";
@@ -723,6 +727,8 @@
             // 
             // _ItemPrice
             // 
+            this._ItemPrice.AppearanceCell.Options.UseTextOptions = true;
+            this._ItemPrice.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this._ItemPrice.Caption = "Đơn giá";
             this._ItemPrice.FieldName = "ItemPrice";
             this._ItemPrice.Name = "_ItemPrice";
@@ -733,11 +739,15 @@
             // 
             // _DiscountGrid2
             // 
+            this._DiscountGrid2.AppearanceCell.Options.UseTextOptions = true;
+            this._DiscountGrid2.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this._DiscountGrid2.Caption = "Giảm giá";
             this._DiscountGrid2.DisplayFormat.FormatString = "N0";
             this._DiscountGrid2.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this._DiscountGrid2.FieldName = "Discount";
             this._DiscountGrid2.Name = "_DiscountGrid2";
+            this._DiscountGrid2.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Discount", "Tổng cộng:")});
             this._DiscountGrid2.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this._DiscountGrid2.Visible = true;
             this._DiscountGrid2.VisibleIndex = 4;
@@ -745,10 +755,14 @@
             // 
             // _TotalGrid2
             // 
+            this._TotalGrid2.AppearanceCell.Options.UseTextOptions = true;
+            this._TotalGrid2.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
             this._TotalGrid2.Caption = "Thành tiền";
             this._TotalGrid2.FieldName = "Total";
             this._TotalGrid2.Name = "_TotalGrid2";
             this._TotalGrid2.OptionsColumn.AllowEdit = false;
+            this._TotalGrid2.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "Total", "{0:N0}")});
             this._TotalGrid2.Visible = true;
             this._TotalGrid2.VisibleIndex = 5;
             this._TotalGrid2.Width = 98;
@@ -830,7 +844,7 @@
             this.pHeader.Controls.Add(this.CreateServicelbl);
             this.pHeader.Controls.Add(this.ServicePool);
             this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pHeader.Location = new System.Drawing.Point(0, 122);
+            this.pHeader.Location = new System.Drawing.Point(0, 104);
             this.pHeader.Margin = new System.Windows.Forms.Padding(2);
             this.pHeader.Name = "pHeader";
             this.pHeader.Size = new System.Drawing.Size(931, 73);
@@ -901,7 +915,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(931, 122);
+            this.panel3.Size = new System.Drawing.Size(931, 104);
             this.panel3.TabIndex = 1;
             // 
             // ServiceHeaderCtr
@@ -912,7 +926,7 @@
             this.ServiceHeaderCtr.MainView = this.gvServiceHeader;
             this.ServiceHeaderCtr.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceHeaderCtr.Name = "ServiceHeaderCtr";
-            this.ServiceHeaderCtr.Size = new System.Drawing.Size(931, 122);
+            this.ServiceHeaderCtr.Size = new System.Drawing.Size(931, 104);
             this.ServiceHeaderCtr.TabIndex = 1;
             this.ServiceHeaderCtr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvServiceHeader});
@@ -1105,7 +1119,7 @@
             this.Appearance.Options.UseForeColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(946, 450);
+            this.ClientSize = new System.Drawing.Size(946, 465);
             this.Controls.Add(this.xtraTabControl);
             this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("DXMain.IconOptions.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -1172,7 +1186,7 @@
         private DevExpress.XtraEditors.GroupControl groupControl3;
         private PlaceHolderTextBox Search2Txt;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimeBill;
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;

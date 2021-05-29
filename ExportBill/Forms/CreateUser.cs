@@ -12,12 +12,11 @@ namespace ExportBill
         public CreateUser()
         {
             InitializeComponent();
+            DateOfBirth.Text = null;
         }
         public static string Bso = string.Empty;
         public static string SDT = string.Empty;
         public static string User = string.Empty;
-        public static string kmTxt = string.Empty;
-        public static string Note = string.Empty;
         Dictionary<string, Dictionary<string, string>> ListProvinceToDistrict = new Dictionary<string, Dictionary<string, string>>();
         //####################################################################
         private void CreateSaveBtn_Click(object sender, EventArgs e)
@@ -30,9 +29,6 @@ namespace ExportBill
                     CreateUser.Bso = BSTxt.Text;
                     CreateUser.SDT = SDTTxt.Text;
                     CreateUser.User = NameTxt.Text;
-                    CreateUser.kmTxt = KilometerTxt.Text;
-                    CreateUser.Note = this.NoteTxt.Text;
-                    //DXMain.checkCreateUser = true;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -43,27 +39,26 @@ namespace ExportBill
             }
         }
 
-        private void SaveBtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (Save_User())
-                {
-                    this.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
         private bool Save_User()
         {
-            if (string.IsNullOrWhiteSpace(NameTxt.Text) ||
-                   string.IsNullOrWhiteSpace(BSTxt.Text) ||
-                   string.IsNullOrWhiteSpace(SDTTxt.Text))
+            if (string.IsNullOrWhiteSpace(NameTxt.Text))
             {
-                MessageBox.Show("Tên Khách hàng, Biển số và SĐT Không được để trống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Tên Khách hàng không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(BSTxt.Text))
+            {
+                MessageBox.Show("Biển số không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(SDTTxt.Text))
+            {
+                MessageBox.Show("Số điện thoại không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(ProductCbx.Text))
+            {
+                MessageBox.Show("Loại xe không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             else
@@ -76,8 +71,8 @@ namespace ExportBill
                 //data_create.Add(new KeyValuePair<string, string>("Fax", ""));
                 if (!string.IsNullOrEmpty(comboBox1.Text))
                     data_create.Add(new KeyValuePair<string, string>("Gender", comboBox1.Text));
-                if (!string.IsNullOrEmpty(dateTimePicker1.Text))
-                    data_create.Add(new KeyValuePair<string, string>("DateOfBirth", dateTimePicker1.Text));
+                if (!string.IsNullOrEmpty(DateOfBirth.Text))
+                    data_create.Add(new KeyValuePair<string, string>("DateOfBirth", DateOfBirth.Text));
                 if (!string.IsNullOrEmpty(SDTTxt.Text))
                     data_create.Add(new KeyValuePair<string, string>("Phone", SDTTxt.Text));
                 if (!string.IsNullOrEmpty(CMNDTxt.Text))
@@ -98,8 +93,8 @@ namespace ExportBill
                 var Product = this.ProductCbx.SelectedItem as ComboboxItem;
                 if (Product != null)
                     data_create1.Add(new KeyValuePair<string, string>("CategoryName", Product.Value.ToString()));
-                if (!string.IsNullOrEmpty(dateTimePicker2.Text))
-                    data_create1.Add(new KeyValuePair<string, string>("InvoceDate", dateTimePicker2.Text));
+                if (!string.IsNullOrEmpty(InvoceDate.Text))
+                    data_create1.Add(new KeyValuePair<string, string>("InvoceDate", InvoceDate.Text));
                 if (!string.IsNullOrEmpty(SDTTxt.Text))
                     data_create1.Add(new KeyValuePair<string, string>("CustomerPhone", SDTTxt.Text));
                 FormUrlEncodedContent _formContent = new FormUrlEncodedContent(data_create1);
@@ -163,7 +158,7 @@ namespace ExportBill
 
                             this.ProductCbx.Items.Add(itemcbx);
                         }
-                        this.ProductCbx.SelectedIndex = 0;
+                        this.ProductCbx.SelectedIndex = -1;
                     }
                     else
                     {
@@ -326,8 +321,8 @@ namespace ExportBill
                         DistrictCbx.Items.Add(itemcbx);
                     }
                 }
-                this.ProvinceCbx.SelectedIndex = 0;
-                this.DistrictCbx.SelectedIndex = 0;
+                this.ProvinceCbx.SelectedIndex = -1;
+                this.DistrictCbx.SelectedIndex = -1;
                 #endregion
             }
             catch (Exception ex)

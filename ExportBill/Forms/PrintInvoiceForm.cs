@@ -203,7 +203,7 @@ namespace ExportBill
                             var data = item.Split(';');
                             ItemSell items = new ItemSell();
                             items.ItemName = data[0];
-                            items.ItemQuality = Convert.ToDecimal(data[1]).ToString("N0");
+                            items.ItemQuality = Convert.ToDecimal(data[1]).ToString("N2");
                             items.ItemUnit = data[2];
                             items.ItemPrice = Convert.ToDecimal(data[3]).ToString("N0");
                             items.TotalBeforeDiscount = Convert.ToDecimal(data[3]).ToString("N0");
@@ -214,7 +214,8 @@ namespace ExportBill
                     int i = 0;
                     foreach (var item in itemSell)
                     {
-                        dt.Rows.Add(i, "Ngày in bill: " + this.customer.Date, this.customer.Company, this.customer.Adress, "Biển số: " + this.customer.BS, "Loại xe:" + this.customer.LX,
+                        var dateTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+                        dt.Rows.Add(i, "Ngày in bill: " + dateTime, this.customer.Company, this.customer.Adress, "Biển số: " + this.customer.BS, "Loại xe:" + this.customer.LX,
                             this.customer.Discount.ToString("N0"), item.ItemName, item.ItemQuality, item.ItemPrice, item.TotalBeforeDiscount, Convert.ToDecimal(this.customer.Total).ToString("N0"), "(" + this.customer.DetailMoney + ")", this.titleBottom, "Phiếu DV:" + this.customer.MaPhieu, ms.ToArray());
                         i++;
                     }

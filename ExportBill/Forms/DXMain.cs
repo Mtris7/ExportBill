@@ -57,7 +57,7 @@ namespace ExportBill
             try
             {
                 this.DatetimeLbl.Text = DateTime.Now.ToLocalTime().ToShortDateString();
-                this.dateTimePicker1.Value = DateTime.Now;
+                this.dateTimeBill.Value = DateTime.Now;
                 //this.egencylb.Text = this.egencylb2.Text = "";
                 //this.Diemltn.Text = this.Diemltn2.Text = "";
             }
@@ -146,7 +146,7 @@ namespace ExportBill
 
         private void DatetimeLbl_Click(object sender, EventArgs e)
         {
-            dateTimePicker1.Visible = true;
+            dateTimeBill.Visible = true;
             DatetimeLbl.Visible = false;
         }
 
@@ -201,7 +201,6 @@ namespace ExportBill
                         
                     }
                     this.ListCustomerSearch.Clear();
-                    this.delete_gvServiceLin();
                     
                     foreach (var item in dataList.data)
                     {
@@ -792,7 +791,6 @@ namespace ExportBill
                 cs.Adress = getData.Adress;
                 cs.Discount = getData.Discount;
                 cs.DetailMoney = getData.DetailMoney;
-                cs.Date = getData.Date;
                 new PrintInvoiceForm(cs, true).ShowDialog();
                 gridView1.SetRowCellValue(rowIndex, _RecallBill, Posted);
                 if (pbill != invoiced)
@@ -828,7 +826,6 @@ namespace ExportBill
                 cs.Adress = getData.Adress;
                 cs.Discount = getData.Discount;
                 cs.DetailMoney = getData.DetailMoney;
-                cs.Date = getData.Date;
                 new PrintInvoiceForm(cs).ShowDialog();
 
                 var pbill = this.gridView1.GetRowCellValue(rowIndex, PBill)?.ToString();
@@ -937,7 +934,7 @@ namespace ExportBill
                     var item = ListIS.Where(x => x.ItemName.Equals(this.gvServiceLine.GetRowCellValue(i, _ItemName)));
                     var workerId = ListSM.Where(x => x.UserName.Equals(this.gvServiceLine.GetRowCellValue(i, _WorkerId)))?.First().UserID;
                     var adviserId = this.gvServiceLine.GetRowCellValue(i, _AdviserId) == null ? "" : ListSM.Where(x => x.UserName.Equals(this.gvServiceLine.GetRowCellValue(i, _AdviserId)))?.First().UserID;
-                    var qty = this.gvServiceLine.GetRowCellValue(i, _ItemQuality) == null ? "1" : this.gvServiceLine.GetRowCellValue(i, _ItemQuality).ToString();
+                    var qty = this.gvServiceLine.GetRowCellValue(i, _ItemQuality) == null ? "1" : Convert.ToDecimal(this.gvServiceLine.GetRowCellValue(i, _ItemQuality)).ToString("N2");
                     var Disc = this.gvServiceLine.GetRowCellValue(i, _DiscountGrid2) == null ? "0" : this.gvServiceLine.GetRowCellValue(i, _DiscountGrid2).ToString();
                     if (!item.Any()) return false;
                     var itemID = item.First().ItemID;
@@ -1140,7 +1137,7 @@ namespace ExportBill
             {
                 this.Enabled = false;
                 this.ds.Clear();
-                string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId=" + Staff.UserID + "&serviceDate=" + this.dateTimePicker1.Value.ToString("dd/MM/yyyy");
+                string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId=" + Staff.UserID + "&serviceDate=" + this.dateTimeBill.Value.ToString("dd/MM/yyyy");
                 if (!string.IsNullOrWhiteSpace(this.SearchControl1Txt.Text))
                 {
                     url += "&plateId=" + this.SearchControl1Txt.Text;
@@ -1172,8 +1169,7 @@ namespace ExportBill
                         //public Customer(string maPhieu, string userName, string bs, string lx, string tsc, string dg, decimal discount, decimal total, string detaiMoney, string company, string adress, string date, string print)
                         ds.Add(new Customer(data[0], data[1], data[2], data[3], data[4], data[5],
                             Convert.ToInt32(Convert.ToDecimal(data[6])), Convert.ToInt32(Convert.ToDecimal(data[7])),
-                            data[8], data[9], data[10], this.dateTimePicker1.Value.ToString("dd/MM/yyyy"),
-                            postBill, payment, "Print", recalbill));
+                            data[8], data[9], data[10], postBill, payment, "Print", recalbill));
                     }
                     this.gridControl1.DataSource = ds;
                 }
@@ -1313,8 +1309,6 @@ namespace ExportBill
                                 this.sSelect = ListCustomerSearch.Where(x => x.CustomerNumber == data[0]).FirstOrDefault();
                             }
                         }
-                        this.CurrentKm.PlaceHolderText = CreateUser.kmTxt;
-                        this.NoteTxt.Text = CreateUser.Note;
                     }
                     else
                     {
