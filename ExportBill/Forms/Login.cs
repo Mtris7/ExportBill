@@ -70,7 +70,7 @@ namespace ExportBill
                 if (!string.IsNullOrEmpty(DXMain.token))
                 {
                     this.Enabled = false;
-                    string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierCheckLogin";
+                    string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/CashierCheckLogin";
                     //var client = new HttpClient();
                     //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
                     //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -103,7 +103,7 @@ namespace ExportBill
                             Staff.Address = data[2];
                             Staff.AddressID = data[3];
                             this.Hide();
-                            DXMain dx = new DXMain(data[1],data[2]);
+                            DXMain dx = new DXMain();
                             dx.Closed += (s, args) => this.Close();
                             dx.ShowDialog();
                         }

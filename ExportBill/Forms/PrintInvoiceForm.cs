@@ -177,7 +177,7 @@ namespace ExportBill
                 List<ItemSell> itemSell = new List<ItemSell>();
                 if (this.customer != null)
                 {
-                    string url = @"http://api.ototienthu.com.vn/api/v1/customers/BillService?serviceOrderId=" + this.customer.MaPhieu;
+                    string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/BillService?serviceOrderId=" + this.customer.MaPhieu;
                     var client = new HttpClient();
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

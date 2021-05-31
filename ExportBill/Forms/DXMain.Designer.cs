@@ -152,7 +152,7 @@
             this.xtraTabControl.Margin = new System.Windows.Forms.Padding(2);
             this.xtraTabControl.Name = "xtraTabControl";
             this.xtraTabControl.SelectedTabPage = this.ServiceListTab;
-            this.xtraTabControl.Size = new System.Drawing.Size(946, 465);
+            this.xtraTabControl.Size = new System.Drawing.Size(946, 478);
             this.xtraTabControl.TabIndex = 0;
             this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.ServiceListTab,
@@ -165,7 +165,7 @@
             this.ServiceListTab.Controls.Add(this.groupControl1);
             this.ServiceListTab.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceListTab.Name = "ServiceListTab";
-            this.ServiceListTab.Size = new System.Drawing.Size(944, 425);
+            this.ServiceListTab.Size = new System.Drawing.Size(944, 453);
             this.ServiceListTab.Text = "Danh sách xe làm dịch vụ";
             // 
             // groupControl2
@@ -177,7 +177,7 @@
             this.groupControl2.Location = new System.Drawing.Point(2, 94);
             this.groupControl2.Margin = new System.Windows.Forms.Padding(2);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(935, 329);
+            this.groupControl2.Size = new System.Drawing.Size(935, 342);
             this.groupControl2.TabIndex = 1;
             // 
             // gridControl1
@@ -196,7 +196,7 @@
             this.repositoryItemZoomTrackBar1,
             this.repositoryItemPopupContainerEdit1,
             this.cmbPayment});
-            this.gridControl1.Size = new System.Drawing.Size(932, 307);
+            this.gridControl1.Size = new System.Drawing.Size(932, 320);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -548,7 +548,7 @@
             this.CreateServiceTab.Controls.Add(this.groupControl3);
             this.CreateServiceTab.Margin = new System.Windows.Forms.Padding(2);
             this.CreateServiceTab.Name = "CreateServiceTab";
-            this.CreateServiceTab.Size = new System.Drawing.Size(944, 440);
+            this.CreateServiceTab.Size = new System.Drawing.Size(944, 453);
             this.CreateServiceTab.Text = "Tạo phiếu dịch vụ";
             // 
             // groupControl4
@@ -560,7 +560,7 @@
             this.groupControl4.Location = new System.Drawing.Point(2, 84);
             this.groupControl4.Margin = new System.Windows.Forms.Padding(2);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(935, 358);
+            this.groupControl4.Size = new System.Drawing.Size(935, 371);
             this.groupControl4.TabIndex = 2;
             // 
             // panelInfo
@@ -573,7 +573,7 @@
             this.panelInfo.Location = new System.Drawing.Point(2, 23);
             this.panelInfo.Margin = new System.Windows.Forms.Padding(2);
             this.panelInfo.Name = "panelInfo";
-            this.panelInfo.Size = new System.Drawing.Size(931, 333);
+            this.panelInfo.Size = new System.Drawing.Size(931, 346);
             this.panelInfo.TabIndex = 1;
             // 
             // pFooter
@@ -583,7 +583,7 @@
             this.pFooter.Controls.Add(this.BtnRemove);
             this.pFooter.Controls.Add(this.CreatePrintBill);
             this.pFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pFooter.Location = new System.Drawing.Point(0, 301);
+            this.pFooter.Location = new System.Drawing.Point(0, 314);
             this.pFooter.Margin = new System.Windows.Forms.Padding(2);
             this.pFooter.Name = "pFooter";
             this.pFooter.Size = new System.Drawing.Size(931, 32);
@@ -648,8 +648,11 @@
             // 
             // ServiceLineCtr
             // 
+            this.ServiceLineCtr.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ServiceLineCtr.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
-            this.ServiceLineCtr.Location = new System.Drawing.Point(0, 168);
+            this.ServiceLineCtr.Location = new System.Drawing.Point(2, 135);
             this.ServiceLineCtr.MainView = this.gvServiceLine;
             this.ServiceLineCtr.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceLineCtr.Name = "ServiceLineCtr";
@@ -659,7 +662,7 @@
             this.WorkerIdCbx,
             this.AdviserIdCbx,
             this.repositoryItemGridLookUpEdit1});
-            this.ServiceLineCtr.Size = new System.Drawing.Size(931, 130);
+            this.ServiceLineCtr.Size = new System.Drawing.Size(931, 175);
             this.ServiceLineCtr.TabIndex = 3;
             this.ServiceLineCtr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvServiceLine});
@@ -839,22 +842,23 @@
             // 
             // pHeader
             // 
+            this.pHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pHeader.Controls.Add(this.NoteTxt);
             this.pHeader.Controls.Add(this.CurrentKm);
             this.pHeader.Controls.Add(this.CreateServicelbl);
             this.pHeader.Controls.Add(this.ServicePool);
-            this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pHeader.Location = new System.Drawing.Point(0, 104);
+            this.pHeader.Location = new System.Drawing.Point(2, 72);
             this.pHeader.Margin = new System.Windows.Forms.Padding(2);
             this.pHeader.Name = "pHeader";
-            this.pHeader.Size = new System.Drawing.Size(931, 73);
+            this.pHeader.Size = new System.Drawing.Size(928, 59);
             this.pHeader.TabIndex = 2;
             // 
             // NoteTxt
             // 
             this.NoteTxt.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
             this.NoteTxt.ForeColor = System.Drawing.Color.Gray;
-            this.NoteTxt.Location = new System.Drawing.Point(368, 38);
+            this.NoteTxt.Location = new System.Drawing.Point(368, 34);
             this.NoteTxt.Margin = new System.Windows.Forms.Padding(2);
             this.NoteTxt.Name = "NoteTxt";
             this.NoteTxt.PlaceHolderText = "Nội dung yêu cầu dịch vụ";
@@ -867,7 +871,7 @@
             this.CurrentKm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.CurrentKm.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
             this.CurrentKm.ForeColor = System.Drawing.Color.Gray;
-            this.CurrentKm.Location = new System.Drawing.Point(239, 39);
+            this.CurrentKm.Location = new System.Drawing.Point(239, 35);
             this.CurrentKm.Margin = new System.Windows.Forms.Padding(2);
             this.CurrentKm.Name = "CurrentKm";
             this.CurrentKm.PlaceHolderText = "Số kilomet";
@@ -880,7 +884,7 @@
             // 
             this.CreateServicelbl.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
             this.CreateServicelbl.Appearance.Options.UseFont = true;
-            this.CreateServicelbl.Location = new System.Drawing.Point(7, 10);
+            this.CreateServicelbl.Location = new System.Drawing.Point(7, 6);
             this.CreateServicelbl.Margin = new System.Windows.Forms.Padding(2);
             this.CreateServicelbl.Name = "CreateServicelbl";
             this.CreateServicelbl.Size = new System.Drawing.Size(144, 17);
@@ -890,7 +894,7 @@
             // ServicePool
             // 
             this.ServicePool.EditValue = "Kiểm tra định kỳ";
-            this.ServicePool.Location = new System.Drawing.Point(5, 39);
+            this.ServicePool.Location = new System.Drawing.Point(5, 35);
             this.ServicePool.Margin = new System.Windows.Forms.Padding(2);
             this.ServicePool.Name = "ServicePool";
             this.ServicePool.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -915,7 +919,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(931, 104);
+            this.panel3.Size = new System.Drawing.Size(931, 69);
             this.panel3.TabIndex = 1;
             // 
             // ServiceHeaderCtr
@@ -926,7 +930,7 @@
             this.ServiceHeaderCtr.MainView = this.gvServiceHeader;
             this.ServiceHeaderCtr.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceHeaderCtr.Name = "ServiceHeaderCtr";
-            this.ServiceHeaderCtr.Size = new System.Drawing.Size(931, 104);
+            this.ServiceHeaderCtr.Size = new System.Drawing.Size(931, 69);
             this.ServiceHeaderCtr.TabIndex = 1;
             this.ServiceHeaderCtr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvServiceHeader});
@@ -1119,7 +1123,7 @@
             this.Appearance.Options.UseForeColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(946, 465);
+            this.ClientSize = new System.Drawing.Size(946, 478);
             this.Controls.Add(this.xtraTabControl);
             this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("DXMain.IconOptions.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);

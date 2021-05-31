@@ -44,7 +44,7 @@ namespace ExportBill
                     return;
                 }
                 this.Enabled = false;
-                string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierChangePassword";
+                string url = @"http://"+ Settings.API +".ototienthu.com.vn/api/v1/customers/CashierChangePassword";
                 var client = new HttpClient();
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

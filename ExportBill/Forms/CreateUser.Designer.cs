@@ -70,6 +70,7 @@
             this.DateOfBirth.Name = "DateOfBirth";
             this.DateOfBirth.Size = new System.Drawing.Size(84, 21);
             this.DateOfBirth.TabIndex = 4;
+            this.DateOfBirth.ValueChanged += new System.EventHandler(this.DateOfBirth_ValueChanged);
             // 
             // CreateSaveBtn
             // 
@@ -96,6 +97,7 @@
             this.InvoceDate.Name = "InvoceDate";
             this.InvoceDate.Size = new System.Drawing.Size(84, 21);
             this.InvoceDate.TabIndex = 20;
+            this.InvoceDate.ValueChanged += new System.EventHandler(this.InvoceDate_ValueChanged);
             // 
             // ProvinceCbx
             // 

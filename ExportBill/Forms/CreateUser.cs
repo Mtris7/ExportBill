@@ -64,14 +64,14 @@ namespace ExportBill
             else
             {
                 this.Enabled = false;
-                string url = @"http://api.ototienthu.com.vn/api/v1/customers/createcustomer";
+                string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/createcustomer";
                 var data_create = new List<KeyValuePair<string, string>>();
                 data_create.Add(new KeyValuePair<string, string>("FirstName", NameTxt.Text));
                 data_create.Add(new KeyValuePair<string, string>("HcmPersonnelNumberId", Staff.UserID));
                 //data_create.Add(new KeyValuePair<string, string>("Fax", ""));
                 if (!string.IsNullOrEmpty(comboBox1.Text))
                     data_create.Add(new KeyValuePair<string, string>("Gender", comboBox1.Text));
-                if (!string.IsNullOrEmpty(DateOfBirth.Text))
+                if (!string.IsNullOrWhiteSpace(DateOfBirth.Text))
                     data_create.Add(new KeyValuePair<string, string>("DateOfBirth", DateOfBirth.Text));
                 if (!string.IsNullOrEmpty(SDTTxt.Text))
                     data_create.Add(new KeyValuePair<string, string>("Phone", SDTTxt.Text));
@@ -87,7 +87,7 @@ namespace ExportBill
                 GetAPI get_API = new GetAPI();
                 var response = get_API.Post_NoAsyn(url, formContent);
 
-                string _url = @"http://api.ototienthu.com.vn/api/v1/customers/createplate";
+                string _url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/createplate";
                 var data_create1 = new List<KeyValuePair<string, string>>();
                 data_create1.Add(new KeyValuePair<string, string>("LicensePlate", BSTxt.Text));
                 var Product = this.ProductCbx.SelectedItem as ComboboxItem;
@@ -135,7 +135,7 @@ namespace ExportBill
             try
             {
                 this.Enabled = false;
-                string url = @"http://api.ototienthu.com.vn/api/v1/customers/LookupProduct";
+                string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/LookupProduct";
                 var data_create = new List<KeyValuePair<string, string>>();
                 data_create.Add(new KeyValuePair<string, string>("HcmPersonnelNumberId", Staff.UserID));
 
@@ -178,152 +178,53 @@ namespace ExportBill
             }
         }
         //####################################################################
-        private void SetComboBox()
+        private async void SetComboBox()
         {
             try
             {
                 #region combobox Province 
-                Dictionary<string, string> ListProvince = new Dictionary<string, string>();
-                ListProvince.Add("DANANG", "Đà Nẵng");
-                ListProvince.Add("QUANGBINH", "Quảng Bình");
-                ListProvince.Add("QUANGNAM", "Quảng Nam");
-                ListProvince.Add("QUANGNGAI", "Quảng Ngãi");
-                //ListProvince.Add("QUANGTRI", "Quảng Trị");
-                //ListProvince.Add("BINHDINH", "Bình Định");
-                //ListProvince.Add("BINHTHUAN", "Bình Thuận");
-                //ListProvince.Add("DAKLAK", "Đắk Lắk");
-                //ListProvince.Add("DAKNONG", "Đắk Nông");
-                //ListProvince.Add("GIALAI", "Gia Lai");
-                //ListProvince.Add("HATINH", "Hà Tĩnh");
-                //ListProvince.Add("KHANHHOA", "Khánh Hòa");
-                //ListProvince.Add("KONTUM", "Kon Tum");
-                //ListProvince.Add("LAMDONG", "Lâm Đồng");
-                //ListProvince.Add("NGHEAN", "Nghệ An");
-                //ListProvince.Add("NINHTHUAN", "Ninh Thuận");
-                //ListProvince.Add("PHUYEN", "Phú Yên");
-                //ListProvince.Add("THUATHIENHUE", "Thừa Thiên Huế");
-                //ListProvince.Add("TAMKY", "Tam Kỳ");
-                this.ProvinceCbx.Items.Clear();
-                foreach (var item in ListProvince)
+                string url = "http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/LookupCity";
+                var formContent = new FormUrlEncodedContent(new[]
+                        {
+                        new KeyValuePair<string, string>("HcmPersonnelNumberId", Staff.UserID),
+                    });
+                GetAPI Load_Item_CbBox = new GetAPI();
+                var res = await Load_Item_CbBox.post(url, formContent);
+                this.Enabled = true;
+                if (res.IsSuccessStatusCode)
                 {
-                    ComboboxItem itemcbx = new ComboboxItem();
-                    itemcbx.Text = item.Value;
-                    itemcbx.Value = item.Key;
-
-                    this.ProvinceCbx.Items.Add(itemcbx);
-                }
-                #endregion
-
-                #region combobox District
-
-
-                Dictionary<string, string> ListDistrictDN = new Dictionary<string, string>();
-                ListDistrictDN.Add("HOAVANG", "Hoà Vang");
-                ListDistrictDN.Add("HOANGSA", "Hoàng Sa");
-                ListDistrictDN.Add("CAMLE", "Cẩm Lệ");
-                ListDistrictDN.Add("HAICHAU", "Hải Châu");
-                ListDistrictDN.Add("LIENCHIEU", "Liên Chiểu");
-                ListDistrictDN.Add("NGUHANHSON", "Ngũ Hành Sơn");
-                ListDistrictDN.Add("SONTRA", "Sơn Trà");
-                ListDistrictDN.Add("THANHKHE", "Thanh Khê");
-                ListProvinceToDistrict.Add("DANANG", ListDistrictDN);
-
-                //QUANGBINH
-                Dictionary<string, string> ListDistrictQB = new Dictionary<string, string>();
-                ListDistrictQB.Add("LETHUY", "Lệ Thủy");
-                ListDistrictQB.Add("MINHHOA", "Minh Hóa");
-                ListDistrictQB.Add("TUYENHOA", "Tuyên Hóa");
-                ListDistrictQB.Add("BOTRACH", "Bố Trạch");
-                ListDistrictQB.Add("QUANGNINH", "Quảng Ninh");
-                ListDistrictQB.Add("QUANGTRACH", "Quảng Trạch");
-                ListDistrictQB.Add("DONGHOI", "Đồng Hới");
-
-                ListProvinceToDistrict.Add("QUANGBINH", ListDistrictQB);
-
-                //QUANG Nam
-                Dictionary<string, string> ListDistrictQN = new Dictionary<string, string>();
-                ListDistrictQN.Add("BACTRAMY", "Bắc Trà My");
-                ListDistrictQN.Add("DAILOC", "Đại Lộc");
-                ListDistrictQN.Add("DIENBAN", "Điện Bàn");
-                ListDistrictQN.Add("DONGGIANG", "Đông Giang");
-                ListDistrictQN.Add("DUYXUYEN", "Duy Xuyên");
-                ListDistrictQN.Add("HIEPDUC", "Hiệp Đức");
-                ListDistrictQN.Add("NAMGIANG", "Nam Giang");
-                ListDistrictQN.Add("NAMTRAMY", "Nam Trà My");
-                ListDistrictQN.Add("NONGSON", "Nông Sơn");
-                ListDistrictQN.Add("NUITHANH", "Núi Thành");
-                ListDistrictQN.Add("PHUNINH", "Phú Ninh");
-                ListDistrictQN.Add("PHUOCSON", "Phước Sơn");
-                ListDistrictQN.Add("QUESON", "Quế Sơn");
-                ListDistrictQN.Add("TAYGIANG", "Tây Giang");
-                ListDistrictQN.Add("THANGBINH", "Thăng Bình");
-                ListDistrictQN.Add("TIENPHUOC", "Tiên Phước");
-                ListDistrictQN.Add("HOIAN", "Hội An");
-                ListDistrictQN.Add("TAMKY", "Tam Kỳ");
-
-                ListProvinceToDistrict.Add("QUANGNAM", ListDistrictQN);
-
-                //Quảng Ngãi
-                Dictionary<string, string> ListDistrictQNg = new Dictionary<string, string>();
-                ListDistrictQNg.Add("BATO", "Ba Tơ");
-                ListDistrictQNg.Add("BINHSON", "Bình Sơn");
-                ListDistrictQNg.Add("DUCPHO", "Đức Phổ");
-                ListDistrictQNg.Add("LYSON", "Lý Sơn");
-                ListDistrictQNg.Add("MINHLONG", "Minh Long");
-                ListDistrictQNg.Add("MODUC", "Mộ Đức");
-                ListDistrictQNg.Add("NGHIAHANH", "Nghĩa Hành");
-                ListDistrictQNg.Add("SONHA", "Sơn Hà");
-                ListDistrictQNg.Add("SONTAY", "Sơn Tây");
-                ListDistrictQNg.Add("SONTINH", "Sơn Tịnh");
-                ListDistrictQNg.Add("TAYTRA", "Tây Trà");
-                ListDistrictQNg.Add("TRABONG", "Trà Bồng");
-                ListDistrictQNg.Add("TUNGHIA", "Tư Nghĩa");
-                ListDistrictQNg.Add("QUANGNGAI", "Quảng Ngãi");
-
-                ListProvinceToDistrict.Add("QUANGNGAI", ListDistrictQNg);
-
-                //QUANGTRI
-                //Dictionary<string, string> ListDistrictQT = new Dictionary<string, string>();
-                //ListDistrictQT.Add("CONCO", "Cồn Cỏ");
-                //ListDistrictQT.Add("DAKRONG", "Đa Krông");
-                //ListProvinceToDistrict.Add("QUANGTRI", ListDistrictQT);
-
-                ////Bình Định
-                //Dictionary<string, string> ListDistrictBD = new Dictionary<string, string>();
-                //ListDistrictBD.Add("ANNHON", "An Nhơn");
-                //ListDistrictBD.Add("QUINHON", "Qui Nhơn");
-                //ListProvinceToDistrict.Add("BINHDINH", ListDistrictBD);
-
-                ////Bình Thuận
-                //Dictionary<string, string> ListDistrictBT = new Dictionary<string, string>();
-                //ListDistrictBT.Add("PHUQUI", "Phú Quí");
-                //ListProvinceToDistrict.Add("BINHTHUAN", ListDistrictBT);
-
-                //Đắk Lắk
-                //Dictionary<string, string> ListDistrictDL = new Dictionary<string, string>();
-                //ListDistrictDL.Add("CUM'GAR", "Cư M'gar");
-                //ListDistrictDL.Add("EAH'LEO", "Ea H'leo");
-                //ListDistrictDL.Add("KRONGANA", "Krông A Na");
-                //ListDistrictDL.Add("KRONGBUK", "Krông Búk");
-                //ListDistrictDL.Add("LAK", "Lắk");
-                //ListDistrictDL.Add("M'DRAK", "M'đrắk");
-                //ListProvinceToDistrict.Add("DAKLAK", ListDistrictDL);
-
-                foreach (var item in ListProvinceToDistrict)
-                {
-                    if (!item.Key.Contains("DANANG")) continue;
-                    foreach (var itemDistrict in item.Value)
+                    var body = await res.Content.ReadAsStringAsync();
+                    var dataList = JsonConvert.DeserializeObject<DataModel>(body);
+                    if (dataList.data == null)
                     {
-                        ComboboxItem itemcbx = new ComboboxItem();
-                        itemcbx.Text = itemDistrict.Value;
-                        itemcbx.Value = itemDistrict.Key;
+                        MessageBox.Show("Load dữ liệu không thành công, vui lòng đăng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    if (dataList.data.Count == 0)
+                    {
+                        MessageBox.Show("Không tìm thấy dữ liệu, vui lòng đăng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
 
-                        DistrictCbx.Items.Add(itemcbx);
+                    this.ProvinceCbx.Items.Clear();
+                    foreach (var item in dataList.data)
+                    {
+                        var data = item.Split(';');
+                        ComboboxItem itemcbx = new ComboboxItem();
+                        itemcbx.Text = data[1];
+                        itemcbx.Value = data[0];
+
+                        this.ProvinceCbx.Items.Add(itemcbx);
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Load dữ liệu không thành công, vui lòng đăng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                #endregion
+
                 this.ProvinceCbx.SelectedIndex = -1;
                 this.DistrictCbx.SelectedIndex = -1;
-                #endregion
             }
             catch (Exception ex)
             {
@@ -337,29 +238,68 @@ namespace ExportBill
             this.lookupProduct();
         }
 
-        private void ProvinceCbx_SelectedIndexChanged(object sender, EventArgs e)
+        private async void ProvinceCbx_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                var province = (sender as ComboBox).SelectedItem as ComboboxItem ;
-                foreach (var item in ListProvinceToDistrict)
+                var province = (sender as ComboBox).SelectedItem as ComboboxItem;
+                this.DistrictCbx.SelectedIndex = -1;
+                this.DistrictCbx.Items.Clear();
+                string url = "http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/LookupDistrict";
+                var formContent = new FormUrlEncodedContent(new[]
+                        {
+                        new KeyValuePair<string, string>("HcmPersonnelNumberId", Staff.UserID),
+                        new KeyValuePair<string, string>("City", province.Value.ToString()),
+                    });
+                GetAPI Load_Item_CbBox = new GetAPI();
+                var res = await Load_Item_CbBox.post(url, formContent);
+                this.Enabled = true;
+                if (res.IsSuccessStatusCode)
                 {
-                    if (!item.Key.Contains(province.Value.ToString())) continue;
-                    this.DistrictCbx.Items.Clear();
-                    foreach (var itemDistrict in item.Value)
+                    var body = await res.Content.ReadAsStringAsync();
+                    var dataList = JsonConvert.DeserializeObject<DataModel>(body);
+                    if (dataList.data == null)
                     {
+                        MessageBox.Show("Load dữ liệu không thành công, vui lòng đăng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    if (dataList.data.Count == 0)
+                    {
+                        MessageBox.Show("Không tìm thấy dữ liệu, vui lòng đăng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    foreach (var item in dataList.data)
+                    {
+                        var data = item.Split(';');
                         ComboboxItem itemcbx = new ComboboxItem();
-                        itemcbx.Text = itemDistrict.Value;
-                        itemcbx.Value = itemDistrict.Key;
+                        itemcbx.Text = data[1];
+                        itemcbx.Value = data[0];
 
                         this.DistrictCbx.Items.Add(itemcbx);
                     }
                 }
-                this.DistrictCbx.SelectedIndex = 0;
+                else
+                {
+                    MessageBox.Show("Load dữ liệu không thành công, vui lòng đăng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        private int countDatePicker = 0;// enable custom format in date picker
+        private void DateOfBirth_ValueChanged(object sender, EventArgs e)
+        {
+            countDatePicker++;
+            if (countDatePicker > 1)
+            this.DateOfBirth.CustomFormat = string.Empty;
+        }
+
+        private void InvoceDate_ValueChanged(object sender, EventArgs e)
+        {
+            countDatePicker++;
+            if (countDatePicker > 1)
+                this.InvoceDate.CustomFormat = string.Empty;
         }
         //####################################################################
     }

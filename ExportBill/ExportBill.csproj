@@ -165,12 +165,6 @@
     <Compile Include="Forms\ChangePassword.Designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CreateService.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\CreateService.Designer.cs">
-      <DependentUpon>CreateService.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\CreateUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,15 +216,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="BunifuTextBox.resx">
       <DependentUpon>BunifuTextBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CreateService.resx">
-      <DependentUpon>CreateService.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CreateUser.resx">
       <DependentUpon>CreateUser.cs</DependentUpon>

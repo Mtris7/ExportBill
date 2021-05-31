@@ -18,7 +18,7 @@ namespace ExportBill
     {
         //##############################################################################################
         #region const
-        private const string URL = @"http://api.ototienthu.com.vn/api/v1/oauth/token";
+        private const string URL = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/oauth/token";
         private const string username = "apitest@tienthu.vn";
         private const string password = "62&z!]r*RV";
         private const string PrBill = "PrintBill";
@@ -72,14 +72,10 @@ namespace ExportBill
         public DXMain()
         {
             InitializeComponent();
-        }
-        public DXMain(string userName, string companyName)
-        {
-            InitializeComponent();
             InitializeGrid();
             InitializeCombobox();
-            this.CompanyLbl.Text = companyName;
-            this.UserNamelbl.Text = userName;
+            this.CompanyLbl.Text = Staff.UserName;
+            this.UserNamelbl.Text = Staff.Address;
             gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             gridView1.RowCellClick += gridView1_RowCellClick;
             InitializeDefaultStyle();
@@ -168,7 +164,7 @@ namespace ExportBill
                     System.Threading.Thread.Sleep(500);
                     return;
                 }
-                string url = @"http://api.ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + Search2Txt.Text + "&searchtype=";
+                string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + Search2Txt.Text + "&searchtype=";
                 if (bsCheck.Checked)
                     url += "LicensePlate";
                 else
@@ -740,7 +736,7 @@ namespace ExportBill
                 this.Enabled = false;
                 var MaPhieu = this.gridView1.GetRowCellValue(row, MPhieu)?.ToString();
                 var payment = this.gridView1.GetRowCellValue(row, Payment)?.ToString();
-                string url = @"http://api.ototienthu.com.vn/api/v1/customers/PostBillService";
+                string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/PostBillService";
                 var formContent = new FormUrlEncodedContent(new[]
                     {
                         new KeyValuePair<string, string>("ServiceOrderId", MaPhieu),
@@ -842,7 +838,7 @@ namespace ExportBill
             {
                 var MaPhieu = this.gridView1.GetRowCellValue(rowIndex, MPhieu)?.ToString();
                 var getData = ds.Where(x => x.MaPhieu == MaPhieu).FirstOrDefault();
-                string url = "http://api.ototienthu.com.vn/api/v1/customers/RunRecallBill";
+                string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/RunRecallBill";
                 var nvc = new List<KeyValuePair<string, string>>();
                 if (!string.IsNullOrEmpty(MaPhieu))
                     nvc.Add(new KeyValuePair<string, string>("SMAServiceOrderId", MaPhieu));
@@ -881,7 +877,7 @@ namespace ExportBill
             try
             {
                
-                string url = "http://api.ototienthu.com.vn/api/v1/customers/createserviceorder";
+                string url = "http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/createserviceorder";
                 var nvc = new List<KeyValuePair<string, string>>();
                 nvc.Add(new KeyValuePair<string, string>("CustAccount", sSelect.CustomerNumber));
                 if (!string.IsNullOrEmpty(sSelect.PlateID))
@@ -939,7 +935,7 @@ namespace ExportBill
                     if (!item.Any()) return false;
                     var itemID = item.First().ItemID;
                     ListItemID.Add(itemID);
-                    string url = "http://api.ototienthu.com.vn/api/v1/customers/CreateServiceLine";
+                    string url = "http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/CreateServiceLine";
                     var nvc = new List<KeyValuePair<string, string>>();
                     nvc.Add(new KeyValuePair<string, string>("serviceOrderId", this.ServiceId));
                     nvc.Add(new KeyValuePair<string, string>("itemId", itemID));
@@ -976,7 +972,7 @@ namespace ExportBill
         {
             try
             {
-                string url = "http://api.ototienthu.com.vn/api/v1/customers/PostTransfer";
+                string url = "http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/PostTransfer";
                 var nvc = new List<KeyValuePair<string, string>>();
                 nvc.Add(new KeyValuePair<string, string>("SMAServiceOrderId", this.ServiceId));
                 nvc.Add(new KeyValuePair<string, string>("HcmPersonnelNumberId", Staff.UserID));
@@ -1028,7 +1024,7 @@ namespace ExportBill
 
                 this.Enabled = false;
                 //var cl = new HttpClient();
-                string url = "http://api.ototienthu.com.vn/api/v1/customers/LookupItemCashier";
+                string url = "http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/LookupItemCashier";
                 var formContent = new FormUrlEncodedContent(new[]
                         {
                         new KeyValuePair<string, string>("personnalNumberId", Staff.UserID),
@@ -1082,7 +1078,7 @@ namespace ExportBill
             try
             {
                 this.Enabled = false;
-                string url = "http://api.ototienthu.com.vn/api/v1/customers/LookupWorkerCashier";
+                string url = "http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/LookupWorkerCashier";
                 var cl = new HttpClient();
                 cl.BaseAddress = new Uri(url);
                 int _TimeoutSec = 90;
@@ -1137,7 +1133,7 @@ namespace ExportBill
             {
                 this.Enabled = false;
                 this.ds.Clear();
-                string url = @"http://api.ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId=" + Staff.UserID + "&serviceDate=" + this.dateTimeBill.Value.ToString("dd/MM/yyyy");
+                string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/CashierService?personnalNumberId=" + Staff.UserID + "&serviceDate=" + this.dateTimeBill.Value.ToString("dd/MM/yyyy");
                 if (!string.IsNullOrWhiteSpace(this.SearchControl1Txt.Text))
                 {
                     url += "&plateId=" + this.SearchControl1Txt.Text;
@@ -1279,7 +1275,7 @@ namespace ExportBill
                     this.groupControl3.Enabled = false;
                     this.ServiceHeaderCtr.Enabled = false;
                     //
-                    string url = @"http://api.ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + CreateUser.Bso + "&searchtype=LicensePlate";
+                    string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + CreateUser.Bso + "&searchtype=LicensePlate";
 
                     GetAPI Search = new GetAPI();
                     var response = await Search.Only_url(url);
