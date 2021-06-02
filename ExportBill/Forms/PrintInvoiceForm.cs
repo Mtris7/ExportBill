@@ -75,7 +75,7 @@ namespace ExportBill
               @"<DeviceInfo>
                 <OutputFormat>EMF</OutputFormat>
                 <PageWidth>2.84in</PageWidth>
-                <PageHeight>11in</PageHeight>
+                <PageHeight>15in</PageHeight>
                 <MarginTop>0.25in</MarginTop>
                 <MarginLeft>0.04in</MarginLeft>
                 <MarginRight>0.04in</MarginRight>
@@ -108,7 +108,7 @@ namespace ExportBill
             ev.Graphics.DrawImage(pageImage, adjustedRect);
 
             // Prepare for the next page. Make sure we haven't hit the end.
-            m_currentPageIndex++;
+            m_currentPageIndex += 2;
             ev.HasMorePages = (m_currentPageIndex < m_streams.Count);
         }
 

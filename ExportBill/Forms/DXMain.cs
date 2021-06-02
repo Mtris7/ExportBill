@@ -19,8 +19,6 @@ namespace ExportBill
         //##############################################################################################
         #region const
         private const string URL = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/oauth/token";
-        private const string username = "apitest@tienthu.vn";
-        private const string password = "62&z!]r*RV";
         private const string PrBill = "PrintBill";
         private const string PBill = "PostBill";
         private const string PostBillStr = "Post Bill";
@@ -72,10 +70,14 @@ namespace ExportBill
         public DXMain()
         {
             InitializeComponent();
+        }
+        public DXMain(string userName, string companyName)
+        {
+            InitializeComponent();
             InitializeGrid();
             InitializeCombobox();
-            this.CompanyLbl.Text = Staff.UserName;
-            this.UserNamelbl.Text = Staff.Address;
+            this.CompanyLbl.Text = companyName;
+            this.UserNamelbl.Text = userName;
             gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
             gridView1.RowCellClick += gridView1_RowCellClick;
             InitializeDefaultStyle();
@@ -711,8 +713,8 @@ namespace ExportBill
                 var request = new HttpRequestMessage(HttpMethod.Post, URL);
                 var formContent = new FormUrlEncodedContent(new[]
                     {
-                        new KeyValuePair<string, string>("username", username),
-                        new KeyValuePair<string, string>("password", password),
+                        new KeyValuePair<string, string>("username", Settings.userName),
+                        new KeyValuePair<string, string>("password", Settings.passWord),
                         new KeyValuePair<string, string>("grant_type", "password"),
                     });
                 request.Content = formContent;

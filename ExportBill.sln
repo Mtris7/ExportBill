@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28307.1433
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportBill", "ExportBill\ExportBill.csproj", "{E63E30B2-3830-4722-83AB-99B813BE014D}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TIENTHUPOS1.0.1", "TIENTHUPOS1.0.1\TIENTHUPOS1.0.1.vdproj", "{D3A3F9AC-8868-4FEB-8A7A-B829FD9DF0C5}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TIENTHUPOS1.1.9", "TIENTHUPOS1.0.1\TIENTHUPOS1.0.1.vdproj", "{D3A3F9AC-8868-4FEB-8A7A-B829FD9DF0C5}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TIENTHUPOS1.0", "TIENTHUPOS1.0\TIENTHUPOS1.0.vdproj", "{AB7FE20A-942F-4EB9-AF37-9D6C93911F71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,8 @@ Global
 		{E63E30B2-3830-4722-83AB-99B813BE014D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D3A3F9AC-8868-4FEB-8A7A-B829FD9DF0C5}.Debug|Any CPU.ActiveCfg = Debug
 		{D3A3F9AC-8868-4FEB-8A7A-B829FD9DF0C5}.Release|Any CPU.ActiveCfg = Release
+		{AB7FE20A-942F-4EB9-AF37-9D6C93911F71}.Debug|Any CPU.ActiveCfg = Debug
+		{AB7FE20A-942F-4EB9-AF37-9D6C93911F71}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

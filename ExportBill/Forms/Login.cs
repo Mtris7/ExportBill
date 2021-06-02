@@ -103,7 +103,7 @@ namespace ExportBill
                             Staff.Address = data[2];
                             Staff.AddressID = data[3];
                             this.Hide();
-                            DXMain dx = new DXMain();
+                            DXMain dx = new DXMain(data[1], data[2]);
                             dx.Closed += (s, args) => this.Close();
                             dx.ShowDialog();
                         }
