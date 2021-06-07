@@ -31,6 +31,8 @@
               <xs:element name="TitleBotom" msprop:Generator_ColumnVarNameInTable="columnTitleBotom" msprop:Generator_ColumnPropNameInRow="TitleBotom" msprop:Generator_ColumnPropNameInTable="TitleBotomColumn" msprop:Generator_UserColumnName="TitleBotom" type="xs:string" minOccurs="0" />
               <xs:element name="PhieuDV" msprop:Generator_ColumnVarNameInTable="columnPhieuDV" msprop:Generator_ColumnPropNameInRow="PhieuDV" msprop:Generator_ColumnPropNameInTable="PhieuDVColumn" msprop:Generator_UserColumnName="PhieuDV" type="xs:string" minOccurs="0" />
               <xs:element name="Image" msprop:Generator_ColumnVarNameInTable="columnImage" msprop:Generator_ColumnPropNameInRow="Image" msprop:Generator_ColumnPropNameInTable="ImageColumn" msprop:Generator_UserColumnName="Image" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="PhoneStaff" msprop:Generator_ColumnVarNameInTable="columnPhoneStaff" msprop:Generator_ColumnPropNameInRow="PhoneStaff" msprop:Generator_ColumnPropNameInTable="PhoneStaffColumn" msprop:Generator_UserColumnName="PhoneStaff" type="xs:string" minOccurs="0" />
+              <xs:element name="NameStaff" msprop:Generator_ColumnVarNameInTable="columnNameStaff" msprop:Generator_ColumnPropNameInRow="NameStaff" msprop:Generator_ColumnPropNameInTable="NameStaffColumn" msprop:Generator_UserColumnName="NameStaff" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

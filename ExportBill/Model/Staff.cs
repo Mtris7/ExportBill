@@ -7,5 +7,6 @@
         public static string passWord;
         public static string Address;
         public static string AddressID;
+        public static string Phone;
     }
 }

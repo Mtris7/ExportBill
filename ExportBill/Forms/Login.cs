@@ -15,8 +15,7 @@ namespace ExportBill
             try
             {
                 InitializeComponent();
-                DXMain dXMain = new DXMain();
-                dXMain.getToken();
+                this.getToken();
             }
             catch(Exception ex)
             {
@@ -67,21 +66,15 @@ namespace ExportBill
                     Properties.Settings.Default.passWord = passw;
                     Properties.Settings.Default.Save();
                 }
-                if (!string.IsNullOrEmpty(DXMain.token))
+                if (!string.IsNullOrEmpty(Settings.token))
                 {
                     this.Enabled = false;
                     string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/CashierCheckLogin";
-                    //var client = new HttpClient();
-                    //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
-                    //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    //var request = new HttpRequestMessage(HttpMethod.Post, url);
                     var formContent = new FormUrlEncodedContent(new[]
                         {
                         new KeyValuePair<string, string>("personnalNumberId", user),
                         new KeyValuePair<string, string>("retailStaffPassword", passw),
                     });
-                    //request.Content = formContent;
-                    //var response = await client.SendAsync(request);
                     GetAPI Login = new GetAPI();
                     var response = await Login.post(url, formContent);
                     this.Enabled = true;
@@ -102,6 +95,7 @@ namespace ExportBill
                             Staff.UserName = data[1];
                             Staff.Address = data[2];
                             Staff.AddressID = data[3];
+                            Staff.Phone = data[4];
                             this.Hide();
                             DXMain dx = new DXMain(data[1], data[2]);
                             dx.Closed += (s, args) => this.Close();
@@ -166,6 +160,32 @@ namespace ExportBill
             try
             {
                 new ChangePassword().ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public async void getToken()
+        {
+            try
+            {
+                var client = new HttpClient();
+                var request = new HttpRequestMessage(HttpMethod.Post, Settings.URL);
+                var formContent = new FormUrlEncodedContent(new[]
+                    {
+                        new KeyValuePair<string, string>("username", Settings.userName),
+                        new KeyValuePair<string, string>("password", Settings.passWord),
+                        new KeyValuePair<string, string>("grant_type", "password"),
+                    });
+                request.Content = formContent;
+                var response = await client.SendAsync(request);
+                if (response.IsSuccessStatusCode)
+                {
+                    var body = await response.Content.ReadAsStringAsync();
+                    var tokenData = JsonConvert.DeserializeObject<Token>(body);
+                    Settings.token = tokenData.access_token;
+                }
             }
             catch (Exception ex)
             {

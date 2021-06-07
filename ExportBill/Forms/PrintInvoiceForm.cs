@@ -18,7 +18,7 @@ namespace ExportBill
 {
     public partial class PrintInvoiceForm : Form
     {
-        string titleBottom = "Phòng chăm sóc khách hàng/ Hotline 02363566887";
+        string titleBottom = "*chỉ xuất hóa đơn trong ngày*";
         bool auto = false;
         Customer customer = new Customer();
         public PrintInvoiceForm(Customer customer, bool auto = false)
@@ -75,7 +75,7 @@ namespace ExportBill
               @"<DeviceInfo>
                 <OutputFormat>EMF</OutputFormat>
                 <PageWidth>2.84in</PageWidth>
-                <PageHeight>15in</PageHeight>
+                <PageHeight>11in</PageHeight>
                 <MarginTop>0.25in</MarginTop>
                 <MarginLeft>0.04in</MarginLeft>
                 <MarginRight>0.04in</MarginRight>
@@ -108,7 +108,7 @@ namespace ExportBill
             ev.Graphics.DrawImage(pageImage, adjustedRect);
 
             // Prepare for the next page. Make sure we haven't hit the end.
-            m_currentPageIndex += 2;
+            m_currentPageIndex++;
             ev.HasMorePages = (m_currentPageIndex < m_streams.Count);
         }
 
@@ -165,6 +165,8 @@ namespace ExportBill
                 dt.Columns.Add("TitleBotom", typeof(String));
                 dt.Columns.Add("PhieuDV", typeof(String));
                 dt.Columns.Add("Image", typeof(byte[]));
+                dt.Columns.Add("PhoneStaff", typeof(String));
+                dt.Columns.Add("NameStaff", typeof(String));
 
                 BarcodeLib.Barcode barcode = new BarcodeLib.Barcode()
                 {
@@ -179,7 +181,7 @@ namespace ExportBill
                 {
                     string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/BillService?serviceOrderId=" + this.customer.MaPhieu;
                     var client = new HttpClient();
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.token);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     var request = new HttpRequestMessage(HttpMethod.Get, url);
 
@@ -215,8 +217,9 @@ namespace ExportBill
                     foreach (var item in itemSell)
                     {
                         var dateTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
-                        dt.Rows.Add(i, "Ngày in bill: " + dateTime, this.customer.Company, this.customer.Adress, "Biển số: " + this.customer.BS, "Loại xe:" + this.customer.LX,
-                            this.customer.Discount.ToString("N0"), item.ItemName, item.ItemQuality, item.ItemPrice, item.TotalBeforeDiscount, Convert.ToDecimal(this.customer.Total).ToString("N0"), "(" + this.customer.DetailMoney + ")", this.titleBottom, "Phiếu DV:" + this.customer.MaPhieu, ms.ToArray());
+                        dt.Rows.Add(i, "Ngày in phiếu: " + dateTime, this.customer.Company, this.customer.Adress, "Biển số: " + this.customer.BS, "Dòng xe:" + this.customer.LX,
+                            this.customer.Discount.ToString("N0"), item.ItemName, item.ItemQuality, item.ItemPrice, item.TotalBeforeDiscount, Convert.ToDecimal(this.customer.Total).ToString("N0"),
+                            "(" + this.customer.DetailMoney + ")", this.titleBottom, "Số phiếu:" + this.customer.MaPhieu, ms.ToArray(),"ĐT: " +Staff.Phone, "Thu ngân: " + Staff.UserName);
                         i++;
                     }
                 }

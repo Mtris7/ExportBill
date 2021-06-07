@@ -18,7 +18,6 @@ namespace ExportBill
     {
         //##############################################################################################
         #region const
-        private const string URL = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/oauth/token";
         private const string PrBill = "PrintBill";
         private const string PBill = "PostBill";
         private const string PostBillStr = "Post Bill";
@@ -26,7 +25,6 @@ namespace ExportBill
         private const string inProcess = "In process";
         private const string invoiced = "Invoiced";
         private const string MPhieu = "MaPhieu";
-        public static string token = string.Empty;
         #endregion
         //###############################################################################################
         #region field
@@ -47,7 +45,6 @@ namespace ExportBill
 
         private void DXMain_Load(object sender, EventArgs e)
         {
-            this.getToken();
             this.SetDefault();
         }
         private void SetDefault()
@@ -533,18 +530,12 @@ namespace ExportBill
                 if (e.Column.Equals(_WorkerId))
                 {
                     ItemSell iS = new ItemSell();
-                    var item1 = ListSM.Where(x => x.UserName.Equals(e.Value));
-                    iS.WorkerId = item1.First().UserName;
-                    iS.AdviserId = item1.First().NameAdviser;
-                    ListIS.Add(iS);
+                    var item1 = ListSM.Where(x => x.UserName.Equals(e.Value)).FirstOrDefault();
+                    if (item1 == null) return;
+                    iS.WorkerId = item1.UserName;
+                    iS.AdviserId = item1.NameAdviser;
                     this.gvServiceLine.SetRowCellValue(e.RowHandle, _AdviserId, iS.AdviserId);
                 }
-                //if (e.Column.Equals(_DiscountGrid2))
-                //{
-                //    var discount = this.gvServiceLine.GetRowCellValue(e.RowHandle, _DiscountGrid2);
-                //    this.gvServiceLine.SetRowCellValue(e.RowHandle, _DiscountGrid2, Convert.ToDecimal(e.Value).ToString("F0"));
-
-                //}
             }
             catch (Exception ex)
             {
@@ -622,6 +613,13 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+
+        #endregion
+
+
+        #region Grid Inventory
+
+
         #endregion
 
         private void btnAddLine_Click(object sender, EventArgs e)
@@ -702,35 +700,60 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
-        #endregion
-        //##############################################################################################
-        #region method  
-        public async void getToken()
+
+        private async void BtnSearchInventory_Click(object sender, EventArgs e)
         {
             try
             {
-                var client = new HttpClient();
-                var request = new HttpRequestMessage(HttpMethod.Post, URL);
+                string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/LookupOnhandItem";
                 var formContent = new FormUrlEncodedContent(new[]
                     {
-                        new KeyValuePair<string, string>("username", Settings.userName),
-                        new KeyValuePair<string, string>("password", Settings.passWord),
-                        new KeyValuePair<string, string>("grant_type", "password"),
+                        new KeyValuePair<string, string>("HcmPersonnelNumberId", Staff.UserID),
+                        new KeyValuePair<string, string>("ItemId", SearchInventoryTxt.Text),
                     });
-                request.Content = formContent;
-                var response = await client.SendAsync(request);
+                GetAPI DXMain_PostBill = new GetAPI();
+                var response = await DXMain_PostBill.post(url, formContent);
+                this.Enabled = true;
                 if (response.IsSuccessStatusCode)
                 {
                     var body = await response.Content.ReadAsStringAsync();
-                    var tokenData = JsonConvert.DeserializeObject<Token>(body);
-                    DXMain.token = tokenData.access_token;
+                    var result = JsonConvert.DeserializeObject<DataModel>(body);
+                    if (result.data != null)
+                    {
+                        List<ItemSell> list = new List<ItemSell>();
+                        //Dầu nhớt SL cho động cơ 1L -  xe số;08232-2MA-K1LV1;985.90;BÌNH;NHOT;88,000.00;BÌNH
+                        foreach(var item in result.data)
+                        {
+                            var data        = item.Split(';');
+                            ItemSell iS     = new ItemSell();
+                            iS.ItemName     = data[0];
+                            iS.ItemID       = data[1];
+                            iS.Inventory    = Convert.ToDecimal(data[2]);
+                            iS.ItemUnit     = data[3];
+                            iS.ItemGroup    = data[4];
+                            iS.ItemPrice    = data[5];
+                            iS.ItemUnitSell = data[6];
+                            list.Add(iS);
+                        }
+                        this.InventoryControl.DataSource = list;
+                    }
+                    else
+                        MessageBox.Show("Tải dữ liệu không thành công.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Post bill không thành công, vui lòng kiểm tra lại.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+        #endregion
+        //##############################################################################################
+        #region method  
+
         private async void RunPostBill(int row)
         {
             try
@@ -770,6 +793,7 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+
         private void RunPrintBill(int rowIndex)
         {
             try
@@ -806,6 +830,7 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+
         private void RunViewBill(int rowIndex)
         {
             try
@@ -834,6 +859,7 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+
         private  void RunRecallBill(int rowIndex)
         {
             try
@@ -874,6 +900,7 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+
         private bool RunCreateHeader()
         {
             try
@@ -923,6 +950,7 @@ namespace ExportBill
                 return false;
             }
         }
+
         private bool RunCreateLine()
         {
             try
@@ -1075,6 +1103,7 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+
         private async void LoadWorkerCombobox()
         {
             try
@@ -1087,7 +1116,7 @@ namespace ExportBill
                 cl.Timeout = new TimeSpan(0, 0, _TimeoutSec);
                 string _ContentType = "application/x-www-form-urlencoded";
                 cl.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_ContentType));
-                cl.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+                cl.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.token);
                 var nvc = new List<KeyValuePair<string, string>>();
                 nvc.Add(new KeyValuePair<string, string>("personnalNumberId", Staff.UserID));
 
@@ -1181,6 +1210,7 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+
         private void ComeBack()
         {
             try
@@ -1216,6 +1246,7 @@ namespace ExportBill
             this.RunCreateUser();
             
         }
+
         private void delete_gvServiceLin()
         {
             while (this.gvServiceLine.RowCount > 0)
@@ -1229,6 +1260,7 @@ namespace ExportBill
             this.pHeader.Enabled = false;
             this.ServiceLineCtr.Enabled = false;
         }
+
         private void delete_gvServiceHeader()
         {
             while (this.gvServiceHeader.RowCount > 0)
@@ -1241,6 +1273,7 @@ namespace ExportBill
         {
             this.fsm = fsm_BtBack.fsm_delete_number;
         }
+
         private void BsoChange()
         {
             Search2Txt.Text = CreateUser.Bso;

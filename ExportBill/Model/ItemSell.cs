@@ -15,6 +15,8 @@
         public string AdviserId { get; set; }
         public decimal Inventory { get; set; }
         public decimal LineDisc { get; set; }
+        public string ItemUnitSell { get; set; }
+        public string ItemGroup { get; set; }
         public ItemSell()
         {
         }

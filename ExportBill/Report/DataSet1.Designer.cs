@@ -311,6 +311,10 @@ namespace ExportBill.Report {
             
             private global::System.Data.DataColumn columnImage;
             
+            private global::System.Data.DataColumn columnPhoneStaff;
+            
+            private global::System.Data.DataColumn columnNameStaff;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public DataTable_ReportDataTable() {
@@ -474,6 +478,22 @@ namespace ExportBill.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn PhoneStaffColumn {
+                get {
+                    return this.columnPhoneStaff;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn NameStaffColumn {
+                get {
+                    return this.columnNameStaff;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -525,7 +545,9 @@ namespace ExportBill.Report {
                         string ItemDetailPrice, 
                         string TitleBotom, 
                         string PhieuDV, 
-                        byte[] Image) {
+                        byte[] Image, 
+                        string PhoneStaff, 
+                        string NameStaff) {
                 DataTable_ReportRow rowDataTable_ReportRow = ((DataTable_ReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         InvoiceID,
@@ -543,7 +565,9 @@ namespace ExportBill.Report {
                         ItemDetailPrice,
                         TitleBotom,
                         PhieuDV,
-                        Image};
+                        Image,
+                        PhoneStaff,
+                        NameStaff};
                 rowDataTable_ReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable_ReportRow);
                 return rowDataTable_ReportRow;
@@ -582,6 +606,8 @@ namespace ExportBill.Report {
                 this.columnTitleBotom = base.Columns["TitleBotom"];
                 this.columnPhieuDV = base.Columns["PhieuDV"];
                 this.columnImage = base.Columns["Image"];
+                this.columnPhoneStaff = base.Columns["PhoneStaff"];
+                this.columnNameStaff = base.Columns["NameStaff"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -619,6 +645,10 @@ namespace ExportBill.Report {
                 base.Columns.Add(this.columnPhieuDV);
                 this.columnImage = new global::System.Data.DataColumn("Image", typeof(byte[]), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnImage);
+                this.columnPhoneStaff = new global::System.Data.DataColumn("PhoneStaff", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPhoneStaff);
+                this.columnNameStaff = new global::System.Data.DataColumn("NameStaff", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNameStaff);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1018,6 +1048,38 @@ namespace ExportBill.Report {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string PhoneStaff {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable_Report.PhoneStaffColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PhoneStaff\' in table \'DataTable_Report\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable_Report.PhoneStaffColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public string NameStaff {
+                get {
+                    try {
+                        return ((string)(this[this.tableDataTable_Report.NameStaffColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NameStaff\' in table \'DataTable_Report\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDataTable_Report.NameStaffColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsInvoiceIDNull() {
                 return this.IsNull(this.tableDataTable_Report.InvoiceIDColumn);
             }
@@ -1206,6 +1268,30 @@ namespace ExportBill.Report {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetImageNull() {
                 this[this.tableDataTable_Report.ImageColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsPhoneStaffNull() {
+                return this.IsNull(this.tableDataTable_Report.PhoneStaffColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetPhoneStaffNull() {
+                this[this.tableDataTable_Report.PhoneStaffColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsNameStaffNull() {
+                return this.IsNull(this.tableDataTable_Report.NameStaffColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetNameStaffNull() {
+                this[this.tableDataTable_Report.NameStaffColumn] = global::System.Convert.DBNull;
             }
         }
         

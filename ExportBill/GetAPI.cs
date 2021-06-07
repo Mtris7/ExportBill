@@ -12,7 +12,7 @@ namespace ExportBill
         public async Task<HttpResponseMessage> post(string url,FormUrlEncodedContent formContent)
         {
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.token);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var request = new HttpRequestMessage(HttpMethod.Post, url);
             
@@ -24,7 +24,7 @@ namespace ExportBill
         {
             
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.token);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             var request = new HttpRequestMessage(HttpMethod.Get, url);
 
@@ -38,7 +38,7 @@ namespace ExportBill
             cl.Timeout = new TimeSpan(0, 0, _TimeoutSec);
             string _ContentType = "application/x-www-form-urlencoded";
             cl.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(_ContentType));
-            cl.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", DXMain.token);
+            cl.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.token);
 
             var req = new HttpRequestMessage(HttpMethod.Post, url);
             req.Content = formContent;
