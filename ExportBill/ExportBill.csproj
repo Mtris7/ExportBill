@@ -286,6 +286,7 @@
     <None Include="Resources\find21.png" />
     <None Include="Resources\LoginBackground.png" />
     <Content Include="image\addUser.png" />
+    <Content Include="Resources\logo hinh vuong Tien Thu - 15mm.jpg" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
