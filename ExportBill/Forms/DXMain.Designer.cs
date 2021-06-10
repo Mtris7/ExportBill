@@ -37,6 +37,7 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.MaPhieu = new DevExpress.XtraGrid.Columns.GridColumn();
             this._CustomerName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.PhoneNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.BS = new DevExpress.XtraGrid.Columns.GridColumn();
             this.LX = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TSC = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -71,7 +72,11 @@
             this.ServiceLineCtr = new DevExpress.XtraGrid.GridControl();
             this.gvServiceLine = new DevExpress.XtraGrid.Views.Grid.GridView();
             this._ItemName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.ItemNameCbx = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.repositoryItemGridLookUpEdit = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
+            this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.ItemID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ItemName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ItemPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this._ItemQuality = new DevExpress.XtraGrid.Columns.GridColumn();
             this._ItemUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this._ItemPrice = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -83,8 +88,7 @@
             this.AdviserIdCbx = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this._Inventory = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.repositoryItemGridLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
-            this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.ItemNameCbx = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.pHeader = new System.Windows.Forms.Panel();
             this.NoteTxt = new ExportBill.PlaceHolderTextBox();
             this.CurrentKm = new ExportBill.PlaceHolderTextBox();
@@ -149,12 +153,12 @@
             this.pFooter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceLineCtr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvServiceLine)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemNameCbx)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WorkerIdCbx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdviserIdCbx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemNameCbx)).BeginInit();
             this.pHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicePool.Properties)).BeginInit();
             this.panel3.SuspendLayout();
@@ -237,6 +241,7 @@
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.MaPhieu,
             this._CustomerName,
+            this.PhoneNumber,
             this.BS,
             this.LX,
             this.TSC,
@@ -293,6 +298,17 @@
             this._CustomerName.VisibleIndex = 1;
             this._CustomerName.Width = 159;
             // 
+            // PhoneNumber
+            // 
+            this.PhoneNumber.Caption = "SĐT";
+            this.PhoneNumber.FieldName = "PhoneNumber";
+            this.PhoneNumber.MinWidth = 25;
+            this.PhoneNumber.Name = "PhoneNumber";
+            this.PhoneNumber.OptionsColumn.AllowEdit = false;
+            this.PhoneNumber.Visible = true;
+            this.PhoneNumber.VisibleIndex = 2;
+            this.PhoneNumber.Width = 94;
+            // 
             // BS
             // 
             this.BS.AppearanceCell.Options.UseTextOptions = true;
@@ -306,7 +322,7 @@
             this.BS.OptionsColumn.AllowEdit = false;
             this.BS.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.BS.Visible = true;
-            this.BS.VisibleIndex = 2;
+            this.BS.VisibleIndex = 3;
             this.BS.Width = 82;
             // 
             // LX
@@ -318,7 +334,7 @@
             this.LX.OptionsColumn.AllowEdit = false;
             this.LX.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.LX.Visible = true;
-            this.LX.VisibleIndex = 3;
+            this.LX.VisibleIndex = 4;
             this.LX.Width = 82;
             // 
             // TSC
@@ -330,7 +346,7 @@
             this.TSC.OptionsColumn.AllowEdit = false;
             this.TSC.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.TSC.Visible = true;
-            this.TSC.VisibleIndex = 4;
+            this.TSC.VisibleIndex = 5;
             this.TSC.Width = 107;
             // 
             // DG
@@ -344,7 +360,7 @@
             new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "DG", "Tổng cộng(VNĐ)")});
             this.DG.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.DG.Visible = true;
-            this.DG.VisibleIndex = 5;
+            this.DG.VisibleIndex = 6;
             this.DG.Width = 219;
             // 
             // _TotalGridListItem
@@ -361,7 +377,7 @@
             new DevExpress.XtraGrid.GridColumnSummaryItem()});
             this._TotalGridListItem.UnboundType = DevExpress.Data.UnboundColumnType.Decimal;
             this._TotalGridListItem.Visible = true;
-            this._TotalGridListItem.VisibleIndex = 6;
+            this._TotalGridListItem.VisibleIndex = 7;
             this._TotalGridListItem.Width = 80;
             // 
             // Payment
@@ -378,7 +394,7 @@
             this.Payment.OptionsColumn.AllowEdit = false;
             this.Payment.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.Payment.Visible = true;
-            this.Payment.VisibleIndex = 7;
+            this.Payment.VisibleIndex = 8;
             this.Payment.Width = 66;
             // 
             // cmbPayment
@@ -403,7 +419,7 @@
             this.PrintBill.OptionsColumn.AllowEdit = false;
             this.PrintBill.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.PrintBill.Visible = true;
-            this.PrintBill.VisibleIndex = 8;
+            this.PrintBill.VisibleIndex = 9;
             this.PrintBill.Width = 59;
             // 
             // PostBill
@@ -421,7 +437,7 @@
             this.PostBill.OptionsColumn.AllowEdit = false;
             this.PostBill.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this.PostBill.Visible = true;
-            this.PostBill.VisibleIndex = 9;
+            this.PostBill.VisibleIndex = 10;
             this.PostBill.Width = 65;
             // 
             // _RecallBill
@@ -438,7 +454,7 @@
             this._RecallBill.Name = "_RecallBill";
             this._RecallBill.OptionsColumn.AllowEdit = false;
             this._RecallBill.Visible = true;
-            this._RecallBill.VisibleIndex = 10;
+            this._RecallBill.VisibleIndex = 11;
             this._RecallBill.Width = 95;
             // 
             // repositoryItemButtonEdit1
@@ -704,7 +720,7 @@
             this.ItemNameCbx,
             this.WorkerIdCbx,
             this.AdviserIdCbx,
-            this.repositoryItemGridLookUpEdit1});
+            this.repositoryItemGridLookUpEdit});
             this.ServiceLineCtr.Size = new System.Drawing.Size(1165, 220);
             this.ServiceLineCtr.TabIndex = 3;
             this.ServiceLineCtr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -736,20 +752,40 @@
             // _ItemName
             // 
             this._ItemName.Caption = "Hàng hóa, dịch vụ";
-            this._ItemName.ColumnEdit = this.ItemNameCbx;
             this._ItemName.FieldName = "ItemName";
             this._ItemName.MinWidth = 25;
             this._ItemName.Name = "_ItemName";
+            this._ItemName.UnboundType = DevExpress.Data.UnboundColumnType.String;
             this._ItemName.Visible = true;
             this._ItemName.VisibleIndex = 0;
             this._ItemName.Width = 385;
             // 
-            // ItemNameCbx
+            // ItemID
             // 
-            this.ItemNameCbx.AutoHeight = false;
-            this.ItemNameCbx.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.ItemNameCbx.Name = "ItemNameCbx";
+            this.ItemID.Caption = "Mã sản phẩm";
+            this.ItemID.FieldName = "ItemID";
+            this.ItemID.Name = "ItemID";
+            this.ItemID.OptionsColumn.AllowEdit = false;
+            this.ItemID.Visible = true;
+            this.ItemID.VisibleIndex = 0;
+            // 
+            // ItemName
+            // 
+            this.ItemName.Caption = "Tên sản phẩm";
+            this.ItemName.FieldName = "ItemName";
+            this.ItemName.Name = "ItemName";
+            this.ItemName.OptionsColumn.AllowEdit = false;
+            this.ItemName.Visible = true;
+            this.ItemName.VisibleIndex = 1;
+            // 
+            // ItemPrice
+            // 
+            this.ItemPrice.Caption = "Giá";
+            this.ItemPrice.FieldName = "ItemPrice";
+            this.ItemPrice.Name = "ItemPrice";
+            this.ItemPrice.OptionsColumn.AllowEdit = false;
+            this.ItemPrice.Visible = true;
+            this.ItemPrice.VisibleIndex = 2;
             // 
             // _ItemQuality
             // 
@@ -879,21 +915,12 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
             // 
-            // repositoryItemGridLookUpEdit1
+            // ItemNameCbx
             // 
-            this.repositoryItemGridLookUpEdit1.AutoHeight = false;
-            this.repositoryItemGridLookUpEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.ItemNameCbx.AutoHeight = false;
+            this.ItemNameCbx.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemGridLookUpEdit1.Name = "repositoryItemGridLookUpEdit1";
-            this.repositoryItemGridLookUpEdit1.PopupView = this.repositoryItemGridLookUpEdit1View;
-            // 
-            // repositoryItemGridLookUpEdit1View
-            // 
-            this.repositoryItemGridLookUpEdit1View.DetailHeight = 437;
-            this.repositoryItemGridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.repositoryItemGridLookUpEdit1View.Name = "repositoryItemGridLookUpEdit1View";
-            this.repositoryItemGridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.repositoryItemGridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            this.ItemNameCbx.Name = "ItemNameCbx";
             // 
             // pHeader
             // 
@@ -1183,7 +1210,7 @@
             this.InventoryTab.Controls.Add(this.groupControl5);
             this.InventoryTab.Controls.Add(this.BtnSearchInventory);
             this.InventoryTab.Controls.Add(this.SearchInventoryTxt);
-            this.InventoryTab.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.InventoryTab.Margin = new System.Windows.Forms.Padding(4);
             this.InventoryTab.Name = "InventoryTab";
             this.InventoryTab.Size = new System.Drawing.Size(1180, 567);
             this.InventoryTab.Text = "Tồn kho";
@@ -1195,7 +1222,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControl5.Controls.Add(this.InventoryControl);
             this.groupControl5.Location = new System.Drawing.Point(4, 51);
-            this.groupControl5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupControl5.Margin = new System.Windows.Forms.Padding(4);
             this.groupControl5.Name = "groupControl5";
             this.groupControl5.Size = new System.Drawing.Size(1172, 412);
             this.groupControl5.TabIndex = 8;
@@ -1432,12 +1459,12 @@
             this.pFooter.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ServiceLineCtr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvServiceLine)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ItemNameCbx)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WorkerIdCbx)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdviserIdCbx)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ItemNameCbx)).EndInit();
             this.pHeader.ResumeLayout(false);
             this.pHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicePool.Properties)).EndInit();
@@ -1536,7 +1563,7 @@
         private System.Windows.Forms.Panel pFooter;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnAddLine;
-        private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit repositoryItemGridLookUpEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit repositoryItemGridLookUpEdit;
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemGridLookUpEdit1View;
         private DevExpress.XtraGrid.Columns.GridColumn _Inventory;
         private DevExpress.XtraGrid.Columns.GridColumn _CustomerName;
@@ -1561,5 +1588,9 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox4;
         private DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit repositoryItemGridLookUpEdit2;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
+        private DevExpress.XtraGrid.Columns.GridColumn PhoneNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn ItemID;
+        private DevExpress.XtraGrid.Columns.GridColumn ItemName;
+        private DevExpress.XtraGrid.Columns.GridColumn ItemPrice;
     }
 }

@@ -108,7 +108,7 @@ namespace ExportBill
             ev.Graphics.DrawImage(pageImage, adjustedRect);
 
             // Prepare for the next page. Make sure we haven't hit the end.
-            m_currentPageIndex++;
+            m_currentPageIndex += 2;
             ev.HasMorePages = (m_currentPageIndex < m_streams.Count);
         }
 
@@ -216,10 +216,10 @@ namespace ExportBill
                     int i = 0;
                     foreach (var item in itemSell)
                     {
-                        var dateTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
-                        dt.Rows.Add(i, "Ngày in phiếu: " + dateTime, this.customer.Company, this.customer.Adress, "Biển số: " + this.customer.BS, "Dòng xe:" + this.customer.LX,
+                        var dateTime = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+                        dt.Rows.Add(i, "Ngày in phiếu: " + dateTime, this.customer.Company, this.customer.Adress, "Biển số: " + this.customer.BS, "Dòng xe: " + this.customer.LX,
                             this.customer.Discount.ToString("N0"), item.ItemName, item.ItemQuality, item.ItemPrice, item.TotalBeforeDiscount, Convert.ToDecimal(this.customer.Total).ToString("N0"),
-                            "(" + this.customer.DetailMoney + ")", this.titleBottom, "Số phiếu:" + this.customer.MaPhieu, ms.ToArray(),"ĐT: " +Staff.Phone, "Thu ngân: " + Staff.UserName);
+                            "(" + this.customer.DetailMoney + ")", this.titleBottom, "Số phiếu: " + this.customer.MaPhieu, ms.ToArray(),"ĐT: " +Staff.Phone, "Thu ngân: " + Staff.UserName);
                         i++;
                     }
                 }

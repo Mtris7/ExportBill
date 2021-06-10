@@ -1,4 +1,6 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -31,6 +33,7 @@ namespace ExportBill
         private BindingList<Customer> ds = new BindingList<Customer>();
         private BindingList<CustomerModel> ListCustomerSearch = new BindingList<CustomerModel>();
         private BindingList<ItemSell> ListIS = new BindingList<ItemSell>();
+        private BindingList<ItemLookup> ListItemLookup = new BindingList<ItemLookup>();
         private BindingList<StaffModel> ListSM = new BindingList<StaffModel>();
         private CustomerModel sSelect;
         private string servicePool = "SCPT";
@@ -564,6 +567,7 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+
         #endregion
 
         #region grid3 Create Service Header
@@ -1077,6 +1081,7 @@ namespace ExportBill
                         return;
                     }
                     ListIS.Clear();
+                    ListItemLookup.Clear();
                     foreach (var item in dataList.data)
                     {
                         //Mã SP; Tên SP; Giá bán: gía mặc định; tồn kho; ĐVT
@@ -1090,8 +1095,25 @@ namespace ExportBill
                         iS.Inventory = Convert.ToDecimal(data[4]);
                         iS.ItemUnit = data[5];
                         ListIS.Add(iS);
-                        ItemNameCbx.Items.Add(iS.ItemName);
+
+                        ItemLookup itemLookup = new ItemLookup();
+                        itemLookup.ItemID = data[0];
+                        itemLookup.ItemName = data[1];
+                        itemLookup.ItemPrice = data[2];
+                        ListItemLookup.Add(itemLookup);
                     }
+                    RepositoryItemLookUpEdit repositoryLUE = new RepositoryItemLookUpEdit();
+                    repositoryLUE.ValueMember = "ItemName";
+                    repositoryLUE.DisplayMember = "ItemName";
+                    repositoryLUE.DataSource = ListItemLookup;
+                    repositoryLUE.PopupFormMinSize = new  Size(700, 0);
+                    //repositoryLUE.ShowHeader = false;
+                    repositoryLUE.NullText = "";
+                    repositoryLUE.Columns.Add(new LookUpColumnInfo("ItemID", 40, "Mã sản phẩm"));
+                    repositoryLUE.Columns.Add(new LookUpColumnInfo("ItemName", 40, "Tên sản phẩm"));
+                    repositoryLUE.Columns.Add(new LookUpColumnInfo("ItemPrice", 40, "Giá bán"));
+
+                    gvServiceLine.Columns["ItemName"].ColumnEdit = repositoryLUE;
                 }
                 else
                 {
@@ -1103,7 +1125,6 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
-
         private async void LoadWorkerCombobox()
         {
             try
@@ -1193,8 +1214,8 @@ namespace ExportBill
                         var postBill = data[11] == "Open" ? PostBillStr : invoiced;
                         var payment = data[12];
                         var recalbill = data[13] == Posted ? Posted : inProcess;
-                        //public Customer(string maPhieu, string userName, string bs, string lx, string tsc, string dg, decimal discount, decimal total, string detaiMoney, string company, string adress, string date, string print)
-                        ds.Add(new Customer(data[0], data[1], data[2], data[3], data[4], data[5],
+                        //public Customer(string maPhieu, string userName,phoneNumber, string bs, string lx, string tsc, string dg, decimal discount, decimal total, string detaiMoney, string company, string adress, string date, string print)
+                        ds.Add(new Customer(data[0], data[1],data[15], data[2], data[3], data[4], data[5],
                             Convert.ToInt32(Convert.ToDecimal(data[6])), Convert.ToInt32(Convert.ToDecimal(data[7])),
                             data[8], data[9], data[10], postBill, payment, "Print", recalbill));
                     }
