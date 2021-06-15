@@ -72,11 +72,6 @@
             this.ServiceLineCtr = new DevExpress.XtraGrid.GridControl();
             this.gvServiceLine = new DevExpress.XtraGrid.Views.Grid.GridView();
             this._ItemName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemGridLookUpEdit = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
-            this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.ItemID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.ItemName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.ItemPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this._ItemQuality = new DevExpress.XtraGrid.Columns.GridColumn();
             this._ItemUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this._ItemPrice = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -89,7 +84,10 @@
             this._Inventory = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.ItemNameCbx = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.repositoryItemGridLookUpEdit = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
             this.pHeader = new System.Windows.Forms.Panel();
+            this.searchCustomerTxt = new ExportBill.PlaceHolderTextBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.NoteTxt = new ExportBill.PlaceHolderTextBox();
             this.CurrentKm = new ExportBill.PlaceHolderTextBox();
             this.CreateServicelbl = new DevExpress.XtraEditors.LabelControl();
@@ -129,6 +127,10 @@
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.BtnSearchInventory = new System.Windows.Forms.Button();
             this.SearchInventoryTxt = new ExportBill.PlaceHolderTextBox();
+            this.repositoryItemGridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.ItemID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ItemName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.ItemPrice = new DevExpress.XtraGrid.Columns.GridColumn();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
             this.xtraTabControl.SuspendLayout();
@@ -153,12 +155,11 @@
             this.pFooter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceLineCtr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvServiceLine)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WorkerIdCbx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdviserIdCbx)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemNameCbx)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit)).BeginInit();
             this.pHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicePool.Properties)).BeginInit();
             this.panel3.SuspendLayout();
@@ -177,6 +178,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).BeginInit();
             this.SuspendLayout();
             // 
             // xtraTabControl
@@ -186,7 +188,7 @@
             this.xtraTabControl.Margin = new System.Windows.Forms.Padding(2);
             this.xtraTabControl.Name = "xtraTabControl";
             this.xtraTabControl.SelectedTabPage = this.ServiceListTab;
-            this.xtraTabControl.Size = new System.Drawing.Size(1182, 598);
+            this.xtraTabControl.Size = new System.Drawing.Size(1182, 660);
             this.xtraTabControl.TabIndex = 0;
             this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.ServiceListTab,
@@ -200,7 +202,7 @@
             this.ServiceListTab.Controls.Add(this.groupControl1);
             this.ServiceListTab.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceListTab.Name = "ServiceListTab";
-            this.ServiceListTab.Size = new System.Drawing.Size(1180, 567);
+            this.ServiceListTab.Size = new System.Drawing.Size(1180, 629);
             this.ServiceListTab.Text = "Danh sách xe làm dịch vụ";
             // 
             // groupControl2
@@ -607,7 +609,7 @@
             this.CreateServiceTab.Controls.Add(this.groupControl3);
             this.CreateServiceTab.Margin = new System.Windows.Forms.Padding(2);
             this.CreateServiceTab.Name = "CreateServiceTab";
-            this.CreateServiceTab.Size = new System.Drawing.Size(1180, 567);
+            this.CreateServiceTab.Size = new System.Drawing.Size(1180, 629);
             this.CreateServiceTab.Text = "Tạo phiếu dịch vụ";
             // 
             // groupControl4
@@ -619,7 +621,7 @@
             this.groupControl4.Location = new System.Drawing.Point(2, 105);
             this.groupControl4.Margin = new System.Windows.Forms.Padding(2);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(1169, 464);
+            this.groupControl4.Size = new System.Drawing.Size(1169, 526);
             this.groupControl4.TabIndex = 2;
             // 
             // panelInfo
@@ -632,7 +634,7 @@
             this.panelInfo.Location = new System.Drawing.Point(2, 28);
             this.panelInfo.Margin = new System.Windows.Forms.Padding(2);
             this.panelInfo.Name = "panelInfo";
-            this.panelInfo.Size = new System.Drawing.Size(1165, 434);
+            this.panelInfo.Size = new System.Drawing.Size(1165, 496);
             this.panelInfo.TabIndex = 1;
             // 
             // pFooter
@@ -642,7 +644,7 @@
             this.pFooter.Controls.Add(this.BtnRemove);
             this.pFooter.Controls.Add(this.CreatePrintBill);
             this.pFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pFooter.Location = new System.Drawing.Point(0, 394);
+            this.pFooter.Location = new System.Drawing.Point(0, 456);
             this.pFooter.Margin = new System.Windows.Forms.Padding(2);
             this.pFooter.Name = "pFooter";
             this.pFooter.Size = new System.Drawing.Size(1165, 40);
@@ -711,7 +713,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ServiceLineCtr.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
-            this.ServiceLineCtr.Location = new System.Drawing.Point(2, 169);
+            this.ServiceLineCtr.Location = new System.Drawing.Point(2, 212);
             this.ServiceLineCtr.MainView = this.gvServiceLine;
             this.ServiceLineCtr.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceLineCtr.Name = "ServiceLineCtr";
@@ -721,7 +723,7 @@
             this.WorkerIdCbx,
             this.AdviserIdCbx,
             this.repositoryItemGridLookUpEdit});
-            this.ServiceLineCtr.Size = new System.Drawing.Size(1165, 220);
+            this.ServiceLineCtr.Size = new System.Drawing.Size(1165, 239);
             this.ServiceLineCtr.TabIndex = 3;
             this.ServiceLineCtr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvServiceLine});
@@ -759,33 +761,6 @@
             this._ItemName.Visible = true;
             this._ItemName.VisibleIndex = 0;
             this._ItemName.Width = 385;
-            // 
-            // ItemID
-            // 
-            this.ItemID.Caption = "Mã sản phẩm";
-            this.ItemID.FieldName = "ItemID";
-            this.ItemID.Name = "ItemID";
-            this.ItemID.OptionsColumn.AllowEdit = false;
-            this.ItemID.Visible = true;
-            this.ItemID.VisibleIndex = 0;
-            // 
-            // ItemName
-            // 
-            this.ItemName.Caption = "Tên sản phẩm";
-            this.ItemName.FieldName = "ItemName";
-            this.ItemName.Name = "ItemName";
-            this.ItemName.OptionsColumn.AllowEdit = false;
-            this.ItemName.Visible = true;
-            this.ItemName.VisibleIndex = 1;
-            // 
-            // ItemPrice
-            // 
-            this.ItemPrice.Caption = "Giá";
-            this.ItemPrice.FieldName = "ItemPrice";
-            this.ItemPrice.Name = "ItemPrice";
-            this.ItemPrice.OptionsColumn.AllowEdit = false;
-            this.ItemPrice.Visible = true;
-            this.ItemPrice.VisibleIndex = 2;
             // 
             // _ItemQuality
             // 
@@ -922,10 +897,16 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.ItemNameCbx.Name = "ItemNameCbx";
             // 
+            // repositoryItemGridLookUpEdit
+            // 
+            this.repositoryItemGridLookUpEdit.Name = "repositoryItemGridLookUpEdit";
+            // 
             // pHeader
             // 
             this.pHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pHeader.Controls.Add(this.searchCustomerTxt);
+            this.pHeader.Controls.Add(this.button3);
             this.pHeader.Controls.Add(this.NoteTxt);
             this.pHeader.Controls.Add(this.CurrentKm);
             this.pHeader.Controls.Add(this.CreateServicelbl);
@@ -933,14 +914,44 @@
             this.pHeader.Location = new System.Drawing.Point(2, 90);
             this.pHeader.Margin = new System.Windows.Forms.Padding(2);
             this.pHeader.Name = "pHeader";
-            this.pHeader.Size = new System.Drawing.Size(1161, 74);
+            this.pHeader.Size = new System.Drawing.Size(1161, 118);
             this.pHeader.TabIndex = 2;
+            // 
+            // searchCustomerTxt
+            // 
+            this.searchCustomerTxt.BackColor = System.Drawing.Color.White;
+            this.searchCustomerTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchCustomerTxt.Font = new System.Drawing.Font("Tahoma", 8.5F, System.Drawing.FontStyle.Italic);
+            this.searchCustomerTxt.ForeColor = System.Drawing.Color.Gray;
+            this.searchCustomerTxt.Location = new System.Drawing.Point(9, 38);
+            this.searchCustomerTxt.Margin = new System.Windows.Forms.Padding(2);
+            this.searchCustomerTxt.Name = "searchCustomerTxt";
+            this.searchCustomerTxt.PlaceHolderText = "Thay đổi khách hàng";
+            this.searchCustomerTxt.Size = new System.Drawing.Size(152, 25);
+            this.searchCustomerTxt.TabIndex = 20;
+            this.searchCustomerTxt.Text = "Thay đổi khách hàng";
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Image = global::ExportBill.Properties.Resources.find21;
+            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button3.Location = new System.Drawing.Point(166, 33);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(109, 30);
+            this.button3.TabIndex = 19;
+            this.button3.Text = "Tìm kiếm";
+            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // NoteTxt
             // 
             this.NoteTxt.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
             this.NoteTxt.ForeColor = System.Drawing.Color.Gray;
-            this.NoteTxt.Location = new System.Drawing.Point(460, 42);
+            this.NoteTxt.Location = new System.Drawing.Point(460, 84);
             this.NoteTxt.Margin = new System.Windows.Forms.Padding(2);
             this.NoteTxt.Name = "NoteTxt";
             this.NoteTxt.PlaceHolderText = "Nội dung yêu cầu dịch vụ";
@@ -953,7 +964,7 @@
             this.CurrentKm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.CurrentKm.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
             this.CurrentKm.ForeColor = System.Drawing.Color.Gray;
-            this.CurrentKm.Location = new System.Drawing.Point(299, 44);
+            this.CurrentKm.Location = new System.Drawing.Point(299, 84);
             this.CurrentKm.Margin = new System.Windows.Forms.Padding(2);
             this.CurrentKm.Name = "CurrentKm";
             this.CurrentKm.PlaceHolderText = "Số kilomet";
@@ -976,7 +987,7 @@
             // ServicePool
             // 
             this.ServicePool.EditValue = "Kiểm tra định kỳ";
-            this.ServicePool.Location = new System.Drawing.Point(6, 44);
+            this.ServicePool.Location = new System.Drawing.Point(6, 85);
             this.ServicePool.Margin = new System.Windows.Forms.Padding(2);
             this.ServicePool.Name = "ServicePool";
             this.ServicePool.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -1212,7 +1223,7 @@
             this.InventoryTab.Controls.Add(this.SearchInventoryTxt);
             this.InventoryTab.Margin = new System.Windows.Forms.Padding(4);
             this.InventoryTab.Name = "InventoryTab";
-            this.InventoryTab.Size = new System.Drawing.Size(1180, 567);
+            this.InventoryTab.Size = new System.Drawing.Size(1180, 629);
             this.InventoryTab.Text = "Tồn kho";
             // 
             // groupControl5
@@ -1419,6 +1430,37 @@
             this.SearchInventoryTxt.TabIndex = 6;
             this.SearchInventoryTxt.Text = "Mã hoặc tên sản phẩm";
             // 
+            // repositoryItemGridLookUpEdit1View
+            // 
+            this.repositoryItemGridLookUpEdit1View.Name = "repositoryItemGridLookUpEdit1View";
+            // 
+            // ItemID
+            // 
+            this.ItemID.Caption = "Mã sản phẩm";
+            this.ItemID.FieldName = "ItemID";
+            this.ItemID.Name = "ItemID";
+            this.ItemID.OptionsColumn.AllowEdit = false;
+            this.ItemID.Visible = true;
+            this.ItemID.VisibleIndex = 0;
+            // 
+            // ItemName
+            // 
+            this.ItemName.Caption = "Tên sản phẩm";
+            this.ItemName.FieldName = "ItemName";
+            this.ItemName.Name = "ItemName";
+            this.ItemName.OptionsColumn.AllowEdit = false;
+            this.ItemName.Visible = true;
+            this.ItemName.VisibleIndex = 1;
+            // 
+            // ItemPrice
+            // 
+            this.ItemPrice.Caption = "Giá";
+            this.ItemPrice.FieldName = "ItemPrice";
+            this.ItemPrice.Name = "ItemPrice";
+            this.ItemPrice.OptionsColumn.AllowEdit = false;
+            this.ItemPrice.Visible = true;
+            this.ItemPrice.VisibleIndex = 2;
+            // 
             // DXMain
             // 
             this.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -1427,7 +1469,7 @@
             this.Appearance.Options.UseForeColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1182, 598);
+            this.ClientSize = new System.Drawing.Size(1182, 660);
             this.Controls.Add(this.xtraTabControl);
             this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("DXMain.IconOptions.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -1459,12 +1501,11 @@
             this.pFooter.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ServiceLineCtr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvServiceLine)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WorkerIdCbx)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AdviserIdCbx)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemNameCbx)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit)).EndInit();
             this.pHeader.ResumeLayout(false);
             this.pHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicePool.Properties)).EndInit();
@@ -1486,6 +1527,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit1View)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1592,5 +1634,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn ItemID;
         private DevExpress.XtraGrid.Columns.GridColumn ItemName;
         private DevExpress.XtraGrid.Columns.GridColumn ItemPrice;
+        private PlaceHolderTextBox searchCustomerTxt;
+        private System.Windows.Forms.Button button3;
     }
 }

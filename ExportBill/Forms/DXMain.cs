@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace ExportBill
@@ -42,6 +43,19 @@ namespace ExportBill
         private fsm_BtBack fsm;
         public static bool checkCreateUser = false;
         public static bool ChangeBso = false;
+
+        private fsm_BtBack status { get => fsm;
+            set
+            {
+                OnStatusChange(fsm);
+                OnPropertyChanged();
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
         #endregion
         //###############################################################################################
         #region Initialize
@@ -220,6 +234,68 @@ namespace ExportBill
             }
         }
 
+
+        private async void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(searchCustomerTxt.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập mục tìm kiếm");
+                    searchCustomerTxt.Focus();
+                    return;
+                }
+                string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + searchCustomerTxt.Text + "&searchtype=CustomerPhone";
+                
+                GetAPI Search = new GetAPI();
+                this.Enabled = false;
+                var response = await Search.Only_url(url);
+                this.Enabled = true;
+                this.fsm = fsm_BtBack.fsm_delete_gvServiceHeader;
+                if (response.IsSuccessStatusCode)
+                {
+                    var body = await response.Content.ReadAsStringAsync();
+                    var dataList = JsonConvert.DeserializeObject<DataModel>(body);
+                    if (dataList.data == null)
+                    {
+                        MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    if (dataList.data.Count == 0)
+                    {
+                        DialogResult result = MessageBox.Show("Không tìm thấy khách hàng, Tạo khách hàng mới không?.", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (result == DialogResult.Yes)
+                        {
+                            this.RunCreateUser();
+                        }
+                        else
+                        {
+                            return;
+                        }
+
+                    }
+                    var item = dataList.data.FirstOrDefault();
+                    if(item != null)
+                    {
+                        var data = item.Split(';');
+                        //"C15-030575;LÊ THỊ DIỆU ANH;BẦU CÂU - HÒA CHÂU - HV - ĐN;0979300094;43H1-16861;2"
+                        this.sSelect.CustomerNumber = data[0];
+                        this.sSelect.CustomerName = data[1];
+                        //label customer
+                        this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: " + this.sSelect.PlateID + " | " + this.sSelect.CustomerName;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -460,7 +536,6 @@ namespace ExportBill
             }
         }
 
-
         private void gridView2_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             try
@@ -649,17 +724,20 @@ namespace ExportBill
                     case fsm_BtBack.fsm_delete_gvServiceLin:
                         {
                             this.delete_gvServiceLin();
+                            this.fsm = fsm_BtBack.fsm_delete_gvServiceHeader;
                             break;
                         }
                     case fsm_BtBack.fsm_delete_gvServiceHeader:
                         {
                             this.delete_gvServiceHeader();
+                            this.fsm = fsm_BtBack.fsm_delete_number;
                             break;
                         }
                     case fsm_BtBack.fsm_delete_number:
                         {
                             Search2Txt.Text = "";
                             Search2Txt.Focus();
+                            this.fsm = fsm_BtBack.fsm_nothing;
                             break;
                         }
                     case fsm_BtBack.fsm_status4:
@@ -668,15 +746,45 @@ namespace ExportBill
                             this.delete_gvServiceHeader();
                             break;
                         }
-                    default:
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void OnStatusChange(fsm_BtBack fsm)
+        {
+            try
+            {
+                switch (fsm)
+                {
+                    case fsm_BtBack.fsm_delete_gvServiceLin:
                         {
-                            MessageBox.Show("Không thể back nữa");
+                            this.delete_gvServiceLin();
+                            this.fsm = fsm_BtBack.fsm_delete_gvServiceHeader;
+                            break;
+                        }
+                    case fsm_BtBack.fsm_delete_gvServiceHeader:
+                        {
+                            this.delete_gvServiceHeader();
+                            this.fsm = fsm_BtBack.fsm_delete_number;
+                            break;
+                        }
+                    case fsm_BtBack.fsm_delete_number:
+                        {
+                            Search2Txt.Text = "";
+                            Search2Txt.Focus();
+                            this.fsm = fsm_BtBack.fsm_nothing;
+                            break;
+                        }
+                    case fsm_BtBack.fsm_status4:
+                        {
+                            this.delete_gvServiceLin();
+                            this.delete_gvServiceHeader();
                             break;
                         }
                 }
-                if (this.fsm.Equals(fsm_BtBack.fsm_delete_gvServiceLin)) { this.fsm = fsm_BtBack.fsm_delete_gvServiceHeader; }
-                else if (this.fsm.Equals(fsm_BtBack.fsm_delete_gvServiceHeader)) { this.fsm = fsm_BtBack.fsm_delete_number; }
-                else if (this.fsm.Equals(fsm_BtBack.fsm_delete_number)) { this.fsm = fsm_BtBack.fsm_nothing; }
             }
             catch (Exception ex)
             {
@@ -1107,7 +1215,6 @@ namespace ExportBill
                     repositoryLUE.DisplayMember = "ItemName";
                     repositoryLUE.DataSource = ListItemLookup;
                     repositoryLUE.PopupFormMinSize = new  Size(700, 0);
-                    //repositoryLUE.ShowHeader = false;
                     repositoryLUE.NullText = "";
                     repositoryLUE.Columns.Add(new LookUpColumnInfo("ItemID", 40, "Mã sản phẩm"));
                     repositoryLUE.Columns.Add(new LookUpColumnInfo("ItemName", 40, "Tên sản phẩm"));
@@ -1366,8 +1473,6 @@ namespace ExportBill
                     {
                         MessageBox.Show("Tải dữ liệu thất bại.");
                     }
-                    
-
                 }
                 else
                 {
@@ -1375,8 +1480,7 @@ namespace ExportBill
                     this.sSelect = ListCustomerSearch.Where(x => x.CustomerNumber == CustomerNumber).FirstOrDefault();
                     this.fsm = fsm_BtBack.fsm_delete_gvServiceLin;
                 }
-                
-                
+
                 //label customer
                 this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: " + this.sSelect.PlateID + " | " + this.sSelect.CustomerName;
                 //enable 

@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -29,7 +28,7 @@ namespace ExportBill
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
-        private void Form1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             try
             {
@@ -84,7 +83,7 @@ namespace ExportBill
                          var dataList = JsonConvert.DeserializeObject<DataModelString>(body);
                         if (dataList.data == null)
                         {
-                            MessageBox.Show("Hệ thống AX đang bị lỗi, vui lòng đăng nhập sau!");
+                            MessageBox.Show("Hệ thống AX đang bị lỗi, vui lòng đăng nhập sau!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                         var data = dataList.data.Split(';');
