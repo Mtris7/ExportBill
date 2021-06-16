@@ -36,7 +36,7 @@ namespace ExportBill
         private BindingList<ItemSell> ListIS = new BindingList<ItemSell>();
         private BindingList<ItemLookup> ListItemLookup = new BindingList<ItemLookup>();
         private BindingList<StaffModel> ListSM = new BindingList<StaffModel>();
-        private CustomerModel sSelect;
+        public static CustomerModel sSelect;
         private string servicePool = "SCPT";
         private string ServiceId = string.Empty;
         private List<string> ListItemID = new List<string>();
@@ -235,66 +235,11 @@ namespace ExportBill
         }
 
 
-        private async void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(searchCustomerTxt.Text))
-                {
-                    MessageBox.Show("Vui lòng nhập mục tìm kiếm");
-                    searchCustomerTxt.Focus();
-                    return;
-                }
-                string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + searchCustomerTxt.Text + "&searchtype=CustomerPhone";
-                
-                GetAPI Search = new GetAPI();
-                this.Enabled = false;
-                var response = await Search.Only_url(url);
-                this.Enabled = true;
-                this.fsm = fsm_BtBack.fsm_delete_gvServiceHeader;
-                if (response.IsSuccessStatusCode)
-                {
-                    var body = await response.Content.ReadAsStringAsync();
-                    var dataList = JsonConvert.DeserializeObject<DataModel>(body);
-                    if (dataList.data == null)
-                    {
-                        MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    if (dataList.data.Count == 0)
-                    {
-                        DialogResult result = MessageBox.Show("Không tìm thấy khách hàng, Tạo khách hàng mới không?.", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                        if (result == DialogResult.Yes)
-                        {
-                            this.RunCreateUser();
-                        }
-                        else
-                        {
-                            return;
-                        }
-
-                    }
-                    var item = dataList.data.FirstOrDefault();
-                    if(item != null)
-                    {
-                        var data = item.Split(';');
-                        //"C15-030575;LÊ THỊ DIỆU ANH;BẦU CÂU - HÒA CHÂU - HV - ĐN;0979300094;43H1-16861;2"
-                        this.sSelect.CustomerNumber = data[0];
-                        this.sSelect.CustomerName = data[1];
-                        //label customer
-                        this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: " + this.sSelect.PlateID + " | " + this.sSelect.CustomerName;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            new ChangeCustomer().ShowDialog();
+            //label customer
+            this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: " + sSelect.PlateID + " | " + sSelect.CustomerName;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -501,7 +446,7 @@ namespace ExportBill
                         this.Enabled = true;
                         MessageBox.Show("Tạo phiếu thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         if (PostTransfer())
-                            SearchControl1Txt.Text = this.sSelect.PlateID;
+                            SearchControl1Txt.Text = sSelect.PlateID;
                         else
                             SearchControl1Txt.Text = "TT_";
                         xtraTabControl.SelectedTabPage = ServiceListTab;
@@ -1465,7 +1410,7 @@ namespace ExportBill
                             if (data[3].Equals(CreateUser.SDT))
                             {
                                 ListCustomerSearch.Add(new CustomerModel(data[0], data[1], data[2], data[3], data[4], null, data[5]));
-                                this.sSelect = ListCustomerSearch.Where(x => x.CustomerNumber == data[0]).FirstOrDefault();
+                                sSelect = ListCustomerSearch.Where(x => x.CustomerNumber == data[0]).FirstOrDefault();
                             }
                         }
                     }
@@ -1477,12 +1422,12 @@ namespace ExportBill
                 else
                 {
                     var CustomerNumber = this.gvServiceHeader.GetRowCellValue(rowIndex, _CustomerNumber)?.ToString();
-                    this.sSelect = ListCustomerSearch.Where(x => x.CustomerNumber == CustomerNumber).FirstOrDefault();
+                    sSelect = ListCustomerSearch.Where(x => x.CustomerNumber == CustomerNumber).FirstOrDefault();
                     this.fsm = fsm_BtBack.fsm_delete_gvServiceLin;
                 }
 
                 //label customer
-                this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: " + this.sSelect.PlateID + " | " + this.sSelect.CustomerName;
+                this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: " + sSelect.PlateID + " | " + sSelect.CustomerName;
                 //enable 
                 this.pHeader.Enabled = true;
                 this.ServiceLineCtr.Enabled = true;

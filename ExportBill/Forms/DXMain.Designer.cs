@@ -86,7 +86,6 @@
             this.ItemNameCbx = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemGridLookUpEdit = new DevExpress.XtraEditors.Repository.RepositoryItemGridLookUpEdit();
             this.pHeader = new System.Windows.Forms.Panel();
-            this.searchCustomerTxt = new ExportBill.PlaceHolderTextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.NoteTxt = new ExportBill.PlaceHolderTextBox();
             this.CurrentKm = new ExportBill.PlaceHolderTextBox();
@@ -713,7 +712,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ServiceLineCtr.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
-            this.ServiceLineCtr.Location = new System.Drawing.Point(2, 212);
+            this.ServiceLineCtr.Location = new System.Drawing.Point(2, 197);
             this.ServiceLineCtr.MainView = this.gvServiceLine;
             this.ServiceLineCtr.Margin = new System.Windows.Forms.Padding(2);
             this.ServiceLineCtr.Name = "ServiceLineCtr";
@@ -905,7 +904,6 @@
             // 
             this.pHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pHeader.Controls.Add(this.searchCustomerTxt);
             this.pHeader.Controls.Add(this.button3);
             this.pHeader.Controls.Add(this.NoteTxt);
             this.pHeader.Controls.Add(this.CurrentKm);
@@ -914,22 +912,8 @@
             this.pHeader.Location = new System.Drawing.Point(2, 90);
             this.pHeader.Margin = new System.Windows.Forms.Padding(2);
             this.pHeader.Name = "pHeader";
-            this.pHeader.Size = new System.Drawing.Size(1161, 118);
+            this.pHeader.Size = new System.Drawing.Size(1161, 103);
             this.pHeader.TabIndex = 2;
-            // 
-            // searchCustomerTxt
-            // 
-            this.searchCustomerTxt.BackColor = System.Drawing.Color.White;
-            this.searchCustomerTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchCustomerTxt.Font = new System.Drawing.Font("Tahoma", 8.5F, System.Drawing.FontStyle.Italic);
-            this.searchCustomerTxt.ForeColor = System.Drawing.Color.Gray;
-            this.searchCustomerTxt.Location = new System.Drawing.Point(9, 38);
-            this.searchCustomerTxt.Margin = new System.Windows.Forms.Padding(2);
-            this.searchCustomerTxt.Name = "searchCustomerTxt";
-            this.searchCustomerTxt.PlaceHolderText = "Thay đổi khách hàng";
-            this.searchCustomerTxt.Size = new System.Drawing.Size(152, 25);
-            this.searchCustomerTxt.TabIndex = 20;
-            this.searchCustomerTxt.Text = "Thay đổi khách hàng";
             // 
             // button3
             // 
@@ -937,12 +921,12 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Image = global::ExportBill.Properties.Resources.find21;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(166, 33);
+            this.button3.Location = new System.Drawing.Point(6, 33);
             this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(109, 30);
+            this.button3.Size = new System.Drawing.Size(169, 30);
             this.button3.TabIndex = 19;
-            this.button3.Text = "Tìm kiếm";
+            this.button3.Text = "Thay đổi khách hàng";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -951,7 +935,7 @@
             // 
             this.NoteTxt.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
             this.NoteTxt.ForeColor = System.Drawing.Color.Gray;
-            this.NoteTxt.Location = new System.Drawing.Point(460, 84);
+            this.NoteTxt.Location = new System.Drawing.Point(460, 74);
             this.NoteTxt.Margin = new System.Windows.Forms.Padding(2);
             this.NoteTxt.Name = "NoteTxt";
             this.NoteTxt.PlaceHolderText = "Nội dung yêu cầu dịch vụ";
@@ -964,7 +948,7 @@
             this.CurrentKm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.CurrentKm.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Italic);
             this.CurrentKm.ForeColor = System.Drawing.Color.Gray;
-            this.CurrentKm.Location = new System.Drawing.Point(299, 84);
+            this.CurrentKm.Location = new System.Drawing.Point(299, 74);
             this.CurrentKm.Margin = new System.Windows.Forms.Padding(2);
             this.CurrentKm.Name = "CurrentKm";
             this.CurrentKm.PlaceHolderText = "Số kilomet";
@@ -987,7 +971,7 @@
             // ServicePool
             // 
             this.ServicePool.EditValue = "Kiểm tra định kỳ";
-            this.ServicePool.Location = new System.Drawing.Point(6, 85);
+            this.ServicePool.Location = new System.Drawing.Point(6, 75);
             this.ServicePool.Margin = new System.Windows.Forms.Padding(2);
             this.ServicePool.Name = "ServicePool";
             this.ServicePool.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -1634,7 +1618,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn ItemID;
         private DevExpress.XtraGrid.Columns.GridColumn ItemName;
         private DevExpress.XtraGrid.Columns.GridColumn ItemPrice;
-        private PlaceHolderTextBox searchCustomerTxt;
         private System.Windows.Forms.Button button3;
     }
 }

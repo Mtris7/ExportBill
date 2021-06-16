@@ -9,9 +9,16 @@ namespace ExportBill
 {
     public partial class CreateUser : Form
     {
-        public CreateUser()
+        public CreateUser(bool OneWay = false)
         {
             InitializeComponent();
+            if(OneWay)
+            {
+                CreateSaveBtn.Text = "Lưu";
+                CreateSaveBtn.Size = new System.Drawing.Size(80, 43);
+                CreateSaveBtn.Location = new System.Drawing.Point(390, 229);
+            }
+
             DateOfBirth.Text = null;
         }
         public static string Bso = string.Empty;
