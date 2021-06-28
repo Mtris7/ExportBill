@@ -9,14 +9,18 @@ namespace ExportBill
 {
     public partial class CreateUser : Form
     {
-        public CreateUser(bool OneWay = false)
+        private bool _onlyCustomer;
+        public CreateUser(bool onlyCreateCustomer = false)
         {
             InitializeComponent();
-            if(OneWay)
+            _onlyCustomer = onlyCreateCustomer;
+            if (_onlyCustomer)
             {
                 CreateSaveBtn.Text = "Lưu";
                 CreateSaveBtn.Size = new System.Drawing.Size(80, 43);
-                CreateSaveBtn.Location = new System.Drawing.Point(390, 229);
+                BXPanel.Visible = false;
+                this.Size = new System.Drawing.Size(509, 280);
+                CreateSaveBtn.Location = new System.Drawing.Point(390, 175);
             }
 
             DateOfBirth.Text = null;
@@ -53,7 +57,7 @@ namespace ExportBill
                 MessageBox.Show("Tên Khách hàng không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (string.IsNullOrWhiteSpace(BSTxt.Text))
+            if (string.IsNullOrWhiteSpace(BSTxt.Text) && !_onlyCustomer)
             {
                 MessageBox.Show("Biển số không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -63,37 +67,55 @@ namespace ExportBill
                 MessageBox.Show("Số điện thoại không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (string.IsNullOrWhiteSpace(ProductCbx.Text))
+            if (string.IsNullOrWhiteSpace(ProductCbx.Text) && !_onlyCustomer)
             {
                 MessageBox.Show("Loại xe không được để trống", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else
+            this.Enabled = false;
+            string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/createcustomer";
+            var data_create = new List<KeyValuePair<string, string>>();
+            data_create.Add(new KeyValuePair<string, string>("FirstName", NameTxt.Text));
+            data_create.Add(new KeyValuePair<string, string>("HcmPersonnelNumberId", Staff.UserID));
+            //data_create.Add(new KeyValuePair<string, string>("Fax", ""));
+            if (!string.IsNullOrEmpty(comboBox1.Text))
+                data_create.Add(new KeyValuePair<string, string>("Gender", comboBox1.Text));
+            if (!string.IsNullOrWhiteSpace(DateOfBirth.Text))
+                data_create.Add(new KeyValuePair<string, string>("DateOfBirth", DateOfBirth.Text));
+            if (!string.IsNullOrEmpty(SDTTxt.Text))
+                data_create.Add(new KeyValuePair<string, string>("Phone", SDTTxt.Text));
+            if (!string.IsNullOrEmpty(CMNDTxt.Text))
+                data_create.Add(new KeyValuePair<string, string>("CMND", CMNDTxt.Text));
+            if (!string.IsNullOrEmpty(StreetTxt.Text))
+                data_create.Add(new KeyValuePair<string, string>("CustomerAddress", StreetTxt.Text));
+            var District = DistrictCbx.SelectedItem as ComboboxItem;
+            if (District != null)
+                data_create.Add(new KeyValuePair<string, string>("District", District.Value.ToString()));
+
+            FormUrlEncodedContent formContent = new FormUrlEncodedContent(data_create);
+            GetAPI get_API = new GetAPI();
+            var response = get_API.Post_NoAsyn(url, formContent);
+
+            this.Enabled = true;
+            if (!string.IsNullOrEmpty(response))
             {
-                this.Enabled = false;
-                string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/createcustomer";
-                var data_create = new List<KeyValuePair<string, string>>();
-                data_create.Add(new KeyValuePair<string, string>("FirstName", NameTxt.Text));
-                data_create.Add(new KeyValuePair<string, string>("HcmPersonnelNumberId", Staff.UserID));
-                //data_create.Add(new KeyValuePair<string, string>("Fax", ""));
-                if (!string.IsNullOrEmpty(comboBox1.Text))
-                    data_create.Add(new KeyValuePair<string, string>("Gender", comboBox1.Text));
-                if (!string.IsNullOrWhiteSpace(DateOfBirth.Text))
-                    data_create.Add(new KeyValuePair<string, string>("DateOfBirth", DateOfBirth.Text));
-                if (!string.IsNullOrEmpty(SDTTxt.Text))
-                    data_create.Add(new KeyValuePair<string, string>("Phone", SDTTxt.Text));
-                if (!string.IsNullOrEmpty(CMNDTxt.Text))
-                    data_create.Add(new KeyValuePair<string, string>("CMND", CMNDTxt.Text));
-                if (!string.IsNullOrEmpty(StreetTxt.Text))
-                    data_create.Add(new KeyValuePair<string, string>("CustomerAddress", StreetTxt.Text));
-                var District = DistrictCbx.SelectedItem as ComboboxItem;
-                if (District != null)
-                    data_create.Add(new KeyValuePair<string, string>("District", District.Value.ToString()));
-
-                FormUrlEncodedContent formContent = new FormUrlEncodedContent(data_create);
-                GetAPI get_API = new GetAPI();
-                var response = get_API.Post_NoAsyn(url, formContent);
-
+                var result = (JObject)JsonConvert.DeserializeObject(response);
+                string test = result["data"].Value<string>();
+                bool check = response.ToString().Contains("status: true");
+                if (result["status"].Value<string>().ToUpper().Contains("TRUE"))
+                {
+                    CreateUser.Bso = BSTxt.Text;
+                    if (_onlyCustomer)
+                        MessageBox.Show("Đăng kí khách hàng thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Số điện thoại đã tồn tại hoặc đã có sự cố trong quá trình đăng ký", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            if (!_onlyCustomer)
+            {
                 string _url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/createplate";
                 var data_create1 = new List<KeyValuePair<string, string>>();
                 data_create1.Add(new KeyValuePair<string, string>("LicensePlate", BSTxt.Text));
@@ -105,26 +127,22 @@ namespace ExportBill
                 if (!string.IsNullOrEmpty(SDTTxt.Text))
                     data_create1.Add(new KeyValuePair<string, string>("CustomerPhone", SDTTxt.Text));
                 FormUrlEncodedContent _formContent = new FormUrlEncodedContent(data_create1);
+
+                this.Enabled = false;
                 var _response = get_API.Post_NoAsyn(_url, _formContent);
                 this.Enabled = true;
-                if (!string.IsNullOrEmpty(response) && !string.IsNullOrEmpty(_response))
-
+                if (!string.IsNullOrEmpty(_response))
                 {
-
-                    var result = (JObject)JsonConvert.DeserializeObject(response);
                     var result1 = (JObject)JsonConvert.DeserializeObject(_response);
-                    string test = result["data"].Value<string>();
                     bool check = response.ToString().Contains("status: true");
-                    if (result["status"].Value<string>().ToUpper().Contains("TRUE") && result1["status"].Value<string>().ToUpper().Contains("TRUE"))
+                    if (result1["status"].Value<string>().ToUpper().Contains("TRUE"))
                     {
                         CreateUser.Bso = BSTxt.Text;
-                        //DialogResult Result = MessageBox.Show("Đăng ký thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        MessageBox.Show("Đăng kí thành công", "Thông báo");
-                        return true;
+                        MessageBox.Show("Đăng kí thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show("Tài khoản đã tồn tại hoặc đã có sự cố trong quá trình đăng ký", "Thông báo");
+                        MessageBox.Show("Biển số xe đã tồn tại hoặc đã có sự cố trong quá trình đăng ký", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
 
@@ -136,6 +154,7 @@ namespace ExportBill
                     return false;
                 }
             }
+            return true;
         }
         private void lookupProduct()
         {

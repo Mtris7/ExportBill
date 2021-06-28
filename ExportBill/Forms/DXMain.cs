@@ -13,6 +13,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ExportBill
@@ -169,69 +170,7 @@ namespace ExportBill
         /// <param name="e"></param>
         private async void button2_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(Search2Txt.Text))
-                {
-                    Point Search2TxtLocation = new Point(groupControl3.Location.X + Search2Txt.Location.X - 10, groupControl3.Location.Y + Search2Txt.Location.Y - 15);
-                    toolTip1.Show("Mục bắt buộc nhập.", Search2Txt, Search2TxtLocation);
-                    toolTip1.Active = true;
-                    
-                    System.Threading.Thread.Sleep(500);
-                    return;
-                }
-                string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + Search2Txt.Text + "&searchtype=";
-                if (bsCheck.Checked)
-                    url += "LicensePlate";
-                else
-                    url += "CustomerPhone";
-                GetAPI Search = new GetAPI();
-                this.Enabled = false;
-                var response = await Search.Only_url(url);
-                this.Enabled = true;
-                this.fsm = fsm_BtBack.fsm_delete_gvServiceHeader;
-                if (response.IsSuccessStatusCode)
-                {
-                    var body = await response.Content.ReadAsStringAsync();
-                    var dataList = JsonConvert.DeserializeObject<DataModel>(body);
-                    if (dataList.data == null)
-                    {
-                        MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    if (dataList.data.Count == 0)
-                    {
-                        DialogResult result = MessageBox.Show("Không tìm thấy khách hàng, Tạo khách hàng mới không?.", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                        if (result == DialogResult.Yes)
-                        {
-                            this.RunCreateUser();
-                        }
-                        else
-                        {
-                            return;
-                        }
-                        
-                    }
-                    this.ListCustomerSearch.Clear();
-                    
-                    foreach (var item in dataList.data)
-                    {
-                        var data = item.Split(';');
-                        //"C15-030575;LÊ THỊ DIỆU ANH;BẦU CÂU - HÒA CHÂU - HV - ĐN\nHOAVANG\nDANANG\nVNM;0979300094;43H1-16861;2"
-                        ListCustomerSearch.Add(new CustomerModel(data[0], data[1], data[2], data[3], data[4], null, data[5]));
-                    }
-                    this.ServiceHeaderCtr.DataSource = ListCustomerSearch;
-                }
-                else
-                {
-                    MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            await this.SearchCustomer();
         }
 
 
@@ -438,12 +377,10 @@ namespace ExportBill
                     return;
                 }
 
-                this.Enabled = false;
                 if (RunCreateHeader())
                 {
                     if (RunCreateLine())
                     {
-                        this.Enabled = true;
                         MessageBox.Show("Tạo phiếu thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         if (PostTransfer())
                             SearchControl1Txt.Text = sSelect.PlateID;
@@ -630,6 +567,10 @@ namespace ExportBill
                 if (e.Column == CreateService)
                 {
                     this.CreateNewService(e.RowHandle);
+                }
+                if (e.Column == _Phone)
+                {
+                    this.ChangePhone(e.RowHandle);
                 }
             }
             catch (Exception ex)
@@ -981,7 +922,10 @@ namespace ExportBill
                 nvc.Add(new KeyValuePair<string, string>("PersonnelNumberId", Staff.UserID));
                 GetAPI get_API = new GetAPI();
                 FormUrlEncodedContent formContent = new FormUrlEncodedContent(nvc);
+
+                this.Enabled = false;
                 var apiResponse = get_API.Post_NoAsyn(url, formContent);
+                this.Enabled = true;
 
                 if (apiResponse != "")
                 {
@@ -1032,7 +976,11 @@ namespace ExportBill
                     nvc.Add(new KeyValuePair<string, string>("lineDisc", Convert.ToDecimal(Disc).ToString()));
                     GetAPI get_API = new GetAPI();
                     FormUrlEncodedContent formContent = new FormUrlEncodedContent(nvc);
+
+                    this.Enabled = false;
                     var apiResponse = get_API.Post_NoAsyn(url, formContent);
+                    this.Enabled = true;
+
                     if (apiResponse != "")
                     {
                         var result = (JObject)JsonConvert.DeserializeObject(apiResponse);
@@ -1065,9 +1013,11 @@ namespace ExportBill
                 nvc.Add(new KeyValuePair<string, string>("HcmPersonnelNumberId", Staff.UserID));
                 GetAPI get_API = new GetAPI();
                 FormUrlEncodedContent formContent = new FormUrlEncodedContent(nvc);
-                var apiResponse = get_API.Post_NoAsyn(url, formContent);
 
-                
+                this.Enabled = false;
+                var apiResponse = get_API.Post_NoAsyn(url, formContent);
+                this.Enabled = true;
+
                 if (apiResponse != "")
                 {
                     var result = (JObject)JsonConvert.DeserializeObject(apiResponse);
@@ -1177,6 +1127,7 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
+
         private async void LoadWorkerCombobox()
         {
             try
@@ -1436,6 +1387,118 @@ namespace ExportBill
                 this.gvServiceLine.FocusedRowHandle = 0;
             }
             catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public async void ChangePhone(int rowIndex)
+        {
+            try
+            {
+                new ChangeInfo().ShowDialog();
+                if (!String.IsNullOrWhiteSpace(ChangeInfo.SDTChange))
+                {
+                    var CustomerNumber = this.gvServiceHeader.GetRowCellValue(rowIndex, _CustomerNumber)?.ToString();
+                    var OldPhone = this.gvServiceHeader.GetRowCellValue(rowIndex, _Phone)?.ToString();
+                    //
+                    string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/ChangeMainPhoneNumber";
+                    var formContent = new FormUrlEncodedContent(new[]
+                       {
+                        new KeyValuePair<string, string>("AccountNum", CustomerNumber),
+                        new KeyValuePair<string, string>("OldPhone", OldPhone),
+                        new KeyValuePair<string, string>("NewPhone", ChangeInfo.SDTChange),
+                        new KeyValuePair<string, string>("chkPhone", ChangeInfo.chk),
+                    });
+                    GetAPI Search = new GetAPI();
+                    var response = await Search.post(url, formContent);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var body = await response.Content.ReadAsStringAsync();
+                        var dataModel = JsonConvert.DeserializeObject<DataModelString>(body);
+
+                        if(dataModel.data.ToUpper().Equals("TRUE"))
+                        {
+                            MessageBox.Show("Thay đổi số điện thoại thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if(ChangeInfo.chk == "true")
+                                await this.SearchCustomer();
+                        }
+                        else
+                            MessageBox.Show("Thay đổi số điện thoại không thành công.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tải dữ liệu thất bại.");
+                    }
+                }
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private async Task SearchCustomer()
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(Search2Txt.Text))
+                {
+                    Point Search2TxtLocation = new Point(groupControl3.Location.X + Search2Txt.Location.X - 10, groupControl3.Location.Y + Search2Txt.Location.Y - 15);
+                    toolTip1.Show("Mục bắt buộc nhập.", Search2Txt, Search2TxtLocation);
+                    toolTip1.Active = true;
+
+                    System.Threading.Thread.Sleep(500);
+                    return;
+                }
+                string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + Search2Txt.Text + "&searchtype=";
+                if (bsCheck.Checked)
+                    url += "LicensePlate";
+                else
+                    url += "CustomerPhone";
+                GetAPI Search = new GetAPI();
+                this.Enabled = false;
+                var response = await Search.Only_url(url);
+                this.Enabled = true;
+                this.fsm = fsm_BtBack.fsm_delete_gvServiceHeader;
+                if (response.IsSuccessStatusCode)
+                {
+                    var body = await response.Content.ReadAsStringAsync();
+                    var dataList = JsonConvert.DeserializeObject<DataModel>(body);
+                    if (dataList.data == null)
+                    {
+                        MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    if (dataList.data.Count == 0)
+                    {
+                        DialogResult result = MessageBox.Show("Không tìm thấy khách hàng, Tạo khách hàng mới không?.", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (result == DialogResult.Yes)
+                        {
+                            this.RunCreateUser();
+                        }
+                        else
+                        {
+                            return;
+                        }
+
+                    }
+                    this.ListCustomerSearch.Clear();
+
+                    foreach (var item in dataList.data)
+                    {
+                        var data = item.Split(';');
+                        //"C15-030575;LÊ THỊ DIỆU ANH;BẦU CÂU - HÒA CHÂU - HV - ĐN\nHOAVANG\nDANANG\nVNM;0979300094;43H1-16861;2"
+                        ListCustomerSearch.Add(new CustomerModel(data[0], data[1], data[2], data[3], data[4], null, data[5]));
+                    }
+                    this.ServiceHeaderCtr.DataSource = ListCustomerSearch;
+                }
+                else
+                {
+                    MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

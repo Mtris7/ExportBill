@@ -35,12 +35,14 @@
             this.InvoceDate = new System.Windows.Forms.DateTimePicker();
             this.ProvinceCbx = new System.Windows.Forms.ComboBox();
             this.DistrictCbx = new System.Windows.Forms.ComboBox();
+            this.ProductCbx = new System.Windows.Forms.ComboBox();
+            this.BXPanel = new System.Windows.Forms.Panel();
             this.BSTxt = new ExportBill.PlaceHolderTextBox();
             this.StreetTxt = new ExportBill.PlaceHolderTextBox();
             this.SDTTxt = new ExportBill.PlaceHolderTextBox();
             this.CMNDTxt = new ExportBill.PlaceHolderTextBox();
             this.NameTxt = new ExportBill.PlaceHolderTextBox();
-            this.ProductCbx = new System.Windows.Forms.ComboBox();
+            this.BXPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -81,7 +83,7 @@
             this.CreateSaveBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CreateSaveBtn.Name = "CreateSaveBtn";
             this.CreateSaveBtn.Size = new System.Drawing.Size(180, 43);
-            this.CreateSaveBtn.TabIndex = 30;
+            this.CreateSaveBtn.TabIndex = 40;
             this.CreateSaveBtn.Text = "Lưu và tạo phiếu";
             this.CreateSaveBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.CreateSaveBtn.UseVisualStyleBackColor = true;
@@ -92,7 +94,7 @@
             this.InvoceDate.CustomFormat = " ";
             this.InvoceDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.InvoceDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.InvoceDate.Location = new System.Drawing.Point(357, 177);
+            this.InvoceDate.Location = new System.Drawing.Point(344, 10);
             this.InvoceDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.InvoceDate.Name = "InvoceDate";
             this.InvoceDate.Size = new System.Drawing.Size(111, 24);
@@ -112,18 +114,40 @@
             // DistrictCbx
             // 
             this.DistrictCbx.FormattingEnabled = true;
-            this.DistrictCbx.Location = new System.Drawing.Point(244, 95);
+            this.DistrictCbx.Location = new System.Drawing.Point(241, 95);
             this.DistrictCbx.Margin = new System.Windows.Forms.Padding(4);
             this.DistrictCbx.Name = "DistrictCbx";
-            this.DistrictCbx.Size = new System.Drawing.Size(224, 24);
+            this.DistrictCbx.Size = new System.Drawing.Size(227, 24);
             this.DistrictCbx.TabIndex = 12;
+            // 
+            // ProductCbx
+            // 
+            this.ProductCbx.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.ProductCbx.FormattingEnabled = true;
+            this.ProductCbx.Location = new System.Drawing.Point(163, 10);
+            this.ProductCbx.Margin = new System.Windows.Forms.Padding(4);
+            this.ProductCbx.Name = "ProductCbx";
+            this.ProductCbx.Size = new System.Drawing.Size(175, 24);
+            this.ProductCbx.TabIndex = 18;
+            // 
+            // BXPanel
+            // 
+            this.BXPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BXPanel.Controls.Add(this.BSTxt);
+            this.BXPanel.Controls.Add(this.ProductCbx);
+            this.BXPanel.Controls.Add(this.InvoceDate);
+            this.BXPanel.Location = new System.Drawing.Point(12, 169);
+            this.BXPanel.Name = "BXPanel";
+            this.BXPanel.Size = new System.Drawing.Size(476, 43);
+            this.BXPanel.TabIndex = 31;
             // 
             // BSTxt
             // 
             this.BSTxt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.BSTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic);
             this.BSTxt.ForeColor = System.Drawing.Color.Gray;
-            this.BSTxt.Location = new System.Drawing.Point(21, 177);
+            this.BSTxt.Location = new System.Drawing.Point(10, 10);
             this.BSTxt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BSTxt.Name = "BSTxt";
             this.BSTxt.PlaceHolderText = "Biển số xe";
@@ -182,27 +206,15 @@
             this.NameTxt.Text = "Họ và Tên";
             this.NameTxt.WordWrap = false;
             // 
-            // ProductCbx
-            // 
-            this.ProductCbx.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ProductCbx.FormattingEnabled = true;
-            this.ProductCbx.Location = new System.Drawing.Point(175, 177);
-            this.ProductCbx.Margin = new System.Windows.Forms.Padding(4);
-            this.ProductCbx.Name = "ProductCbx";
-            this.ProductCbx.Size = new System.Drawing.Size(175, 24);
-            this.ProductCbx.TabIndex = 18;
-            // 
             // CreateUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(491, 284);
-            this.Controls.Add(this.ProductCbx);
+            this.Controls.Add(this.BXPanel);
             this.Controls.Add(this.DistrictCbx);
             this.Controls.Add(this.ProvinceCbx);
-            this.Controls.Add(this.InvoceDate);
-            this.Controls.Add(this.BSTxt);
             this.Controls.Add(this.CreateSaveBtn);
             this.Controls.Add(this.DateOfBirth);
             this.Controls.Add(this.comboBox1);
@@ -215,6 +227,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tạo mới khách hàng";
             this.Load += new System.EventHandler(this.CreateUser_Load);
+            this.BXPanel.ResumeLayout(false);
+            this.BXPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,5 +248,6 @@
         private System.Windows.Forms.ComboBox ProvinceCbx;
         private System.Windows.Forms.ComboBox DistrictCbx;
         private System.Windows.Forms.ComboBox ProductCbx;
+        private System.Windows.Forms.Panel BXPanel;
     }
 }

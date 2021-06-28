@@ -1409,7 +1409,7 @@
             this.SearchInventoryTxt.Location = new System.Drawing.Point(25, 15);
             this.SearchInventoryTxt.Margin = new System.Windows.Forms.Padding(2);
             this.SearchInventoryTxt.Name = "SearchInventoryTxt";
-            this.SearchInventoryTxt.PlaceHolderText = "Nhập biển số xe";
+            this.SearchInventoryTxt.PlaceHolderText = "Mã hoặc tên sản phẩm";
             this.SearchInventoryTxt.Size = new System.Drawing.Size(168, 23);
             this.SearchInventoryTxt.TabIndex = 6;
             this.SearchInventoryTxt.Text = "Mã hoặc tên sản phẩm";
