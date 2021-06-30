@@ -10,7 +10,8 @@ namespace ExportBill
     public partial class CreateUser : Form
     {
         private bool _onlyCustomer;
-        public CreateUser(bool onlyCreateCustomer = false)
+        private string _sdt;
+        public CreateUser(string sdt, bool onlyCreateCustomer = false)
         {
             InitializeComponent();
             _onlyCustomer = onlyCreateCustomer;
@@ -22,7 +23,7 @@ namespace ExportBill
                 this.Size = new System.Drawing.Size(509, 280);
                 CreateSaveBtn.Location = new System.Drawing.Point(390, 175);
             }
-
+            _sdt = sdt;
             DateOfBirth.Text = null;
         }
         public static string Bso = string.Empty;
@@ -262,6 +263,8 @@ namespace ExportBill
         {
             this.SetComboBox();
             this.lookupProduct();
+            SDTTxt.isPlaceHolder = false;
+            SDTTxt.Text = _sdt;
         }
 
         private async void ProvinceCbx_SelectedIndexChanged(object sender, EventArgs e)

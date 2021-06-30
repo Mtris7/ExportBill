@@ -91,7 +91,7 @@
             this.CurrentKm = new ExportBill.PlaceHolderTextBox();
             this.CreateServicelbl = new DevExpress.XtraEditors.LabelControl();
             this.ServicePool = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panelHeader = new System.Windows.Forms.Panel();
             this.ServiceHeaderCtr = new DevExpress.XtraGrid.GridControl();
             this.gvServiceHeader = new DevExpress.XtraGrid.Views.Grid.GridView();
             this._CustomerNumber = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -101,8 +101,7 @@
             this._PlateID = new DevExpress.XtraGrid.Columns.GridColumn();
             this._CountCheck = new DevExpress.XtraGrid.Columns.GridColumn();
             this.CreateService = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.btCreateUser = new System.Windows.Forms.Button();
+            this.groupSearch_CreateService = new DevExpress.XtraEditors.GroupControl();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.bsCheck = new System.Windows.Forms.RadioButton();
             this.button2 = new System.Windows.Forms.Button();
@@ -161,11 +160,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemGridLookUpEdit)).BeginInit();
             this.pHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicePool.Properties)).BeginInit();
-            this.panel3.SuspendLayout();
+            this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServiceHeaderCtr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvServiceHeader)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
-            this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupSearch_CreateService)).BeginInit();
+            this.groupSearch_CreateService.SuspendLayout();
             this.InventoryTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
             this.groupControl5.SuspendLayout();
@@ -605,7 +604,7 @@
             // CreateServiceTab
             // 
             this.CreateServiceTab.Controls.Add(this.groupControl4);
-            this.CreateServiceTab.Controls.Add(this.groupControl3);
+            this.CreateServiceTab.Controls.Add(this.groupSearch_CreateService);
             this.CreateServiceTab.Margin = new System.Windows.Forms.Padding(2);
             this.CreateServiceTab.Name = "CreateServiceTab";
             this.CreateServiceTab.Size = new System.Drawing.Size(1180, 629);
@@ -628,7 +627,7 @@
             this.panelInfo.Controls.Add(this.pFooter);
             this.panelInfo.Controls.Add(this.ServiceLineCtr);
             this.panelInfo.Controls.Add(this.pHeader);
-            this.panelInfo.Controls.Add(this.panel3);
+            this.panelInfo.Controls.Add(this.panelHeader);
             this.panelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelInfo.Location = new System.Drawing.Point(2, 28);
             this.panelInfo.Margin = new System.Windows.Forms.Padding(2);
@@ -989,15 +988,15 @@
             this.ServicePool.TabIndex = 0;
             this.ServicePool.EditValueChanged += new System.EventHandler(this.ServicePool_EditValueChanged);
             // 
-            // panel3
+            // panelHeader
             // 
-            this.panel3.Controls.Add(this.ServiceHeaderCtr);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1165, 86);
-            this.panel3.TabIndex = 1;
+            this.panelHeader.Controls.Add(this.ServiceHeaderCtr);
+            this.panelHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelHeader.Location = new System.Drawing.Point(0, 0);
+            this.panelHeader.Margin = new System.Windows.Forms.Padding(2);
+            this.panelHeader.Name = "panelHeader";
+            this.panelHeader.Size = new System.Drawing.Size(1165, 86);
+            this.panelHeader.TabIndex = 1;
             // 
             // ServiceHeaderCtr
             // 
@@ -1111,38 +1110,20 @@
             this.CreateService.VisibleIndex = 6;
             this.CreateService.Width = 81;
             // 
-            // groupControl3
+            // groupSearch_CreateService
             // 
-            this.groupControl3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupSearch_CreateService.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupControl3.Controls.Add(this.btCreateUser);
-            this.groupControl3.Controls.Add(this.radioButton2);
-            this.groupControl3.Controls.Add(this.bsCheck);
-            this.groupControl3.Controls.Add(this.button2);
-            this.groupControl3.Controls.Add(this.Search2Txt);
-            this.groupControl3.Location = new System.Drawing.Point(2, 2);
-            this.groupControl3.Margin = new System.Windows.Forms.Padding(2);
-            this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(1169, 101);
-            this.groupControl3.TabIndex = 1;
-            this.groupControl3.Text = "Thông tin tìm kiếm";
-            // 
-            // btCreateUser
-            // 
-            this.btCreateUser.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btCreateUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btCreateUser.Image = ((System.Drawing.Image)(resources.GetObject("btCreateUser.Image")));
-            this.btCreateUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btCreateUser.Location = new System.Drawing.Point(352, 38);
-            this.btCreateUser.Margin = new System.Windows.Forms.Padding(2);
-            this.btCreateUser.Name = "btCreateUser";
-            this.btCreateUser.Size = new System.Drawing.Size(186, 30);
-            this.btCreateUser.TabIndex = 23;
-            this.btCreateUser.Text = "Tạo khách hàng mới";
-            this.btCreateUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btCreateUser.UseVisualStyleBackColor = false;
-            this.btCreateUser.Visible = false;
-            this.btCreateUser.Click += new System.EventHandler(this.CreateUser_Click);
+            this.groupSearch_CreateService.Controls.Add(this.radioButton2);
+            this.groupSearch_CreateService.Controls.Add(this.bsCheck);
+            this.groupSearch_CreateService.Controls.Add(this.button2);
+            this.groupSearch_CreateService.Controls.Add(this.Search2Txt);
+            this.groupSearch_CreateService.Location = new System.Drawing.Point(2, 2);
+            this.groupSearch_CreateService.Margin = new System.Windows.Forms.Padding(2);
+            this.groupSearch_CreateService.Name = "groupSearch_CreateService";
+            this.groupSearch_CreateService.Size = new System.Drawing.Size(1169, 101);
+            this.groupSearch_CreateService.TabIndex = 1;
+            this.groupSearch_CreateService.Text = "Thông tin tìm kiếm";
             // 
             // radioButton2
             // 
@@ -1493,12 +1474,12 @@
             this.pHeader.ResumeLayout(false);
             this.pHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicePool.Properties)).EndInit();
-            this.panel3.ResumeLayout(false);
+            this.panelHeader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ServiceHeaderCtr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvServiceHeader)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
-            this.groupControl3.ResumeLayout(false);
-            this.groupControl3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupSearch_CreateService)).EndInit();
+            this.groupSearch_CreateService.ResumeLayout(false);
+            this.groupSearch_CreateService.PerformLayout();
             this.InventoryTab.ResumeLayout(false);
             this.InventoryTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
@@ -1529,7 +1510,7 @@
         private System.Windows.Forms.Label UserNamelbl;
         private System.Windows.Forms.Label CompanyLbl;
         private System.Windows.Forms.Label DatetimeLbl;
-        private DevExpress.XtraEditors.GroupControl groupControl3;
+        private DevExpress.XtraEditors.GroupControl groupSearch_CreateService;
         private PlaceHolderTextBox Search2Txt;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DateTimePicker dateTimeBill;
@@ -1557,7 +1538,7 @@
         private PlaceHolderTextBox CurrentKm;
         private DevExpress.XtraEditors.LabelControl CreateServicelbl;
         private DevExpress.XtraEditors.ComboBoxEdit ServicePool;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panelHeader;
         private DevExpress.XtraGrid.GridControl ServiceHeaderCtr;
         private DevExpress.XtraGrid.Views.Grid.GridView gvServiceHeader;
         private DevExpress.XtraGrid.Columns.GridColumn _Customer;
@@ -1594,7 +1575,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn _Inventory;
         private DevExpress.XtraGrid.Columns.GridColumn _CustomerName;
         private DevExpress.XtraGrid.Columns.GridColumn _RecallBill;
-        private System.Windows.Forms.Button btCreateUser;
         private DevExpress.XtraTab.XtraTabPage InventoryTab;
         private System.Windows.Forms.Button BtnSearchInventory;
         private PlaceHolderTextBox SearchInventoryTxt;

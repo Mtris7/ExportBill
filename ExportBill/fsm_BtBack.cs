@@ -11,7 +11,6 @@ namespace ExportBill
         fsm_delete_gvServiceLin,
         fsm_delete_gvServiceHeader,
         fsm_delete_number,
-        fsm_status4,
         fsm_nothing
     }
 }

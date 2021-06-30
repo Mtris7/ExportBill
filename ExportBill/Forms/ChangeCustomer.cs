@@ -43,7 +43,7 @@ namespace ExportBill
                         DialogResult result = MessageBox.Show("Không tìm thấy khách hàng, Tạo khách hàng mới không?.", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (result == DialogResult.Yes)
                         {
-                            CreateUser createUser = new CreateUser(true);
+                            CreateUser createUser = new CreateUser(searchCustomerTxt.Text,true);
                             createUser.ShowDialog();
                         }
                         else

@@ -44,19 +44,6 @@ namespace ExportBill
         private fsm_BtBack fsm;
         public static bool checkCreateUser = false;
         public static bool ChangeBso = false;
-
-        private fsm_BtBack status { get => fsm;
-            set
-            {
-                OnStatusChange(fsm);
-                OnPropertyChanged();
-            }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
         #endregion
         //###############################################################################################
         #region Initialize
@@ -609,13 +596,34 @@ namespace ExportBill
                 {
                     case fsm_BtBack.fsm_delete_gvServiceLin:
                         {
-                            this.delete_gvServiceLin();
+                            while (this.gvServiceLine.RowCount > 0)
+                                this.gvServiceLine.DeleteRow(this.gvServiceLine.FocusedRowHandle);
+                            this.gvServiceLine.AddNewRow();
+
+                            this.CurrentKm.Text = string.Empty;
+                            this.CurrentKm.Focus();
+                            this.NoteTxt.Text = string.Empty;
+                            this.NoteTxt.Focus();
+
+                            this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: ";
+                            this.pHeader.Enabled = false;
+                            this.ServiceLineCtr.Enabled = false;
+
+                            //header
+                            this.ServiceHeaderCtr.Enabled = true;
+                            this.groupSearch_CreateService.Enabled = true;
+
                             this.fsm = fsm_BtBack.fsm_delete_gvServiceHeader;
                             break;
                         }
                     case fsm_BtBack.fsm_delete_gvServiceHeader:
                         {
-                            this.delete_gvServiceHeader();
+                            while (this.gvServiceHeader.RowCount > 0)
+                                this.gvServiceHeader.DeleteRow(this.gvServiceHeader.FocusedRowHandle);
+                            this.gvServiceHeader.AddNewRow();
+                            this.ServiceHeaderCtr.Enabled = false;
+                            this.groupSearch_CreateService.Enabled = true;
+
                             this.fsm = fsm_BtBack.fsm_delete_number;
                             break;
                         }
@@ -624,50 +632,6 @@ namespace ExportBill
                             Search2Txt.Text = "";
                             Search2Txt.Focus();
                             this.fsm = fsm_BtBack.fsm_nothing;
-                            break;
-                        }
-                    case fsm_BtBack.fsm_status4:
-                        {
-                            this.delete_gvServiceLin();
-                            this.delete_gvServiceHeader();
-                            break;
-                        }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        private void OnStatusChange(fsm_BtBack fsm)
-        {
-            try
-            {
-                switch (fsm)
-                {
-                    case fsm_BtBack.fsm_delete_gvServiceLin:
-                        {
-                            this.delete_gvServiceLin();
-                            this.fsm = fsm_BtBack.fsm_delete_gvServiceHeader;
-                            break;
-                        }
-                    case fsm_BtBack.fsm_delete_gvServiceHeader:
-                        {
-                            this.delete_gvServiceHeader();
-                            this.fsm = fsm_BtBack.fsm_delete_number;
-                            break;
-                        }
-                    case fsm_BtBack.fsm_delete_number:
-                        {
-                            Search2Txt.Text = "";
-                            Search2Txt.Focus();
-                            this.fsm = fsm_BtBack.fsm_nothing;
-                            break;
-                        }
-                    case fsm_BtBack.fsm_status4:
-                        {
-                            this.delete_gvServiceLin();
-                            this.delete_gvServiceHeader();
                             break;
                         }
                 }
@@ -1254,7 +1218,7 @@ namespace ExportBill
                 this.pHeader.Enabled = false;
                 this.ServiceLineCtr.Enabled = false;
                 this.pFooter.Enabled = false;
-                this.groupControl3.Enabled = true;
+                this.groupSearch_CreateService.Enabled = true;
 
                 this.ServiceHeaderCtr.DataSource = null;
                 this.Search2Txt.Text = string.Empty;
@@ -1263,34 +1227,6 @@ namespace ExportBill
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void CreateUser_Click(object sender, EventArgs e)
-        {
-            this.RunCreateUser();
-            
-        }
-
-        private void delete_gvServiceLin()
-        {
-            while (this.gvServiceLine.RowCount > 0)
-                this.gvServiceLine.DeleteRow(this.gvServiceLine.FocusedRowHandle);
-            this.CurrentKm.Text = string.Empty;
-            this.CurrentKm.Focus();
-            this.NoteTxt.Text = string.Empty;
-            this.NoteTxt.Focus();
-            this.gvServiceLine.AddNewRow();
-            this.CreateServicelbl.Text = "Phiếu yêu cầu dịch vụ: ";
-            this.pHeader.Enabled = false;
-            this.ServiceLineCtr.Enabled = false;
-        }
-
-        private void delete_gvServiceHeader()
-        {
-            while (this.gvServiceHeader.RowCount > 0)
-                this.gvServiceHeader.DeleteRow(this.gvServiceHeader.FocusedRowHandle);
-            this.gvServiceHeader.AddNewRow();
-            this.groupControl3.Enabled = true;
         }
 
         private void Search_Changed(object sender, EventArgs e)
@@ -1330,8 +1266,8 @@ namespace ExportBill
                 
                 if(check)
                 {
-                    this.fsm = fsm_BtBack.fsm_status4;
-                    this.groupControl3.Enabled = false;
+                    this.fsm = fsm_BtBack.fsm_delete_gvServiceLin;
+                    this.groupSearch_CreateService.Enabled = false;
                     this.ServiceHeaderCtr.Enabled = false;
                     //
                     string url = @"http://" + Settings.API + ".ototienthu.com.vn/api/v1/customers/searchcustomers?searchtext=" + CreateUser.Bso + "&searchtype=LicensePlate";
@@ -1443,7 +1379,7 @@ namespace ExportBill
             {
                 if (string.IsNullOrWhiteSpace(Search2Txt.Text))
                 {
-                    Point Search2TxtLocation = new Point(groupControl3.Location.X + Search2Txt.Location.X - 10, groupControl3.Location.Y + Search2Txt.Location.Y - 15);
+                    Point Search2TxtLocation = new Point(groupSearch_CreateService.Location.X + Search2Txt.Location.X - 10, groupSearch_CreateService.Location.Y + Search2Txt.Location.Y - 15);
                     toolTip1.Show("Mục bắt buộc nhập.", Search2Txt, Search2TxtLocation);
                     toolTip1.Active = true;
 
@@ -1460,6 +1396,7 @@ namespace ExportBill
                 var response = await Search.Only_url(url);
                 this.Enabled = true;
                 this.fsm = fsm_BtBack.fsm_delete_gvServiceHeader;
+                bool addCustomer = false;
                 if (response.IsSuccessStatusCode)
                 {
                     var body = await response.Content.ReadAsStringAsync();
@@ -1475,12 +1412,8 @@ namespace ExportBill
                         if (result == DialogResult.Yes)
                         {
                             this.RunCreateUser();
+                            addCustomer = true;
                         }
-                        else
-                        {
-                            return;
-                        }
-
                     }
                     this.ListCustomerSearch.Clear();
 
@@ -1491,6 +1424,8 @@ namespace ExportBill
                         ListCustomerSearch.Add(new CustomerModel(data[0], data[1], data[2], data[3], data[4], null, data[5]));
                     }
                     this.ServiceHeaderCtr.DataSource = ListCustomerSearch;
+                    if(!addCustomer)
+                        this.ServiceHeaderCtr.Enabled = true;
                 }
                 else
                 {
@@ -1508,7 +1443,7 @@ namespace ExportBill
         {
             try
             {
-                CreateUser createUser = new CreateUser();
+                CreateUser createUser = new CreateUser(Search2Txt.Text);
                 if (createUser.ShowDialog(this) == DialogResult.OK)
                 {
                     CreateNewService(0, true);

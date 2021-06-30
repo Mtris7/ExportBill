@@ -12,7 +12,7 @@ namespace ExportBill
 {
     public partial class PlaceHolderTextBox : TextBox
     {
-        bool isPlaceHolder = true;
+        public bool isPlaceHolder = true;
         string _placeHolderText;
         public string PlaceHolderText
         {
