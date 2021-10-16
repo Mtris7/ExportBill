@@ -1181,10 +1181,22 @@ namespace ExportBill
                         var postBill = data[11] == "Open" ? PostBillStr : invoiced;
                         var payment = data[12];
                         var recalbill = data[13] == Posted ? Posted : inProcess;
-                        //public Customer(string maPhieu, string userName,phoneNumber, string bs, string lx, string tsc, string dg, decimal discount, decimal total, string detaiMoney, string company, string adress, string date, string print)
-                        ds.Add(new Customer(data[0], data[1],data[15], data[2], data[3], data[4], data[5],
-                            Convert.ToInt32(Convert.ToDecimal(data[6])), Convert.ToInt32(Convert.ToDecimal(data[7])),
-                            data[8], data[9], data[10], postBill, payment, "Print", recalbill));
+                        string maPhieu = data[0];
+                        string userName = data[1];
+                        string phoneNumber = data[15];
+                        string bs = data[2];
+                        string lx = data[3];
+                        string tsc = data[4];
+                        string dg = data[5];
+                        int discount = Convert.ToInt32(Convert.ToDecimal(data[6]));
+                        int total = Convert.ToInt32(Convert.ToDecimal(data[7]));
+                        string detaiMoney = data[8];
+                        string company = data[9];
+                        string address = data[10];
+                        //public Customer(string maPhieu, string userName,phoneNumber, string bs, string lx, string tsc,
+                        //string dg, decimal discount, decimal total, string detaiMoney, string company, string adress, string date, string print)
+                        ds.Add(new Customer(maPhieu, userName, phoneNumber, bs, lx, tsc, dg, discount, total,
+                            detaiMoney, company, address, postBill, payment, "Print", recalbill));
                     }
                     this.gridControl1.DataSource = ds;
                 }
@@ -1195,7 +1207,7 @@ namespace ExportBill
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message );
             }
         }
 
@@ -1403,7 +1415,7 @@ namespace ExportBill
                     var dataList = JsonConvert.DeserializeObject<DataModel>(body);
                     if (dataList.data == null)
                     {
-                        MessageBox.Show("Có lỗi dữ liệu từ máy chủ, vui lòng đăng nhập lại sau.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Không tìm thấy dữ liệu, vui lòng kiểm tra thông tin tìm kiếm.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     if (dataList.data.Count == 0)
@@ -1456,7 +1468,7 @@ namespace ExportBill
                 MessageBox.Show(ex.Message);
             }
         }
-        #endregion
+#endregion
         //##############################################################################################
     }
 }
